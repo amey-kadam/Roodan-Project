@@ -89,7 +89,7 @@ const Inquiry = () => {
         {/* Inquiry Form */}
         <section className="section-padding bg-white">
           <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div className="lg:col-span-2">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -116,7 +116,7 @@ const Inquiry = () => {
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="phone" className="text-sm font-medium">
-                        {t("inquiry.form.phone")}
+                        {t("inquiry.form.phone")} <span className="text-destructive">*</span>
                       </label>
                       <Input id="phone" type="tel" />
                     </div>
@@ -150,9 +150,9 @@ const Inquiry = () => {
                   
                   <div className="space-y-2">
                     <label htmlFor="delivery" className="text-sm font-medium">
-                      {t("inquiry.form.delivery")}
+                      {t("inquiry.form.delivery")} <span className="text-destructive">*</span>
                     </label>
-                    <Select>
+                    <Select required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select delivery terms" />
                       </SelectTrigger>
