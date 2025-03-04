@@ -33,7 +33,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 precise-transition",
+        " fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300 precise-transition",
         isScrolled 
           ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-3" 
           : "bg-transparent"
@@ -41,7 +41,7 @@ export function Header() {
     >
       <div className="page-container">
         <div className="flex items-center justify-between">
-          <NavLink to="/" className="flex items-center space-x-2 group">
+          <NavLink to="/" className="flex items-center space-x-4 group">
             <div className="rounded-full  p-2.5 transition-all duration-300 group-hover:scale-110">
               <img src="/logo.png" alt="Roodan" className="w-11 h-11 rounded-full bg-white" />
             </div>
