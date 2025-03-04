@@ -103,7 +103,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Contact',
     
     // Hero
-    'hero.title': 'Solutions de Commerce Premium',
+    'hero.title': 'Commerce général de Roodan',
     'hero.subtitle': 'Produits de qualité mondiale avec un service fiable',
     'hero.cta': 'Explorer les Produits',
     

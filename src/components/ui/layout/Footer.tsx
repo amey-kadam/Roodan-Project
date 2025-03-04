@@ -11,7 +11,7 @@ export function Footer() {
       <div className="page-container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
           <div className="md:col-span-1">
-            <h3 className="text-lg font-display font-semibold mb-4">TradeNexus</h3>
+            <h3 className="text-lg font-display font-semibold mb-4">ROODAN</h3>
             <p className="text-muted-foreground text-sm max-w-xs">
               Premium global trading solutions providing high-quality products with reliable service worldwide.
             </p>
@@ -54,7 +54,7 @@ export function Footer() {
           {/* Products */}
           <div>
             <h3 className="font-medium mb-4 text-sm uppercase tracking-wider text-muted-foreground">
-              Products
+            {t("hero.cta")}
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -92,13 +92,13 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start space-x-2">
-                <span className="text-foreground/70">Email:</span>
+                <span className="text-foreground/70">{t("contact.email")}:</span>
                 <a href="mailto:info@tradenexus.com" className="text-foreground/70 hover:text-primary transition-colors">
-                  info@tradenexus.com
+                www.roodan.ae 
                 </a>
               </li>
               <li className="flex items-start space-x-2">
-                <span className="text-foreground/70">Phone:</span>
+                <span className="text-foreground/70">{t("contact.phone")}:</span>
                 <a href="tel:+12345678900" className="text-foreground/70 hover:text-primary transition-colors">
                   +1 (234) 567-8900
                 </a>
@@ -106,7 +106,10 @@ export function Footer() {
               <li className="flex items-start space-x-2">
                 <span className="text-foreground/70">{t("contact.address")}:</span>
                 <span className="text-foreground/70">
-                  123 Trading Street, Business City, 10001
+                Khalidiya Towers, Mezzanine Floor,<br />
+                Al Faskar Street W10,
+                Al Bateen, <br />Al Khalidiyah, 
+                Abu Dhabi, United Arab Emirates
                 </span>
               </li>
             </ul>
@@ -115,7 +118,7 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-border/30 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-foreground/60">
-            &copy; {currentYear} TradeNexus. {t("footer.rights")}.
+            &copy; {currentYear} ROODAN. {t("footer.rights")}.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">

@@ -69,7 +69,7 @@ const Contact = () => {
                 </div>
                 <h3 className="text-lg font-display font-semibold mb-2">{t("contact.email")}</h3>
                 <a href="mailto:info@tradenexus.com" className="text-primary hover:underline">
-                  info@tradenexus.com
+                www.roodan.ae 
                 </a>
                 <a href="mailto:sales@tradenexus.com" className="text-primary hover:underline">
                   sales@tradenexus.com
@@ -95,9 +95,10 @@ const Contact = () => {
                 </div>
                 <h3 className="text-lg font-display font-semibold mb-2">{t("contact.address")}</h3>
                 <address className="not-italic">
-                  123 Trading Street<br />
-                  Business City, 10001<br />
-                  United States
+                Khalidiya Towers, Mezzanine Floor,<br />
+                Al Faskar Street W10,
+                Al Bateen, <br />Al Khalidiyah, 
+                Abu Dhabi, United Arab Emirates
                 </address>
               </div>
             </div>
