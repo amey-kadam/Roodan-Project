@@ -61,6 +61,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.desc': 'Quality, reliability, partnership, and flexibility form the cornerstone of our business philosophy.',
     'about.experience.title': 'Our Experience',
     'about.experience.desc': 'With years of experience in international trade, we have established strong partnerships and a reputation for excellence.',
+    'about.team.title': 'Our Team',
+    'about.team.desc': 'Meet our dedicated team of experts who are committed to providing exceptional service and building strong partnerships with our clients.',
     
     // Contact
     'contact.title': 'Contact Us',
@@ -143,7 +145,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.desc': 'La qualité, la fiabilité, le partenariat et la flexibilité constituent la pierre angulaire de notre philosophie d\'entreprise.',
     'about.experience.title': 'Notre Expérience',
     'about.experience.desc': 'Avec des années d\'expérience dans le commerce international, nous avons établi des partenariats solides et une réputation d\'excellence.',
-    
+    'about.team.title': 'Notre Équipe',
+    'about.team.desc': 'Rencontrez notre équipe dévouée d\'experts qui s\'engagent à fournir un service exceptionnel et à construire des partenariats solides avec nos clients.',
     // Contact
     'contact.title': 'Contactez-Nous',
     'contact.subtitle': 'Entrez en contact avec notre équipe',
@@ -225,6 +228,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.desc': 'الجودة والموثوقية والشراكة والمرونة تشكل حجر الزاوية في فلسفة أعمالنا.',
     'about.experience.title': 'خبرتنا',
     'about.experience.desc': 'مع سنوات من الخبرة في التجارة الدولية، أقمنا شراكات قوية وسمعة في التميز.',
+    'about.team.title': 'فريقنا',
+    'about.team.desc': 'تعرف على فريقنا المتفاني من الخبراء الملتزمين بتقديم خدمة استثنائية وبناء شراكات قوية مع عملائنا.',
     
     // Contact
     'contact.title': 'اتصل بنا',

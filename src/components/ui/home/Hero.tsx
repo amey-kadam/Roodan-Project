@@ -12,7 +12,7 @@ export function Hero() {
       {/* Background image */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
         style={{ 
-          backgroundImage: 'url("https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=2560&auto=format")',
+          backgroundImage: 'url("/world-map.jpg")',
           backgroundPosition: '50% 40%'
         }}>
         <div className="absolute inset-0 bg-background/70 backdrop-blur-sm"></div>

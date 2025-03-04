@@ -106,6 +106,85 @@ const About = () => {
             </div>
           </div>
         </section>
+        <section className="section-padding bg-white">
+          <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-display font-bold">
+                {t("about.team.title") || "Our Team"}
+              </h2>
+              <div className="w-20 h-1 bg-primary/20 mx-auto mt-4 mb-6"></div>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {t("about.team.desc") || "Meet our dedicated team of experts who are committed to providing exceptional service and building strong partnerships with our clients."}
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Team Member 1 */}
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 shadow-md">
+                  <img 
+                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format" 
+                    alt="CEO"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <h3 className="font-bold text-lg">John Smith</h3>
+                    <p className="text-sm text-white/80">CEO & Founder</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Team Member 2 */}
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 shadow-md">
+                  <img 
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format" 
+                    alt="COO"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <h3 className="font-bold text-lg">Sarah Johnson</h3>
+                    <p className="text-sm text-white/80">Chief Operations Officer</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Team Member 3 */}
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 shadow-md">
+                  <img 
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format" 
+                    alt="CFO"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <h3 className="font-bold text-lg">Michael Chen</h3>
+                    <p className="text-sm text-white/80">Chief Financial Officer</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Team Member 4 */}
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 shadow-md">
+                  <img 
+                    src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1974&auto=format" 
+                    alt="Global Trade Director"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <h3 className="font-bold text-lg">Emma Rodriguez</h3>
+                    <p className="text-sm text-white/80">Global Trade Director</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
