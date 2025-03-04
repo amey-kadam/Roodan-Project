@@ -178,59 +178,6 @@ const Inquiry = () => {
                   </Button>
                 </form>
               </div>
-              
-              <div>
-                <div className="bg-secondary/50 rounded-xl p-6 border border-border/30 shadow-sm">
-                  <h3 className="text-xl font-display font-semibold mb-4">Why Choose Us?</h3>
-                  <ul className="space-y-4">
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 mr-2 flex-shrink-0"></span>
-                      <span>Premium quality products sourced from trusted suppliers worldwide</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 mr-2 flex-shrink-0"></span>
-                      <span>Flexible delivery terms to meet your specific requirements</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 mr-2 flex-shrink-0"></span>
-                      <span>Competitive pricing and transparent business practices</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 mr-2 flex-shrink-0"></span>
-                      <span>Responsive customer service and dedicated support</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 mr-2 flex-shrink-0"></span>
-                      <span>Years of experience in international trade with a global network</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="mt-6 bg-secondary/50 rounded-xl p-6 border border-border/30 shadow-sm">
-                  <h3 className="text-xl font-display font-semibold mb-4">Contact Information</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="font-medium">Email:</p>
-                      <a href="mailto:info@tradenexus.com" className="text-primary hover:underline">
-                        info@tradenexus.com
-                      </a>
-                    </div>
-                    <div>
-                      <p className="font-medium">Phone:</p>
-                      <a href="tel:+12345678900" className="text-primary hover:underline">
-                        +1 (234) 567-8900
-                      </a>
-                    </div>
-                    <div>
-                      <p className="font-medium">Address:</p>
-                      <address className="not-italic">
-                        123 Trading Street<br />
-                        Business City, 10001
-                      </address>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
