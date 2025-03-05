@@ -26,7 +26,6 @@ export function Header() {
     { path: "/", label: t("nav.home") },
     { path: "/about", label: t("nav.about") },
     { path: "/products", label: t("nav.products") },
-    { path: "/inquiry", label: t("nav.inquiry") },
     { path: "/contact", label: t("nav.contact") },
   ];
 
