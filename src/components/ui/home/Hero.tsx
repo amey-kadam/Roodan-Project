@@ -106,7 +106,7 @@ export function Hero() {
 
 
           <motion.h1
-  className="hero-element opacity-0 translate-y-12 text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent h-20" 
+  className="hero-element opacity-0 translate-y-12 text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent h-20 " 
 >
   {t("hero.title")}
 </motion.h1>
