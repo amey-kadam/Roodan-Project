@@ -1,11 +1,17 @@
-
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
 import { useI18n } from "@/utils/i18n";
 import { ProductCard } from "@/components/ui/products/ProductCard";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { 
+  Grid, 
+  Filter, 
+  ShoppingBag, 
+  Package 
+} from "lucide-react";
 
 // Product category type
 type ProductCategory = 'all' | 'food' | 'oils' | 'agri' | 'petro';
@@ -13,7 +19,6 @@ type ProductCategory = 'all' | 'food' | 'oils' | 'agri' | 'petro';
 const Products = () => {
   const { t, language } = useI18n();
   const [activeCategory, setActiveCategory] = useState<ProductCategory>('all');
-
   // Product data
   const products = [
     {
@@ -157,74 +162,155 @@ const Products = () => {
 
   // Category buttons data with translations
   const categories = [
-    { id: 'all', label: t('products.categories.all') },
-    { id: 'food', label: t('products.categories.food') },
-    { id: 'oils', label: t('products.categories.oils') },
-    { id: 'agri', label: t('products.categories.agri') },
-    { id: 'petro', label: t('products.categories.petro') },
+    { id: 'all', label: t('products.categories.all'), icon: Grid },
+    { id: 'food', label: t('products.categories.food'), icon: ShoppingBag },
+    { id: 'oils', label: t('products.categories.oils'), icon: Package },
+    { id: 'agri', label: t('products.categories.agri'), icon: Filter },
+    { id: 'petro', label: t('products.categories.petro'), icon: ShoppingBag },
   ];
 
+  const pageVariants = {
+    initial: { opacity: 0, y: 50 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      <main className="flex-grow pt-20">
-        {/* Hero Section */}
-        <section className="relative py-24">
-          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" 
-            style={{ 
-              backgroundImage: 'url("https://images.unsplash.com/photo-1542361345-89e58247401a?q=80&w=2070&auto=format")',
-              backgroundPosition: '50% 40%'
-            }}>
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+      <main className="flex-grow">
+        {/* Hero Section with Enhanced Background */}
+        <motion.section 
+          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Background Gradient and Effects */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-primary/10 opacity-100" />
+            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
+            <motion.div
+              className="absolute w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -top-64 -left-64"
+              animate={{
+                y: [0, -20, 0],
+                transition: {
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+              }}
+            />
           </div>
-          
-          <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
+
+          {/* Content */}
+          <motion.div 
+            className={cn(
+              "page-container relative z-10 text-center",
+              language === "ar" ? "rtl" : "ltr"
+            )}
+            initial="initial"
+            animate="animate"
+          >
+            <motion.div variants={pageVariants}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
                 {t("products.title")}
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mt-6">
                 {t("products.description")}
               </p>
-            </div>
-          </div>
-        </section>
+            </motion.div>
+          </motion.div>
+        </motion.section>
 
         {/* Product Categories */}
-        <section className="py-8 border-b border-border/30">
+        <motion.section 
+          className="py-16"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
           <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {categories.map((category) => (
-                <Button
-                  key={category.id}
-                  variant={activeCategory === category.id ? "default" : "outline"}
-                  onClick={() => setActiveCategory(category.id as ProductCategory)}
-                  className="transition-all duration-300"
-                >
-                  {category.label}
-                </Button>
-              ))}
-            </div>
+            <motion.div 
+              variants={pageVariants}
+              className="flex flex-wrap gap-4 justify-center"
+            >
+              {categories.map((category) => {
+                const Icon = category.icon;
+                return (
+                  <Button
+                    key={category.id}
+                    variant={activeCategory === category.id ? "default" : "outline"}
+                    onClick={() => setActiveCategory(category.id as ProductCategory)}
+                    className={cn(
+                      "group transition-all duration-300 px-6 py-3 rounded-2xl",
+                      activeCategory === category.id 
+                        ? "bg-gradient-to-r from-primary to-primary/90" 
+                        : "hover:border-primary hover:bg-secondary/10"
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon 
+                        className={cn(
+                          "w-5 h-5 transition-colors",
+                          activeCategory === category.id 
+                            ? "text-white" 
+                            : "text-primary group-hover:text-primary"
+                        )}
+                      />
+                      {category.label}
+                    </div>
+                  </Button>
+                );
+              })}
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Products Grid */}
-        <section className="section-padding bg-secondary/30">
+        <motion.section 
+          className="py-24 bg-secondary/5"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
           <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => (
-                <ProductCard
+            <motion.div 
+              variants={pageVariants}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredProducts.map((product, index) => (
+                <motion.div
                   key={product.id}
-                  title={product.title}
-                  image={product.image}
-                  description={product.description}
-                  details={product.details}
-                  className="animate-scale-in"
-                />
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    scale: 1,
+                    transition: { 
+                      duration: 0.5,
+                      delay: index * 0.1
+                    }
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <ProductCard
+                    title={product.title}
+                    image={product.image}
+                    description={product.description}
+                    details={product.details}
+                    className="hover:shadow-primary/10 transition-shadow duration-300"
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
       </main>
       <Footer />
     </div>
