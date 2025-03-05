@@ -78,6 +78,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Inquiry
     'inquiry.title': 'Request a Quote',
     'inquiry.subtitle': 'Fill out the form to receive a personalized quote',
+    'inquiry.form.title': 'Request a Quote',
+    'inquiry.form.description': 'Fill out the form to receive a personalized quote',
     'inquiry.form.company': 'Company Name',
     'inquiry.form.name': 'Your Name',
     'inquiry.form.email': 'Email Address',
@@ -161,6 +163,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Inquiry
     'inquiry.title': 'Demande de Devis',
     'inquiry.subtitle': 'Remplissez le formulaire pour recevoir un devis personnalisé',
+    'inquiry.form.title': 'Demande de Devis',
+    'inquiry.form.description': 'Remplissez le formulaire pour recevoir un devis personnalisé',
     'inquiry.form.company': 'Nom de l\'Entreprise',
     'inquiry.form.name': 'Votre Nom',
     'inquiry.form.email': 'Adresse Email',
@@ -245,6 +249,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Inquiry
     'inquiry.title': 'طلب عرض سعر',
     'inquiry.subtitle': 'املأ النموذج للحصول على عرض سعر مخصص',
+    'inquiry.form.title': 'طلب عرض سعر',
+    'inquiry.form.description': 'املأ النموذج للحصول على عرض سعر مخصص',
     'inquiry.form.company': 'اسم الشركة',
     'inquiry.form.name': 'اسمك',
     'inquiry.form.email': 'البريد الإلكتروني',

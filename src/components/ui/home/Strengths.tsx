@@ -109,5 +109,6 @@ export function Strengths() {
         </motion.div>
       </div>
     </section>
+    
   );
 }
