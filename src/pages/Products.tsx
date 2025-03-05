@@ -6,20 +6,16 @@ import { useI18n } from "@/utils/i18n";
 import { ProductCard } from "@/components/ui/products/ProductCard";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { 
-  Grid, 
-  Filter, 
-  ShoppingBag, 
-  Package 
-} from "lucide-react";
+import { Grid, Filter, ShoppingBag, Package } from "lucide-react";
 
 // Product category type
-type ProductCategory = 'all' | 'food' | 'oils' | 'agri' | 'petro';
+type ProductCategory = "all" | "food" | "oils" | "agri" | "petro";
 
 const Products = () => {
   const { t, language } = useI18n();
-  const [activeCategory, setActiveCategory] = useState<ProductCategory>('all');
-  // Product data
+  const [activeCategory, setActiveCategory] = useState<ProductCategory>("all");
+
+  // Product data remains the same
   const products = [
     {
       id: 1,
@@ -29,9 +25,9 @@ const Products = () => {
       details: [
         "ICUMSA 45 (white sugar), ICUMSA 100 (raw sugar), ICUMSA 150",
         "Packaging: 50 kg bags or big bags",
-        "Delivery: CIF, FOB, etc."
+        "Delivery: CIF, FOB, etc.",
       ],
-      category: "food"
+      category: "food",
     },
     {
       id: 2,
@@ -41,9 +37,9 @@ const Products = () => {
       details: [
         "Soybeans (GMO-free on request), soy flour, soy oil",
         "Packaging: According to customer requirements",
-        "Delivery: Worldwide, flexible"
+        "Delivery: Worldwide, flexible",
       ],
-      category: "agri"
+      category: "agri",
     },
     {
       id: 3,
@@ -53,9 +49,9 @@ const Products = () => {
       details: [
         "Robusta (strong) and Arabica (mild)",
         "Origin: South America, Asia, Africa",
-        "Packaging: 50 kg bags or big bags"
+        "Packaging: 50 kg bags or big bags",
       ],
-      category: "food"
+      category: "food",
     },
     {
       id: 4,
@@ -65,9 +61,9 @@ const Products = () => {
       details: [
         "Frozen beef, various cuts",
         "Packaging: Frozen goods",
-        "Delivery: Worldwide"
+        "Delivery: Worldwide",
       ],
-      category: "food"
+      category: "food",
     },
     {
       id: 5,
@@ -77,9 +73,9 @@ const Products = () => {
       details: [
         "Whole chickens, chicken breasts, chicken legs, chicken wings",
         "Packaging: Frozen goods",
-        "Delivery: Worldwide"
+        "Delivery: Worldwide",
       ],
-      category: "food"
+      category: "food",
     },
     {
       id: 6,
@@ -89,9 +85,9 @@ const Products = () => {
       details: [
         "100% pure beef ghee",
         "Packaging: 1 kg cans, 15 kg buckets",
-        "Delivery: Worldwide"
+        "Delivery: Worldwide",
       ],
-      category: "oils"
+      category: "oils",
     },
     {
       id: 7,
@@ -101,9 +97,9 @@ const Products = () => {
       details: [
         "Palm oil, various packaging sizes",
         "Delivery: CIF, FOB or by arrangement",
-        "Premium quality for food and industrial applications"
+        "Premium quality for food and industrial applications",
       ],
-      category: "oils"
+      category: "oils",
     },
     {
       id: 8,
@@ -113,9 +109,9 @@ const Products = () => {
       details: [
         "Basmati, jasmine, parboiled, white rice",
         "Packaging: 5 kg, 25 kg bags or big bags",
-        "Delivery: CIF, FOB"
+        "Delivery: CIF, FOB",
       ],
-      category: "food"
+      category: "food",
     },
     {
       id: 9,
@@ -125,9 +121,9 @@ const Products = () => {
       details: [
         "Extra virgin olive oil, virgin olive oil, refined olive oil",
         "Packaging: 1 l bottles, 5 l canisters, 200L drums",
-        "Delivery: CIF, FOB"
+        "Delivery: CIF, FOB",
       ],
-      category: "oils"
+      category: "oils",
     },
     {
       id: 10,
@@ -137,9 +133,9 @@ const Products = () => {
       details: [
         "Urea 46% Granular and Prilled",
         "Packaging: 50kg bags or big bags",
-        "Delivery: Worldwide"
+        "Delivery: Worldwide",
       ],
-      category: "agri"
+      category: "agri",
     },
     {
       id: 11,
@@ -149,173 +145,165 @@ const Products = () => {
       details: [
         "EN 590, D2, AGO, Jet A1",
         "Diesel, Aviation Fuel, Automotive Fuel",
-        "Delivery: CIF, FOB"
+        "Delivery: CIF, FOB",
       ],
-      category: "petro"
-    }
+      category: "petro",
+    },
   ];
 
-   // Filter products based on active category
-   const filteredProducts = activeCategory === 'all' 
-   ? products 
-   : products.filter(product => product.category === activeCategory);
+  // Filter products based on active category
+  const filteredProducts =
+    activeCategory === "all"
+      ? products
+      : products.filter((product) => product.category === activeCategory);
 
- // Category buttons data with translations
- const categories = [
-   { id: 'all', label: t('products.categories.all'), icon: Grid },
-   { id: 'food', label: t('products.categories.food'), icon: ShoppingBag },
-   { id: 'oils', label: t('products.categories.oils'), icon: Package },
-   { id: 'agri', label: t('products.categories.agri'), icon: Filter },
-   { id: 'petro', label: t('products.categories.petro'), icon: ShoppingBag },
- ];
+  // Category filter buttons
+  const categories = [
+    { id: "all", label: t("products.categories.all"), icon: Grid },
+    { id: "food", label: t("products.categories.food"), icon: ShoppingBag },
+    { id: "oils", label: t("products.categories.oils"), icon: Package },
+    { id: "agri", label: t("products.categories.agri"), icon: Filter },
+    { id: "petro", label: t("products.categories.petro"), icon: ShoppingBag },
+  ];
 
- const pageVariants = {
-   initial: { opacity: 0, y: 50 },
-   animate: { 
-     opacity: 1, 
-     y: 0,
-     transition: { 
-       duration: 0.8,
-       ease: "easeOut"
-     }
-   }
- };
+  const pageVariants = {
+    initial: { opacity: 0, y: 50 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
 
- return (
-   <div className="min-h-screen flex flex-col bg-background">
-     <Header />
-     <main className="flex-grow">
-       {/* Hero Section with Enhanced Background */}
-       <motion.section 
-         className="relative min-h-[60vh] flex items-center justify-center overflow-hidden"
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         transition={{ duration: 1 }}
-       >
-         {/* Background Gradient and Effects */}
-         <div className="absolute inset-0 z-0">
-           <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-primary/10 opacity-100" />
-           <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
-           <motion.div
-             className="absolute w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -top-64 -left-64"
-             animate={{
-               y: [0, -20, 0],
-               transition: {
-                 duration: 6,
-                 repeat: Infinity,
-                 ease: "easeInOut",
-               }
-             }}
-           />
-         </div>
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <Header />
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <motion.section
+          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Previous hero section content remains the same */}
+          <motion.div
+            className={cn(
+              "page-container relative z-10 text-center",
+              language === "ar" ? "rtl" : "ltr"
+            )}
+            initial="initial"
+            animate="animate"
+          >
+            <motion.div variants={pageVariants}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+                {t("products.title")}
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mt-6">
+                {t("products.description")}
+              </p>
+            </motion.div>
+          </motion.div>
+        </motion.section>
 
-         {/* Content */}
-         <motion.div 
-           className={cn(
-             "page-container relative z-10 text-center",
-             language === "ar" ? "rtl" : "ltr"
-           )}
-           initial="initial"
-           animate="animate"
-         >
-           <motion.div variants={pageVariants}>
-             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-               {t("products.title")}
-             </h1>
-             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mt-6">
-               {t("products.description")}
-             </p>
-           </motion.div>
-         </motion.div>
-       </motion.section>
+        {/* Product Categories Filter */}
+        <motion.section
+          className="py-16"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <div
+            className={cn("page-container", language === "ar" ? "rtl" : "ltr")}
+          >
+            <motion.div
+              variants={pageVariants}
+              className="flex flex-wrap gap-4 justify-center items-center mb-8"
+            >
+              {categories.map((category) => {
+                const Icon = category.icon;
+                return (
+                  <Button
+                    key={category.id}
+                    variant={
+                      activeCategory === category.id ? "default" : "outline"
+                    }
+                    onClick={() =>
+                      setActiveCategory(category.id as ProductCategory)
+                    }
+                    className={cn(
+                      "group transition-all duration-300 px-6 py-3 rounded-2xl h-14 flex items-center justify-center",
+                      activeCategory === category.id
+                        ? "bg-gradient-to-r from-primary to-primary/90"
+                        : "hover:border-primary hover:bg-secondary/10"
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon
+                        className={cn(
+                          "w-5 h-5 transition-colors",
+                          activeCategory === category.id
+                            ? "text-white"
+                            : "text-primary group-hover:text-primary"
+                        )}
+                      />
+                      {category.label}
+                    </div>
+                  </Button>
+                );
+              })}
+            </motion.div>
+          </div>
+        </motion.section>
 
-       {/* Product Categories */}
-       <motion.section 
-         className="py-16"
-         initial="initial"
-         whileInView="animate"
-         viewport={{ once: true }}
-       >
-         <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
-           <motion.div 
-             variants={pageVariants}
-             className="flex flex-wrap gap-4 justify-center"
-           >
-             {categories.map((category) => {
-               const Icon = category.icon;
-               return (
-                 <Button
-                   key={category.id}
-                   variant={activeCategory === category.id ? "default" : "outline"}
-                   onClick={() => setActiveCategory(category.id as ProductCategory)}
-                   className={cn(
-                     "group transition-all duration-300 px-6 py-3 rounded-2xl",
-                     activeCategory === category.id 
-                       ? "bg-gradient-to-r from-primary to-primary/90" 
-                       : "hover:border-primary hover:bg-secondary/10"
-                   )}
-                 >
-                   <div className="flex items-center gap-3">
-                     <Icon 
-                       className={cn(
-                         "w-5 h-5 transition-colors",
-                         activeCategory === category.id 
-                           ? "text-white" 
-                           : "text-primary group-hover:text-primary"
-                       )}
-                     />
-                     {category.label}
-                   </div>
-                 </Button>
-               );
-             })}
-           </motion.div>
-         </div>
-       </motion.section>
-
-       {/* Products Grid */}
-       <motion.section 
-         className="py-24 bg-secondary/5"
-         initial="initial"
-         whileInView="animate"
-         viewport={{ once: true }}
-       >
-         <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
-           <motion.div 
-             variants={pageVariants}
-             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-           >
-             {filteredProducts.map((product, index) => (
-               <motion.div
-                 key={product.id}
-                 initial={{ opacity: 0, scale: 0.9 }}
-                 whileInView={{ 
-                   opacity: 1, 
-                   scale: 1,
-                   transition: { 
-                     duration: 0.5,
-                     delay: index * 0.1
-                   }
-                 }}
-                 viewport={{ once: true }}
-                 className="flex h-full" // Added h-full to ensure consistent height
-               >
-                 <ProductCard
-                   title={product.title}
-                   image={product.image}
-                   description={product.description}
-                   details={product.details}
-                   className="hover:shadow-primary/10 transition-shadow duration-300 flex-grow flex flex-col" // Added flex-grow and flex-col
-                 />
-               </motion.div>
-             ))}
-           </motion.div>
-         </div>
-       </motion.section>
-     </main>
-     <Footer />
-   </div>
- );
+        {/* Products Grid */}
+        <motion.section
+          className="py-24 bg-secondary/5"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <div
+            className={cn("page-container", language === "ar" ? "rtl" : "ltr")}
+          >
+            <motion.div
+              variants={pageVariants}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredProducts.map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      duration: 0.5,
+                      delay: index * 0.1,
+                    },
+                  }}
+                  viewport={{ once: true }}
+                  className="flex"
+                >
+                  <ProductCard
+                    title={product.title}
+                    image={product.image}
+                    description={product.description}
+                    details={product.details}
+                    className="hover:shadow-primary/10 transition-shadow duration-300 flex-grow flex flex-col h-full"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.section>
+      </main>
+      <Footer />
+    </div>
+  );
 };
 
 export default Products;

@@ -1,8 +1,6 @@
-
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { NavLink } from "react-router-dom";
-import { useI18n } from "@/utils/i18n";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface ProductCardProps {
   title: string;
@@ -12,40 +10,48 @@ interface ProductCardProps {
   className?: string;
 }
 
-export function ProductCard({ title, image, description, details, className }: ProductCardProps) {
-  const { language } = useI18n();
-
+export const ProductCard: React.FC<ProductCardProps> = ({
+  title,
+  image,
+  description,
+  details,
+  className
+}) => {
   return (
     <div className={cn(
-      "bg-background rounded-xl overflow-hidden border border-border/40 shadow-lg hover:shadow-md transition-all duration-300",
+      "bg-white border rounded-xl shadow-sm overflow-hidden flex flex-col",
       className
     )}>
-      <div className="aspect-video overflow-hidden">
+      <div className="relative pt-[60%]">
         <img 
           src={image} 
           alt={title} 
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-display font-semibold mb-2">{title}</h3>
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-semibold mb-3">{title}</h3>
         <p className="text-muted-foreground mb-4">{description}</p>
         
-        <ul className="space-y-2 mb-6">
+        <div className="mb-4">
           {details.map((detail, index) => (
-            <li key={index} className="flex items-start text-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 mr-2 flex-shrink-0"></span>
-              <span>{detail}</span>
-            </li>
+            <div 
+              key={index} 
+              className="text-sm text-foreground/70 mb-1 flex items-start"
+            >
+              <span className="mr-2">•</span>
+              {detail}
+            </div>
           ))}
-        </ul>
-        
-        <Button  className="w-full hover:scale-105 ">
-          <NavLink to="/inquiry">
-            {language === "ar" ? "طلب عرض سعر" : language === "fr" ? "Demander un devis" : "Request Quote"}
-          </NavLink>
-        </Button>
+        </div>
+
+        {/* Push the button to the bottom */}
+        <div className="mt-auto">
+          <Button className="w-full">
+            Request Quote
+          </Button>
+        </div>
       </div>
     </div>
   );
-}
+};
