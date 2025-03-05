@@ -104,19 +104,19 @@ export function Hero() {
             </span>
           </motion.div>
 
-{/* Title */}
-<motion.h1
-  className="hero-element opacity-0 translate-y-12 text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent"
+
+          <motion.h1
+  className="hero-element opacity-0 translate-y-12 text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent h-20" 
 >
   {t("hero.title")}
 </motion.h1>
 
-{/* Subtitle */}
 <motion.p
-  className="hero-element opacity-0 translate-y-12 text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mt-6"
+  className="hero-element opacity-0 translate-y-12 text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed -mt-2" // Added -mt-2 to pull subtitle up
 >
   {t("hero.subtitle")}
 </motion.p>
+
 
 
           {/* Buttons */}
