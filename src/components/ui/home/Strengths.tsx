@@ -1,7 +1,7 @@
-
 import { useI18n } from "@/utils/i18n";
 import { CheckCircle, Shield, HandshakeIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 // Using a custom icon for Flexible since it's not in the standard Lucide set
 const FlexibleIcon = () => (
@@ -51,18 +51,52 @@ export function Strengths() {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <section className="section-padding bg-white">
       <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
-        <div className="text-center max-w-xl mx-auto mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center max-w-xl mx-auto mb-16"
+        >
           <h2 className="text-3xl font-display font-bold mb-4">{t("strengths.title")}</h2>
           <div className="w-20 h-1 bg-primary/20 mx-auto"></div>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {strengths.map((strength, index) => (
-            <div 
+            <motion.div 
               key={index} 
+              variants={itemVariants}
               className="bg-background rounded-xl p-6 border border-border/40 shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px]"
             >
               <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", strength.color)}>
@@ -70,9 +104,9 @@ export function Strengths() {
               </div>
               <h3 className="text-xl font-display font-semibold mb-2">{strength.title}</h3>
               <p className="text-muted-foreground">{strength.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
