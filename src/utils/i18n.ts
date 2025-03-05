@@ -68,6 +68,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.title': 'Contact Us',
     'contact.subtitle': 'Get in touch with our team',
     'contact.address': 'Address',
+    'contact.address_main':'Khalidiya Towers, Mezzanine Floor,\nAl Faskar Street W10,\nAl Bateen, Al Khalidiyah,\nAbu Dhabi, United Arab Emirates',
     'contact.phone': 'Phone',
     'contact.email': 'Email',
     'contact.form.name': 'Your Name',
@@ -91,9 +92,11 @@ const translations: Record<Language, Record<string, string>> = {
     'inquiry.form.submit': 'Submit Inquiry',
     
     // Footer
+    'slogan':'Premium global trading solutions providing high-quality products with reliable service worldwide.',
     'footer.rights': 'All rights reserved',
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
+    'nav.quick_link':'Quick Links',
   },
   
   fr: {
@@ -153,6 +156,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.title': 'Contactez-Nous',
     'contact.subtitle': 'Entrez en contact avec notre équipe',
     'contact.address': 'Adresse',
+    'contact.address_main':'Khalidiya Towers, Mezzanine Floor,\nAl Faskar Street W10,\nAl Bateen, Al Khalidiyah,\nAbu Dhabi, Émirats Arabes Unis',
     'contact.phone': 'Téléphone',
     'contact.email': 'Email',
     'contact.form.name': 'Votre Nom',
@@ -176,9 +180,11 @@ const translations: Record<Language, Record<string, string>> = {
     'inquiry.form.submit': 'Soumettre la Demande',
     
     // Footer
+    'slogan':'Solutions commerciales mondiales haut de gamme offrant des produits de haute qualité avec un service fiable dans le monde entier.',
     'footer.rights': 'Tous droits réservés',
     'footer.privacy': 'Politique de Confidentialité',
     'footer.terms': 'Conditions d\'Utilisation',
+    'nav.quick_link':'Liens rapides',
   },
   
   ar: {
@@ -239,6 +245,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.title': 'اتصل بنا',
     'contact.subtitle': 'تواصل مع فريقنا',
     'contact.address': 'العنوان',
+    'contact.address_main':'أبراج الخالدية، طابق الميزانين،\nشارع الفسكر W10،\nالبطين، الخالدية،\nأبوظبي، الإمارات العربية المتحدة',
     'contact.phone': 'الهاتف',
     'contact.email': 'البريد الإلكتروني',
     'contact.form.name': 'اسمك',
@@ -262,9 +269,11 @@ const translations: Record<Language, Record<string, string>> = {
     'inquiry.form.submit': 'تقديم الطلب',
     
     // Footer
+    'slogan':'حلول تجارية عالمية متميزة توفر منتجات عالية الجودة مع خدمة موثوقة في جميع أنحاء العالم..',
     'footer.rights': 'جميع الحقوق محفوظة',
     'footer.privacy': 'سياسة الخصوصية',
     'footer.terms': 'شروط الخدمة',
+    'nav.quick_link':'روابط سريعة',
   }
 };
 

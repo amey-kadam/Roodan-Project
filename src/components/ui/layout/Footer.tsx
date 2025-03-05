@@ -13,14 +13,14 @@ export function Footer() {
           <div className="md:col-span-1">
             <h3 className="text-lg font-display font-semibold mb-4">ROODAN</h3>
             <p className="text-muted-foreground text-sm max-w-xs">
-              Premium global trading solutions providing high-quality products with reliable service worldwide.
+            {t("slogan")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h3 className="font-medium mb-4 text-sm uppercase tracking-wider text-muted-foreground">
-              Quick Links
+              {t("nav.quick_link")}
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -106,10 +106,7 @@ export function Footer() {
               <li className="flex items-start space-x-2">
                 <span className="text-foreground/70">{t("contact.address")}:</span>
                 <span className="text-foreground/70">
-                Khalidiya Towers, Mezzanine Floor,<br />
-                Al Faskar Street W10,
-                Al Bateen, <br />Al Khalidiyah, 
-                Abu Dhabi, United Arab Emirates
+                {t("contact.address_main")}
                 </span>
               </li>
             </ul>

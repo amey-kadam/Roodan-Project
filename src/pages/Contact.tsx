@@ -137,8 +137,8 @@ const Contact = () => {
                 { 
                   icon: MapPin, 
                   title: t("contact.address"), 
-                  address: "Khalidiya Towers, Mezzanine Floor,\nAl Faskar Street W10,\nAl Bateen, Al Khalidiyah,\nAbu Dhabi, United Arab Emirates"
-                }
+                  address: t("contact.address_main"),
+                },
               ].map((item, index) => (
                 <motion.div 
                   key={index}

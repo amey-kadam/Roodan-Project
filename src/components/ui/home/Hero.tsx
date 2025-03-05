@@ -124,9 +124,6 @@ export function Hero() {
 >
   {t("hero.subtitle")}
 </motion.p>
-
-
-
           {/* Buttons */}
           <motion.div
             className="hero-element opacity-0 translate-y-12 flex flex-wrap justify-center gap-5 pt-8"
