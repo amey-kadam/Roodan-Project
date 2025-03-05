@@ -15,7 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.home': 'Home',
     'nav.about': 'About Us',
     'nav.products': 'Products',
-    'nav.inquiry': 'Enquiry',
+    'nav.inquiry': 'Request Quotation',
     'nav.contact': 'Contact',
     
     // Hero
@@ -99,7 +99,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.home': 'Accueil',
     'nav.about': 'À Propos',
     'nav.products': 'Produits',
-    'nav.inquiry': 'Enquête',
+    'nav.inquiry': 'demande de devis',
     'nav.contact': 'Contact',
     
     // Hero
@@ -182,7 +182,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.home': 'الرئيسية',
     'nav.about': 'من نحن',
     'nav.products': 'المنتجات',
-    'nav.inquiry': 'اسْتيضاح',
+    'nav.inquiry': 'طلب الاقتباس',
     'nav.contact': 'اتصل بنا',
     
     // Hero
