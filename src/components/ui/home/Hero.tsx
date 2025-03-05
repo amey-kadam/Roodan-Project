@@ -23,6 +23,14 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* World Map Background */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-60" 
+        style={{ 
+          backgroundImage: "url('/world-map.jpg')" 
+        }}
+      />
+
       {/* Enhanced Background Elements */}
       <motion.div
         className="absolute inset-0 z-0"
@@ -124,7 +132,7 @@ export function Hero() {
             className="hero-element opacity-0 translate-y-12 flex flex-wrap justify-center gap-5 pt-8"
           >
             <Button
-              size="xl"
+              size="lg"
               asChild
               className="group h-14 px-8 rounded-2xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary transition-all shadow-lg hover:shadow-primary/30"
             >
@@ -137,7 +145,7 @@ export function Hero() {
               </NavLink>
             </Button>
             <Button
-              size="xl"
+              size="lg"
               variant="outline"
               asChild
               className="group h-14 px-8 rounded-2xl border-2 bg-background/50 hover:bg-background/80 hover:border-primary transition-all"
