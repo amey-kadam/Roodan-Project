@@ -77,8 +77,9 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.email': 'Your Email',
     'contact.form.message': 'Your Message',
     'contact.form.submit': 'Send Message',
-   ' contact.whatsapp' : 'WhatsApp',
-    
+    'contact.whatsapp' : 'WhatsApp',
+    'SendUs.title' : 'Send Us a Message',
+    'SendUs.desc' :' Have a question or inquiry? Fill out the form below and we will get back to you as soon as possible.',
     // Inquiry
     'inquiry.title': 'Request a Quote',
     'inquiry.subtitle': 'Fill out the form to receive a personalized quote',
@@ -179,6 +180,9 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.email': 'Votre Email',
     'contact.form.message': 'Votre Message',
     'contact.form.submit': 'Envoyer le Message',
+    'contact.whatsapp' : 'WhatsApp',
+    'SendUs.title' : 'Envoyez-nous un message',
+    'SendUs.desc' :'Vous avez une question ou une demande ? Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.',
     
     // Inquiry
     'inquiry.title': 'Demande de Devis',
@@ -282,6 +286,10 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.email': 'بريدك الإلكتروني',
     'contact.form.message': 'رسالتك',
     'contact.form.submit': 'إرسال الرسالة',
+    'contact.whatsapp' : 'واتساب',     
+    'SendUs.title' : 'أرسل لنا رسالة',
+    'SendUs.desc' :'هل لديك سؤال أو استفسار؟ املأ النموذج أدناه وسنقوم بالرد عليك في أقرب وقت ممكن.',
+
     
     // Inquiry
     'inquiry.title': 'طلب عرض سعر',

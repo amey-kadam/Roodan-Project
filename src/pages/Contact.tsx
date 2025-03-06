@@ -182,7 +182,7 @@ const Contact = () => {
                   },
                   { 
                     icon: MessageCircle, 
-                    title: t("contact.whatsapp") || "WhatsApp", 
+                    title: t("contact.whatsapp"), 
                     links: [
                       { text: "+1 (234) 567-8902", href: "https://wa.me/12345678902" }
                     ]
@@ -238,10 +238,10 @@ const Contact = () => {
             >
               <div>
                 <h2 className="text-3xl font-display font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                  Send Us a Message
+                 {t("SendUs.title")}
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  Have a question or inquiry? Fill out the form below and we'll get back to you as soon as possible.
+                 {t("SendUs.desc")}
                 </p>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
