@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - General Trading Company</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="header">
+            <div class="logo">
+                <h1>General Trading Co.</h1>
+            </div>
+            <div class="user-info">
+                <span>Welcome, {{ session.get('admin_username', 'Admin') }}</span>
+                <a href="{{ url_for('admin.logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </header>
+        
+        <div class="dashboard-content">
+            <aside class="sidebar">
+                <nav>
+                    <ul>
+                        <li class="active"><a href="#overview">Dashboard Overview</a></li>
+                        <li><a href="#enquiries">Enquiries</a></li>
+                        <li><a href="#quotations">Quotation Requests</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            
+            <main class="main-content">
+                <section id="overview" class="dashboard-section active">
+                    <h2>Dashboard Overview</h2>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card" id="visits-card">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-data">
+                                <h3>Total Visits</h3>
+                                <p class="stat-number" id="total-visits">Loading...</p>
+                                <p class="stat-detail" id="recent-visits">Recent: Loading...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" id="enquiries-card">
+                            <div class="stat-icon">✉️</div>
+                            <div class="stat-data">
+                                <h3>Enquiries</h3>
+                                <p class="stat-number" id="total-enquiries">Loading...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" id="quotations-card">
+                            <div class="stat-icon">📄</div>
+                            <div class="stat-data">
+                                <h3>Quotation Requests</h3>
+                                <p class="stat-number" id="total-quotations">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>Website Traffic (Last 7 Days)</h3>
+                        <canvas id="traffic-chart"></canvas>
+                    </div>
+                </section>
+                
+                <section id="enquiries" class="dashboard-section">
+                    <h2>Enquiries</h2>
+                    <div class="table-container">
+                        <table class="data-table" id="enquiries-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">Loading enquiries...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <section id="quotations" class="dashboard-section">
+                    <h2>Quotation Requests</h2>
+                    <div class="table-container">
+                        <table class="data-table" id="quotations-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Company</th>
+                                    <th>Contact</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6">Loading quotation requests...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Load dashboard data
+        fetch('/admin/api/stats')
+            .then(response => response.json())
+            .then(data => {
+                // Update stats
+                document.getElementById('total-visits').textContent = data.total_visits;
+                document.getElementById('recent-visits').textContent = `Recent (30d): ${data.recent_visits}`;
+                document.getElementById('total-enquiries').textContent = data.total_enquiries;
+                document.getElementById('total-quotations').textContent = data.total_quotations;
+                
+                // Create chart
+                const ctx = document.getElementById('traffic-chart').getContext('2d');
+                const chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.visits_by_day.map(day => day.date),
+                        datasets: [{
+                            label: 'Daily Visits',
+                            data: data.visits_by_day.map(day => day.count),
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    precision: 0
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading stats:', error));
+        
+        // Load enquiries
+        fetch('/admin/api/enquiries')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector('#enquiries-table tbody');
+                tbody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td colspan="5">No enquiries found</td>';
+                    tbody.appendChild(row);
+                    return;
+                }
+                
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.email}</td>
+                        <td>${item.message}</td>
+                        <td>${new Date(item.timestamp).toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error loading enquiries:', error));
+        
+        // Load quotations
+        fetch('/admin/api/quotations')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector('#quotations-table tbody');
+                tbody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td colspan="6">No quotation requests found</td>';
+                    tbody.appendChild(row);
+                    return;
+                }
+                
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.company}</td>
+                        <td>${item.name} (${item.email})</td>
+                        <td>${item.product}</td>
+                        <td>${item.quantity}</td>
+                        <td>${new Date(item.timestamp).toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error loading quotations:', error));
+        
+        // Tab navigation
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active link
+                document.querySelectorAll('.sidebar li').forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.parentElement.classList.add('active');
+                
+                // Show corresponding section
+                const targetId = this.getAttribute('href').substring(1);
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

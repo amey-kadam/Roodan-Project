@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, session, redirect, url_for
 from flask_cors import CORS
 import smtplib
 from email.mime.text import MIMEText
@@ -6,18 +6,38 @@ from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
 
+# Import admin module
+from admin import admin_bp, init_db, track_visit, record_enquiry, record_quotation
+
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-# Email configuration - store these in a .env file in production
+# Configure Flask app
+app.secret_key = os.getenv("SECRET_KEY", "your-secret-key-for-sessions")  # Change this in production
+app.config['SESSION_TYPE'] = 'filesystem'
+
+# Register the admin blueprint
+app.register_blueprint(admin_bp, url_prefix='/admin')
+
+# Initialize the database
+init_db()
+
+# Email configuration
 EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
 EMAIL_USER = os.getenv("EMAIL_USER", "your-email@gmail.com")  # Your sender email
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD", "your-app-password")  # Use app password for Gmail
 RECIPIENT_EMAIL = "amey.p.kadam@gmail.com"
+
+# Track visit for all routes
+@app.before_request
+def before_request():
+    # Exclude static files and admin API routes from tracking
+    if not request.path.startswith('/static') and not request.path.startswith('/admin/api'):
+        track_visit(request.path)
 
 @app.route('/api/contact', methods=['POST'])
 def contact():
@@ -57,6 +77,9 @@ def contact():
             server.starttls()  # Secure the connection
             server.login(EMAIL_USER, EMAIL_PASSWORD)
             server.send_message(msg)
+        
+        # Record the enquiry in the database
+        record_enquiry(name, email, message)
         
         return jsonify({"success": True, "message": "Your message has been sent successfully!"}), 200
     
@@ -115,12 +138,25 @@ def inquiry():
             server.login(EMAIL_USER, EMAIL_PASSWORD)
             server.send_message(msg)
         
+        # Record the quotation request in the database
+        record_quotation(company, name, email, phone, product, quantity, delivery, message)
+        
         return jsonify({"success": True, "message": "Your inquiry has been submitted successfully!"}), 200
     
     except Exception as e:
         # Log the error (you would use a proper logging system in production)
         print(f"Error sending inquiry email: {str(e)}")
         return jsonify({"success": False, "message": "Failed to submit inquiry. Please try again later."}), 500
+
+# Add a route for the main admin page
+@app.route('/admin', methods=['GET'])
+def admin_redirect():
+    return redirect(url_for('admin.login'))
+
+# Default route for testing
+@app.route('/')
+def index():
+    return "General Trading Company API is running. Access the admin dashboard at /admin"
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
