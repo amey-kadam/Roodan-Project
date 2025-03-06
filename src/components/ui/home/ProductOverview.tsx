@@ -93,12 +93,14 @@ export function ProductOverview() {
             <motion.div
               key={index}
               variants={itemVariants}
+              className="rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
             >
               <NavLink
                 to={product.link}
                 className="group rounded-xl overflow-hidden bg-background border border-border/40 shadow-sm transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
+                onClick={() => window.scrollTo(0, 0)}
               >
-                <div className="aspect-[4/3] overflow-hidden relative">
+                <div className="aspect-[4/3] overflow-hidden relative rounded-t-xl">
                   <img
                     src={product.image}
                     alt={product.title}
@@ -106,7 +108,7 @@ export function ProductOverview() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 rounded-b-xl">
                   <h3 className="text-xl font-display font-semibold mb-2">{product.title}</h3>
                   <p className="text-muted-foreground mb-4">{product.description}</p>
                   <div className="flex items-center text-primary font-medium transition-colors group-hover:text-primary/90">
@@ -126,8 +128,8 @@ export function ProductOverview() {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <Button asChild size="lg" className="hover-scale hover:bg-white hover:text-primary" >
-            <NavLink to="/products">
+          <Button asChild size="lg" className="hover-scale hover:bg-white hover:text-primary">
+            <NavLink to="/products" onClick={() => window.scrollTo(0, 0)}>
               {t("products.viewAll")}
             </NavLink>
           </Button>

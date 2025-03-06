@@ -36,23 +36,29 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300 precise-transition",
-        isScrolled 
-          ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-3" 
-          : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 precise-transition",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-2"
+          : "bg-transparent py-4"
       )}
     >
       <div className="page-container">
         <div className="flex items-center justify-between">
-          <NavLink 
-            to="/" 
-            className="flex items-center space-x-4 group"
+          <NavLink
+            to="/"
+            className="flex items-center group"
             onClick={() => window.scrollTo(0, 0)}
           >
-            <div className="rounded-full p-2.5 transition-all duration-300 group-hover:scale-110">
-              <img src="/logo.png" alt="Roodan" className="w-11 h-11 rounded-full bg-white" />
+            <div className="transition-all duration-300 group-hover:scale-105">
+              <img
+                src="/Roodan-LOGO-without-background.png"
+                alt="Roodan"
+                className={cn(
+                  "transition-all duration-300",
+                  isScrolled ? "w-20 h-20" : "w-24 h-24"
+                )}
+              />
             </div>
-            <span className="text-xl font-display font-semibold">ROODAN</span>
           </NavLink>
 
           {/* Desktop Navigation */}
@@ -63,10 +69,13 @@ export function Header() {
                 to={route.path}
                 className={({ isActive }) =>
                   cn(
-                    "relative font-medium text-sm hover:text-primary transition-colors precise-transition",
-                    isActive ? "text-primary" : "text-foreground/80",
+                    "relative font-medium text-base hover:text-primary transition-colors precise-transition py-2",
+                    isActive ? "text-primary font-semibold" : "text-foreground/80",
                     "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:transform after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100",
-                    { "after:origin-bottom-left after:scale-x-100": location.pathname === route.path }
+                    {
+                      "after:origin-bottom-left after:scale-x-100":
+                        location.pathname === route.path,
+                    }
                   )
                 }
                 onClick={() => window.scrollTo(0, 0)}
@@ -78,15 +87,12 @@ export function Header() {
 
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSelector />
-            <Button 
-              asChild 
-              size="sm" 
-              className="hover-scale hover:shadow-md hover:bg-white hover:text-primary"
+            <Button
+              asChild
+              size="lg"
+              className="hover-scale hover:shadow-md hover:bg-white hover:text-primary font-medium px-6"
             >
-              <NavLink 
-                to="/inquiry"
-                onClick={() => window.scrollTo(0, 0)}
-              >
+              <NavLink to="/inquiry" onClick={() => window.scrollTo(0, 0)}>
                 {t("nav.inquiry")}
               </NavLink>
             </Button>
@@ -95,13 +101,18 @@ export function Header() {
           {/* Mobile Navigation Trigger */}
           <div className="flex md:hidden items-center space-x-4">
             <LanguageSelector />
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
+              className="h-10 w-10"
             >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -109,15 +120,17 @@ export function Header() {
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border/30 shadow-md animate-slide-down">
-            <nav className="flex flex-col py-4 px-4">
+            <nav className="flex flex-col py-6 px-4">
               {routes.map((route) => (
                 <NavLink
                   key={route.path}
                   to={route.path}
                   className={({ isActive }) =>
                     cn(
-                      "py-3 px-4 font-medium transition-colors",
-                      isActive ? "text-primary bg-primary/5 rounded-md" : "text-foreground/80"
+                      "py-4 px-4 font-medium text-lg transition-colors",
+                      isActive
+                        ? "text-primary bg-primary/5 rounded-md"
+                        : "text-foreground/80"
                     )
                   }
                   onClick={() => {
@@ -128,10 +141,10 @@ export function Header() {
                   {route.label}
                 </NavLink>
               ))}
-              <div className="pt-2 pb-3 px-4">
-                <Button className="w-full" asChild>
-                  <NavLink 
-                    to="/inquiry" 
+              <div className="pt-4 pb-2 px-4">
+                <Button className="w-full py-6 text-base" asChild>
+                  <NavLink
+                    to="/inquiry"
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       window.scrollTo(0, 0);
