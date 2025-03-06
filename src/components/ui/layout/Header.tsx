@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -12,6 +11,11 @@ export function Header() {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Handle scrolling for page transitions
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +36,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        " fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300 precise-transition",
+        "fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300 precise-transition",
         isScrolled 
           ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-3" 
           : "bg-transparent"
@@ -40,8 +44,12 @@ export function Header() {
     >
       <div className="page-container">
         <div className="flex items-center justify-between">
-          <NavLink to="/" className="flex items-center space-x-4 group">
-            <div className="rounded-full  p-2.5 transition-all duration-300 group-hover:scale-110">
+          <NavLink 
+            to="/" 
+            className="flex items-center space-x-4 group"
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            <div className="rounded-full p-2.5 transition-all duration-300 group-hover:scale-110">
               <img src="/logo.png" alt="Roodan" className="w-11 h-11 rounded-full bg-white" />
             </div>
             <span className="text-xl font-display font-semibold">ROODAN</span>
@@ -61,6 +69,7 @@ export function Header() {
                     { "after:origin-bottom-left after:scale-x-100": location.pathname === route.path }
                   )
                 }
+                onClick={() => window.scrollTo(0, 0)}
               >
                 {route.label}
               </NavLink>
@@ -69,8 +78,17 @@ export function Header() {
 
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSelector />
-            <Button asChild size="sm" className="hover-scale hover:shadow-md hover:bg-white hover:text-primary">
-              <NavLink to="/inquiry">{t("nav.inquiry")}</NavLink>
+            <Button 
+              asChild 
+              size="sm" 
+              className="hover-scale hover:shadow-md hover:bg-white hover:text-primary"
+            >
+              <NavLink 
+                to="/inquiry"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                {t("nav.inquiry")}
+              </NavLink>
             </Button>
           </div>
 
@@ -102,14 +120,23 @@ export function Header() {
                       isActive ? "text-primary bg-primary/5 rounded-md" : "text-foreground/80"
                     )
                   }
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   {route.label}
                 </NavLink>
               ))}
               <div className="pt-2 pb-3 px-4">
                 <Button className="w-full" asChild>
-                  <NavLink to="/inquiry" onClick={() => setIsMobileMenuOpen(false)}>
+                  <NavLink 
+                    to="/inquiry" 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
                     {t("nav.inquiry")}
                   </NavLink>
                 </Button>
