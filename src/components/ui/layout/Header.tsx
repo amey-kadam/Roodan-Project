@@ -26,6 +26,18 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMobileMenuOpen]);
+
   const routes = [
     { path: "/", label: t("nav.home") },
     { path: "/about", label: t("nav.about") },
@@ -38,11 +50,11 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 precise-transition",
         isScrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-2"
-          : "bg-transparent py-4"
+          ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-1 sm:py-2"
+          : "bg-transparent py-2 sm:py-4"
       )}
     >
-      <div className="page-container">
+      <div className="w-full max-w-screen-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <NavLink
             to="/"
@@ -55,21 +67,23 @@ export function Header() {
                 alt="Roodan"
                 className={cn(
                   "transition-all duration-300",
-                  isScrolled ? "w-20 h-20" : "w-24 h-24"
+                  isScrolled 
+                    ? "w-16 h-14 sm:w-18 sm:h-16 md:w-20 md:h-18" 
+                    : "w-20 h-18 sm:w-22 sm:h-20 md:w-24 md:h-22"
                 )}
               />
             </div>
           </NavLink>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
             {routes.map((route) => (
               <NavLink
                 key={route.path}
                 to={route.path}
                 className={({ isActive }) =>
                   cn(
-                    "relative font-medium text-base hover:text-primary transition-colors precise-transition py-2",
+                    "relative font-medium text-sm lg:text-base hover:text-primary transition-colors precise-transition py-2",
                     isActive ? "text-primary font-semibold" : "text-foreground/80",
                     "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:transform after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100",
                     {
@@ -85,12 +99,12 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
             <LanguageSelector />
             <Button
               asChild
-              size="lg"
-              className="hover-scale hover:shadow-md hover:bg-white hover:text-primary font-medium px-6"
+              size="sm"
+              className="hover-scale hover:shadow-md hover:bg-white hover:text-primary font-medium px-3 lg:px-6 lg:text-base lg:size-lg"
             >
               <NavLink to="/inquiry" onClick={() => window.scrollTo(0, 0)}>
                 {t("nav.inquiry")}
@@ -99,19 +113,19 @@ export function Header() {
           </div>
 
           {/* Mobile Navigation Trigger */}
-          <div className="flex md:hidden items-center space-x-4">
+          <div className="flex md:hidden items-center space-x-2 sm:space-x-3">
             <LanguageSelector />
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
-              className="h-10 w-10"
+              className="h-8 w-8 sm:h-10 sm:w-10"
             >
               {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5 sm:h-6 sm:w-6" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
               )}
             </Button>
           </div>
@@ -119,15 +133,15 @@ export function Header() {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border/30 shadow-md animate-slide-down">
-            <nav className="flex flex-col py-6 px-4">
+          <div className="md:hidden fixed top-[calc(100%-1px)] inset-x-0 bottom-0 bg-background border-t border-border/30 shadow-md animate-slide-down overflow-y-auto max-h-[80vh]">
+            <nav className="flex flex-col py-4 sm:py-6 px-3 sm:px-4">
               {routes.map((route) => (
                 <NavLink
                   key={route.path}
                   to={route.path}
                   className={({ isActive }) =>
                     cn(
-                      "py-4 px-4 font-medium text-lg transition-colors",
+                      "py-3 sm:py-4 px-3 sm:px-4 font-medium text-base sm:text-lg transition-colors",
                       isActive
                         ? "text-primary bg-primary/5 rounded-md"
                         : "text-foreground/80"
@@ -141,8 +155,11 @@ export function Header() {
                   {route.label}
                 </NavLink>
               ))}
-              <div className="pt-4 pb-2 px-4">
-                <Button className="w-full py-6 text-base" asChild>
+              <div className="pt-3 sm:pt-4 pb-2 px-2 sm:px-4">
+                <Button 
+                  className="w-full py-4 sm:py-6 text-sm sm:text-base" 
+                  asChild
+                >
                   <NavLink
                     to="/inquiry"
                     onClick={() => {
