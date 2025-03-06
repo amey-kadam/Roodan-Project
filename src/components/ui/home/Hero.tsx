@@ -85,7 +85,7 @@ export function Hero() {
         ref={scope}
       >
         {/* Rest of the component remains the same as in the previous version */}
-        <motion.div
+        <motion.div 
           className="max-w-4xl mx-auto space-y-8"
           initial="initial"
           animate="animate"
@@ -98,18 +98,8 @@ export function Hero() {
           }}
         >
           {/* Badge */}
-          <motion.div
-            className="hero-element opacity-0 translate-y-12 inline-block px-5 py-3 rounded-2xl bg-background/50 border border-border/50 backdrop-blur-lg mb-6 shadow-lg hover:shadow-primary/10 transition-shadow"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <span className="text-base font-semibold text-primary flex items-center gap-3">
-              <Globe className="w-5 h-5" />
-              <Layers className="w-5 h-5 opacity-50" />
-              {language === "ar" 
-                ? "حلول تجارية عالمية" 
-                : "Global Trading Solutions"}
-            </span>
+          <motion.div>
+          
           </motion.div>
 
 
