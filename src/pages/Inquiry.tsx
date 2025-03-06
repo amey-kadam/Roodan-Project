@@ -22,23 +22,83 @@ const Inquiry = () => {
   const { t, language } = useI18n();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    company: "",
+    name: "",
+    email: "",
+    phone: "",
+    product: "",
+    quantity: "",
+    delivery: "",
+    message: ""
+  });
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+  
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast({
-        title: "Inquiry Submitted",
-        description: "We've received your inquiry and will contact you soon.",
-        duration: 5000,
+    try {
+      // Validate required fields
+      const requiredFields = ['company', 'name', 'email', 'phone', 'product', 'quantity', 'delivery'];
+      const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
+      
+      if (missingFields.length > 0) {
+        throw new Error("Please fill all required fields");
+      }
+      
+      // Send data to backend API
+      const response = await fetch('http://localhost:5000/api/inquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
       
-      // Reset form
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+      const data = await response.json();
+      
+      if (response.ok) {
+        toast({
+          title: "Inquiry Submitted",
+          description: data.message || "We've received your inquiry and will contact you soon.",
+          duration: 5000,
+        });
+        
+        // Reset form
+        setFormData({
+          company: "",
+          name: "",
+          email: "",
+          phone: "",
+          product: "",
+          quantity: "",
+          delivery: "",
+          message: ""
+        });
+      } else {
+        throw new Error(data.message || "Failed to submit inquiry");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to submit inquiry. Please try again.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Product options
@@ -164,6 +224,8 @@ const Inquiry = () => {
                     </label>
                     <Input 
                       id="company" 
+                      value={formData.company}
+                      onChange={handleChange}
                       required 
                       className="rounded-xl focus:ring-2 focus:ring-primary/30"
                     />
@@ -179,6 +241,8 @@ const Inquiry = () => {
                     </label>
                     <Input 
                       id="name" 
+                      value={formData.name}
+                      onChange={handleChange}
                       required 
                       className="rounded-xl focus:ring-2 focus:ring-primary/30"
                     />
@@ -197,6 +261,8 @@ const Inquiry = () => {
                     <Input 
                       id="email" 
                       type="email" 
+                      value={formData.email}
+                      onChange={handleChange}
                       required 
                       className="rounded-xl focus:ring-2 focus:ring-primary/30"
                     />
@@ -213,6 +279,9 @@ const Inquiry = () => {
                     <Input 
                       id="phone" 
                       type="tel" 
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
                       className="rounded-xl focus:ring-2 focus:ring-primary/30"
                     />
                   </motion.div>
@@ -227,7 +296,11 @@ const Inquiry = () => {
                       <ShoppingCart className="w-5 h-5 text-primary" />
                       {t("inquiry.form.product")} <span className="text-destructive">*</span>
                     </label>
-                    <Select required>
+                    <Select 
+                      value={formData.product} 
+                      onValueChange={(value) => handleSelectChange('product', value)}
+                      required
+                    >
                       <SelectTrigger className="rounded-xl">
                         <SelectValue placeholder="Select a product" />
                       </SelectTrigger>
@@ -255,6 +328,8 @@ const Inquiry = () => {
                     </label>
                     <Input 
                       id="quantity" 
+                      value={formData.quantity}
+                      onChange={handleChange}
                       required 
                       className="rounded-xl focus:ring-2 focus:ring-primary/30"
                     />
@@ -269,7 +344,11 @@ const Inquiry = () => {
                     <ShoppingCart className="w-5 h-5 text-primary" />
                     {t("inquiry.form.delivery")} <span className="text-destructive">*</span>
                   </label>
-                  <Select required>
+                  <Select 
+                    value={formData.delivery} 
+                    onValueChange={(value) => handleSelectChange('delivery', value)}
+                    required
+                  >
                     <SelectTrigger className="rounded-xl">
                       <SelectValue placeholder="Select delivery terms" />
                     </SelectTrigger>
@@ -297,6 +376,8 @@ const Inquiry = () => {
                   </label>
                   <Textarea 
                     id="message" 
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={5} 
                     className="rounded-xl focus:ring-2 focus:ring-primary/30"
                   />
