@@ -63,6 +63,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about.experience.desc': 'With years of experience in international trade, we have established strong partnerships and a reputation for excellence.',
     'about.team.title': 'Our Team',
     'about.team.desc': 'Meet our dedicated team of experts who are committed to providing exceptional service and building strong partnerships with our clients.',
+    // About.Why Choose Us
+    'about.whyChooseUs.title': 'Why Choose Us?',
     
     // Contact
     'contact.title': 'Contact Us',
@@ -75,6 +77,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.email': 'Your Email',
     'contact.form.message': 'Your Message',
     'contact.form.submit': 'Send Message',
+   ' contact.whatsapp' : 'WhatsApp',
     
     // Inquiry
     'inquiry.title': 'Request a Quote',
@@ -152,6 +155,19 @@ const translations: Record<Language, Record<string, string>> = {
     'about.experience.desc': 'Avec des années d\'expérience dans le commerce international, nous avons établi des partenariats solides et une réputation d\'excellence.',
     'about.team.title': 'Notre Équipe',
     'about.team.desc': 'Rencontrez notre équipe dévouée d\'experts qui s\'engagent à fournir un service exceptionnel et à construire des partenariats solides avec nos clients.',
+
+    // about.Why Choose Us
+    'about.whyChooseUs.title': 'Pourquoi Nous Choisir?',
+    'about.whyChooseUs.quality.title': 'Qualité Premium',
+    'about.whyChooseUs.quality.desc': 'Produits de qualité premium provenant de fournisseurs de confiance dans le monde entier',
+    'about.whyChooseUs.delivery.title': 'Livraison Flexible',
+    'about.whyChooseUs.delivery.desc': 'Conditions de livraison flexibles pour répondre à vos besoins spécifiques',
+    'about.whyChooseUs.pricing.title': 'Prix Compétitifs',
+    'about.whyChooseUs.pricing.desc': 'Prix compétitifs et pratiques commerciales transparentes',
+    'about.whyChooseUs.service.title': 'Service Réactif',
+    'about.whyChooseUs.service.desc': 'Service client réactif et support dédié',
+    'about.whyChooseUs.experience.title': 'Expérience Mondiale',
+    'about.whyChooseUs.experience.desc': 'Des années d\'expérience dans le commerce international avec un réseau mondial',
     // Contact
     'contact.title': 'Contactez-Nous',
     'contact.subtitle': 'Entrez en contact avec notre équipe',
@@ -240,6 +256,20 @@ const translations: Record<Language, Record<string, string>> = {
     'about.experience.desc': 'مع سنوات من الخبرة في التجارة الدولية، أقمنا شراكات قوية وسمعة في التميز.',
     'about.team.title': 'فريقنا',
     'about.team.desc': 'تعرف على فريقنا المتفاني من الخبراء الملتزمين بتقديم خدمة استثنائية وبناء شراكات قوية مع عملائنا.',
+
+    //about.Why Choose Us
+    'about.whyChooseUs.title': 'لماذا تختارنا؟',
+    'about.whyChooseUs.quality.title': 'جودة ممتازة',
+    'about.whyChooseUs.quality.desc': 'منتجات عالية الجودة من موردين موثوقين حول العالم',
+    'about.whyChooseUs.delivery.title': 'تسليم مرن',
+    'about.whyChooseUs.delivery.desc': 'شروط تسليم مرنة لتلبية متطلباتك الخاصة',
+    'about.whyChooseUs.pricing.title': 'أسعار تنافسية',
+    'about.whyChooseUs.pricing.desc': 'أسعار تنافسية وممارسات تجارية شفافة',
+    'about.whyChooseUs.service.title': 'خدمة سريعة الاستجابة',
+    'about.whyChooseUs.service.desc': 'خدمة عملاء سريعة الاستجابة ودعم مخصص',
+    'about.whyChooseUs.experience.title': 'خبرة عالمية',
+    'about.whyChooseUs.experience.desc': 'سنوات من الخبرة في التجارة الدولية مع شبكة عالمية',
+    
     
     // Contact
     'contact.title': 'اتصل بنا',

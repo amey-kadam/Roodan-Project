@@ -226,6 +226,7 @@ const About = () => {
         </div>
 
         {/* Why Choose Us Section */}
+       
         <motion.section 
           className="page-container py-24 bg-secondary/5"
           initial="initial"
@@ -238,7 +239,7 @@ const About = () => {
                 <Globe className="w-12 h-12 text-primary" />
               </motion.div>
               <h2 className="text-4xl font-display font-bold text-center">
-                Why Choose Us?
+               {t("about.whyChooseUs.title")}
               </h2>
             </div>
             
