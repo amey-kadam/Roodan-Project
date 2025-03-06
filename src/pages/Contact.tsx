@@ -32,7 +32,7 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Get form data
+
       const form = e.target as HTMLFormElement;
       const formData = {
         name: (form.elements.namedItem('name') as HTMLInputElement).value,
