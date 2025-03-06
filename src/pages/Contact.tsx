@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -14,6 +14,15 @@ const Contact = () => {
   const { t, language } = useI18n();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Add loading state management
+  useState(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  });
 
   const floatingVariants = {
     initial: { y: -20 },
@@ -101,73 +110,89 @@ const Contact = () => {
         {/* Contact Information */}
         <section className="py-16 bg-white">
           <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { 
-                  opacity: 1, 
-                  y: 0,
-                  transition: {
-                    staggerChildren: 0.2
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="bg-secondary/30 rounded-xl p-6 h-48 animate-pulse"></div>
+                ))}
+              </div>
+            ) : (
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: {
+                      staggerChildren: 0.2
+                    }
                   }
-                }
-              }}
-            >
-              {[
-                { 
-                  icon: Mail, 
-                  title: t("contact.email"), 
-                  links: [
-                    { text: "www.roodan.ae", href: "https://www.roodan.ae" },
-                    { text: "sales@tradenexus.com", href: "mailto:sales@tradenexus.com" }
-                  ]
-                },
-                { 
-                  icon: Phone, 
-                  title: t("contact.phone"), 
-                  links: [
-                    { text: "+1 (234) 567-8900", href: "tel:+12345678900" },
-                    { text: "+1 (234) 567-8901", href: "tel:+12345678901" }
-                  ]
-                },
-                { 
-                  icon: MapPin, 
-                  title: t("contact.address"), 
-                  address: t("contact.address_main"),
-                },
-              ].map((item, index) => (
-                <motion.div 
-                  key={index}
-                  variants={{
-                    hidden: { opacity: 0, y: 50 },
-                    visible: { opacity: 1, y: 0 }
-                  }}
-                  className="bg-secondary/30 rounded-xl p-6 flex flex-col items-center text-center hover:shadow-md transition-all duration-300 border border-border/30"
-                >
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    <item.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-display font-semibold mb-2">{item.title}</h3>
-                  {item.links ? (
-                    item.links.map((link, idx) => (
-                      <a 
-                        key={idx} 
-                        href={link.href} 
-                        className="text-primary hover:underline"
-                      >
-                        {link.text}
-                      </a>
-                    ))
-                  ) : (
-                    <address className="not-italic">{item.address}</address>
-                  )}
-                </motion.div>
-              ))}
-            </motion.div>
+                }}
+              >
+                {[
+                  { 
+                    icon: Mail, 
+                    title: t("contact.email"), 
+                    links: [
+                      { text: "www.roodan.ae", href: "https://www.roodan.ae" },
+                      { text: "sales@tradenexus.com", href: "mailto:sales@tradenexus.com" }
+                    ]
+                  },
+                  { 
+                    icon: Phone, 
+                    title: t("contact.phone"), 
+                    links: [
+                      { text: "+1 (234) 567-8900", href: "tel:+12345678900" },
+                      { text: "+1 (234) 567-8901", href: "tel:+12345678901" }
+                    ]
+                  },
+                  { 
+                    icon: MessageCircle, 
+                    title: t("contact.whatsapp") || "WhatsApp", 
+                    links: [
+                      { text: "+1 (234) 567-8902", href: "https://wa.me/12345678902" }
+                    ]
+                  },
+                  { 
+                   
+                    icon: MapPin, 
+                    title: t("contact.address"), 
+                    address: t("contact.address_main"),
+                  },
+                ].map((item, index) => (
+                  <motion.div 
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, y: 50 },
+                      visible: { opacity: 1, y: 0 }
+                    }}
+                    className="bg-secondary/30 rounded-xl p-6 flex flex-col items-center text-center hover:shadow-md transition-all duration-300 border border-border/30"
+                  >
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                      <item.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-display font-semibold mb-2">{item.title}</h3>
+                    {item.links ? (
+                      item.links.map((link, idx) => (
+                        <a 
+                          key={idx} 
+                          href={link.href} 
+                          className="text-primary hover:underline"
+                        >
+                          {link.text}
+                        </a>
+                      ))
+                    ) : (
+                      <address className="not-italic">{item.address}</address>
+                    )}
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
           </div>
         </section>
 
