@@ -213,11 +213,11 @@ const About = () => {
                     <Users className="w-12 h-12 text-primary" />
                   </motion.div>
                   <h2 className="text-4xl font-display font-bold">
-                    Our Leadership Team
+                    {t("about.team.title")}
                   </h2>
                 </div>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Discover the exceptional individuals driving our company's vision and success.
+                  {t("about.team.desc")}
                 </p>
               </motion.div>
               <TeamScrollComponent />
@@ -244,13 +244,13 @@ const About = () => {
             </div>
             
             <div className="grid md:grid-cols-2 gap-8">
-              {[
-                "Premium quality products sourced from trusted suppliers worldwide",
-                "Flexible delivery terms to meet your specific requirements",
-                "Competitive pricing and transparent business practices",
-                "Responsive customer service and dedicated support",
-                "Years of experience in international trade with a global network"
-              ].map((reason, index) => (
+              {[  
+                  "about.whyChooseUs.reason1",
+                  "about.whyChooseUs.reason2",
+                  "about.whyChooseUs.reason3",
+                  "about.whyChooseUs.reason4",
+                  "about.whyChooseUs.reason5",
+                ].map((reason, index) => (
                 <motion.div 
                   key={index} 
                   variants={sectionVariants}
@@ -258,7 +258,7 @@ const About = () => {
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <p className="text-muted-foreground">{reason}</p>
+                    <p className="text-muted-foreground">{t(reason)}</p>
                   </div>
                 </motion.div>
               ))}
