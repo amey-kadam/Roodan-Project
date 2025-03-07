@@ -163,12 +163,12 @@ const translations: Record<Language, Record<string, string>> = {
     'about.team.desc': 'Découvrez les individus exceptionnels qui sont à l’origine de la vision et du succès de notre entreprise.',
 
     // About.Why Choose Us
-    'about.whyChooseUs.title': 'Pourquoi Nous Choisir?',
-    'about.whyChooseUs.reason1': 'Produits de qualité premium provenant de fournisseurs de confiance du monde entier',
-    'about.whyChooseUs.reason2': 'Conditions de livraison flexibles pour répondre à vos exigences spécifiques',
-    'about.whyChooseUs.reason3': 'Prix compétitifs et pratiques commerciales transparentes',
-    'about.whyChooseUs.reason4': 'Service client réactif et support dédié',
-    'about.whyChooseUs.reason5': 'Années d\'expérience dans le commerce international avec un réseau mondial',
+    'about.whyChooseUs.title': 'Why Choose Us?',
+    'about.whyChooseUs.reason1': 'Premium quality products sourced from trusted suppliers worldwide',
+    'about.whyChooseUs.reason2': 'Flexible delivery terms to meet your specific requirements',
+    'about.whyChooseUs.reason3': 'Competitive pricing and transparent business practices',
+    'about.whyChooseUs.reason4': 'Responsive customer service and dedicated support',
+    'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
     
     // Contact
     'contact.title': 'Contactez-Nous',
@@ -250,13 +250,27 @@ const translations: Record<Language, Record<string, string>> = {
     'products.categories.agri': 'المنتجات الزراعية',
     'products.categories.petro': 'المنتجات البترولية',
     
-    // About why choose us
-    'about.whyChooseUs.title': 'لماذا تختارنا؟',
-    'about.whyChooseUs.reason1': 'منتجات فائقة الجودة من موردين موثوقين في جميع أنحاء العالم',
-    'about.whyChooseUs.reason2': 'شروط تسليم مرنة لتلبية متطلباتك المحددة',
-    'about.whyChooseUs.reason3': 'أسعار تنافسية وممارسات تجارية شفافة',
-    'about.whyChooseUs.reason4': 'خدمة عملاء سريعة الاستجابة ودعم مخصص',
-    'about.whyChooseUs.reason5': 'سنوات من الخبرة في التجارة الدولية مع شبكة عالمية',
+    // About
+    'about.title': 'من نحن',
+    'about.subtitle': 'مهمتنا وقيمنا',
+    'about.mission.title': 'مهمتنا',
+    'about.mission.desc': 'توفير منتجات عالية الجودة من خلال شراكات شفافة وموثوقة في جميع أنحاء العالم.',
+    'about.values.title': 'قيمنا',
+    'about.values.desc': 'الجودة والموثوقية والشراكة والمرونة تشكل حجر الزاوية في فلسفة أعمالنا.',
+    'about.experience.title': 'خبرتنا',
+    'about.experience.desc': 'مع سنوات من الخبرة في التجارة الدولية، أقمنا شراكات قوية وسمعة في التميز.',
+    'about.team.title': 'فريق القيادة لدينا',
+    'about.team.desc':'اكتشف الأفراد الاستثنائيين الذين يقودون رؤية شركتنا ونجاحها.',
+
+      
+  // About.Why Choose Us
+  'about.whyChooseUs.title': 'لماذا تختارنا؟',
+  'about.whyChooseUs.reason1': 'منتجات فائقة الجودة من موردين موثوقين في جميع أنحاء العالم',
+  'about.whyChooseUs.reason2': 'شروط تسليم مرنة لتلبية متطلباتك المحددة',
+  'about.whyChooseUs.reason3': 'أسعار تنافسية وممارسات تجارية شفافة',
+  'about.whyChooseUs.reason4': 'خدمة عملاء سريعة الاستجابة ودعم مخصص',
+  'about.whyChooseUs.reason5': 'سنوات من الخبرة في التجارة الدولية مع شبكة عالمية',
+    
     
     // Contact
     'contact.title': 'اتصل بنا',
