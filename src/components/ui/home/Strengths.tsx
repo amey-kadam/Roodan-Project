@@ -1,10 +1,11 @@
+import React, { useMemo } from "react";
 import { useI18n } from "@/utils/i18n";
-import { CheckCircle, Shield, HandshakeIcon } from "lucide-react";
+import { CheckCircle, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 // Using a custom icon for Flexible since it's not in the standard Lucide set
-const FlexibleIcon = () => (
+const FlexibleIcon = React.memo(() => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -19,12 +20,67 @@ const FlexibleIcon = () => (
     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
     <path d="M14.5 9a2.5 2.5 0 0 0-5 0v6a2.5 2.5 0 0 0 5 0" />
   </svg>
-);
+));
+
+// Handshake icon (renamed and simplified)
+const Handshake = React.memo(() => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z" />
+    <path d="M12 5.36 8.87 8.5a2.13 2.13 0 0 0 0 3h0a2.13 2.13 0 0 0 3 0l2.26-2.21a2.13 2.13 0 0 1 3 0l2.24 2.2a2.13 2.13 0 0 0 3 0h0a2.13 2.13 0 0 0 0-3L18.37 5.36a4.25 4.25 0 0 0-6 0h-.02a4.25 4.25 0 0 0-6 0z" />
+  </svg>
+));
+
+FlexibleIcon.displayName = 'FlexibleIcon';
+Handshake.displayName = 'Handshake';
+
+// Pre-defined animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const titleVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 0.5 
+    }
+  }
+};
 
 export function Strengths() {
   const { t, language } = useI18n();
   
-  const strengths = [
+  // Memoize the strengths array to prevent recreation on every render
+  const strengths = useMemo(() => [
     {
       title: t("strengths.quality.title"),
       description: t("strengths.quality.desc"),
@@ -40,7 +96,7 @@ export function Strengths() {
     {
       title: t("strengths.partnership.title"),
       description: t("strengths.partnership.desc"),
-      icon: HandshakeIcon,
+      icon: Handshake,
       color: "bg-amber-50 text-amber-600",
     },
     {
@@ -49,37 +105,21 @@ export function Strengths() {
       icon: FlexibleIcon,
       color: "bg-purple-50 text-purple-600",
     },
-  ];
+  ], [t]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
+  // Memoize direction class
+  const directionClass = useMemo(() => 
+    language === "ar" ? "rtl" : "ltr", 
+  [language]);
 
   return (
     <section className="section-padding bg-white">
-      <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+      <div className={cn("page-container", directionClass)}>
         <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           className="text-center max-w-xl mx-auto mb-16"
         >
           <h2 className="text-3xl font-display font-bold mb-4">{t("strengths.title")}</h2>
@@ -90,7 +130,7 @@ export function Strengths() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {strengths.map((strength, index) => (
@@ -109,6 +149,5 @@ export function Strengths() {
         </motion.div>
       </div>
     </section>
-    
   );
 }

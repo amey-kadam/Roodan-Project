@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface ProductCardProps {
   title: string;
@@ -10,7 +12,18 @@ interface ProductCardProps {
   className?: string;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({
+// Separate list item component to optimize rendering of list items
+const DetailItem = memo(({ detail }: { detail: string }) => (
+  <div className="text-sm text-foreground/70 mb-1 flex items-start">
+    <span className="mr-2">•</span>
+    {detail}
+  </div>
+));
+
+// Display name for debugging purposes
+DetailItem.displayName = 'DetailItem';
+
+const ProductCardComponent: React.FC<ProductCardProps> = ({
   title,
   image,
   description,
@@ -23,10 +36,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       className
     )}>
       <div className="relative pt-[60%]">
-        <img 
-          src={image} 
-          alt={title} 
-          className="absolute inset-0 w-full h-full object-cover"
+        {/* Replace standard img with LazyLoadImage for performance */}
+        <LazyLoadImage
+          src={image}
+          alt={title}
+          effect="blur"
+          wrapperClassName="absolute inset-0 w-full h-full"
+          className="object-cover w-full h-full"
+          threshold={300} // Start loading when 300px from viewport
+          placeholderSrc="/placeholder-image.jpg" // Optional: low-res placeholder
         />
       </div>
       <div className="p-6 flex flex-col flex-grow">
@@ -34,14 +52,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <p className="text-muted-foreground mb-4">{description}</p>
         
         <div className="mb-4">
+          {/* Map through details array just once with memoized child components */}
           {details.map((detail, index) => (
-            <div 
-              key={index} 
-              className="text-sm text-foreground/70 mb-1 flex items-start"
-            >
-              <span className="mr-2">•</span>
-              {detail}
-            </div>
+            <DetailItem key={index} detail={detail} />
           ))}
         </div>
 
@@ -55,3 +68,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     </div>
   );
 };
+
+// Export memoized component to prevent unnecessary re-renders
+export const ProductCard = memo(ProductCardComponent);

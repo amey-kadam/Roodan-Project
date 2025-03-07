@@ -1,15 +1,22 @@
+import React, { useCallback, useMemo } from "react";
 import { useI18n } from "@/utils/i18n";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { motion, stagger, useAnimate } from "framer-motion";
-import { Globe, ArrowRight, Layers } from "lucide-react";
+// Optimized imports - only import what's needed
+import { motion } from "framer-motion";
+import { stagger } from "framer-motion";
+import { useAnimate } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
-export function Hero() {
+function HeroComponent() {
   const { t, language } = useI18n();
   const [scope, animate] = useAnimate();
 
-  const floatingVariants = {
+  // Memoize animation variants
+  const floatingVariants = useMemo(() => ({
     initial: { y: -20 },
     animate: {
       y: [0, -20, 0],
@@ -19,17 +26,28 @@ export function Hero() {
         ease: "easeInOut",
       },
     },
-  };
+  }), []);
+
+  // Memoize callback function for animation
+  const handleViewportEnter = useCallback(() => {
+    animate(
+      ".hero-element",
+      { opacity: 1, y: 0 },
+      { delay: stagger(0.2), duration: 0.8 }
+    );
+  }, [animate]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* World Map Background */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-60" 
-        style={{ 
-          backgroundImage: "url('/world-map.jpg')" 
-        }}
-      />
+      {/* Optimized world map background with lazy loading */}
+      <div className="absolute inset-0 z-0 opacity-60">
+        <LazyLoadImage
+          src="/world-map.jpg"
+          effect="blur"
+          className="object-cover w-full h-full"
+          wrapperClassName="absolute inset-0"
+        />
+      </div>
 
       {/* Enhanced Background Elements */}
       <motion.div
@@ -44,12 +62,16 @@ export function Hero() {
         {/* Layered Grid Pattern */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
         
-        {/* Animated Floating Shapes */}
+        {/* Animated Floating Shapes - Optimized for GPU acceleration */}
         <motion.div
           className="absolute w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -top-64 -left-64"
           variants={floatingVariants}
           initial="initial"
           animate="animate"
+          style={{ 
+            willChange: 'transform',
+            translateZ: 0 // Force GPU acceleration
+          }}
         />
         <motion.div
           className="absolute w-[700px] h-[700px] bg-secondary/5 rounded-full blur-3xl -bottom-64 -right-64"
@@ -57,6 +79,10 @@ export function Hero() {
           initial="initial"
           animate="animate"
           transition={{ delay: 2 }}
+          style={{ 
+            willChange: 'transform',
+            translateZ: 0 // Force GPU acceleration
+          }}
         />
         
         {/* Extended Geometric Overlay */}
@@ -84,18 +110,11 @@ export function Hero() {
         )}
         ref={scope}
       >
-        {/* Rest of the component remains the same as in the previous version */}
         <motion.div 
           className="max-w-4xl mx-auto space-y-8"
           initial="initial"
           animate="animate"
-          onViewportEnter={() => {
-            animate(
-              ".hero-element",
-              { opacity: 1, y: 0 },
-              { delay: stagger(0.2), duration: 0.8 }
-            );
-          }}
+          onViewportEnter={handleViewportEnter}
         >
           {/* Badge */}
           <motion.div>
@@ -167,9 +186,13 @@ export function Hero() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
+            style={{ willChange: 'transform' }}
           />
         </div>
       </motion.div>
     </section>
   );
 }
+
+// Export memoized component to prevent unnecessary re-renders
+export const Hero = React.memo(HeroComponent);
