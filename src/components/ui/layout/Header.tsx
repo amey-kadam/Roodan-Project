@@ -61,9 +61,9 @@ export function Header() {
             className="flex items-center group"
             onClick={() => window.scrollTo(0, 0)}
           >
-            <div className="transition-all duration-300 group-hover:scale-105">
+            <div className="transition-all duration-300 group-hover:scale-105 flex items-center">
               <img
-                src="/Roodan-LOGO-without-background.png"
+                src="/tree_logo.png"
                 alt="Roodan"
                 className={cn(
                   "transition-all duration-300",
@@ -72,6 +72,19 @@ export function Header() {
                     : "w-20 h-18 sm:w-22 sm:h-20 md:w-24 md:h-22"
                 )}
               />
+              <span 
+                className={cn(
+                  "font-bold ml-2 tracking-wide transition-all duration-300 bg-clip-text text-transparent",
+                  isScrolled
+                    ? "text-lg sm:text-xl md:text-2xl"
+                    : "text-xl sm:text-2xl md:text-3xl"
+                )}
+                style={{ 
+                  backgroundImage: "linear-gradient(to right,rgb(2, 75, 4),rgb(3, 152, 21))"
+                }}
+              >
+                ROODAN
+              </span>
             </div>
           </NavLink>
 
