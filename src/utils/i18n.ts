@@ -17,6 +17,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.products': 'Products',
     'nav.inquiry': 'Request Quotation',
     'nav.contact': 'Contact',
+    //Header
+    'logo.title':'ROODAN',
     
     // Hero
     'hero.title': 'Roodan General Trading ',
@@ -115,6 +117,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.products': 'Produits',
     'nav.inquiry': 'demande de devis',
     'nav.contact': 'Contact',
+    //Header
+    'logo.title':'ROODAN',
     
     // Hero
     'hero.title': 'Commerce général de Roodan',
@@ -215,6 +219,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.products': 'المنتجات',
     'nav.inquiry': 'طلب الاقتباس',
     'nav.contact': 'اتصل بنا',
+    //Header
+    'logo.title':'رودان',
     
     // Hero
     'hero.title': 'رودان للتجارة العامة',

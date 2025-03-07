@@ -61,12 +61,12 @@ export function Header() {
             className="flex items-center group"
             onClick={() => window.scrollTo(0, 0)}
           >
-            <div className="transition-all duration-300 group-hover:scale-105 flex items-center">
+            <div className="transition-all duration-300 group-hover:scale-105 flex items-center  ">
               <img
                 src="/tree_logo.png"
                 alt="Roodan"
                 className={cn(
-                  "transition-all duration-300",
+                  "transition-all duration-300 mb-4",
                   isScrolled 
                     ? "w-16 h-14 sm:w-18 sm:h-16 md:w-20 md:h-18" 
                     : "w-20 h-18 sm:w-22 sm:h-20 md:w-24 md:h-22"
@@ -83,7 +83,7 @@ export function Header() {
                   backgroundImage: "linear-gradient(to right,rgb(2, 75, 4),rgb(3, 152, 21))"
                 }}
               >
-                ROODAN
+               {t("logo.title")}
               </span>
             </div>
           </NavLink>
