@@ -24,6 +24,7 @@ const ProductCard = memo(({ product, language }: ProductCardProps) => {
       to={product.link}
       className="group rounded-xl overflow-hidden bg-background border border-emerald-600/20 shadow-sm transition-all duration-300 hover:shadow-emerald-600/30 focus:outline-none focus:ring-2 focus:ring-emerald-600/50 focus:ring-offset-2"
       onClick={() => window.scrollTo(0, 0)}
+      aria-label={`View details for ${product.title}`} // Added for accessibility
     >
       <div className="aspect-[4/3] overflow-hidden relative rounded-t-xl">
         <img
@@ -31,6 +32,7 @@ const ProductCard = memo(({ product, language }: ProductCardProps) => {
           alt={product.title}
           loading="lazy" // Use native lazy loading
           className="w-full h-full object-cover"
+          decoding="async" // Improve image loading performance
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
       </div>
@@ -102,11 +104,16 @@ function ProductOverviewComponent() {
       description: "EN 590, D2, AGO, Jet A1",
       link: "/products",
     },
-  ], [t]); // Only recreate when translations change
+  ], [t, language]); // Recreate when `t` or `language` changes
+
+  // Memoize direction class
+  const directionClass = useMemo(() => 
+    language === "ar" ? "rtl" : "ltr", 
+  [language]);
 
   return (
     <section className="section-padding bg-primary/5">
-      <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+      <div className={cn("page-container", directionClass)}>
         <div className="text-center max-w-xl mx-auto mb-16">
           <h2 
             className="text-3xl font-display font-bold mb-4 bg-clip-text text-transparent" 
@@ -143,6 +150,7 @@ function ProductOverviewComponent() {
               to="/products" 
               onClick={() => window.scrollTo(0, 0)}
               className="flex items-center gap-3 text-lg font-semibold text-white"
+              aria-label="View all products" // Added for accessibility
             >
               {t("products.viewAll")}
               <ArrowRight className="w-6 h-6" />
