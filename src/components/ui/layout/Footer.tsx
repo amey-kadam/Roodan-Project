@@ -7,9 +7,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   // Modern gradient styles
-  const titleGradient = "linear-gradient(135deg, #059669, #34d399)";
+  const titleGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
   const textGradient = "linear-gradient(135deg, #047857, #10b981)";
-  const hoverGradient = "linear-gradient(135deg, #059669, #6ee7b7)";
+  const hoverGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
 
   return (
     <footer className="bg-background/80 backdrop-blur-lg border-t border-emerald-500/20">
@@ -25,23 +25,22 @@ export function Footer() {
                 className="w-8 h-10 object-contain -translate-y-1 transform transition-transform duration-300"
               />
               <span 
-                className="bg-clip-text text-transparent transition-all duration-300 relative group inline-block"
+                className="bg-clip-text text-transparent transition-all duration-300 inline-block relative group"
                 style={{ 
-                  backgroundImage: "linear-gradient(to right, #0a5d36, #4ade80)",
+                  backgroundImage: titleGradient,
                   textShadow: "0 2px 4px rgba(10, 93, 54, 0.2)"
                 }}
               >
                 ROODAN
                 <span 
-                  className="absolute -bottom-1 left-0 w-full h-0.5 transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100"
-                  style={{ 
-                    background: "linear-gradient(to right, #0a5d36, #4ade80)",
-                    boxShadow: "0 0 8px rgba(10, 93, 54, 0.3)"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-800 to-emerald-400 transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"
+                  style={{
+                    boxShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
                   }}
                 />
               </span>
             </h3>
-            <p className="text-black text-sm max-w-xs leading-relaxed">
+            <p className="text-gray-600 text-sm max-w-xs leading-relaxed">
               {t("slogan")}
             </p>
           </div>
@@ -53,7 +52,10 @@ export function Footer() {
             >
               <span 
                 className="bg-clip-text text-transparent inline-block"
-                style={{ backgroundImage: titleGradient }}
+                style={{ 
+                  backgroundImage: titleGradient,
+                  textShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
+                }}
               >
                 {t("nav.quick_link")}
               </span>
@@ -71,13 +73,8 @@ export function Footer() {
                     to={link.to} 
                     className={({ isActive }) =>
                       cn(
-<<<<<<< HEAD
                         "transition-all duration-300 text-gray-600 hover:text-gray-900", // Same color for all links
                         isActive ? "font-medium" : "" // Only apply font-weight difference for active link
-=======
-                        "transition-all duration-300 hover:font-medium",
-                        isActive ? "font-medium text-black" : "text-black"
->>>>>>> 955e0ecc002bad52a8227ed2cce02c79e3d04a95
                       )
                     }
                   >
@@ -95,7 +92,10 @@ export function Footer() {
             >
               <span 
                 className="bg-clip-text text-transparent inline-block"
-                style={{ backgroundImage: titleGradient }}
+                style={{ 
+                  backgroundImage: titleGradient,
+                  textShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
+                }}
               >
                 {t("hero.cta")}
               </span>
@@ -111,7 +111,7 @@ export function Footer() {
                 <li key={product}>
                   <NavLink 
                     to="/products" 
-                    className="transition-all duration-300 text-black hover:font-medium"
+                    className="transition-all duration-300 text-gray-600 hover:text-gray-900"
                   >
                     {product}
                   </NavLink>
@@ -127,33 +127,36 @@ export function Footer() {
             >
               <span 
                 className="bg-clip-text text-transparent inline-block"
-                style={{ backgroundImage: titleGradient }}
+                style={{ 
+                  backgroundImage: titleGradient,
+                  textShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
+                }}
               >
                 {t("contact.title")}
               </span>
             </h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start space-x-2">
-                <span className="text-black">{t("contact.email")}:</span>
+                <span className="text-gray-600">{t("contact.email")}:</span>
                 <a 
                   href="mailto:info@tradenexus.com" 
-                  className="transition-all duration-300 text-black hover:font-medium"
+                  className="transition-all duration-300 text-gray-600 hover:text-gray-900"
                 >
                   www.roodan.ae
                 </a>
               </li>
               <li className="flex items-start space-x-2">
-                <span className="text-black">{t("contact.phone")}:</span>
+                <span className="text-gray-600">{t("contact.phone")}:</span>
                 <a 
                   href="tel:+12345678900" 
-                  className="transition-all duration-300 text-black hover:font-medium"
+                  className="transition-all duration-300 text-gray-600 hover:text-gray-900"
                 >
                   +1 (234) 567-8900
                 </a>
               </li>
               <li className="flex items-start space-x-2">
-                <span className="text-black">{t("contact.address")}:</span>
-                <span className="text-black">
+                <span className="text-gray-600">{t("contact.address")}:</span>
+                <span className="text-gray-600">
                   {t("contact.address_main")}
                 </span>
               </li>
@@ -162,7 +165,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-emerald-500/20 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-black text-sm">
+          <p className="text-gray-600 text-sm">
             &copy; {currentYear} ROODAN. {t("footer.rights")}.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
@@ -170,7 +173,7 @@ export function Footer() {
               <a 
                 key={item}
                 href="#" 
-                className="text-sm text-black transition-all duration-300 hover:font-medium"
+                className="text-sm text-gray-600 transition-all duration-300 hover:text-gray-900"
               >
                 {t(item)}
               </a>
