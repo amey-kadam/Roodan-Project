@@ -214,13 +214,13 @@ const Contact = () => {
                         <a 
                           key={idx} 
                           href={link.href} 
-                          className="text-primary hover:underline"
+                          className="text-foreground hover:text-[#039815] transition-colors"
                         >
                           {link.text}
                         </a>
                       ))
                     ) : (
-                      <address className="not-italic">{item.address}</address>
+                      <address className="not-italic text-foreground">{item.address}</address>
                     )}
                   </motion.div>
                 ))}
