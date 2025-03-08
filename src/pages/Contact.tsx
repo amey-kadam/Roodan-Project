@@ -131,10 +131,10 @@ const Contact = () => {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
                 {t("contact.title")}
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mt-4">
+              <p className="text-xl md:text-2xl bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent max-w-3xl mx-auto mt-4">
                 {t("contact.subtitle")}
               </p>
             </motion.div>
@@ -192,7 +192,6 @@ const Contact = () => {
                     ]
                   },
                   { 
-                   
                     icon: MapPin, 
                     title: t("contact.address"), 
                     address: t("contact.address_main"),
@@ -207,9 +206,9 @@ const Contact = () => {
                     className="bg-secondary/30 rounded-xl p-6 flex flex-col items-center text-center hover:shadow-md transition-all duration-300 border border-border/30"
                   >
                     <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <item.icon className="w-6 h-6 text-primary" />
+                      <item.icon className="w-6 h-6 text-[#039815]" />
                     </div>
-                    <h3 className="text-lg font-display font-semibold mb-2">{item.title}</h3>
+                    <h3 className="text-lg font-display font-semibold mb-2 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">{item.title}</h3>
                     {item.links ? (
                       item.links.map((link, idx) => (
                         <a 
@@ -241,10 +240,10 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <div>
-                <h2 className="text-3xl font-display font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+                <h2 className="text-3xl font-display font-bold mb-6 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
                  {t("SendUs.title")}
                 </h2>
-                <p className="text-muted-foreground mb-6">
+                <p className="bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent mb-6">
                  {t("SendUs.desc")}
                 </p>
                 
@@ -280,16 +279,16 @@ const Contact = () => {
                       id="message" 
                       rows={5} 
                       required 
-                      className="focus:border-primary focus:ring-primary/50"
+                      className="focus:border-[#039815] focus:ring-[#039815]/50"
                     />
                   </div>
                   
                   <Button 
                     type="submit" 
-                    className="group h-14 px-8 rounded-2xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary transition-all shadow-lg hover:shadow-primary/30 w-full md:w-auto"
+                    className="group h-14 px-8 rounded-2xl bg-gradient-to-r from-[#024B04] to-[#039815] hover:from-[#039815] hover:to-[#024B04] transition-all shadow-lg hover:shadow-[#039815]/30 w-full md:w-auto"
                     disabled={isSubmitting}
                   >
-                    <span className="flex items-center gap-3 text-lg font-semibold">
+                    <span className="flex items-center gap-3 text-lg font-semibold text-white">
                       {isSubmitting ? "Sending..." : t("contact.form.submit")}
                       <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
                     </span>
