@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { ArrowRight } from "lucide-react";
 
 interface ProductCardProps {
   title: string;
@@ -15,7 +16,7 @@ interface ProductCardProps {
 // Separate list item component to optimize rendering of list items
 const DetailItem = memo(({ detail }: { detail: string }) => (
   <div className="text-sm text-foreground/70 mb-1 flex items-start">
-    <span className="mr-2">•</span>
+    <span className="mr-2 text-emerald-600">•</span>
     {detail}
   </div>
 ));
@@ -32,7 +33,7 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
 }) => {
   return (
     <div className={cn(
-      "bg-white border rounded-xl shadow-sm overflow-hidden flex flex-col",
+      "bg-white border border-emerald-600/20 rounded-xl shadow-sm hover:shadow-emerald-600/30 overflow-hidden flex flex-col transition-all duration-300",
       className
     )}>
       <div className="relative pt-[60%]">
@@ -48,7 +49,14 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
         />
       </div>
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-semibold mb-3">{title}</h3>
+        <h3 
+          className="text-xl font-semibold mb-3 bg-clip-text text-transparent" 
+          style={{ 
+            backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+          }}
+        >
+          {title}
+        </h3>
         <p className="text-muted-foreground mb-4">{description}</p>
         
         <div className="mb-4">
@@ -60,8 +68,14 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
 
         {/* Push the button to the bottom */}
         <div className="mt-auto">
-          <Button className="w-full">
+          <Button 
+            className="w-full group flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-emerald-600/30"
+            style={{
+              background: "linear-gradient(to right, #004d00, #00b300)"
+            }}
+          >
             Request Quote
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
       </div>

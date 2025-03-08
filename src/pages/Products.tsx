@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
 import { useI18n } from "@/utils/i18n";
@@ -166,80 +165,60 @@ const Products = () => {
     { id: "petro", label: t("products.categories.petro"), icon: ShoppingBag },
   ];
 
-  const pageVariants = {
-    initial: { opacity: 0, y: 50 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main className="flex-grow">
         {/* Hero Section */}
-        <motion.section
-          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          {/* Previous hero section content remains the same */}
-          <motion.div
-            className={cn(
-              "page-container relative z-10 text-center",
-              language === "ar" ? "rtl" : "ltr"
-            )}
-            initial="initial"
-            animate="animate"
-          >
-            <motion.div variants={pageVariants}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                {t("products.title")}
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mt-6">
-                {t("products.description")}
-              </p>
-            </motion.div>
-          </motion.div>
-        </motion.section>
+        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+          {/* Background with green gradient */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-emerald-700/10 opacity-100" />
+            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
+          </div>
+
+          <div className={cn("page-container relative z-10 text-center", language === "ar" ? "rtl" : "ltr")}>
+            <h1 
+              className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-clip-text text-transparent pb-6"
+              style={{ 
+                backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+              }}
+            >
+              {t("products.title")}
+            </h1>
+            <p 
+              className="text-xl md:text-2xl max-w-3xl mx-auto mt-6 bg-clip-text text-transparent"
+              style={{
+                backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
+              }}
+            >
+              {t("products.description")}
+            </p>
+          </div>
+        </section>
 
         {/* Product Categories Filter */}
-        <motion.section
-          className="py-16"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-        >
-          <div
-            className={cn("page-container", language === "ar" ? "rtl" : "ltr")}
-          >
-            <motion.div
-              variants={pageVariants}
-              className="flex flex-wrap gap-4 justify-center items-center mb-8"
-            >
+        <section className="py-16">
+          <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+            <div className="flex flex-wrap gap-4 justify-center items-center mb-8">
               {categories.map((category) => {
                 const Icon = category.icon;
                 return (
                   <Button
                     key={category.id}
-                    variant={
-                      activeCategory === category.id ? "default" : "outline"
-                    }
-                    onClick={() =>
-                      setActiveCategory(category.id as ProductCategory)
-                    }
+                    variant={activeCategory === category.id ? "default" : "outline"}
+                    onClick={() => setActiveCategory(category.id as ProductCategory)}
                     className={cn(
                       "group transition-all duration-300 px-6 py-3 rounded-2xl h-14 flex items-center justify-center",
                       activeCategory === category.id
-                        ? "bg-gradient-to-r from-primary to-primary/90"
-                        : "hover:border-primary hover:bg-secondary/10"
+                        ? ""
+                        : "hover:border-emerald-700 hover:bg-emerald-50/20"
                     )}
+                    style={
+                      activeCategory === category.id
+                        ? { background: "linear-gradient(to right, #004d00, #00b300)" }
+                        : {}
+                    }
                   >
                     <div className="flex items-center gap-3">
                       <Icon
@@ -247,59 +226,37 @@ const Products = () => {
                           "w-5 h-5 transition-colors",
                           activeCategory === category.id
                             ? "text-white"
-                            : "text-primary group-hover:text-primary"
+                            : "text-emerald-700 group-hover:text-emerald-800"
                         )}
                       />
-                      {category.label}
+                      <span className={activeCategory === category.id ? "text-white" : ""}>
+                        {category.label}
+                      </span>
                     </div>
                   </Button>
                 );
               })}
-            </motion.div>
+            </div>
           </div>
-        </motion.section>
+        </section>
 
         {/* Products Grid */}
-        <motion.section
-          className="py-24 bg-secondary/5"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-        >
-          <div
-            className={cn("page-container", language === "ar" ? "rtl" : "ltr")}
-          >
-            <motion.div
-              variants={pageVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {filteredProducts.map((product, index) => (
-                <motion.div
+        <section className="py-24 bg-emerald-50/20">
+          <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProducts.map((product) => (
+                <ProductCard
                   key={product.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{
-                    opacity: 1,
-                    scale: 1,
-                    transition: {
-                      duration: 0.5,
-                      delay: index * 0.1,
-                    },
-                  }}
-                  viewport={{ once: true }}
-                  className="flex"
-                >
-                  <ProductCard
-                    title={product.title}
-                    image={product.image}
-                    description={product.description}
-                    details={product.details}
-                    className="hover:shadow-primary/10 transition-shadow duration-300 flex-grow flex flex-col h-full"
-                  />
-                </motion.div>
+                  title={product.title}
+                  image={product.image}
+                  description={product.description}
+                  details={product.details}
+                  className="hover:shadow-emerald-700/10 transition-shadow duration-300 flex-grow flex flex-col h-full"
+                />
               ))}
-            </motion.div>
+            </div>
           </div>
-        </motion.section>
+        </section>
       </main>
       <Footer />
     </div>
