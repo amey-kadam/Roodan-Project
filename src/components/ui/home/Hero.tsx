@@ -21,7 +21,7 @@ function HeroComponent() {
     animate: {
       y: [0, -20, 0],
       transition: {
-        duration: 6,
+        duration: 12,
         repeat: Infinity,
         ease: "easeInOut",
       },
@@ -123,14 +123,20 @@ function HeroComponent() {
 
           <div className="mb-24"> {/* Added container with bottom margin */}
             <motion.h1
-              className="hero-element opacity-0 translate-y-12 text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent pb-6 leading-normal" 
+              className="hero-element opacity-0 translate-y-12 text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-clip-text text-transparent pb-6 leading-normal" 
+              style={{ 
+                backgroundImage: "linear-gradient(to right, #004d00, #00b300,rgb(3, 111, 3))" 
+              }}
             >
               {t("hero.title")}
             </motion.h1>
           </div>
 
           <motion.p
-            className="hero-element opacity-0 translate-y-12 text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mt-4"
+            className="hero-element opacity-0 translate-y-12 text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed mt-4 bg-clip-text text-transparent"
+            style={{
+              backgroundImage: "linear-gradient(to right, #006400,rgb(32, 110, 32))"
+            }}
           >
             {t("hero.subtitle")}
           </motion.p>
@@ -142,11 +148,14 @@ function HeroComponent() {
             <Button
               size="lg"
               asChild
-              className="group h-14 px-8 rounded-2xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary transition-all shadow-lg hover:shadow-primary/30"
+              className="group h-14 px-8 rounded-2xl transition-all shadow-lg hover:shadow-emerald-600/30"
+              style={{
+                background: "linear-gradient(to right, #004d00, #00b300)"
+              }}
             >
               <NavLink
                 to="/products"
-                className="flex items-center gap-3 text-lg font-semibold"
+                className="flex items-center gap-3 text-lg font-semibold text-white"
               >
                 {t("hero.cta")}
                 <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
@@ -156,14 +165,17 @@ function HeroComponent() {
               size="lg"
               variant="outline"
               asChild
-              className="group h-14 px-8 rounded-2xl border-2 bg-background/50 hover:bg-background/80 hover:border-primary transition-all"
+              className="group h-14 px-8 rounded-2xl border-2 border-emerald-600 bg-background/50 hover:bg-emerald-50/20 transition-all shadow-lg hover:shadow-emerald-600/30"
             >
               <NavLink
                 to="/contact"
-                className="flex items-center gap-3 text-lg font-semibold"
+                className="flex items-center gap-3 text-lg font-semibold bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(to right, #004d00,rgb(2, 128, 2))"
+                }}
               >
                 {t("nav.contact")}
-                <ArrowRight className="w-6 h-6 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
+                <ArrowRight className="w-6 h-6 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1 text-emerald-600" />
               </NavLink>
             </Button>
           </motion.div>
@@ -179,14 +191,17 @@ function HeroComponent() {
       >
         <div className="w-8 h-12 rounded-3xl border-2 border-border flex justify-center p-1">
           <motion.div
-            className="w-2 h-2 bg-primary rounded-full"
+            className="w-2 h-2 rounded-full"
             animate={{ y: [0, 12] }}
             transition={{
-              duration: 1.5,
+              duration: 2.5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            style={{ willChange: 'transform' }}
+            style={{ 
+              willChange: 'transform',
+              background: "linear-gradient(to bottom, #004d00, #00b300)"
+            }}
           />
         </div>
       </motion.div>

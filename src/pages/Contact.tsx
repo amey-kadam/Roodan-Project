@@ -36,6 +36,10 @@ const Contact = () => {
     },
   };
 
+  const gradientStyle = {
+    backgroundImage: "linear-gradient(to right,rgb(2, 75, 4),rgb(3, 152, 21))"
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);

@@ -45,6 +45,14 @@ export function Header() {
     { path: "/contact", label: t("nav.contact") },
   ];
 
+  // Modern gradient styles
+  const logoGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
+  const navHoverGradient = "linear-gradient(to right, #0e8f3c, #66bb6a)";
+  const buttonGradient = "linear-gradient(135deg, #0f9d58, #66bb6a)";
+  const textGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
+  const hoverTextGradient = "linear-gradient(to right, #15803d, #86efac)";
+  const underlineGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
+
   return (
     <header
       className={cn(
@@ -61,12 +69,12 @@ export function Header() {
             className="flex items-center group"
             onClick={() => window.scrollTo(0, 0)}
           >
-            <div className="transition-all duration-300 group-hover:scale-105 flex items-center  ">
+            <div className="transition-all duration-300 group-hover:scale-105 flex items-center">
               <img
                 src="/tree_logo.png"
                 alt="Roodan"
                 className={cn(
-                  "transition-all duration-300 mb-4",
+                  "transition-all duration-300",
                   isScrolled 
                     ? "w-16 h-14 sm:w-18 sm:h-16 md:w-20 md:h-18" 
                     : "w-20 h-18 sm:w-22 sm:h-20 md:w-24 md:h-22"
@@ -74,13 +82,14 @@ export function Header() {
               />
               <span 
                 className={cn(
-                  "font-bold ml-2 tracking-wide transition-all duration-300 bg-clip-text text-transparent",
+                  "font-bold ml-2 tracking-wider transition-all duration-300 bg-clip-text text-transparent",
                   isScrolled
                     ? "text-lg sm:text-xl md:text-2xl"
                     : "text-xl sm:text-2xl md:text-3xl"
                 )}
                 style={{ 
-                  backgroundImage: "linear-gradient(to right,rgb(2, 75, 4),rgb(3, 152, 21))"
+                  backgroundImage: logoGradient,
+                  textShadow: "0 1px 2px rgba(0,0,0,0.1)"
                 }}
               >
                {t("logo.title")}
@@ -96,18 +105,47 @@ export function Header() {
                 to={route.path}
                 className={({ isActive }) =>
                   cn(
-                    "relative font-medium text-sm lg:text-base hover:text-primary transition-colors precise-transition py-2",
-                    isActive ? "text-primary font-semibold" : "text-foreground/80",
-                    "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:transform after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100",
-                    {
-                      "after:origin-bottom-left after:scale-x-100":
-                        location.pathname === route.path,
-                    }
+                    "relative font-medium text-sm lg:text-base transition-all duration-300 py-2 group",
+                    isActive 
+                      ? "font-semibold" 
+                      : "hover:font-medium"
                   )
                 }
+                style={({ isActive }) => ({
+                  backgroundImage: isActive ? textGradient : "none",
+                  WebkitBackgroundClip: isActive ? "text" : "none",
+                  WebkitTextFillColor: isActive ? "transparent" : "inherit"
+                })}
+                onMouseEnter={(e) => {
+                  if (!location.pathname.includes(route.path)) {
+                    e.currentTarget.style.backgroundImage = hoverTextGradient;
+                    e.currentTarget.style.webkitBackgroundClip = "text";
+                    e.currentTarget.style.webkitTextFillColor = "transparent";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!location.pathname.includes(route.path)) {
+                    e.currentTarget.style.backgroundImage = "none";
+                    e.currentTarget.style.webkitBackgroundClip = "none";
+                    e.currentTarget.style.webkitTextFillColor = "inherit";
+                  }
+                }}
                 onClick={() => window.scrollTo(0, 0)}
               >
                 {route.label}
+                <span 
+                  className={cn(
+                    "absolute -bottom-1 left-0 w-full h-0.5 transition-all duration-500",
+                    location.pathname === route.path 
+                      ? "scale-x-100 opacity-100" 
+                      : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                  )}
+                  style={{ 
+                    background: underlineGradient,
+                    transformOrigin: "left",
+                    boxShadow: "0 0 8px rgba(10, 93, 54, 0.5)"
+                  }}
+                />
               </NavLink>
             ))}
           </nav>
@@ -117,7 +155,12 @@ export function Header() {
             <Button
               asChild
               size="sm"
-              className="hover-scale hover:shadow-md hover:bg-white hover:text-primary font-medium px-3 lg:px-6 lg:text-base lg:size-lg"
+              className="hover-scale hover:shadow-md font-medium px-3 lg:px-6 lg:text-base lg:size-lg text-white"
+              style={{ 
+                background: buttonGradient,
+                transition: "all 0.3s ease",
+                boxShadow: "0 4px 14px rgba(15, 157, 88, 0.25)"
+              }}
             >
               <NavLink to="/inquiry" onClick={() => window.scrollTo(0, 0)}>
                 {t("nav.inquiry")}
@@ -154,23 +197,60 @@ export function Header() {
                   to={route.path}
                   className={({ isActive }) =>
                     cn(
-                      "py-3 sm:py-4 px-3 sm:px-4 font-medium text-base sm:text-lg transition-colors",
+                      "py-3 sm:py-4 px-3 sm:px-4 font-medium text-base sm:text-lg transition-all duration-300 relative group",
                       isActive
-                        ? "text-primary bg-primary/5 rounded-md"
-                        : "text-foreground/80"
+                        ? "font-semibold"
+                        : "hover:font-medium"
                     )
                   }
+                  style={({ isActive }) => ({
+                    backgroundImage: isActive ? textGradient : "none",
+                    WebkitBackgroundClip: isActive ? "text" : "none",
+                    WebkitTextFillColor: isActive ? "transparent" : "inherit"
+                  })}
+                  onMouseEnter={(e) => {
+                    if (!location.pathname.includes(route.path)) {
+                      e.currentTarget.style.backgroundImage = hoverTextGradient;
+                      e.currentTarget.style.webkitBackgroundClip = "text";
+                      e.currentTarget.style.webkitTextFillColor = "transparent";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!location.pathname.includes(route.path)) {
+                      e.currentTarget.style.backgroundImage = "none";
+                      e.currentTarget.style.webkitBackgroundClip = "none";
+                      e.currentTarget.style.webkitTextFillColor = "inherit";
+                    }
+                  }}
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     window.scrollTo(0, 0);
                   }}
                 >
                   {route.label}
+                  <span 
+                    className={cn(
+                      "absolute -bottom-1 left-0 w-full h-0.5 transition-all duration-500",
+                      location.pathname === route.path 
+                        ? "scale-x-100 opacity-100" 
+                        : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                    )}
+                    style={{ 
+                      background: underlineGradient,
+                      transformOrigin: "left",
+                      boxShadow: "0 0 8px rgba(10, 93, 54, 0.5)"
+                    }}
+                  />
                 </NavLink>
               ))}
               <div className="pt-3 sm:pt-4 pb-2 px-2 sm:px-4">
                 <Button 
-                  className="w-full py-4 sm:py-6 text-sm sm:text-base" 
+                  className="w-full py-4 sm:py-6 text-sm sm:text-base text-white hover:shadow-lg" 
+                  style={{ 
+                    background: buttonGradient,
+                    boxShadow: "0 4px 14px rgba(15, 157, 88, 0.25)",
+                    transition: "all 0.3s ease"
+                  }}
                   asChild
                 >
                   <NavLink
