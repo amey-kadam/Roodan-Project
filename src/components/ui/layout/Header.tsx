@@ -48,7 +48,7 @@ export function Header() {
   // Modern gradient styles
   const logoGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
   const navHoverGradient = "linear-gradient(to right, #0e8f3c, #66bb6a)";
-  const buttonGradient = "linear-gradient(135deg, #0f9d58, #66bb6a)";
+  const buttonGradient = "linear-gradient(to right, #004d00,rgb(13, 152, 13),rgb(3, 111, 3))" 
   const textGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
   const hoverTextGradient = "linear-gradient(to right, #15803d, #86efac)";
   const underlineGradient = "linear-gradient(to right, #0a5d36, #4ade80)";

@@ -11,34 +11,44 @@ export function Footer() {
   const textGradient = "linear-gradient(135deg, #047857, #10b981)";
   const hoverGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = '/';
+  };
+
   return (
     <footer className="bg-background/80 backdrop-blur-lg border-t border-emerald-500/20">
       <div className="page-container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
           <div className="md:col-span-1">
             <h3 
-              className="text-xl font-display font-bold mb-4 inline-flex items-center gap-2"
+              className="text-xl font-display font-bold mb-4"
             >
-              <img
-                src="/tree_logo.png"
-                alt="Roodan Logo"
-                className="w-8 h-10 object-contain -translate-y-1 transform transition-transform duration-300"
-              />
-              <span 
-                className="bg-clip-text text-transparent transition-all duration-300 inline-block relative group"
-                style={{ 
-                  backgroundImage: titleGradient,
-                  textShadow: "0 2px 4px rgba(10, 93, 54, 0.2)"
-                }}
+              <button
+                onClick={handleLogoClick}
+                className="inline-flex items-center gap-2 hover:opacity-80 transition-all duration-300"
               >
-                ROODAN
-                <span 
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-800 to-emerald-400 transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"
-                  style={{
-                    boxShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
-                  }}
+                <img
+                  src="/tree_logo.png"
+                  alt="Roodan Logo"
+                  className="w-8 h-10 object-contain -translate-y-1 transform transition-transform duration-300"
                 />
-              </span>
+                <span 
+                  className="bg-clip-text text-transparent transition-all duration-300 inline-block relative group"
+                  style={{ 
+                    backgroundImage: titleGradient,
+                    textShadow: "0 2px 4px rgba(10, 93, 54, 0.2)"
+                  }}
+                >
+                  ROODAN
+                  <span 
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-800 to-emerald-400 transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"
+                    style={{
+                      boxShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
+                    }}
+                  />
+                </span>
+              </button>
             </h3>
             <p className="text-gray-600 text-sm max-w-xs leading-relaxed">
               {t("slogan")}
