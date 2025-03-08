@@ -243,14 +243,14 @@ const Contact = () => {
                 {/* Map Section - Height adjusted */}
                 <div className="relative h-[300px] lg:h-auto">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.417834204089!2d54.336976478241866!3d24.4709755045078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e65e0afe75c95%3A0x3f42d2c696969cec!2sKhalidiya%20Towers%20-%20Al%20Bateen%20-%20W10%20-%20Abu%20Dhabi%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sin!4v1741159624605!5m2!1sen!2sin" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.417834204089!2d54.33697647424187!3d24.470975504507794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e65e0afe75c95%3A0x3f42d2c696969cec!2sKhalidiyah%20Tower!5e0!3m2!1sen!2sae!4v1710835058468!5m2!1sen!2sae"
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 
                     allowFullScreen 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Location Map"
+                    title="Roodan Office Location"
                     className="absolute inset-0"
                   />
                 </div>
