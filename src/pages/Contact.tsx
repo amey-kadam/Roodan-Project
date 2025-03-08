@@ -78,13 +78,13 @@ const Contact = () => {
         <div className="h-20"></div>
         
         <div className={cn("page-container", language === "ar" ? "rtl" : "ltr", "pt-14 pb-10")}>
-  <h2 className="text-3xl text-gray-700 font-bold text-center mb-3">
-    {t("SendUs.title")}
-  </h2>
-  <p className="text-sm text-gray-500 text-center mx-auto max-w-2xl">
-    {t("SendUs.desc")}
-  </p>
-</div>
+          <h2 className="text-3xl font-bold text-center mb-3 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
+            {t("SendUs.title")}
+          </h2>
+          <p className="text-sm text-center mx-auto max-w-2xl bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
+            {t("SendUs.desc")}
+          </p>
+        </div>
         
         {/* Contact Information Cards - Compact with minimal spacing */}
         <section className="py-4">
