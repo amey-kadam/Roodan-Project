@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, ArrowRight, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -16,44 +16,27 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Add loading state management
-  useState(() => {
-    // Simulate data loading
-    setTimeout(() => {
+  // Improved loading state management
+  useEffect(() => {
+    const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
-  });
+    }, 600); 
+    
+    return () => clearTimeout(timer);
+  }, []);
 
-  const floatingVariants = {
-    initial: { y: -20 },
-    animate: {
-      y: [0, -20, 0],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const gradientStyle = {
-    backgroundImage: "linear-gradient(to right,rgb(2, 75, 4),rgb(3, 152, 21))"
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-
-      const form = e.target as HTMLFormElement;
+      const form = e.target;
       const formData = {
-        name: (form.elements.namedItem('name') as HTMLInputElement).value,
-        email: (form.elements.namedItem('email') as HTMLInputElement).value,
-        message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+        name: form.elements.namedItem('name').value,
+        email: form.elements.namedItem('email').value,
+        message: form.elements.namedItem('message').value,
       };
       
-      // Send data to backend API
       const response = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
         headers: {
@@ -71,7 +54,6 @@ const Contact = () => {
           duration: 5000,
         });
         
-        // Reset form
         form.reset();
       } else {
         throw new Error(data.message || "Failed to send message");
@@ -89,80 +71,42 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-gray-50">
       <Header />
       <main className="flex-grow">
-        {/* Hero Section with Motion Background */}
-        <motion.section 
-          className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          {/* Background Elements */}
-          <div className="absolute inset-0 z-0">
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-primary/10 opacity-100" />
-            
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
-            
-            {/* Animated Floating Shapes */}
-            <motion.div
-              className="absolute w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -top-64 -left-64"
-              variants={floatingVariants}
-              initial="initial"
-              animate="animate"
-            />
-            <motion.div
-              className="absolute w-[700px] h-[700px] bg-secondary/5 rounded-full blur-3xl -bottom-64 -right-64"
-              variants={floatingVariants}
-              initial="initial"
-              animate="animate"
-              transition={{ delay: 2 }}
-            />
-          </div>
-          
-          {/* Page Title Content */}
-          <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center"
-            >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
-                {t("contact.title")}
-              </h1>
-              <p className="text-xl md:text-2xl bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent max-w-3xl mx-auto mt-4">
-                {t("contact.subtitle")}
-              </p>
-            </motion.div>
-          </div>
-        </motion.section>
-
-        {/* Contact Information */}
-        <section className="py-16 bg-white">
+        {/* Added proper spacing from navbar */}
+        <div className="h-20"></div>
+        
+        <div className={cn("page-container", language === "ar" ? "rtl" : "ltr", "pt-14 pb-10")}>
+  <h2 className="text-3xl text-gray-700 font-bold text-center mb-3">
+    {t("SendUs.title")}
+  </h2>
+  <p className="text-sm text-gray-500 text-center mx-auto max-w-2xl">
+    {t("SendUs.desc")}
+  </p>
+</div>
+        
+        {/* Contact Information Cards - Compact with minimal spacing */}
+        <section className="py-4">
           <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
             {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[...Array(4)].map((_, index) => (
-                  <div key={index} className="bg-secondary/30 rounded-xl p-6 h-48 animate-pulse"></div>
+                  <div key={index} className="bg-white rounded-lg p-3 h-32 animate-pulse shadow-sm"></div>
                 ))}
               </div>
             ) : (
               <motion.div 
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                className="grid grid-cols-2 md:grid-cols-4 gap-3"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={{
-                  hidden: { opacity: 0, y: 50 },
+                  hidden: { opacity: 0 },
                   visible: { 
-                    opacity: 1, 
-                    y: 0,
+                    opacity: 1,
                     transition: {
-                      staggerChildren: 0.2
+                      staggerChildren: 0.1
                     }
                   }
                 }}
@@ -200,27 +144,29 @@ const Contact = () => {
                   <motion.div 
                     key={index}
                     variants={{
-                      hidden: { opacity: 0, y: 50 },
-                      visible: { opacity: 1, y: 0 }
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
                     }}
-                    className="bg-secondary/30 rounded-xl p-6 flex flex-col items-center text-center hover:shadow-md transition-all duration-300 border border-border/30"
+                    className="bg-white rounded-lg p-3 flex flex-col items-center text-center hover:shadow-md transition-all duration-200 border border-gray-100"
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <item.icon className="w-6 h-6 text-[#039815]" />
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#024B04]/10 to-[#039815]/20 rounded-full flex items-center justify-center mb-2">
+                      <item.icon className="w-4 h-4 text-[#039815]" />
                     </div>
-                    <h3 className="text-lg font-display font-semibold mb-2 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">{item.title}</h3>
+                    <h3 className="text-sm font-medium mb-1 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">{item.title}</h3>
                     {item.links ? (
-                      item.links.map((link, idx) => (
-                        <a 
-                          key={idx} 
-                          href={link.href} 
-                          className="text-foreground hover:text-[#039815] transition-colors"
-                        >
-                          {link.text}
-                        </a>
-                      ))
+                      <div className="space-y-0.5">
+                        {item.links.map((link, idx) => (
+                          <a 
+                            key={idx} 
+                            href={link.href} 
+                            className="block text-xs text-gray-600 hover:text-[#039815] transition-colors"
+                          >
+                            {link.text}
+                          </a>
+                        ))}
+                      </div>
                     ) : (
-                      <address className="not-italic text-foreground">{item.address}</address>
+                      <address className="not-italic text-xs text-gray-600">{item.address}</address>
                     )}
                   </motion.div>
                 ))}
@@ -229,88 +175,92 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Contact Form */}
-        <section className="py-16 bg-secondary/30">
-          <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+        {/* Contact Form + Map - Adjusted size for form elements */}
+        <section className="py-6">
+          <div className={cn("page-container max-w-6xl", language === "ar" ? "rtl" : "ltr")}>
             <motion.div 
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-              initial={{ opacity: 0, y: 50 }}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <div>
-                <h2 className="text-3xl font-display font-bold mb-6 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
-                 {t("SendUs.title")}
-                </h2>
-                <p className="bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent mb-6">
-                 {t("SendUs.desc")}
-                </p>
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                {/* Form Section - Increased size of form elements */}
+                <div className="p-5 md:p-6">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="space-y-1.5">
+                      <label htmlFor="name" className="text-sm font-medium text-gray-700">
+                        {t("contact.form.name")} <span className="text-red-500">*</span>
+                      </label>
+                      <Input 
+                        id="name" 
+                        required 
+                        className="h-10 text-sm rounded-md border-gray-200 focus:border-[#039815] focus:ring-[#039815]/30 transition-all"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    
+                    <div className="space-y-1.5">
+                      <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                        {t("contact.form.email")} <span className="text-red-500">*</span>
+                      </label>
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        required 
+                        className="h-10 text-sm rounded-md border-gray-200 focus:border-[#039815] focus:ring-[#039815]/30 transition-all"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                    
+                    <div className="space-y-1.5">
+                      <label htmlFor="message" className="text-sm font-medium text-gray-700">
+                        {t("contact.form.message")} <span className="text-red-500">*</span>
+                      </label>
+                      <Textarea 
+                        id="message" 
+                        rows={4} 
+                        required 
+                        className="text-sm rounded-md border-gray-200 focus:border-[#039815] focus:ring-[#039815]/30 transition-all"
+                        placeholder="Your message here..."
+                      />
+                    </div>
+                    
+                    <Button 
+                      type="submit" 
+                      className="group h-11 px-6 rounded-md bg-gradient-to-r from-[#024B04] to-[#039815] hover:from-[#039815] hover:to-[#024B04] transition-all shadow-sm hover:shadow-[#039815]/20"
+                      disabled={isSubmitting}
+                    >
+                      <span className="flex items-center gap-2 font-medium text-white">
+                        {isSubmitting ? "Sending..." : t("contact.form.submit")}
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </Button>
+                  </form>
+                </div>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
-                      {t("contact.form.name")} <span className="text-destructive">*</span>
-                    </label>
-                    <Input 
-                      id="name" 
-                      required 
-                      className="focus:border-primary focus:ring-primary/50"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      {t("contact.form.email")} <span className="text-destructive">*</span>
-                    </label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      required 
-                      className="focus:border-primary focus:ring-primary/50"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      {t("contact.form.message")} <span className="text-destructive">*</span>
-                    </label>
-                    <Textarea 
-                      id="message" 
-                      rows={5} 
-                      required 
-                      className="focus:border-[#039815] focus:ring-[#039815]/50"
-                    />
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="group h-14 px-8 rounded-2xl bg-gradient-to-r from-[#024B04] to-[#039815] hover:from-[#039815] hover:to-[#024B04] transition-all shadow-lg hover:shadow-[#039815]/30 w-full md:w-auto"
-                    disabled={isSubmitting}
-                  >
-                    <span className="flex items-center gap-3 text-lg font-semibold text-white">
-                      {isSubmitting ? "Sending..." : t("contact.form.submit")}
-                      <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </Button>
-                </form>
-              </div>
-              
-              <div className="relative h-[400px] lg:h-[500px] rounded-xl overflow-hidden shadow-lg">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.417834204089!2d54.336976478241866!3d24.4709755045078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e65e0afe75c95%3A0x3f42d2c696969cec!2sKhalidiya%20Towers%20-%20Al%20Bateen%20-%20W10%20-%20Abu%20Dhabi%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sin!4v1741159624605!5m2!1sen!2sin" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Location Map"
-                />
+                {/* Map Section - Height adjusted */}
+                <div className="relative h-[300px] lg:h-auto">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.417834204089!2d54.336976478241866!3d24.4709755045078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e65e0afe75c95%3A0x3f42d2c696969cec!2sKhalidiya%20Towers%20-%20Al%20Bateen%20-%20W10%20-%20Abu%20Dhabi%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sin!4v1741159624605!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Location Map"
+                    className="absolute inset-0"
+                  />
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
+        
+        {/* Added bottom spacing */}
+        <div className="h-8"></div>
       </main>
       <Footer />
     </div>
