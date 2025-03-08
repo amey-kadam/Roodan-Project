@@ -9,57 +9,57 @@ const About = () => {
   const { t, language } = useI18n();
 
   const sectionVariants = {
-    initial: { opacity: 0, y: 50 },
+    initial: { opacity: 0, y: 30 },
     animate: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        duration: 0.8,
+        duration: 0.6,
         ease: "easeOut"
       }
     }
   };
 
-  const iconVariants = {
-    initial: { scale: 0.8, opacity: 0 },
+  const itemVariants = {
+    initial: { opacity: 0, y: 20 },
     animate: { 
-      scale: 1, 
-      opacity: 1,
+      opacity: 1, 
+      y: 0,
       transition: { 
-        type: "spring", 
-        stiffness: 300 
+        duration: 0.5,
+        ease: "easeOut"
       }
     }
   };
 
-  const TeamScrollComponent = () => {
-    const cardData = [
+  const TeamSection = () => {
+    const teamMembers = [
       {
-        title: "John Smith",
+        name: "John Smith",
         role: "CEO & Founder",
         description: "Visionary leader with strategic insights.",
         image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format"
       },
       {
-        title: "Sarah Johnson",
+        name: "Sarah Johnson",
         role: "COO",
         description: "Operational excellence expert.",
         image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format"
       },
       {
-        title: "Michael Chen",
+        name: "Michael Chen",
         role: "CFO",
         description: "Financial strategy mastermind.",
         image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format"
       },
       {
-        title: "Emma Rodriguez",
+        name: "Emma Rodriguez",
         role: "Global Trade Director",
         description: "International markets connector.",
         image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1974&auto=format"
       },
       {
-        title: "David Kim",
+        name: "David Kim",
         role: "Innovation Lead",
         description: "Technology transformation driver.",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format"
@@ -67,232 +67,233 @@ const About = () => {
     ];
 
     return (
-      <div className="flex h-[100vh] overflow-hidden">
-        {/* Left Side - Stable Text */}
-        <div className="w-1/2 bg-emerald-50/20 flex items-center justify-center p-8 sticky top-0">
-          <div className="text-center">
-            <h2 
-              className="text-4xl font-display font-bold mb-6 bg-clip-text text-transparent"
-              style={{ 
-                backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0,
+                transition: {
+                  duration: 0.6,
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }
               }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="group"
             >
-              Our Leadership Team
-            </h2>
-            <p 
-              className="max-w-md mx-auto bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
-              }}
-            >
-              Meet the visionary leaders behind our global success.
-            </p>
-          </div>
-        </div>
-
-        {/* Right Side - Stacking Cards */}
-        <div className="w-1/2 overflow-hidden relative">
-          <div className="h-full overflow-y-auto scrollbar-hide">
-            <div className="relative min-h-[calc(100vh*1.5)] py-24 perspective-1000">
-              {cardData.map((card, index) => (
-                <motion.div
-                  key={index}
-                  className="sticky top-24 h-[70vh] mb-4 transform preserve-3d"
-                  style={{ zIndex: index + 1 }}
-                  initial={{ 
-                    opacity: 0,
-                    y: 50,
-                    rotate: index % 2 === 0 ? -5 : 5
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                    rotate: index % 2 === 0 ? -3 : 3,
-                    transition: {
-                      type: "spring",
-                      stiffness: 60,
-                      damping: 15,
-                      mass: 0.8,
-                      delay: index * 0.05
-                    }
-                  }}
-                  viewport={{ 
-                    margin: "0px 0px -20% 0px",
-                    once: true,
-                    amount: 0.5
-                  }}
-                >
-                  <div className="h-full w-full px-4">
-                    <div className="bg-white border border-emerald-600/20 rounded-none overflow-hidden shadow-xl w-full mx-auto h-full transform origin-top transition-transform duration-300 hover:scale-[1.02]">
-                      <div className="relative aspect-[3/2]">
-                        <img
-                          src={card.image}
-                          alt={card.title}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/60 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                          <h3 className="text-lg font-bold">{card.title}</h3>
-                          <p className="text-xs text-white/80">{card.role}</p>
-                        </div>
-                      </div>
-                      <div className="p-4">
-                        <p className="text-sm text-emerald-800">
-                          {card.description}
-                        </p>
-                      </div>
-                    </div>
+              <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full border border-emerald-100">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/70 to-transparent" />
+                </div>
+                <div className="p-6 relative">
+                  <div className="absolute -top-10 left-6 w-12 h-12 rounded-full border-4 border-white bg-emerald-600 flex items-center justify-center text-white font-bold">
+                    {member.name.charAt(0)}
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                  <h3 className="text-xl font-bold text-emerald-800 mt-2">{member.name}</h3>
+                  <p className="text-sm font-medium text-emerald-600 mb-3">{member.role}</p>
+                  <p className="text-emerald-700/80">{member.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     );
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-emerald-50">
       <Header />
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Mission & Values Section */}
         <motion.section 
-          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          className="page-container py-20 md:py-28"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
         >
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-emerald-700/10 opacity-100" />
-            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
-            <motion.div
-              className="absolute w-[600px] h-[600px] bg-emerald-700/5 rounded-full blur-3xl -top-64 -left-64"
-              animate={{
-                y: [0, -20, 0],
-                transition: {
-                  duration: 12,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }
-              }}
-            />
-          </div>
-
-          <motion.div 
-            className={cn(
-              "page-container relative z-10 text-center",
-              language === "ar" ? "rtl" : "ltr"
-            )}
-            initial="initial"
-            animate="animate"
-          >
-            <motion.div variants={sectionVariants}>
-              <h1 
-                className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-clip-text text-transparent pb-6"
+          <motion.div variants={sectionVariants} className="max-w-5xl mx-auto">
+            <div className="flex flex-col items-center justify-center gap-4 mb-16">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ 
+                  scale: 1, 
+                  opacity: 1,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 300,
+                    delay: 0.2 
+                  }
+                }}
+              >
+                <Target className="w-16 h-16 text-emerald-600" />
+              </motion.div>
+              <h2 
+                className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
                 style={{ 
                   backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
                 }}
               >
-                {t("about.title")}
-              </h1>
+                {t("about.mission.title")}
+              </h2>
               <p 
-                className="text-xl md:text-2xl max-w-3xl mx-auto mt-6 bg-clip-text text-transparent"
+                className="text-xl text-center max-w-3xl mx-auto mt-4 bg-clip-text text-transparent"
                 style={{
                   backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
                 }}
               >
-                {t("about.subtitle")}
+                {t("about.mission.desc")}
               </p>
-            </motion.div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((value, index) => (
+                <motion.div 
+                  key={`value-${index}`}
+                  variants={itemVariants}
+                  className="bg-white border border-emerald-600/20 rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
+                    <Award className="w-6 h-6 text-emerald-700" />
+                  </div>
+                  <h3 className="text-xl font-bold text-emerald-800 mb-3">
+                    {t(`about.values.value${value}.title`)}
+                  </h3>
+                  <p className="text-emerald-700/80">
+                    {t(`about.values.value${value}.desc`)}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.section>
 
-        {/* Mission & Values Section */}
+        {/* Team Section */}
         <motion.section 
-          className="page-container py-24 grid md:grid-cols-2 gap-16 items-center"
+          className="page-container py-20 bg-emerald-50/50"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          {/* Mission & Values content */}
-        </motion.section>
-
-        {/* Team Section */}
-        <div className="h-screen overflow-hidden snap-center">
-          <motion.section 
-            className="py-24 h-full"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            <div className="page-container h-full">
-              <motion.div variants={sectionVariants} className="text-center mb-16">
-                <div className="flex items-center justify-center gap-4 mb-6">
-                  <motion.div variants={iconVariants}>
-                    <Users className="w-12 h-12 text-emerald-700" />
-                  </motion.div>
-                  <h2 
-                    className="text-4xl font-display font-bold bg-clip-text text-transparent"
-                    style={{ 
-                      backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
-                    }}
-                  >
-                    {t("about.team.title")}
-                  </h2>
-                </div>
-                <p 
-                  className="max-w-2xl mx-auto bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
-                  }}
-                >
-                  {t("about.team.desc")}
-                </p>
+          <motion.div variants={sectionVariants} className="text-center mb-16">
+            <div className="flex flex-col items-center justify-center gap-2 mb-6">
+              <motion.div 
+                initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
+                whileInView={{ 
+                  scale: 1, 
+                  opacity: 1, 
+                  rotate: 0,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 200,
+                    delay: 0.1 
+                  }
+                }}
+                viewport={{ once: true }}
+              >
+                <Users className="w-14 h-14 text-emerald-600" />
               </motion.div>
-              <TeamScrollComponent />
+              <h2 
+                className="text-4xl md:text-5xl font-display font-bold bg-clip-text text-transparent mt-4"
+                style={{ 
+                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                }}
+              >
+                {t("about.team.title")}
+              </h2>
             </div>
-          </motion.section>
-        </div>
+            <p 
+              className="max-w-2xl mx-auto text-lg bg-clip-text text-transparent"
+              style={{
+                backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
+              }}
+            >
+              {t("about.team.desc")}
+            </p>
+          </motion.div>
+          
+          <TeamSection />
+        </motion.section>
 
         {/* Why Choose Us Section */}
         <motion.section 
-          className="page-container py-24 bg-emerald-50/20"
+          className="page-container py-24"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <motion.div variants={sectionVariants} className="max-w-4xl mx-auto">
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <motion.div variants={iconVariants}>
-                <Globe className="w-12 h-12 text-emerald-700" />
+          <motion.div variants={sectionVariants} className="max-w-5xl mx-auto">
+            <div className="flex flex-col items-center justify-center gap-4 mb-16">
+              <motion.div 
+                initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
+                whileInView={{ 
+                  scale: 1, 
+                  opacity: 1, 
+                  rotateY: 0,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 200,
+                    delay: 0.1 
+                  }
+                }}
+                viewport={{ once: true }}
+              >
+                <Globe className="w-16 h-16 text-emerald-600" />
               </motion.div>
               <h2 
-                className="text-4xl font-display font-bold text-center bg-clip-text text-transparent"
+                className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
                 style={{ 
                   backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
                 }}
               >
                {t("about.whyChooseUs.title")}
               </h2>
+              <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-full my-2"></div>
             </div>
             
             <div className="grid md:grid-cols-2 gap-8">
               {[  
-                  "about.whyChooseUs.reason1",
-                  "about.whyChooseUs.reason2",
-                  "about.whyChooseUs.reason3",
-                  "about.whyChooseUs.reason4",
-                  "about.whyChooseUs.reason5",
-                ].map((reason, index) => (
+                "about.whyChooseUs.reason1",
+                "about.whyChooseUs.reason2",
+                "about.whyChooseUs.reason3",
+                "about.whyChooseUs.reason4",
+                "about.whyChooseUs.reason5",
+              ].map((reason, index) => (
                 <motion.div 
                   key={index} 
-                  variants={sectionVariants}
-                  className="bg-white border border-emerald-600/20 rounded-2xl p-6 shadow-sm hover:shadow-emerald-700/10 transition-all"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    x: 0,
+                    transition: {
+                      duration: 0.5,
+                      delay: index * 0.1,
+                      ease: "easeOut"
+                    }
+                  }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  className="bg-white border border-emerald-600/20 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 rounded-full bg-emerald-700 mt-2 flex-shrink-0" />
-                    <p className="text-emerald-800">{t(reason)}</p>
+                    <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-emerald-600"></div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-emerald-800 mb-2">
+                        {t(`about.whyChooseUs.title${index + 1}`)}
+                      </h3>
+                      <p className="text-emerald-700/80">{t(reason)}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
