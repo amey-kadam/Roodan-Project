@@ -3,10 +3,7 @@ import { useI18n } from "@/utils/i18n";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
-// Optimized imports - only import what's needed
-import { motion } from "framer-motion";
-import { stagger } from "framer-motion";
-import { useAnimate } from "framer-motion";
+import { motion, stagger, useAnimate } from "framer-motion"; // Combined imports
 import { ArrowRight } from "lucide-react";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -46,6 +43,7 @@ function HeroComponent() {
           effect="blur"
           className="object-cover w-full h-full"
           wrapperClassName="absolute inset-0"
+          alt="World Map Background" // Added alt attribute for accessibility
         />
       </div>
 
@@ -92,6 +90,7 @@ function HeroComponent() {
             viewBox="0 0 1440 900" 
             preserveAspectRatio="none"
             className="absolute bottom-0 w-full h-full text-primary"
+            aria-hidden="true" // Added for accessibility
           >
             <path 
               fill="currentColor" 

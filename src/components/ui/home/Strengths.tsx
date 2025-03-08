@@ -4,7 +4,7 @@ import { CheckCircle, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-// Using a custom icon for Flexible since it's not in the standard Lucide set
+// Custom icons memoized to prevent unnecessary re-renders
 const FlexibleIcon = React.memo(() => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -16,13 +16,13 @@ const FlexibleIcon = React.memo(() => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    aria-hidden="true" // Added for accessibility
   >
     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
     <path d="M14.5 9a2.5 2.5 0 0 0-5 0v6a2.5 2.5 0 0 0 5 0" />
   </svg>
 ));
 
-// Handshake icon (renamed and simplified)
 const Handshake = React.memo(() => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +34,7 @@ const Handshake = React.memo(() => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    aria-hidden="true" // Added for accessibility
   >
     <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z" />
     <path d="M12 5.36 8.87 8.5a2.13 2.13 0 0 0 0 3h0a2.13 2.13 0 0 0 3 0l2.26-2.21a2.13 2.13 0 0 1 3 0l2.24 2.2a2.13 2.13 0 0 0 3 0h0a2.13 2.13 0 0 0 0-3L18.37 5.36a4.25 4.25 0 0 0-6 0h-.02a4.25 4.25 0 0 0-6 0z" />
@@ -43,7 +44,7 @@ const Handshake = React.memo(() => (
 FlexibleIcon.displayName = 'FlexibleIcon';
 Handshake.displayName = 'Handshake';
 
-// Pre-defined animation variants
+// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -105,7 +106,7 @@ export function Strengths() {
       icon: FlexibleIcon,
       color: "bg-emerald-50/80 text-emerald-700",
     },
-  ], [t]);
+  ], [t, language]); // Recreate when `t` or `language` changes
 
   // Memoize direction class
   const directionClass = useMemo(() => 
