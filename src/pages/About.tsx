@@ -69,12 +69,22 @@ const About = () => {
     return (
       <div className="flex h-[100vh] overflow-hidden">
         {/* Left Side - Stable Text */}
-        <div className="w-1/2 bg-secondary/10 flex items-center justify-center p-8 sticky top-0">
+        <div className="w-1/2 bg-emerald-50/20 flex items-center justify-center p-8 sticky top-0">
           <div className="text-center">
-            <h2 className="text-4xl font-display font-bold mb-6 text-foreground">
+            <h2 
+              className="text-4xl font-display font-bold mb-6 bg-clip-text text-transparent"
+              style={{ 
+                backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+              }}
+            >
               Our Leadership Team
             </h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
+            <p 
+              className="max-w-md mx-auto bg-clip-text text-transparent"
+              style={{
+                backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
+              }}
+            >
               Meet the visionary leaders behind our global success.
             </p>
           </div>
@@ -113,21 +123,21 @@ const About = () => {
                   }}
                 >
                   <div className="h-full w-full px-4">
-                    <div className="bg-white border border-border/20 rounded-none overflow-hidden shadow-xl w-full mx-auto h-full transform origin-top transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white border border-emerald-600/20 rounded-none overflow-hidden shadow-xl w-full mx-auto h-full transform origin-top transition-transform duration-300 hover:scale-[1.02]">
                       <div className="relative aspect-[3/2]">
                         <img
                           src={card.image}
                           alt={card.title}
                           className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/60 to-transparent" />
                         <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                           <h3 className="text-lg font-bold">{card.title}</h3>
                           <p className="text-xs text-white/80">{card.role}</p>
                         </div>
                       </div>
                       <div className="p-4">
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-emerald-800">
                           {card.description}
                         </p>
                       </div>
@@ -154,14 +164,14 @@ const About = () => {
           transition={{ duration: 1 }}
         >
           <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-primary/10 opacity-100" />
+            <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-emerald-700/10 opacity-100" />
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
             <motion.div
-              className="absolute w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -top-64 -left-64"
+              className="absolute w-[600px] h-[600px] bg-emerald-700/5 rounded-full blur-3xl -top-64 -left-64"
               animate={{
                 y: [0, -20, 0],
                 transition: {
-                  duration: 6,
+                  duration: 12,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }
@@ -178,10 +188,20 @@ const About = () => {
             animate="animate"
           >
             <motion.div variants={sectionVariants}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              <h1 
+                className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-clip-text text-transparent pb-6"
+                style={{ 
+                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                }}
+              >
                 {t("about.title")}
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mt-6">
+              <p 
+                className="text-xl md:text-2xl max-w-3xl mx-auto mt-6 bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
+                }}
+              >
                 {t("about.subtitle")}
               </p>
             </motion.div>
@@ -210,13 +230,23 @@ const About = () => {
               <motion.div variants={sectionVariants} className="text-center mb-16">
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <motion.div variants={iconVariants}>
-                    <Users className="w-12 h-12 text-primary" />
+                    <Users className="w-12 h-12 text-emerald-700" />
                   </motion.div>
-                  <h2 className="text-4xl font-display font-bold">
+                  <h2 
+                    className="text-4xl font-display font-bold bg-clip-text text-transparent"
+                    style={{ 
+                      backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                    }}
+                  >
                     {t("about.team.title")}
                   </h2>
                 </div>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <p 
+                  className="max-w-2xl mx-auto bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
+                  }}
+                >
                   {t("about.team.desc")}
                 </p>
               </motion.div>
@@ -226,9 +256,8 @@ const About = () => {
         </div>
 
         {/* Why Choose Us Section */}
-       
         <motion.section 
-          className="page-container py-24 bg-secondary/5"
+          className="page-container py-24 bg-emerald-50/20"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
@@ -236,9 +265,14 @@ const About = () => {
           <motion.div variants={sectionVariants} className="max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-4 mb-12">
               <motion.div variants={iconVariants}>
-                <Globe className="w-12 h-12 text-primary" />
+                <Globe className="w-12 h-12 text-emerald-700" />
               </motion.div>
-              <h2 className="text-4xl font-display font-bold text-center">
+              <h2 
+                className="text-4xl font-display font-bold text-center bg-clip-text text-transparent"
+                style={{ 
+                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                }}
+              >
                {t("about.whyChooseUs.title")}
               </h2>
             </div>
@@ -254,11 +288,11 @@ const About = () => {
                 <motion.div 
                   key={index} 
                   variants={sectionVariants}
-                  className="bg-white border border-border/20 rounded-2xl p-6 shadow-sm hover:shadow-primary/10 transition-all"
+                  className="bg-white border border-emerald-600/20 rounded-2xl p-6 shadow-sm hover:shadow-emerald-700/10 transition-all"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <p className="text-muted-foreground">{t(reason)}</p>
+                    <div className="w-2 h-2 rounded-full bg-emerald-700 mt-2 flex-shrink-0" />
+                    <p className="text-emerald-800">{t(reason)}</p>
                   </div>
                 </motion.div>
               ))}

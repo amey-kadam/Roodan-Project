@@ -85,25 +85,25 @@ export function Strengths() {
       title: t("strengths.quality.title"),
       description: t("strengths.quality.desc"),
       icon: CheckCircle,
-      color: "bg-blue-50 text-blue-600",
+      color: "bg-emerald-50/80 text-emerald-700",
     },
     {
       title: t("strengths.reliability.title"),
       description: t("strengths.reliability.desc"),
       icon: Shield,
-      color: "bg-emerald-50 text-emerald-600",
+      color: "bg-emerald-50/80 text-emerald-700",
     },
     {
       title: t("strengths.partnership.title"),
       description: t("strengths.partnership.desc"),
       icon: Handshake,
-      color: "bg-amber-50 text-amber-600",
+      color: "bg-emerald-50/80 text-emerald-700",
     },
     {
       title: t("strengths.flexibility.title"),
       description: t("strengths.flexibility.desc"),
       icon: FlexibleIcon,
-      color: "bg-purple-50 text-purple-600",
+      color: "bg-emerald-50/80 text-emerald-700",
     },
   ], [t]);
 
@@ -113,7 +113,7 @@ export function Strengths() {
   [language]);
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-primary/5">
       <div className={cn("page-container", directionClass)}>
         <motion.div 
           variants={titleVariants}
@@ -122,8 +122,20 @@ export function Strengths() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center max-w-xl mx-auto mb-16"
         >
-          <h2 className="text-3xl font-display font-bold mb-4">{t("strengths.title")}</h2>
-          <div className="w-20 h-1 bg-primary/20 mx-auto"></div>
+          <h2 
+            className="text-3xl font-display font-bold mb-4 bg-clip-text text-transparent" 
+            style={{ 
+              backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+            }}
+          >
+            {t("strengths.title")}
+          </h2>
+          <div 
+            className="w-20 h-1 mx-auto" 
+            style={{ 
+              background: "linear-gradient(to right, #004d00, #00b300)" 
+            }}
+          ></div>
         </motion.div>
 
         <motion.div 
@@ -137,12 +149,19 @@ export function Strengths() {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="bg-background rounded-xl p-6 border border-border/40 shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-5px]"
+              className="bg-background rounded-xl p-6 border border-emerald-600/20 shadow-sm hover:shadow-emerald-600/30 transition-all duration-300 hover:translate-y-[-5px]"
             >
               <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", strength.color)}>
                 <strength.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-display font-semibold mb-2">{strength.title}</h3>
+              <h3 
+                className="text-xl font-display font-semibold mb-2 bg-clip-text text-transparent" 
+                style={{ 
+                  backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+                }}
+              >
+                {strength.title}
+              </h3>
               <p className="text-muted-foreground">{strength.description}</p>
             </motion.div>
           ))}
