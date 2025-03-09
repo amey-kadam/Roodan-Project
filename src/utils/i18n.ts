@@ -101,7 +101,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.message': 'Your Message',
     'contact.form.submit': 'Send Message',
     'contact.whatsapp' : 'WhatsApp',
-    'SendUs.title' : 'Send Us a Message',
+    'SendUs.title' : 'Send us a Message',
     'SendUs.desc' :' Have a question or inquiry? Fill out the form below and we will get back to you as soon as possible.',
     // Inquiry
     'inquiry.title': 'Request a Quote',

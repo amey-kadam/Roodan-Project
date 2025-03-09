@@ -116,7 +116,7 @@ const Contact = () => {
                     icon: Mail, 
                     title: t("contact.email"), 
                     links: [
-                      { text: "www.roodan.ae", href: "https://www.roodan.ae" },
+                      // { text: "www.roodan.ae", href: "https://www.roodan.ae" },
                       { text: "sales@tradenexus.com", href: "mailto:sales@tradenexus.com" }
                     ]
                   },

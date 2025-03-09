@@ -35,8 +35,8 @@ const About = () => {
   const TeamSection = () => {
     const teamMembers = [
       {
-        name: "John Smith",
-        role: "CEO & Founder",
+        name: "Dipl.-Ing. MBA Adama Sow",
+        role: "CEO, General Manager",
         description: "Visionary leader with strategic insights.",
         image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format",
         socialLinks: {
@@ -46,8 +46,8 @@ const About = () => {
         }
       },
       {
-        name: "Sarah Johnson",
-        role: "COO",
+        name: "Jens Marson",
+        role: "COO, Co-Manager",
         description: "Operational excellence expert.",
         image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format",
         socialLinks: {
@@ -57,8 +57,8 @@ const About = () => {
         }
       },
       {
-        name: "Michael Chen",
-        role: "CFO",
+        name: "Tilmann Schillinger",
+        role: "CFO, Co-Manager",
         description: "Financial strategy mastermind.",
         image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format",
         socialLinks: {
@@ -68,8 +68,8 @@ const About = () => {
         }
       },
       {
-        name: "Emma Rodriguez",
-        role: "Global Trade Director",
+        name: "MBA, BSc. Pamela Aupindi ",
+        role: "Business Development Africa",
         description: "International markets connector.",
         image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1974&auto=format",
         socialLinks: {
@@ -79,8 +79,8 @@ const About = () => {
         }
       },
       {
-        name: "David Kim",
-        role: "Innovation Lead",
+        name: "MBA, MSc.(UK) Kunal More",
+        role: "Business Development Asia",
         description: "Technology transformation driver.",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format",
         socialLinks: {
@@ -144,8 +144,8 @@ const About = () => {
                 <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-900 to-emerald-700 p-8 flex flex-col justify-center shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-emerald-600/30">
                   <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTRoLTJ2NGgyek0zMCAzNGgtMnYtNGgydjR6bTAtNnYtNGgtMnY0aDJ6TTI0IDM0aC0ydi00aDJ2NHptMC02di00aC0ydjRoMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30 mix-blend-overlay" />
                   
-                  {/* Logo in top right */}
-                  <div className="absolute top-4 right-4 flex items-center bg-white p-2 rounded shadow-md z-10">
+                  {/* Logo in bottom right */}
+                  <div className="absolute bottom-7 right-4 flex items-center bg-white p-2 rounded shadow-md z-10">
                     <img 
                       src="/tree_logo.png" 
                       alt="Roodan Logo" 
