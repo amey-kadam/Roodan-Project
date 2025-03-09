@@ -144,6 +144,15 @@ const About = () => {
                 <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-900 to-emerald-700 p-8 flex flex-col justify-center shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-emerald-600/30">
                   <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTRoLTJ2NGgyek0zMCAzNGgtMnYtNGgydjR6bTAtNnYtNGgtMnY0aDJ6TTI0IDM0aC0ydi00aDJ2NHptMC02di00aC0ydjRoMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30 mix-blend-overlay" />
                   
+                  {/* Logo in top right */}
+                  <div className="absolute top-4 right-4 flex items-center bg-white p-2 rounded shadow-md z-10">
+                    <img 
+                      src="/tree_logo.png" 
+                      alt="Roodan Logo" 
+                      className="h-11 object-contain"
+                    />
+                  </div>
+                  
                   <div className="mb-6 relative">
                     <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-emerald-300 mb-4" />
                     <h3 className="text-3xl font-bold text-white mb-1">{member.name}</h3>
@@ -154,70 +163,49 @@ const About = () => {
                     {member.description}
                   </p>
                   
-                  {/* Social Links - IMPROVED VERSION WITH BETTER EVENT HANDLING */}
+                  {/* Social Links - FINAL VERSION WITH DIRECT HANDLING */}
                   <div className="flex gap-4 mt-auto relative z-[100]">
                     {/* LinkedIn */}
-                    <div 
-                      className="w-10 h-10 relative" 
-                      onClick={(e) => e.stopPropagation()}
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(member.socialLinks.linkedin, '_blank', 'noopener,noreferrer');
+                      }}
+                      className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 cursor-pointer"
+                      aria-label="LinkedIn"
                     >
-                      <a 
-                        href={member.socialLinks.linkedin}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          window.open(member.socialLinks.linkedin, '_blank', 'noopener,noreferrer');
-                        }}
-                        className="absolute inset-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 cursor-pointer"
-                        aria-label="LinkedIn"
-                      >
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                      </a>
-                    </div>
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      </svg>
+                    </button>
                     
                     {/* Twitter */}
-                    <div 
-                      className="w-10 h-10 relative" 
-                      onClick={(e) => e.stopPropagation()}
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(member.socialLinks.twitter, '_blank', 'noopener,noreferrer');
+                      }}
+                      className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 cursor-pointer"
+                      aria-label="Twitter"
                     >
-                      <a 
-                        href={member.socialLinks.twitter}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          window.open(member.socialLinks.twitter, '_blank', 'noopener,noreferrer');
-                        }}
-                        className="absolute inset-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 cursor-pointer"
-                        aria-label="Twitter"
-                      >
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085a4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                        </svg>
-                      </a>
-                    </div>
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085a4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                      </svg>
+                    </button>
                     
                     {/* Email */}
-                    <div 
-                      className="w-10 h-10 relative" 
-                      onClick={(e) => e.stopPropagation()}
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = member.socialLinks.email;
+                      }}
+                      className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 cursor-pointer"
+                      aria-label="Email"
                     >
-                      <a 
-                        href={member.socialLinks.email}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          window.location.href = member.socialLinks.email;
-                        }}
-                        className="absolute inset-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 cursor-pointer"
-                        aria-label="Email"
-                      >
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                      </a>
-                    </div>
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </div>
