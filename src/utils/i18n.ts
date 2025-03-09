@@ -65,12 +65,28 @@ const translations: Record<Language, Record<string, string>> = {
     'about.experience.desc': 'With years of experience in international trade, we have established strong partnerships and a reputation for excellence.',
     'about.team.title': 'Our Leadership Team',
     'about.team.desc': "Discover the exceptional individuals driving our company's vision and success.",
+
+    // Our Mission
+    'about.values.value1.title':'Quality Assurance',
+    'about.values.value1.desc': 'Delivering premium agricultural and industrial products to global standards.',
+    'about.values.value2.title':'Reliable Partnerships',
+    'about.values.value2.desc': 'Building lasting client relationships with timely, efficient delivery.',
+    'about.values.value3.title':'Sustainable Trade',
+    'about.values.value3.desc': 'Upholding sustainable and ethical trade in all operations.',
+    'about.values.value4.title':'Customer Commitment',
+    'about.values.value4.desc': 'Ensuring customer satisfaction through fair pricing, top logistics, and great service.',
+
     // About.Why Choose Us
     'about.whyChooseUs.title': 'Why Choose Us?',
+    'about.whyChooseUs.title1': 'Superior Quality Assurance',
     'about.whyChooseUs.reason1': 'Premium quality products sourced from trusted suppliers worldwide',
+    'about.whyChooseUs.title2': 'Tailored Logistics Solutions',
     'about.whyChooseUs.reason2': 'Flexible delivery terms to meet your specific requirements',
+    'about.whyChooseUs.title3': 'Competitive & Transparent Pricing',
     'about.whyChooseUs.reason3': 'Competitive pricing and transparent business practices',
+    'about.whyChooseUs.title4': 'Dedicated Customer Support ',
     'about.whyChooseUs.reason4': 'Responsive customer service and dedicated support',
+    'about.whyChooseUs.title5': 'Global Expertise & Trusted Network',
     'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
     
     // Contact
@@ -100,7 +116,7 @@ const translations: Record<Language, Record<string, string>> = {
     'inquiry.form.quantity': 'Quantity',
     'inquiry.form.delivery': 'Delivery Terms',
     'inquiry.form.message': 'Additional Information',
-    'inquiry.form.submit': 'Submit Inquiry',
+    'inquiry.form.submit': 'Send Request',
     
     // Footer
     'slogan':'Premium global trading solutions providing high-quality products with reliable service worldwide.',
@@ -166,12 +182,27 @@ const translations: Record<Language, Record<string, string>> = {
     'about.team.title': 'Notre équipe de direction',
     'about.team.desc': 'Découvrez les individus exceptionnels qui sont à l’origine de la vision et du succès de notre entreprise.',
 
+    // Our Mission
+    'about.values.value1.title':'Quality Assurance',
+    'about.values.value1.desc': 'Fournir des produits agricoles et industriels de haute qualité répondant aux normes mondiales.',
+    'about.values.value2.title':'Des partenariats fiables',
+    'about.values.value2.desc': 'Construire des relations à long terme avec les clients en assurant une livraison rapide et efficace.',
+    'about.values.value3.title':'Commerce durable',
+    'about.values.value3.desc': 'Promouvoir des pratiques commerciales durables et éthiques dans toutes nos opérations.',
+    'about.values.value4.title':'Engagement client',
+    'about.values.value4.desc': 'Assurer la satisfaction du client grâce à des prix compétitifs, une logistique supérieure et un service exceptionnel.',
+
     // About.Why Choose Us
     'about.whyChooseUs.title': 'Why Choose Us?',
+    'about.whyChooseUs.title1': 'Assurance qualité supérieure',
     'about.whyChooseUs.reason1': 'Premium quality products sourced from trusted suppliers worldwide',
+    'about.whyChooseUs.title2': 'Des solutions logistiques sur mesure',
     'about.whyChooseUs.reason2': 'Flexible delivery terms to meet your specific requirements',
+    'about.whyChooseUs.title3': 'Des prix compétitifs et transparents',
     'about.whyChooseUs.reason3': 'Competitive pricing and transparent business practices',
+    'about.whyChooseUs.title4': 'Assistance client dédiée',
     'about.whyChooseUs.reason4': 'Responsive customer service and dedicated support',
+    'about.whyChooseUs.title5': 'Expertise mondiale et réseau de confiance',
     'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
     
     // Contact
@@ -202,7 +233,7 @@ const translations: Record<Language, Record<string, string>> = {
     'inquiry.form.quantity': 'Quantité',
     'inquiry.form.delivery': 'Conditions de Livraison',
     'inquiry.form.message': 'Informations Supplémentaires',
-    'inquiry.form.submit': 'Soumettre la Demande',
+    'inquiry.form.submit': 'Envoyer la demande',
     
     // Footer
     'slogan':'Solutions commerciales mondiales haut de gamme offrant des produits de haute qualité avec un service fiable dans le monde entier.',
@@ -268,14 +299,28 @@ const translations: Record<Language, Record<string, string>> = {
     'about.team.title': 'فريق القيادة لدينا',
     'about.team.desc':'اكتشف الأفراد الاستثنائيين الذين يقودون رؤية شركتنا ونجاحها.',
 
+    // Our Mission
+    'about.values.value1.title':'ضمان الجودة',
+    'about.values.value1.desc': 'توفير منتجات زراعية وصناعية عالية الجودة تتوافق مع المعايير العالمية.',
+    'about.values.value2.title':'شراكات موثوقة',
+    'about.values.value2.desc': 'بناء علاقات طويلة الأمد مع العملاء من خلال ضمان التسليم في الوقت المناسب وبكفاءة.',
+    'about.values.value3.title':'التجارة المستدامة',
+    'about.values.value3.desc': 'تعزيز ممارسات التجارة المستدامة والأخلاقية في جميع عملياتنا.',
+    'about.values.value4.title':'التزام العملاء',
+    'about.values.value4.desc': 'لضمان رضا العملاء من خلال الأسعار التنافسية والخدمات اللوجستية المتفوقة والخدمة الاستثنائية.',
       
-  // About.Why Choose Us
-  'about.whyChooseUs.title': 'لماذا تختارنا؟',
-  'about.whyChooseUs.reason1': 'منتجات فائقة الجودة من موردين موثوقين في جميع أنحاء العالم',
-  'about.whyChooseUs.reason2': 'شروط تسليم مرنة لتلبية متطلباتك المحددة',
-  'about.whyChooseUs.reason3': 'أسعار تنافسية وممارسات تجارية شفافة',
-  'about.whyChooseUs.reason4': 'خدمة عملاء سريعة الاستجابة ودعم مخصص',
-  'about.whyChooseUs.reason5': 'سنوات من الخبرة في التجارة الدولية مع شبكة عالمية',
+    // About.Why Choose Us
+    'about.whyChooseUs.title': 'لماذا تختارنا؟',
+    'about.whyChooseUs.title1': 'ضمان الجودة العالية',
+    'about.whyChooseUs.reason1': 'منتجات فائقة الجودة من موردين موثوقين في جميع أنحاء العالم',
+    'about.whyChooseUs.title2': 'حلول لوجستية مخصصة',
+    'about.whyChooseUs.reason2': 'شروط تسليم مرنة لتلبية متطلباتك المحددة',
+    'about.whyChooseUs.title3': 'أسعار تنافسية وشفافة',
+    'about.whyChooseUs.reason3': 'أسعار تنافسية وممارسات تجارية شفافة',
+    'about.whyChooseUs.title4': 'دعم العملاء المخصص',
+    'about.whyChooseUs.reason4': 'خدمة عملاء سريعة الاستجابة ودعم مخصص',
+    'about.whyChooseUs.title5': 'خبرة عالمية وشبكة موثوقة',
+    'about.whyChooseUs.reason5': 'سنوات من الخبرة في التجارة الدولية مع شبكة عالمية',
     
     
     // Contact
@@ -307,7 +352,7 @@ const translations: Record<Language, Record<string, string>> = {
     'inquiry.form.quantity': 'الكمية',
     'inquiry.form.delivery': 'شروط التسليم',
     'inquiry.form.message': 'معلومات إضافية',
-    'inquiry.form.submit': 'تقديم الطلب',
+    'inquiry.form.submit': 'إرسال الطلب',
     
     // Footer
     'slogan':'حلول تجارية عالمية متميزة توفر منتجات عالية الجودة مع خدمة موثوقة في جميع أنحاء العالم..',

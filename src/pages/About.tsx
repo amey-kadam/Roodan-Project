@@ -116,67 +116,67 @@ const About = () => {
       <main className="flex-grow">
         {/* Mission & Values Section */}
         <motion.section 
-          className="page-container py-20 md:py-28"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
+  className="page-container py-20 md:py-28"
+  initial="initial"
+  whileInView="animate"
+  viewport={{ once: true }}
+>
+  <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4">
+    <div className="flex flex-col items-center justify-center gap-4 mb-16">
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ 
+          scale: 1, 
+          opacity: 1,
+          transition: { 
+            type: "spring", 
+            stiffness: 300,
+            delay: 0.2 
+          }
+        }}
+      >
+        <Target className="w-16 h-16 text-emerald-600" />
+      </motion.div>
+      <h2 
+        className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
+        style={{ 
+          backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+        }}
+      >
+        {t("about.mission.title")}
+      </h2>
+      <p 
+        className="text-xl text-center max-w-3xl mx-auto mt-4 bg-clip-text text-transparent"
+        style={{
+          backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
+        }}
+      >
+        {t("about.mission.desc")}
+      </p>
+    </div>
+    
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {[1, 2, 3, 4].map((value, index) => (
+        <motion.div 
+          key={`value-${index}`}
+          variants={itemVariants}
+          className="bg-white border border-emerald-600/20 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+          whileHover={{ y: -5 }}
         >
-          <motion.div variants={sectionVariants} className="max-w-5xl mx-auto">
-            <div className="flex flex-col items-center justify-center gap-4 mb-16">
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ 
-                  scale: 1, 
-                  opacity: 1,
-                  transition: { 
-                    type: "spring", 
-                    stiffness: 300,
-                    delay: 0.2 
-                  }
-                }}
-              >
-                <Target className="w-16 h-16 text-emerald-600" />
-              </motion.div>
-              <h2 
-                className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
-                style={{ 
-                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
-                }}
-              >
-                {t("about.mission.title")}
-              </h2>
-              <p 
-                className="text-xl text-center max-w-3xl mx-auto mt-4 bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
-                }}
-              >
-                {t("about.mission.desc")}
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((value, index) => (
-                <motion.div 
-                  key={`value-${index}`}
-                  variants={itemVariants}
-                  className="bg-white border border-emerald-600/20 rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300"
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
-                    <Award className="w-6 h-6 text-emerald-700" />
-                  </div>
-                  <h3 className="text-xl font-bold text-emerald-800 mb-3">
-                    {t(`about.values.value${value}.title`)}
-                  </h3>
-                  <p className="text-emerald-700/80">
-                    {t(`about.values.value${value}.desc`)}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.section>
+          <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
+            <Award className="w-7 h-7 text-emerald-700" />
+          </div>
+          <h3 className="text-xl font-bold text-emerald-800 mb-3">
+            {t(`about.values.value${value}.title`)}
+          </h3>
+          <p className="text-emerald-700/80 flex-grow">
+            {t(`about.values.value${value}.desc`)}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
+</motion.section>
 
         {/* Team Section */}
         <motion.section 
