@@ -261,7 +261,7 @@ const About = () => {
               <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-full my-2"></div>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {[  
                 "about.whyChooseUs.reason1",
                 "about.whyChooseUs.reason2",
@@ -282,7 +282,10 @@ const About = () => {
                     }
                   }}
                   viewport={{ once: true, amount: 0.3 }}
-                  className="bg-white border border-emerald-600/20 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300"
+                  className={cn(
+                    "bg-white border border-emerald-600/20 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300",
+                    index === 4 && "md:col-span-2 md:max-w-lg md:mx-auto"
+                  )}
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
