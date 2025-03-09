@@ -40,7 +40,7 @@ export function Footer() {
                     textShadow: "0 2px 4px rgba(10, 93, 54, 0.2)"
                   }}
                 >
-                  ROODAN
+                  {t("logo.title")}
                   <span 
                     className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-800 to-emerald-400 transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"
                     style={{
@@ -176,7 +176,7 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-emerald-500/20 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-600 text-sm">
-            &copy; {currentYear} ROODAN. {t("footer.rights")}.
+            &copy; {currentYear} {t("logo.title")} {t("footer.rights")}.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             {["footer.privacy", "footer.terms"].map((item) => (
