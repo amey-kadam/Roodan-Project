@@ -189,7 +189,7 @@ export function Header() {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed top-[calc(100%-1px)] inset-x-0 bottom-0 bg-background border-t border-border/30 shadow-md animate-slide-down overflow-y-auto max-h-[80vh]">
+          <div className="md:hidden fixed top-[60px] sm:top-[70px] inset-x-0 bg-background border-t border-border/30 shadow-md transition-all duration-300 overflow-y-auto max-h-[calc(100vh-60px)] sm:max-h-[calc(100vh-70px)]">
             <nav className="flex flex-col py-4 sm:py-6 px-3 sm:px-4">
               {routes.map((route) => (
                 <NavLink
