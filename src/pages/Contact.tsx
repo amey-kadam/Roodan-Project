@@ -117,22 +117,22 @@ const Contact = () => {
                     title: t("contact.email"), 
                     links: [
                       // { text: "www.roodan.ae", href: "https://www.roodan.ae" },
-                      { text: "sales@tradenexus.com", href: "mailto:sales@tradenexus.com" }
+                      { text: "info@roodan.ae", href: "mailto:info@roodan.ae" }
                     ]
                   },
                   { 
                     icon: Phone, 
                     title: t("contact.phone"), 
                     links: [
-                      { text: "+1 (234) 567-8900", href: "tel:+12345678900" },
-                      { text: "+1 (234) 567-8901", href: "tel:+12345678901" }
+                      // { text: "+1 (234) 567-8900", href: "tel:+12345678900" },
+                      { text: "+971507654228", href: "tel:+971507654228" }
                     ]
                   },
                   { 
                     icon: MessageCircle, 
                     title: t("contact.whatsapp"), 
                     links: [
-                      { text: "+1 (234) 567-8902", href: "https://wa.me/12345678902" }
+                      { text: "+971507654228", href: "https://wa.me/971507654228" }
                     ]
                   },
                   { 
