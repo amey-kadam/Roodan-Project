@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, memo, lazy, Suspense } from "react";
+import { useState, useCallback, useMemo, memo, lazy, Suspense, useEffect } from "react";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
 import { useI18n } from "@/utils/i18n";
@@ -28,15 +28,15 @@ const MemoizedProductCardWrapper = memo(({
   const getCategoryInfo = useCallback((cat: string) => {
     switch(cat) {
       case 'food':
-        return { label: 'Food', icon: ShoppingBag, color: 'bg-amber-100 text-amber-700' };
+        return { label: 'Food', icon: ShoppingBag, color: 'bg-amber-100/80 text-amber-700 border border-amber-200/50' };
       case 'oils':
-        return { label: 'Oils', icon: Droplet, color: 'bg-yellow-100 text-yellow-700' };
+        return { label: 'Oils', icon: Droplet, color: 'bg-yellow-100/80 text-yellow-700 border border-yellow-200/50' };
       case 'agri':
-        return { label: 'Agriculture', icon: Leaf, color: 'bg-emerald-100 text-emerald-700' };
+        return { label: 'Agriculture', icon: Leaf, color: 'bg-emerald-100/80 text-emerald-700 border border-emerald-200/50' };
       case 'petro':
-        return { label: 'Petroleum', icon: Fuel, color: 'bg-blue-100 text-blue-700' };
+        return { label: 'Petroleum', icon: Fuel, color: 'bg-blue-100/80 text-blue-700 border border-blue-200/50' };
       default:
-        return { label: 'Product', icon: Package, color: 'bg-gray-100 text-gray-700' };
+        return { label: 'Product', icon: Package, color: 'bg-gray-100/80 text-gray-700 border border-gray-200/50' };
     }
   }, []);
 
@@ -45,7 +45,7 @@ const MemoizedProductCardWrapper = memo(({
 
   return (
     <motion.div 
-      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col group"
+      className="bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col group"
       whileHover={{ y: -5 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -61,9 +61,10 @@ const MemoizedProductCardWrapper = memo(({
             loading="lazy"
             decoding="async"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
         <div className="absolute top-4 left-4">
-          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${categoryInfo.color}`}>
+          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md shadow-sm ${categoryInfo.color}`}>
             <CategoryIcon className="w-3 h-3" />
             <span>{categoryInfo.label}</span>
           </div>
@@ -83,18 +84,20 @@ const MemoizedProductCardWrapper = memo(({
       </div>
       <div className="px-6 pb-6">
         <Button 
-          className="w-full bg-white text-emerald-700 border-2 border-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl transition-all duration-300 group"
+          className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 rounded-xl transition-all duration-300 group relative overflow-hidden shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
         >
-          <span>Request Quote</span>
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            Request Quote
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </span>
         </Button>
       </div>
     </motion.div>
@@ -365,7 +368,7 @@ const Products = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-gray-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
       <main className="flex-grow">
         {/* Hero Section */}
@@ -403,83 +406,149 @@ const Products = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="max-w-5xl mx-auto"
             >
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-12">
-                {/* Search Bar */}
-                <div className="relative mb-8 max-w-2xl mx-auto">
-                  <div 
-                    className={cn(
-                      "absolute inset-0 rounded-full transition-all duration-300",
-                      searchFocused ? "bg-emerald-50 shadow-lg shadow-emerald-100/50" : "bg-transparent"
-                    )}
-                    style={{ 
-                      transform: searchFocused ? "scale(1.02)" : "scale(1)",
-                      filter: searchFocused ? "blur(8px)" : "blur(0px)",
-                      opacity: searchFocused ? "0.7" : "0"
-                    }}
-                  />
-                  <div className={cn(
-                    "relative flex items-center overflow-hidden rounded-full transition-all duration-300 border",
-                    searchFocused 
-                      ? "border-emerald-400 shadow-lg shadow-emerald-100/50 bg-white" 
-                      : "border-gray-200 shadow-sm bg-gray-50 hover:border-emerald-200 hover:shadow-md"
-                  )}>
-                    <div className={cn(
-                      "absolute left-4 transition-all duration-300",
-                      searchFocused ? "text-emerald-500" : "text-gray-400"
-                    )}>
-                      <Search className="h-5 w-5" />
+              {/* Modern Search Container */}
+              <div className="relative">
+                {/* Background decorative elements */}
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
+                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
+                
+                {/* Main container with glass effect */}
+                <div className="relative bg-gradient-to-br from-white/90 via-white/80 to-emerald-50/80 backdrop-blur-md rounded-3xl shadow-xl border border-emerald-100/30 p-8 mb-12 overflow-hidden">
+                  {/* Decorative pattern overlay */}
+                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTRoLTJ2NGgyek0zMCAzNGgtMnYtNGgydjR6bTAtNnYtNGgtMnY0aDJ6TTI0IDM0aC0ydi00aDJ2NHptMC02di00aC0ydjRoMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10 mix-blend-overlay pointer-events-none"></div>
+                  
+                  {/* Floating accent line */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-1 bg-gradient-to-r from-emerald-400/0 via-emerald-400 to-emerald-400/0 rounded-full"></div>
+                  
+                  {/* Search Bar */}
+                  <div className="relative mb-12 max-w-2xl mx-auto">
+                    {/* Search title */}
+                    <div className="text-center mb-6">
+                      <h3 className="text-lg font-medium text-gray-700">Find Your Products</h3>
+                      <p className="text-sm text-gray-500">Search our extensive catalog of premium products</p>
                     </div>
-                    <input
-                      type="text"
+                    
+                    {/* Background glow effect */}
+                    <div 
                       className={cn(
-                        "block w-full py-4 transition-all duration-300 bg-transparent focus:outline-none",
-                        searchFocused ? "pl-12 pr-12" : "pl-12 pr-4"
+                        "absolute inset-0 rounded-full transition-all duration-500",
+                        searchFocused ? "opacity-100" : "opacity-0"
                       )}
-                      style={{ fontSize: "1.05rem" }}
-                      placeholder={`Search ${activeCategory === "all" ? "all products" : activeCategory + " products"}...`}
-                      value={searchQuery}
-                      onChange={handleSearchChange}
-                      onFocus={() => setSearchFocused(true)}
-                      onBlur={() => setSearchFocused(false)}
+                      style={{ 
+                        background: "radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 70%)",
+                        transform: searchFocused ? "scale(1.2)" : "scale(0.8)",
+                        filter: "blur(10px)",
+                        zIndex: 0
+                      }}
                     />
+                    
+                    {/* Search input container */}
+                    <div className={cn(
+                      "relative flex items-center overflow-hidden rounded-full transition-all duration-300 border z-10",
+                      searchFocused 
+                        ? "border-emerald-400 shadow-lg shadow-emerald-100/50 bg-white" 
+                        : "border-gray-200 shadow-sm bg-white/90 hover:border-emerald-200 hover:shadow-md"
+                    )}>
+                      {/* Animated search icon */}
+                      <div className={cn(
+                        "absolute left-4 transition-all duration-300 flex items-center justify-center",
+                        searchFocused ? "text-emerald-500" : "text-gray-400"
+                      )}>
+                        <Search className={cn(
+                          "h-5 w-5 transition-transform duration-300",
+                          searchFocused ? "scale-110" : "scale-100"
+                        )} />
+                      </div>
+                      
+                      {/* Search input */}
+                      <input
+                        type="text"
+                        className={cn(
+                          "block w-full py-4 transition-all duration-300 bg-transparent focus:outline-none",
+                          searchFocused ? "pl-12 pr-12" : "pl-12 pr-4"
+                        )}
+                        style={{ 
+                          fontSize: "1.05rem", 
+                          letterSpacing: "0.01em",
+                          caretColor: "#10b981" 
+                        }}
+                        placeholder={`Search ${activeCategory === "all" ? "all products" : activeCategory + " products"}...`}
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                        onFocus={() => setSearchFocused(true)}
+                        onBlur={() => setSearchFocused(false)}
+                      />
+                      
+                      {/* Clear button with animation */}
+                      <AnimatePresence>
+                        {searchQuery && (
+                          <motion.button
+                            initial={{ opacity: 0, scale: 0.8, rotate: -90 }}
+                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                            exit={{ opacity: 0, scale: 0.8, rotate: 90 }}
+                            transition={{ 
+                              duration: 0.2,
+                              type: "spring",
+                              stiffness: 300,
+                              damping: 15
+                            }}
+                            className="absolute right-4 p-1.5 rounded-full bg-gray-100 hover:bg-emerald-100 text-gray-500 hover:text-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 transition-colors duration-200"
+                            onClick={clearSearch}
+                            aria-label="Clear search"
+                          >
+                            <X className="h-4 w-4" />
+                          </motion.button>
+                        )}
+                      </AnimatePresence>
+                      
+                      {/* Decorative accent line */}
+                      <div 
+                        className={cn(
+                          "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-500 ease-out",
+                          searchFocused ? "w-full opacity-100" : "w-0 opacity-0"
+                        )}
+                      />
+                    </div>
+                    
+                    {/* Results counter with animation */}
                     <AnimatePresence>
                       {searchQuery && (
-                        <motion.button
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.15 }}
-                          className="absolute right-4 p-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 focus:outline-none"
-                          onClick={clearSearch}
-                          aria-label="Clear search"
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute right-4 -bottom-8 text-xs font-medium tracking-wide flex items-center gap-1.5"
                         >
-                          <X className="h-4 w-4" />
-                        </motion.button>
+                          <span className="inline-flex items-center justify-center bg-emerald-100 text-emerald-700 rounded-full px-2 py-0.5">
+                            {filteredProducts.length}
+                          </span>
+                          <span className="text-emerald-600">
+                            {filteredProducts.length === 1 ? 'result' : 'results'} found
+                          </span>
+                        </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
-                  {searchQuery && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="absolute right-4 -bottom-6 text-xs text-emerald-600 font-medium"
-                    >
-                      {filteredProducts.length} {filteredProducts.length === 1 ? 'result' : 'results'} found
-                    </motion.div>
-                  )}
-                </div>
-                
-                {/* Category Filters */}
-                <div className="flex flex-wrap gap-3 md:gap-4 justify-center items-center">
-                  {categories.map((category, index) => (
-                    <CategoryButton
-                      key={category.id}
-                      category={category}
-                      activeCategory={activeCategory}
-                      onClick={() => handleCategoryChange(category.id as ProductCategory)}
-                      index={index}
-                    />
-                  ))}
+                  
+                  {/* Category Filters with enhanced styling */}
+                  <div className="relative">
+                    <div className="flex flex-wrap gap-3 md:gap-4 justify-center items-center">
+                      {categories.map((category, index) => (
+                        <CategoryButton
+                          key={category.id}
+                          category={category}
+                          activeCategory={activeCategory}
+                          onClick={() => handleCategoryChange(category.id as ProductCategory)}
+                          index={index}
+                        />
+                      ))}
+                    </div>
+                    
+                    {/* Decorative corner accents */}
+                    <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-emerald-100/50 rounded-tr-xl -mt-2 -mr-2 pointer-events-none"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-emerald-100/50 rounded-bl-xl -mb-2 -ml-2 pointer-events-none"></div>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -516,7 +585,7 @@ const Products = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 max-w-md mx-auto">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100/80 p-8 max-w-md mx-auto">
                       <div className="text-emerald-500 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -529,7 +598,7 @@ const Products = () => {
                           : `No products available in the ${activeCategory} category.`}
                       </p>
                       <Button 
-                        className="mt-4 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200"
+                        className="mt-4 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
                         onClick={() => {
                           setSearchQuery("");
                           setActiveCategory("all");
