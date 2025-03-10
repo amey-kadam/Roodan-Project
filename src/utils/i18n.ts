@@ -103,6 +103,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'WhatsApp',
     'SendUs.title' : 'Send us a Message',
     'SendUs.desc' :' Have a question or inquiry? Fill out the form below and we will get back to you as soon as possible.',
+
     // Inquiry
     'inquiry.title': 'Request a Quote',
     'inquiry.subtitle': 'Fill out the form to receive a personalized quote',
@@ -250,6 +251,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.products': 'المنتجات',
     'nav.inquiry': 'طلب الاقتباس',
     'nav.contact': 'اتصل بنا',
+
     //Header
     'logo.title':'رودان',
     
@@ -338,7 +340,6 @@ const translations: Record<Language, Record<string, string>> = {
     'SendUs.title' : 'أرسل لنا رسالة',
     'SendUs.desc' :'هل لديك سؤال أو استفسار؟ املأ النموذج أدناه وسنقوم بالرد عليك في أقرب وقت ممكن.',
 
-    
     // Inquiry
     'inquiry.title': 'طلب عرض سعر',
     'inquiry.subtitle': 'املأ النموذج للحصول على عرض سعر مخصص',
