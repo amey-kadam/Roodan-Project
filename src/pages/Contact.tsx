@@ -76,11 +76,10 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
       <main className="flex-grow relative">
         {/* Background decorative elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/50 to-transparent pointer-events-none"></div>
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-200 rounded-full opacity-20 blur-3xl"></div>
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
 
@@ -96,16 +95,12 @@ const Contact = () => {
         >
           <div className="flex items-center justify-center gap-4 mb-6">
             <h2
-              className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))",
-              }}
+              className="text-4xl md:text-5xl font-display font-bold text-center bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent mt-4"
             >
               {t("contact.title")}
             </h2>
           </div>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-700 to-emerald-500 mx-auto rounded-full mb-8"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-emerald-500 mx-auto rounded-full mb-8"></div>
 
           {/*  */}
         </div>
@@ -185,10 +180,10 @@ const Contact = () => {
                     }}
                     className="bg-white rounded-lg p-3 flex flex-col items-center text-center hover:shadow-md transition-all duration-200 border border-gray-100"
                   >
-                    <div className="w-8 h-8 bg-gradient-to-br from-[#024B04]/10 to-[#039815]/20 rounded-full flex items-center justify-center mb-2">
-                      <item.icon className="w-4 h-4 text-[#039815]" />
+                    <div className="w-8 h-8 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-full flex items-center justify-center mb-2">
+                      <item.icon className="w-4 h-4 text-emerald-500" />
                     </div>
-                    <h3 className="text-sm font-medium mb-1 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
+                    <h3 className="text-sm font-medium mb-1 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
                       {item.title}
                     </h3>
                     {item.links ? (
@@ -197,7 +192,7 @@ const Contact = () => {
                           <a
                             key={idx}
                             href={link.href}
-                            className="block text-xs text-gray-600 hover:text-[#039815] transition-colors"
+                            className="block text-xs text-gray-600 hover:text-emerald-500 transition-colors"
                           >
                             {link.text}
                           </a>
@@ -233,71 +228,70 @@ const Contact = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Form Section - Increased size of form elements */}
                 <div className="p-5 md:p-6">
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-[#024B04] via-[#039815] to-[#024B04] bg-clip-text text-transparent">
-                    {t("SendUs.title")}
+                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
+                    {t("contact.form.title")}
                   </h3>
-                  <p className="text-sm mb-4 text-gray-600">
-                    {t("SendUs.desc")}
+                  <p className="text-gray-600 mb-6">
+                    {t("contact.form.description")}
                   </p>
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="space-y-1.5">
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
                       <label
                         htmlFor="name"
-                        className="text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium mb-1"
                       >
-                        {t("contact.form.name")}{" "}
-                        <span className="text-red-500">*</span>
+                        {t("contact.form.name")}
                       </label>
-                      <Input
+                      <input
+                        type="text"
                         id="name"
+                        name="name"
                         required
-                        className="h-10 text-sm rounded-md border-gray-200 focus:border-[#039815] focus:ring-[#039815]/30 transition-all"
-                        placeholder="John Doe"
+                        className="h-10 text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
                       />
                     </div>
 
-                    <div className="space-y-1.5">
+                    <div>
                       <label
                         htmlFor="email"
-                        className="text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium mb-1"
                       >
-                        {t("contact.form.email")}{" "}
-                        <span className="text-red-500">*</span>
+                        {t("contact.form.email")}
                       </label>
-                      <Input
-                        id="email"
+                      <input
                         type="email"
+                        id="email"
+                        name="email"
                         required
-                        className="h-10 text-sm rounded-md border-gray-200 focus:border-[#039815] focus:ring-[#039815]/30 transition-all"
-                        placeholder="john@example.com"
+                        className="h-10 text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
                       />
                     </div>
 
-                    <div className="space-y-1.5">
+                    <div>
                       <label
                         htmlFor="message"
-                        className="text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium mb-1"
                       >
-                        {t("contact.form.message")}{" "}
-                        <span className="text-red-500">*</span>
+                        {t("contact.form.message")}
                       </label>
-                      <Textarea
+                      <textarea
                         id="message"
+                        name="message"
                         rows={4}
                         required
-                        className="text-sm rounded-md border-gray-200 focus:border-[#039815] focus:ring-[#039815]/30 transition-all"
-                        placeholder="Your message here..."
+                        className="text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
                       />
                     </div>
 
                     <Button
                       type="submit"
-                      className="group h-11 px-6 rounded-md bg-gradient-to-r from-[#024B04] to-[#039815] hover:from-[#039815] hover:to-[#024B04] transition-all shadow-sm hover:shadow-[#039815]/20"
+                      className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
                       disabled={isSubmitting}
                     >
                       <span className="flex items-center gap-2 font-medium text-white">
                         {isSubmitting ? "Sending..." : t("contact.form.submit")}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </span>
                     </Button>
                   </form>

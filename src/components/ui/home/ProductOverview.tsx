@@ -21,7 +21,7 @@ interface ProductCardProps {
 const ProductCard = memo(({ product, language }: ProductCardProps) => {
   return (
     <NavLink
-      to={product.link}
+      to={product.link}  
       className="group rounded-xl overflow-hidden bg-background border border-emerald-600/20 shadow-sm transition-all duration-300 hover:shadow-emerald-600/30 focus:outline-none focus:ring-2 focus:ring-emerald-600/50 focus:ring-offset-2"
       onClick={() => window.scrollTo(0, 0)}
       aria-label={`View details for ${product.title}`} // Added for accessibility

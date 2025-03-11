@@ -48,7 +48,6 @@ export function Header() {
   // Using emerald colors from Hero.tsx
   const logoGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
   const navHoverGradient = "linear-gradient(to right, #047857, #10b981)";
-  const buttonGradient = "linear-gradient(to r, from-emerald-600 to-emerald-500)";
   const textGradient = "linear-gradient(to right, #059669, #10b981)";
   const hoverTextGradient = "linear-gradient(to right, #047857, #10b981)";
   const underlineGradient = "linear-gradient(to right, #059669, #10b981)";
