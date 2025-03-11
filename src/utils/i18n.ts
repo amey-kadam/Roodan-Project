@@ -104,6 +104,8 @@ const translations: Record<Language, Record<string, string>> = {
     'SendUs.title' : 'Send us a Message',
     'SendUs.desc' :' Have a question or inquiry? Fill out the form below and we will get back to you as soon as possible.',
     'SendUs.button':'Send',
+    'SendUS.sending':'Sending...',
+    'SendUS.success':'Message sent successfully!',
 
     // Inquiry
     'inquiry.title': 'Request a Quote',
