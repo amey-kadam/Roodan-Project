@@ -141,10 +141,7 @@ function ProductOverviewComponent() {
           <Button 
             asChild 
             size="lg" 
-            className="group h-14 px-8 rounded-2xl transition-all shadow-lg hover:shadow-emerald-600/30"
-            style={{
-              background: "linear-gradient(to right, #004d00, #00b300)"
-            }}
+            className="group h-14 px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600"
           >
             <NavLink 
               to="/products" 
@@ -153,7 +150,7 @@ function ProductOverviewComponent() {
               aria-label="View all products" // Added for accessibility
             >
               {t("products.viewAll")}
-              <ArrowRight className="w-6 h-6" />
+              <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
             </NavLink>
           </Button>
         </div>
