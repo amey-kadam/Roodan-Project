@@ -16,6 +16,16 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Format address to properly display multiline content
+  const formatAddress = (address: string) => {
+    // First replace the escaped newlines with actual newlines
+    const processedAddress = address.replace(/\\n/g, '\n');
+    // Then split by newline and map to spans
+    return processedAddress.split('\n').map((line, index) => (
+      <span key={index} className="block text-xs leading-relaxed">{line}</span>
+    ));
+  };
+  
   // Improved loading state management
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -76,13 +86,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
+    <div className="min-h-screen flex flex-col bg-white font-sans">
       <Header />
       <main className="flex-grow relative">
-        {/* Background decorative elements */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-200 rounded-full opacity-20 blur-3xl"></div>
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
-
         {/* Added proper spacing from navbar */}
         <div className="h-20 relative z-10"></div>
 
@@ -199,8 +205,8 @@ const Contact = () => {
                         ))}
                       </div>
                     ) : (
-                      <address className="not-italic text-xs text-gray-600">
-                        {item.address}
+                      <address className="not-italic text-xs text-gray-600 mt-1">
+                        {formatAddress(item.address)}
                       </address>
                     )}
                   </motion.div>
@@ -281,7 +287,7 @@ const Contact = () => {
                         name="message"
                         rows={4}
                         required
-                        className="text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
+                        className="w-full text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all resize-y min-h-[100px]"
                         placeholder="Your message here..."
                       />
                     </div>

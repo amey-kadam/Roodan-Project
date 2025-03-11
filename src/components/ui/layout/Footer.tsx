@@ -16,6 +16,16 @@ export function Footer() {
     window.location.href = '/';
   };
 
+  // Format address to properly display multiline content
+  const formatAddress = (address: string) => {
+    // First replace the escaped newlines with actual newlines
+    const processedAddress = address.replace(/\\n/g, '\n');
+    // Then split by newline and map to spans
+    return processedAddress.split('\n').map((line, index) => (
+      <span key={index} className="block">{line}</span>
+    ));
+  };
+
   return (
     <footer className="bg-background/80 backdrop-blur-lg border-t border-emerald-500/20">
       <div className="page-container py-12 md:py-16">
@@ -164,11 +174,11 @@ export function Footer() {
                   +1 (234) 567-8900
                 </a>
               </li>
-              <li className="flex items-start space-x-2">
+              <li className="flex flex-col space-y-1">
                 <span className="text-gray-600">{t("contact.address")}:</span>
-                <span className="text-gray-600">
-                  {t("contact.address_main")}
-                </span>
+                <div className="text-gray-600 ml-2">
+                  {formatAddress(t("contact.address_main"))}
+                </div>
               </li>
             </ul>
           </div>
