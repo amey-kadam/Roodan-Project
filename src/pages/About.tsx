@@ -3,7 +3,7 @@ import { Footer } from "@/components/ui/layout/Footer";
 import { useI18n } from "@/utils/i18n";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Globe, Target, Award, Users } from "lucide-react";
+import { Globe, Award, Users } from "lucide-react";
 
 const About = () => {
   const { t, language } = useI18n();
@@ -112,7 +112,7 @@ const About = () => {
             >
               <div className="relative h-full w-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                 {/* Front Card */}
-                <div className="absolute inset-0 [backface-visibility:hidden] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/10">
+                <div className="absolute inset-0 [backface-visibility:hidden] rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-emerald-600/20">
                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/10 to-emerald-900/20 mix-blend-multiply z-10" />
                   <div className="absolute inset-0 backdrop-blur-[1px] z-0" />
                   <img
@@ -222,71 +222,63 @@ const About = () => {
       <main className="flex-grow">
         {/* Mission & Values Section */}
         <motion.section 
-  className="page-container py-20 md:py-28"
-  initial="initial"
-  whileInView="animate"
-  viewport={{ once: true }}
->
-  <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4">
-    <div className="flex flex-col items-center justify-center gap-4 mb-16">
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ 
-          scale: 1, 
-          opacity: 1,
-          transition: { 
-            type: "spring", 
-            stiffness: 300,
-            delay: 0.2 
-          }
-        }}
-      >
-        <Target className="w-16 h-16 text-emerald-600" />
-      </motion.div>
-      <h2 
-        className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
-        style={{ 
-          backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
-        }}
-      >
-        {t("about.mission.title")}
-      </h2>
-      <p 
-        className="text-xl text-center max-w-3xl mx-auto mt-4 bg-clip-text text-transparent"
-        style={{
-          backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
-        }}
-      >
-        {t("about.mission.desc")}
-      </p>
-    </div>
-    
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-      {[1, 2, 3, 4].map((value, index) => (
-        <motion.div 
-          key={`value-${index}`}
-          variants={itemVariants}
-          className="bg-white border border-emerald-600/20 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
-          whileHover={{ y: -5 }}
+          className="page-container py-20 md:py-28"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
         >
-          <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
-            <Award className="w-7 h-7 text-emerald-700" />
-          </div>
-          <h3 className="text-xl font-bold text-emerald-800 mb-3">
-            {t(`about.values.value${value}.title`)}
-          </h3>
-          <p className="text-emerald-700/80 flex-grow">
-            {t(`about.values.value${value}.desc`)}
-          </p>
-        </motion.div>
-      ))}
-    </div>
-  </motion.div>
-</motion.section>
+          <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4">
+            <div className="flex flex-col items-center justify-center gap-4 mb-16">
+              <h2 
+                className="text-4xl md:text-5xl font-display mt-3 font-bold text-center bg-clip-text text-transparent" 
+                style={{ 
+                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                }}
+              >
+                {t("about.mission.title")}
+              </h2>
+              <div 
+                className="w-20 h-1 mx-auto" 
+                style={{ 
+                  background: "linear-gradient(to right, #004d00, #00b300)" 
+                }}
+              ></div>
+              <p 
+                className="text-xl text-center max-w-3xl mx-auto mt-4 text-muted-foreground"
+              >
+                {t("about.mission.desc")}
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[1, 2, 3, 4].map((value, index) => (
+                <motion.div 
+                  key={`value-${index}`}
+                  variants={itemVariants}
+                  className="bg-background rounded-xl p-6 border border-emerald-600/20 shadow-sm hover:shadow-emerald-600/30 transition-all duration-300 hover:translate-y-[-5px]"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="w-12 h-12 rounded-lg bg-emerald-50/80 flex items-center justify-center mb-4 text-emerald-700">
+                    <Award className="w-6 h-6" />
+                  </div>
+                  <h3 
+                    className="text-xl font-display font-semibold mb-2 bg-clip-text text-transparent" 
+                    style={{ 
+                      backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+                    }}
+                  >
+                    {t(`about.values.value${value}.title`)}
+                  </h3>
+                  <p className="text-muted-foreground">{t(`about.values.value${value}.desc`)}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.section>
 
         {/* Team Section */}
         <motion.section 
-          className="page-container py-20 bg-emerald-50/50"
+          className="page-container py-20 bg-primary/5"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
@@ -306,8 +298,9 @@ const About = () => {
                   }
                 }}
                 viewport={{ once: true }}
+                className="w-12 h-12 rounded-lg bg-emerald-50/80 flex items-center justify-center mb-4 text-emerald-700"
               >
-                <Users className="w-14 h-14 text-emerald-600" />
+                <Users className="w-6 h-6" />
               </motion.div>
               <h2 
                 className="text-4xl md:text-5xl font-display font-bold bg-clip-text text-transparent mt-4"
@@ -317,13 +310,14 @@ const About = () => {
               >
                 {t("about.team.title")}
               </h2>
+              <div 
+                className="w-20 h-1 mx-auto mt-4" 
+                style={{ 
+                  background: "linear-gradient(to right, #004d00, #00b300)" 
+                }}
+              ></div>
             </div>
-            <p 
-              className="max-w-2xl mx-auto text-lg bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(to right, #006400, rgb(32, 110, 32))"
-              }}
-            >
+            <p className="max-w-2xl mx-auto text-lg text-muted-foreground mt-4">
               {t("about.team.desc")}
             </p>
           </motion.div>
@@ -353,8 +347,9 @@ const About = () => {
                   }
                 }}
                 viewport={{ once: true }}
+                className="w-12 h-12 rounded-lg bg-emerald-50/80 flex items-center justify-center mb-4 text-emerald-700"
               >
-                <Globe className="w-16 h-16 text-emerald-600" />
+                <Globe className="w-6 h-6" />
               </motion.div>
               <h2 
                 className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
@@ -364,7 +359,12 @@ const About = () => {
               >
                {t("about.whyChooseUs.title")}
               </h2>
-              <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-full my-2"></div>
+              <div 
+                className="w-20 h-1 mx-auto mt-2" 
+                style={{ 
+                  background: "linear-gradient(to right, #004d00, #00b300)" 
+                }}
+              ></div>
             </div>
             
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -389,19 +389,24 @@ const About = () => {
                   }}
                   viewport={{ once: true, amount: 0.3 }}
                   className={cn(
-                    "bg-white border border-emerald-600/20 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300",
+                    "bg-background rounded-xl p-6 border border-emerald-600/20 shadow-sm hover:shadow-emerald-600/30 transition-all duration-300 hover:translate-y-[-5px]",
                     index === 4 && "md:col-span-2 md:max-w-lg md:mx-auto"
                   )}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-emerald-50/80 flex items-center justify-center flex-shrink-0 text-emerald-700">
                       <div className="w-3 h-3 rounded-full bg-emerald-600"></div>
                     </div>
                     <div>
-                      <h3 className="font-bold text-emerald-800 mb-2">
+                      <h3 
+                        className="font-semibold bg-clip-text text-transparent mb-2" 
+                        style={{ 
+                          backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+                        }}
+                      >
                         {t(`about.whyChooseUs.title${index + 1}`)}
                       </h3>
-                      <p className="text-emerald-700/80">{t(reason)}</p>
+                      <p className="text-muted-foreground">{t(reason)}</p>
                     </div>
                   </div>
                 </motion.div>

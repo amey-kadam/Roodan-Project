@@ -80,31 +80,35 @@ const titleVariants = {
 export function Strengths() {
   const { t, language } = useI18n();
   
+  // Using emerald colors from Hero.tsx
+  const titleGradient = "linear-gradient(to right, #059669, #10b981)";
+  const accentGradient = "linear-gradient(to right, #059669, #10b981)";
+  
   // Memoize the strengths array to prevent recreation on every render
   const strengths = useMemo(() => [
     {
       title: t("strengths.quality.title"),
       description: t("strengths.quality.desc"),
       icon: CheckCircle,
-      color: "bg-emerald-50/80 text-emerald-700",
+      color: "bg-emerald-50/80 text-emerald-600",
     },
     {
       title: t("strengths.reliability.title"),
       description: t("strengths.reliability.desc"),
       icon: Shield,
-      color: "bg-emerald-50/80 text-emerald-700",
+      color: "bg-emerald-50/80 text-emerald-600",
     },
     {
       title: t("strengths.partnership.title"),
       description: t("strengths.partnership.desc"),
       icon: Handshake,
-      color: "bg-emerald-50/80 text-emerald-700",
+      color: "bg-emerald-50/80 text-emerald-600",
     },
     {
       title: t("strengths.flexibility.title"),
       description: t("strengths.flexibility.desc"),
       icon: FlexibleIcon,
-      color: "bg-emerald-50/80 text-emerald-700",
+      color: "bg-emerald-50/80 text-emerald-600",
     },
   ], [t, language]); // Recreate when `t` or `language` changes
 
@@ -114,7 +118,7 @@ export function Strengths() {
   [language]);
 
   return (
-    <section className="section-padding bg-primary/5">
+    <section className="section-padding bg-emerald-50/30">
       <div className={cn("page-container", directionClass)}>
         <motion.div 
           variants={titleVariants}
@@ -126,7 +130,7 @@ export function Strengths() {
           <h2 
             className="text-3xl font-display font-bold mb-4 bg-clip-text text-transparent" 
             style={{ 
-              backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+              backgroundImage: titleGradient
             }}
           >
             {t("strengths.title")}
@@ -134,7 +138,7 @@ export function Strengths() {
           <div 
             className="w-20 h-1 mx-auto" 
             style={{ 
-              background: "linear-gradient(to right, #004d00, #00b300)" 
+              background: accentGradient
             }}
           ></div>
         </motion.div>
@@ -150,7 +154,7 @@ export function Strengths() {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="bg-background rounded-xl p-6 border border-emerald-600/20 shadow-sm hover:shadow-emerald-600/30 transition-all duration-300 hover:translate-y-[-5px]"
+              className="bg-background rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-[-5px]"
             >
               <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", strength.color)}>
                 <strength.icon className="w-6 h-6" />
@@ -158,7 +162,7 @@ export function Strengths() {
               <h3 
                 className="text-xl font-display font-semibold mb-2 bg-clip-text text-transparent" 
                 style={{ 
-                  backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+                  backgroundImage: titleGradient
                 }}
               >
                 {strength.title}

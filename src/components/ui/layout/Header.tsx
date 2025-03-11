@@ -45,13 +45,13 @@ export function Header() {
     { path: "/contact", label: t("nav.contact") },
   ];
 
-  // Modern gradient styles
-  const logoGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
-  const navHoverGradient = "linear-gradient(to right, #0e8f3c, #66bb6a)";
-  const buttonGradient = "linear-gradient(to right, #004d00,rgb(13, 152, 13),rgb(3, 111, 3))" 
-  const textGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
-  const hoverTextGradient = "linear-gradient(to right, #15803d, #86efac)";
-  const underlineGradient = "linear-gradient(to right, #0a5d36, #4ade80)";
+  // Using emerald colors from Hero.tsx
+  const logoGradient = "linear-gradient(to right, #059669, #10b981)";
+  const navHoverGradient = "linear-gradient(to right, #047857, #10b981)";
+  const buttonGradient = "linear-gradient(to r, from-emerald-600 to-emerald-500)";
+  const textGradient = "linear-gradient(to right, #059669, #10b981)";
+  const hoverTextGradient = "linear-gradient(to right, #047857, #10b981)";
+  const underlineGradient = "linear-gradient(to right, #059669, #10b981)";
 
   return (
     <header
@@ -143,7 +143,7 @@ export function Header() {
                   style={{ 
                     background: underlineGradient,
                     transformOrigin: "left",
-                    boxShadow: "0 0 8px rgba(10, 93, 54, 0.5)"
+                    boxShadow: "0 0 8px rgba(5, 150, 105, 0.5)"
                   }}
                 />
               </NavLink>
@@ -155,11 +155,10 @@ export function Header() {
             <Button
               asChild
               size="sm"
-              className="hover-scale hover:shadow-md font-medium px-3 lg:px-6 lg:text-base lg:size-lg text-white"
+              className="hover-scale hover:shadow-md font-medium px-3 lg:px-6 lg:text-base lg:size-lg text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600"
               style={{ 
-                background: buttonGradient,
                 transition: "all 0.3s ease",
-                boxShadow: "0 4px 14px rgba(15, 157, 88, 0.25)"
+                boxShadow: "0 4px 14px rgba(5, 150, 105, 0.25)"
               }}
             >
               <NavLink to="/inquiry" onClick={() => window.scrollTo(0, 0)}>
@@ -238,17 +237,16 @@ export function Header() {
                     style={{ 
                       background: underlineGradient,
                       transformOrigin: "left",
-                      boxShadow: "0 0 8px rgba(10, 93, 54, 0.5)"
+                      boxShadow: "0 0 8px rgba(5, 150, 105, 0.5)"
                     }}
                   />
                 </NavLink>
               ))}
               <div className="pt-3 sm:pt-4 pb-2 px-2 sm:px-4">
                 <Button 
-                  className="w-full py-4 sm:py-6 text-sm sm:text-base text-white hover:shadow-lg" 
+                  className="w-full py-4 sm:py-6 text-sm sm:text-base text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 hover:shadow-lg" 
                   style={{ 
-                    background: buttonGradient,
-                    boxShadow: "0 4px 14px rgba(15, 157, 88, 0.25)",
+                    boxShadow: "0 4px 14px rgba(5, 150, 105, 0.25)",
                     transition: "all 0.3s ease"
                   }}
                   asChild
