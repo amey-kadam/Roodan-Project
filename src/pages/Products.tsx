@@ -372,29 +372,10 @@ const Products = () => {
       <Header />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-16 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/50 to-transparent pointer-events-none"></div>
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-200 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
+        <section className="relative pt-24 pb-6 overflow-hidden">
+         
           
-          <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center max-w-3xl mx-auto mb-16"
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight text-balance">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 to-emerald-500">
-                  {t("products.title")}
-                </span>
-              </h1>
-              <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full my-6 mx-auto"></div>
-              <p className="text-lg md:text-xl max-w-2xl mx-auto mt-4 text-gray-600">
-                {t("products.description")}
-              </p>
-            </motion.div>
-          </div>
+         
         </section>
 
         {/* Filter and Search Section */}
