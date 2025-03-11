@@ -380,7 +380,7 @@ const Products = () => {
 
         {/* Filter and Search Section */}
         <section className="py-8">
-          <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+          
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -394,21 +394,10 @@ const Products = () => {
                 <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
                 
                 {/* Main container with glass effect */}
-                <div className="relative bg-gradient-to-br from-white/90 via-white/80 to-emerald-50/80 backdrop-blur-md rounded-3xl shadow-xl border border-emerald-100/30 p-8 mb-12 overflow-hidden">
-                  {/* Decorative pattern overlay */}
-                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTRoLTJ2NGgyek0zMCAzNGgtMnYtNGgydjR6bTAtNnYtNGgtMnY0aDJ6TTI0IDM0aC0ydi00aDJ2NHptMC02di00aC0ydjRoMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10 mix-blend-overlay pointer-events-none"></div>
-                  
-                  {/* Floating accent line */}
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-1 bg-gradient-to-r from-emerald-400/0 via-emerald-400 to-emerald-400/0 rounded-full"></div>
-                  
+                
                   {/* Search Bar */}
                   <div className="relative mb-12 max-w-2xl mx-auto">
-                    {/* Search title */}
-                    <div className="text-center mb-6">
-                      <h3 className="text-lg font-medium text-gray-700">Find Your Products</h3>
-                      <p className="text-sm text-gray-500">Search our extensive catalog of premium products</p>
-                    </div>
-                    
+                 
                     {/* Background glow effect */}
                     <div 
                       className={cn(
@@ -530,10 +519,10 @@ const Products = () => {
                     <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-emerald-100/50 rounded-tr-xl -mt-2 -mr-2 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-emerald-100/50 rounded-bl-xl -mb-2 -ml-2 pointer-events-none"></div>
                   </div>
-                </div>
+                
               </div>
             </motion.div>
-          </div>
+         
         </section>
 
         {/* Products Grid */}
