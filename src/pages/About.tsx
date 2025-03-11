@@ -92,8 +92,8 @@ const About = () => {
     ];
   
     return (
-      <div className="w-full max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="w-full max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
             <motion.div
               key={index}
@@ -122,11 +122,11 @@ const About = () => {
                   />
                   
                   {/* Glass Nameplate */}
-                  <div className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/10 border-t border-white/20 p-6 z-20">
-                    <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
+                  <div className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/80 border-t border-emerald-100 p-6 z-20">
+                    <h3 className="text-2xl font-bold bg-clip-text text-transparent mb-1" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
                     <div className="flex items-center justify-between">
-                      <p className="text-emerald-300 font-medium">{member.role}</p>
-                      <span className="text-white/80 text-sm flex items-center gap-1 group-hover:scale-110 transition-transform">
+                      <p className="text-emerald-600 font-medium">{member.role}</p>
+                      <span className="text-emerald-500 text-sm flex items-center gap-1 group-hover:scale-110 transition-transform">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -136,8 +136,8 @@ const About = () => {
                   </div>
                   
                   {/* Decorative Elements */}
-                  <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400/30 to-emerald-600/30 opacity-70 blur-[20px] z-10" />
-                  <div className="absolute top-10 left-10 w-20 h-20 rounded-full bg-gradient-to-br from-emerald-300/30 to-emerald-500/30 opacity-50 blur-[30px] z-10" />
+                  <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-emerald-300 opacity-20 blur-3xl z-10" />
+                  <div className="absolute top-10 left-10 w-20 h-20 rounded-full bg-emerald-400 opacity-20 blur-3xl z-10" />
                 </div>
                 
                 {/* Back Card */}
@@ -154,14 +154,10 @@ const About = () => {
                   </div>
                   
                   <div className="mb-6 relative">
-                    <h3 className="text-3xl font-bold text-white mb-1">{member.name}</h3>
-                    <p className="text-emerald-300 font-medium mb-4">{member.role}</p>
-                    <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-emerald-300" />
+                    <h3 className="text-3xl font-bold bg-clip-text text-transparent mb-1" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
+                    <p className="text-emerald-600 font-medium mb-4">{member.role}</p>
+                    <div className="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-300" />
                   </div>
-                  
-                  <p className="text-white/90 mb-8 relative">
-                    {member.description}
-                  </p>
                   
                   {/* Social Links - FINAL VERSION WITH DIRECT HANDLING */}
                   <div className="flex gap-4 mt-auto relative z-[100]">
@@ -171,7 +167,7 @@ const About = () => {
                         e.stopPropagation();
                         window.open(member.socialLinks.linkedin, '_blank', 'noopener,noreferrer');
                       }}
-                      className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-emerald-500/20 cursor-pointer group"
+                      className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md hover:shadow-emerald-200 cursor-pointer group"
                       aria-label="LinkedIn"
                     >
                       <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -185,7 +181,7 @@ const About = () => {
                         e.stopPropagation();
                         window.open(member.socialLinks.twitter, '_blank', 'noopener,noreferrer');
                       }}
-                      className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-emerald-500/20 cursor-pointer group"
+                      className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md hover:shadow-emerald-200 cursor-pointer group"
                       aria-label="Twitter"
                     >
                       <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -199,7 +195,7 @@ const About = () => {
                         e.stopPropagation();
                         window.location.href = member.socialLinks.email;
                       }}
-                      className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-emerald-800 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-emerald-500/20 cursor-pointer group"
+                      className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md hover:shadow-emerald-200 cursor-pointer group"
                       aria-label="Email"
                     >
                       <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -217,22 +213,26 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-emerald-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
       <main className="flex-grow">
         {/* Mission & Values Section */}
         <motion.section 
-          className="page-container py-20 md:py-28"
+          className="page-container py-16 md:py-20 mt-12 relative"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4">
-            <div className="flex flex-col items-center justify-center gap-4 mb-16">
+          {/* Background decorative elements */}
+          <div className="absolute top-20 right-10 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute bottom-20 left-10 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
+          
+          <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="flex flex-col items-center justify-center gap-3 mb-10">
               <h2 
-                className="text-4xl md:text-5xl font-display mt-3 font-bold text-center bg-clip-text text-transparent" 
+                className="text-4xl md:text-5xl font-display mt-2 font-bold text-center bg-clip-text text-transparent" 
                 style={{ 
-                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                  backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
                 }}
               >
                 {t("about.mission.title")}
@@ -240,36 +240,36 @@ const About = () => {
               <div 
                 className="w-20 h-1 mx-auto" 
                 style={{ 
-                  background: "linear-gradient(to right, #004d00, #00b300)" 
+                  background: "linear-gradient(to right, #047857, #10b981)" 
                 }}
               ></div>
               <p 
-                className="text-xl text-center max-w-3xl mx-auto mt-4 text-muted-foreground"
+                className="text-xl text-center max-w-3xl mx-auto mt-3 text-gray-600"
               >
                 {t("about.mission.desc")}
               </p>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
               {[1, 2, 3, 4].map((value, index) => (
                 <motion.div 
                   key={`value-${index}`}
                   variants={itemVariants}
-                  className="bg-background rounded-xl p-6 border border-emerald-600/20 shadow-sm hover:shadow-emerald-600/30 transition-all duration-300 hover:translate-y-[-5px]"
-                  whileHover={{ y: -5 }}
+                  className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-200/50 transition-all duration-300"
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.2)" }}
                 >
-                  <div className="w-12 h-12 rounded-lg bg-emerald-50/80 flex items-center justify-center mb-4 text-emerald-700">
+                  <div className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600">
                     <Award className="w-6 h-6" />
                   </div>
                   <h3 
                     className="text-xl font-display font-semibold mb-2 bg-clip-text text-transparent" 
-                    style={{ 
-                      backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
-                    }}
+                    style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}
                   >
                     {t(`about.values.value${value}.title`)}
                   </h3>
-                  <p className="text-muted-foreground">{t(`about.values.value${value}.desc`)}</p>
+                  <p className="text-gray-600">
+                    {t(`about.values.value${value}.desc`)}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -278,13 +278,17 @@ const About = () => {
 
         {/* Team Section */}
         <motion.section 
-          className="page-container py-20 bg-primary/5"
+          className="page-container py-16 bg-gradient-to-br from-white via-gray-50 to-emerald-50/20 relative"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <motion.div variants={sectionVariants} className="text-center mb-16">
-            <div className="flex flex-col items-center justify-center gap-2 mb-6">
+          {/* Background decorative elements */}
+          <div className="absolute top-20 left-10 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
+          
+          <motion.div variants={sectionVariants} className="text-center mb-10 relative z-10">
+            <div className="flex flex-col items-center justify-center gap-2 mb-4">
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
                 whileInView={{ 
@@ -298,14 +302,14 @@ const About = () => {
                   }
                 }}
                 viewport={{ once: true }}
-                className="w-12 h-12 rounded-lg bg-emerald-50/80 flex items-center justify-center mb-4 text-emerald-700"
+                className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600"
               >
                 <Users className="w-6 h-6" />
               </motion.div>
               <h2 
                 className="text-4xl md:text-5xl font-display font-bold bg-clip-text text-transparent mt-4"
                 style={{ 
-                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                  backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
                 }}
               >
                 {t("about.team.title")}
@@ -313,11 +317,11 @@ const About = () => {
               <div 
                 className="w-20 h-1 mx-auto mt-4" 
                 style={{ 
-                  background: "linear-gradient(to right, #004d00, #00b300)" 
+                  background: "linear-gradient(to right, #047857, #10b981)" 
                 }}
               ></div>
             </div>
-            <p className="max-w-2xl mx-auto text-lg text-muted-foreground mt-4">
+            <p className="max-w-2xl mx-auto text-lg text-gray-600 mt-4">
               {t("about.team.desc")}
             </p>
           </motion.div>
@@ -327,13 +331,17 @@ const About = () => {
 
         {/* Why Choose Us Section */}
         <motion.section 
-          className="page-container py-24"
+          className="page-container py-16 relative"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          <motion.div variants={sectionVariants} className="max-w-5xl mx-auto">
-            <div className="flex flex-col items-center justify-center gap-4 mb-16">
+          {/* Background decorative elements */}
+          <div className="absolute top-40 right-20 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute bottom-40 left-20 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
+          
+          <motion.div variants={sectionVariants} className="max-w-5xl mx-auto relative z-10">
+            <div className="flex flex-col items-center justify-center gap-3 mb-10">
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
                 whileInView={{ 
@@ -347,14 +355,14 @@ const About = () => {
                   }
                 }}
                 viewport={{ once: true }}
-                className="w-12 h-12 rounded-lg bg-emerald-50/80 flex items-center justify-center mb-4 text-emerald-700"
+                className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600"
               >
                 <Globe className="w-6 h-6" />
               </motion.div>
               <h2 
                 className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
                 style={{ 
-                  backgroundImage: "linear-gradient(to right, #004d00, #00b300, rgb(3, 111, 3))" 
+                  backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
                 }}
               >
                {t("about.whyChooseUs.title")}
@@ -362,12 +370,12 @@ const About = () => {
               <div 
                 className="w-20 h-1 mx-auto mt-2" 
                 style={{ 
-                  background: "linear-gradient(to right, #004d00, #00b300)" 
+                  background: "linear-gradient(to right, #047857, #10b981)" 
                 }}
               ></div>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {[  
                 "about.whyChooseUs.reason1",
                 "about.whyChooseUs.reason2",
@@ -389,24 +397,25 @@ const About = () => {
                   }}
                   viewport={{ once: true, amount: 0.3 }}
                   className={cn(
-                    "bg-background rounded-xl p-6 border border-emerald-600/20 shadow-sm hover:shadow-emerald-600/30 transition-all duration-300 hover:translate-y-[-5px]",
+                    "bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-200/50 transition-all duration-300",
                     index === 4 && "md:col-span-2 md:max-w-lg md:mx-auto"
                   )}
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.2)" }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-50/80 flex items-center justify-center flex-shrink-0 text-emerald-700">
-                      <div className="w-3 h-3 rounded-full bg-emerald-600"></div>
+                    <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-600">
+                      <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
                     </div>
                     <div>
                       <h3 
                         className="font-semibold bg-clip-text text-transparent mb-2" 
                         style={{ 
-                          backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+                          backgroundImage: "linear-gradient(to right, #047857, #10b981)" 
                         }}
                       >
                         {t(`about.whyChooseUs.title${index + 1}`)}
                       </h3>
-                      <p className="text-muted-foreground">{t(reason)}</p>
+                      <p className="text-gray-600">{t(reason)}</p>
                     </div>
                   </div>
                 </motion.div>
