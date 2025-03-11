@@ -229,10 +229,10 @@ const Contact = () => {
                 {/* Form Section - Increased size of form elements */}
                 <div className="p-5 md:p-6">
                   <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
-                    {t("contact.form.title")}
+                    {t("SendUs.title")}
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    {t("contact.form.description")}
+                    {t("SendUs.desc")}
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -241,14 +241,14 @@ const Contact = () => {
                         htmlFor="name"
                         className="block text-sm font-medium mb-1"
                       >
-                        {t("contact.form.name")}
+                        {t("contact.form.name")} <span className="text-red-500">*</span>
                       </label>
-                      <input
-                        type="text"
+                      <Input
                         id="name"
                         name="name"
                         required
                         className="h-10 text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
+                        placeholder="John Doe"
                       />
                     </div>
 
@@ -257,14 +257,15 @@ const Contact = () => {
                         htmlFor="email"
                         className="block text-sm font-medium mb-1"
                       >
-                        {t("contact.form.email")}
+                        {t("contact.form.email")} <span className="text-red-500">*</span>
                       </label>
-                      <input
+                      <Input
                         type="email"
                         id="email"
                         name="email"
                         required
                         className="h-10 text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
+                        placeholder="john@example.com"
                       />
                     </div>
 
@@ -273,25 +274,34 @@ const Contact = () => {
                         htmlFor="message"
                         className="block text-sm font-medium mb-1"
                       >
-                        {t("contact.form.message")}
+                        {t("contact.form.message")} <span className="text-red-500">*</span>
                       </label>
-                      <textarea
+                      <Textarea
                         id="message"
                         name="message"
                         rows={4}
                         required
                         className="text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
+                        placeholder="Your message here..."
                       />
                     </div>
 
                     <Button
                       type="submit"
-                      className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
+                      className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300 group relative overflow-hidden shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
                       disabled={isSubmitting}
                     >
-                      <span className="flex items-center gap-2 font-medium text-white">
-                        {isSubmitting ? "Sending..." : t("contact.form.submit")}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      <span className="relative z-10 flex items-center justify-center gap-2 font-medium text-white">
+                        {isSubmitting ? t("SendUs.sending") : t("SendUs.button")}
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
                       </span>
                     </Button>
                   </form>
