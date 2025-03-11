@@ -83,7 +83,7 @@ export function Footer() {
                     to={link.to} 
                     className={({ isActive }) =>
                       cn(
-                        "transition-all duration-300 text-gray-600 hover:text-gray-900", // Same color for all links
+                        "transition-all duration-300 text-gray-600 hover:text-black-900", // Same color for all links
                         isActive ? "font-medium" : "" // Only apply font-weight difference for active link
                       )
                     }

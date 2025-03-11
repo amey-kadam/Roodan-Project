@@ -90,7 +90,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
     
     // Contact
-    'contact.title': 'Contact Us',
+    'contact.title': 'Contact',
     'contact.subtitle': 'Get in touch with our team',
     'contact.address': 'Address',
     'contact.address_main':'Khalidiya Towers, Mezzanine Floor,\nAl Faskar Street W10,\nAl Bateen, Al Khalidiyah,\nAbu Dhabi, United Arab Emirates',
@@ -207,7 +207,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
     
     // Contact
-    'contact.title': 'Contactez-Nous',
+    'contact.title': 'Contact',
     'contact.subtitle': 'Entrez en contact avec notre équipe',
     'contact.address': 'Adresse',
     'contact.address_main':'Khalidiya Towers, Mezzanine Floor,\nAl Faskar Street W10,\nAl Bateen, Al Khalidiyah,\nAbu Dhabi, Émirats Arabes Unis',
@@ -290,7 +290,7 @@ const translations: Record<Language, Record<string, string>> = {
     'products.categories.petro': 'المنتجات البترولية',
     
     // About
-    'about.title': 'من نحن',
+    'about.title': 'اتصال',
     'about.subtitle': 'مهمتنا وقيمنا',
     'about.mission.title': 'مهمتنا',
     'about.mission.desc': 'توفير منتجات عالية الجودة من خلال شراكات شفافة وموثوقة في جميع أنحاء العالم.',
