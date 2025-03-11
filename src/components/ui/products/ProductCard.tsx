@@ -33,7 +33,7 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
 }) => {
   return (
     <div className={cn(
-      "bg-white border border-emerald-600/20 rounded-xl shadow-sm hover:shadow-emerald-600/30 overflow-hidden flex flex-col transition-all duration-300",
+      "bg-white border border-emerald-600/20 rounded-xl shadow-sm hover:shadow-emerald-500/20 overflow-hidden flex flex-col transition-all duration-300",
       className
     )}>
       <div className="relative pt-[60%]">
@@ -52,7 +52,7 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
         <h3 
           className="text-xl font-semibold mb-3 bg-clip-text text-transparent" 
           style={{ 
-            backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+            backgroundImage: "linear-gradient(to right, #059669, #10b981)" // Updated to Hero colors
           }}
         >
           {title}
@@ -69,10 +69,7 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
         {/* Push the button to the bottom */}
         <div className="mt-auto">
           <Button 
-            className="w-full group flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-emerald-600/30"
-            style={{
-              background: "linear-gradient(to right, #004d00, #00b300)"
-            }}
+            className="w-full group flex items-center justify-center gap-2 h-12 px-6 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/20 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600"
           >
             Request Quote
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

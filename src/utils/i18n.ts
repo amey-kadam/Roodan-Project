@@ -90,7 +90,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
     
     // Contact
-    'contact.title': 'Contact',
+    'contact.title': 'Contact Us',
     'contact.subtitle': 'Get in touch with our team',
     'contact.address': 'Address',
     'contact.address_main':'Khalidiya Towers, Mezzanine Floor,\nAl Faskar Street W10,\nAl Bateen, Al Khalidiyah,\nAbu Dhabi, United Arab Emirates',
@@ -103,6 +103,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'WhatsApp',
     'SendUs.title' : 'Send us a Message',
     'SendUs.desc' :' Have a question or inquiry? Fill out the form below and we will get back to you as soon as possible.',
+    'SendUs.button':'Send',
 
     // Inquiry
     'inquiry.title': 'Request a Quote',
@@ -207,7 +208,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
     
     // Contact
-    'contact.title': 'Contact',
+    'contact.title': 'Contactez-nous',
     'contact.subtitle': 'Entrez en contact avec notre équipe',
     'contact.address': 'Adresse',
     'contact.address_main':'Khalidiya Towers, Mezzanine Floor,\nAl Faskar Street W10,\nAl Bateen, Al Khalidiyah,\nAbu Dhabi, Émirats Arabes Unis',
@@ -220,6 +221,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'WhatsApp',
     'SendUs.title' : 'Envoyez-nous un message',
     'SendUs.desc' :'Vous avez une question ou une demande ? Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.',
+    'SendUs.button':'Envoyer',
     
     // Inquiry
     'inquiry.title': 'Demande de Devis',
@@ -339,6 +341,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'واتساب',     
     'SendUs.title' : 'أرسل لنا رسالة',
     'SendUs.desc' :'هل لديك سؤال أو استفسار؟ املأ النموذج أدناه وسنقوم بالرد عليك في أقرب وقت ممكن.',
+    'SendUs.button':'يرسل',
 
     // Inquiry
     'inquiry.title': 'طلب عرض سعر',
