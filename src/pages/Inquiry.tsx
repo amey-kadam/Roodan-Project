@@ -144,19 +144,18 @@ const Inquiry = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
       <main className="flex-grow">
-        {/* Hero Section with Enhanced Background */}
+        {/* Inquiry Form - Moved to top */}
         <motion.section 
-          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          className="py-12 pt-28 relative"
+          initial="initial"
+          animate="animate"
+          variants={pageVariants}
         >
-          {/* Background Gradient and Effects */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 opacity-100" />
+          {/* Subtle background effect */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
             <motion.div
-              className="absolute w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -top-64 -left-64"
+              className="absolute w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -top-64 -right-64"
               animate={{
                 y: [0, -20, 0],
                 transition: {
@@ -167,38 +166,11 @@ const Inquiry = () => {
               }}
             />
           </div>
-
-          {/* Content */}
-          <motion.div 
-            className={cn(
-              "page-container relative z-10 text-center",
-              language === "ar" ? "rtl" : "ltr"
-            )}
-            initial="initial"
-            animate="animate"
-          >
-            <motion.div variants={pageVariants}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-balance bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
-                {t("inquiry.title")}
-              </h1>
-              <p className="text-xl md:text-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent max-w-3xl mx-auto mt-6">
-                {t("inquiry.subtitle")}
-              </p>
-            </motion.div>
-          </motion.div>
-        </motion.section>
-
-        {/* Inquiry Form */}
-        <motion.section 
-          className="py-24"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-        >
-          <div className={cn("page-container", language === "ar" ? "rtl" : "ltr")}>
+          
+          <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
             <motion.div 
               variants={pageVariants}
-              className="max-w-4xl mx-auto bg-white/90 backdrop-blur-sm border border-gray-100/80 rounded-3xl p-8 md:p-12 shadow-xl"
+              className="max-w-4xl mx-auto mt-8 bg-white/90 backdrop-blur-sm border border-gray-100/80 rounded-3xl p-8 md:p-12 shadow-xl"
             >
               <motion.div variants={pageVariants} className="text-center mb-12">
                 <div className="flex items-center justify-center gap-4 mb-6">
@@ -211,7 +183,7 @@ const Inquiry = () => {
                   {t("inquiry.form.description")}
                 </p>
               </motion.div>
-
+              
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <motion.div 
