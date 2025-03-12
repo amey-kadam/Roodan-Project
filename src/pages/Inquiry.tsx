@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -24,6 +24,8 @@ const Inquiry = () => {
   const { toast } = useToast();
   const location = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [forceUpdate, setForceUpdate] = useState(0);
+  const prevLanguageRef = useRef(language);
   
   // Form state
   const [formData, setFormData] = useState({
@@ -37,35 +39,76 @@ const Inquiry = () => {
     message: ""
   });
 
-  // Product options - moved outside useEffect to be accessible throughout component
-  const productOptions = [
-    { value: "sugar_icumsa", label: "Sugar ICUMSA" },
-    { value: "soy_products", label: "Soy Products" },
-    { value: "coffee_beans", label: "Coffee Beans" },
-    { value: "beef_products", label: "Beef Products" },
-    { value: "chicken_meat", label: "Chicken Meat" },
-    { value: "beef_ghee", label: "Beef Ghee" },
-    { value: "vegetable_oils", label: "Vegetable Oils" },
-    { value: "rice_varieties", label: "Rice Varieties" },
-    { value: "olive_oil", label: "Olive Oil" },
-    { value: "urea_and_fertilizers", label: "Urea & Fertilizers" },
-    { value: "petroleum_products", label: "Petroleum Products" },
-  ];
+  // Product options with translation keys
+  const productOptions = useMemo(() => [
+    { value: "sugar_icumsa", label: t('product.sugar.title') },
+    { value: "soy_products", label: t('product.soy.title') },
+    { value: "coffee_beans", label: t('product.coffee.title') },
+    { value: "beef_products", label: t('product.beef.title') },
+    { value: "chicken_meat", label: t('product.chicken.title') },
+    { value: "beef_ghee", label: t('product.ghee.title') },
+    { value: "vegetable_oils", label: t('product.vegetable.title') },
+    { value: "rice_varieties", label: t('product.rice.title') },
+    { value: "olive_oil", label: t('product.olive.title') },
+    { value: "urea_and_fertilizers", label: t('product.urea.title') },
+    { value: "petroleum_products", label: t('product.petroleum.title') },
+  ], [t, language, forceUpdate]);
 
-  // Set the selected product when the component mounts
+  // Set the selected product when the component mounts or language changes
   useEffect(() => {
     const state = location.state as { selectedProduct?: string };
     if (state?.selectedProduct) {
-      // Find the matching product option
-      const matchingProduct = productOptions.find(
-        option => option.value === state.selectedProduct ||
-                 option.label.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and') === state.selectedProduct
-      );
+      // Try to find a direct match with the value first
+      let matchingProduct = productOptions.find(option => option.value === state.selectedProduct);
+      
+      // If no direct match, try to match by comparing the transformed product ID
+      if (!matchingProduct) {
+        // Get all product labels in lowercase with spaces replaced by underscores
+        const normalizedLabels = productOptions.map(option => ({
+          value: option.value,
+          normalizedLabel: option.label.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and')
+        }));
+        
+        // Find a match with the normalized label
+        const matchByLabel = normalizedLabels.find(item => item.normalizedLabel === state.selectedProduct);
+        
+        if (matchByLabel) {
+          matchingProduct = productOptions.find(option => option.value === matchByLabel.value);
+        }
+      }
+      
       if (matchingProduct) {
         setFormData(prev => ({ ...prev, product: matchingProduct.value }));
       }
     }
-  }, [location.state]);
+  }, [location.state, productOptions, language]);
+  
+  // Force UI update when language changes
+  useEffect(() => {
+    // Only run this effect when language actually changes
+    if (prevLanguageRef.current !== language) {
+      // Store current values
+      const currentValues = { ...formData };
+      
+      // Reset form data to force re-render of select components
+      setFormData(prev => ({
+        ...prev,
+        product: "",
+        delivery: ""
+      }));
+      
+      // After a short delay, restore the values and force update
+      const timer = setTimeout(() => {
+        setFormData(currentValues);
+        setForceUpdate(prev => prev + 1); // Increment to force re-render
+      }, 50);
+      
+      // Update the ref to current language
+      prevLanguageRef.current = language;
+      
+      return () => clearTimeout(timer);
+    }
+  }, [language, formData]);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -133,16 +176,16 @@ const Inquiry = () => {
     }
   };
 
-  // Delivery terms options
-  const deliveryOptions = [
-    { value: "cif", label: "CIF" },
-    { value: "fob", label: "FOB" },
-    { value: "ex_works", label: "Ex Works" },
-    { value: "ddp", label: "DDP" },
-    { value: "fas", label: "FAS" },
-    { value: "cfr", label: "CFR" },
-    { value: "other", label: "Other" },
-  ];
+  // Delivery terms options with translations
+  const deliveryOptions = useMemo(() => [
+    { value: "cif", label: t('inquiry.form.delivery.cif') },
+    { value: "fob", label: t('inquiry.form.delivery.fob') },
+    { value: "ex_works", label: t('inquiry.form.delivery.exw') },
+    { value: "ddp", label: t('inquiry.form.delivery.ddp') },
+    { value: "fas", label: t('inquiry.form.delivery.fas') },
+    { value: "cfr", label: t('inquiry.form.delivery.cfr') },
+    { value: "other", label: t('inquiry.form.delivery.other') },
+  ], [t, language, forceUpdate]);
 
   const pageVariants = {
     initial: { opacity: 0, y: 50 },
@@ -200,7 +243,7 @@ const Inquiry = () => {
                 </p>
               </motion.div>
               
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form key={`inquiry-form-${language}-${forceUpdate}`} onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <motion.div 
                     variants={pageVariants} 
@@ -285,12 +328,13 @@ const Inquiry = () => {
                       {t("inquiry.form.product")} <span className="text-destructive">*</span>
                     </label>
                     <Select 
+                      key={`product-select-${language}-${forceUpdate}`}
                       value={formData.product} 
                       onValueChange={(value) => handleSelectChange('product', value)}
                       required
                     >
                       <SelectTrigger className="rounded-xl">
-                        <SelectValue placeholder="Select a product" />
+                        <SelectValue placeholder={t("inquiry.form.selectProduct")} />
                       </SelectTrigger>
                       <SelectContent>
                         {productOptions.map((option) => (
@@ -333,12 +377,13 @@ const Inquiry = () => {
                     {t("inquiry.form.delivery")} <span className="text-destructive">*</span>
                   </label>
                   <Select 
+                    key={`delivery-select-${language}-${forceUpdate}`}
                     value={formData.delivery} 
                     onValueChange={(value) => handleSelectChange('delivery', value)}
                     required
                   >
                     <SelectTrigger className="rounded-xl">
-                      <SelectValue placeholder="Select delivery terms" />
+                      <SelectValue placeholder={t("inquiry.form.selectDelivery")} />
                     </SelectTrigger>
                     <SelectContent>
                       {deliveryOptions.map((option) => (

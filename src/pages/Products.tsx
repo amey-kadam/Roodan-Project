@@ -28,21 +28,22 @@ const MemoizedProductCardWrapper = memo(({
   productId: string;
 }) => {
   const navigate = useNavigate();
+  const { t } = useI18n();
   // Get category label and icon
   const getCategoryInfo = useCallback((cat: string) => {
     switch(cat) {
       case 'food':
-        return { label: 'Food', icon: ShoppingBag, color: 'bg-amber-100/80 text-amber-700 border border-amber-200/50' };
+        return { label: t('products.categories.food'), icon: ShoppingBag, color: 'bg-amber-100/80 text-amber-700 border border-amber-200/50' };
       case 'oils':
-        return { label: 'Oils', icon: Droplet, color: 'bg-yellow-100/80 text-yellow-700 border border-yellow-200/50' };
+        return { label: t('products.categories.oils'), icon: Droplet, color: 'bg-yellow-100/80 text-yellow-700 border border-yellow-200/50' };
       case 'agri':
-        return { label: 'Agriculture', icon: Leaf, color: 'bg-emerald-100/80 text-emerald-700 border border-emerald-200/50' };
+        return { label: t('products.categories.agri'), icon: Leaf, color: 'bg-emerald-100/80 text-emerald-700 border border-emerald-200/50' };
       case 'petro':
-        return { label: 'Petroleum', icon: Fuel, color: 'bg-blue-100/80 text-blue-700 border border-blue-200/50' };
+        return { label: t('products.categories.petro'), icon: Fuel, color: 'bg-blue-100/80 text-blue-700 border border-blue-200/50' };
       default:
-        return { label: 'Product', icon: Package, color: 'bg-gray-100/80 text-gray-700 border border-gray-200/50' };
+        return { label: t('products.categories.all'), icon: Package, color: 'bg-gray-100/80 text-gray-700 border border-gray-200/50' };
     }
-  }, []);
+  }, [t]);
 
   const categoryInfo = useMemo(() => getCategoryInfo(category), [category, getCategoryInfo]);
   const CategoryIcon = categoryInfo.icon;
@@ -96,7 +97,7 @@ const MemoizedProductCardWrapper = memo(({
           onClick={handleRequestQuote}
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
-            Request Quote
+            {t('products.requestQuote')}
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
@@ -190,137 +191,137 @@ const Products = () => {
   const products = useMemo(() => [
     {
       id: 1,
-      title: "Sugar ICUMSA",
+      title: t('product.sugar.title'),
       image: "/sugar.jpg",
-      description: "Premium sugar with various ICUMSA grades from Brazil",
+      description: t('product.sugar.description'),
       details: [
-        "ICUMSA 45 (white sugar), ICUMSA 100 (raw sugar), ICUMSA 150",
-        "Packaging: 50 kg bags or big bags",
-        "Delivery: CIF, FOB, etc.",
+        t('product.sugar.detail1'),
+        t('product.sugar.detail2'),
+        t('product.sugar.detail3'),
       ],
       category: "food",
     },
     {
       id: 2,
-      title: "Soy Products",
+      title: t('product.soy.title'),
       image: "/soya.jpg",
-      description: "High-quality soy products for various applications",
+      description: t('product.soy.description'),
       details: [
-        "Soybeans (GMO-free on request), soy flour, soy oil",
-        "Packaging: According to customer requirements",
-        "Delivery: Worldwide, flexible",
+        t('product.soy.detail1'),
+        t('product.soy.detail2'),
+        t('product.soy.detail3'),
       ],
       category: "agri",
     },
     {
       id: 3,
-      title: "Coffee Beans",
+      title: t('product.coffee.title'),
       image: "/coffee.jpg",
-      description: "Premium Robusta and Arabica coffee beans",
+      description: t('product.coffee.description'),
       details: [
-        "Robusta (strong) and Arabica (mild)",
-        "Origin: South America, Asia, Africa",
-        "Packaging: 50 kg bags or big bags",
+        t('product.coffee.detail1'),
+        t('product.coffee.detail2'),
+        t('product.coffee.detail3'),
       ],
       category: "food",
     },
     {
       id: 4,
-      title: "Beef Products",
+      title: t('product.beef.title'),
       image: "/Beef.jpg",
-      description: "Premium quality beef from India",
+      description: t('product.beef.description'),
       details: [
-        "Frozen beef, various cuts",
-        "Packaging: Frozen goods",
-        "Delivery: Worldwide",
+        t('product.beef.detail1'),
+        t('product.beef.detail2'),
+        t('product.beef.detail3'),
       ],
       category: "food",
     },
     {
       id: 5,
-      title: "Chicken Meat",
+      title: t('product.chicken.title'),
       image: "/chicken.jpg",
-      description: "Various chicken products of the highest quality",
+      description: t('product.chicken.description'),
       details: [
-        "Whole chickens, chicken breasts, chicken legs, chicken wings",
-        "Packaging: Frozen goods",
-        "Delivery: Worldwide",
+        t('product.chicken.detail1'),
+        t('product.chicken.detail2'),
+        t('product.chicken.detail3'),
       ],
       category: "food",
     },
     {
       id: 6,
-      title: "Beef Ghee",
+      title: t('product.ghee.title'),
       image: "/Ghee.jpg",
-      description: "Pure beef ghee from India",
+      description: t('product.ghee.description'),
       details: [
-        "100% pure beef ghee",
-        "Packaging: 1 kg cans, 15 kg buckets",
-        "Delivery: Worldwide",
+        t('product.ghee.detail1'),
+        t('product.ghee.detail2'),
+        t('product.ghee.detail3'),
       ],
       category: "oils",
     },
     {
       id: 7,
-      title: "Vegetable Oils",
+      title: t('product.vegetable.title'),
       image: "/oil.jpeg",
-      description: "High-quality vegetable oils CP8 and CP10 from Asia",
+      description: t('product.vegetable.description'),
       details: [
-        "Palm oil, various packaging sizes",
-        "Delivery: CIF, FOB or by arrangement",
-        "Premium quality for food and industrial applications",
+        t('product.vegetable.detail1'),
+        t('product.vegetable.detail2'),
+        t('product.vegetable.detail3'),
       ],
       category: "oils",
     },
     {
       id: 8,
-      title: "Rice Varieties",
+      title: t('product.rice.title'),
       image: "/Rice.jpg",
-      description: "Premium rice varieties from around the world",
+      description: t('product.rice.description'),
       details: [
-        "Basmati, jasmine, parboiled, white rice",
-        "Packaging: 5 kg, 25 kg bags or big bags",
-        "Delivery: CIF, FOB",
+        t('product.rice.detail1'),
+        t('product.rice.detail2'),
+        t('product.rice.detail3'),
       ],
       category: "food",
     },
     {
       id: 9,
-      title: "Olive Oil",
+      title: t('product.olive.title'),
       image: "/olive-oil.jpg",
-      description: "Premium olive oil from Greece",
+      description: t('product.olive.description'),
       details: [
-        "Extra virgin olive oil, virgin olive oil, refined olive oil",
-        "Packaging: 1 l bottles, 5 l canisters, 200L drums",
-        "Delivery: CIF, FOB",
+        t('product.olive.detail1'),
+        t('product.olive.detail2'),
+        t('product.olive.detail3'),
       ],
       category: "oils",
     },
     {
       id: 10,
-      title: "Urea & Fertilizers",
+      title: t('product.urea.title'),
       image: "/Urea.png",
-      description: "High-quality urea and fertilizers for agricultural use",
+      description: t('product.urea.description'),
       details: [
-        "Urea 46% Granular and Prilled",
-        "Packaging: 50kg bags or big bags",
-        "Delivery: Worldwide",
+        t('product.urea.detail1'),
+        t('product.urea.detail2'),
+        t('product.urea.detail3'),
       ],
       category: "agri",
     },
     {
       id: 11,
-      title: "Petroleum Products",
+      title: t('product.petroleum.title'),
       image: "/petrol.jpg",
-      description: "Premium petroleum products for various applications",
+      description: t('product.petroleum.description'),
       details: [
-        "EN 590, D2, AGO, Jet A1",
-        "Diesel, Aviation Fuel, Automotive Fuel",
-        "Delivery: CIF, FOB",
+        t('product.petroleum.detail1'),
+        t('product.petroleum.detail2'),
+        t('product.petroleum.detail3'),
       ],
       category: "petro",
     },
-  ], []);
+  ], [t, language]);
 
   // Filter products based on active category and search query
   const filteredProducts = useMemo(() => {
@@ -555,7 +556,7 @@ const Products = () => {
                       description={product.description}
                       details={product.details}
                       category={product.category}
-                      productId={product.title.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and')}
+                      productId={getProductIdByIndex(product.id)}
                     />
                   ))
                 ) : (
@@ -571,11 +572,12 @@ const Products = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">No products found</h3>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">{t('products.noProductsFound')}</h3>
                       <p className="text-gray-600">
                         {searchQuery 
-                          ? `No products matching "${searchQuery}" in ${activeCategory === "all" ? "any" : activeCategory} category.` 
-                          : `No products available in the ${activeCategory} category.`}
+                          ? t('products.noProductsMatching').replace('{query}', searchQuery).replace('{category}', activeCategory === "all" ? t('products.categories.all').toLowerCase() : t(`products.categories.${activeCategory}`).toLowerCase())
+                          : t('products.noProductsInCategory').replace('{category}', activeCategory === "all" ? t('products.categories.all').toLowerCase() : t(`products.categories.${activeCategory}`).toLowerCase())
+                        }
                       </p>
                       <Button 
                         className="mt-4 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
@@ -584,7 +586,7 @@ const Products = () => {
                           setActiveCategory("all");
                         }}
                       >
-                        Clear filters
+                        {t('products.clearFilters')}
                       </Button>
                     </div>
                   </motion.div>
@@ -597,6 +599,24 @@ const Products = () => {
       <Footer />
     </div>
   );
+};
+
+// Helper function to get consistent product IDs
+const getProductIdByIndex = (id: number): string => {
+  switch(id) {
+    case 1: return "sugar_icumsa";
+    case 2: return "soy_products";
+    case 3: return "coffee_beans";
+    case 4: return "beef_products";
+    case 5: return "chicken_meat";
+    case 6: return "beef_ghee";
+    case 7: return "vegetable_oils";
+    case 8: return "rice_varieties";
+    case 9: return "olive_oil";
+    case 10: return "urea_and_fertilizers";
+    case 11: return "petroleum_products";
+    default: return "";
+  }
 };
 
 export default Products;
