@@ -75,7 +75,7 @@ export function LanguageSelector({ className }: { className?: string }) {
           variant="ghost" 
           size="sm"
           className={cn(
-            "relative transition-all duration-300 hover:scale-105 h-auto px-2 py-1",
+            "relative transition-all duration-300 hover:scale-105 h-9 px-3 py-2",
             className
           )}
           style={{
@@ -87,7 +87,7 @@ export function LanguageSelector({ className }: { className?: string }) {
         >
           <div className="flex items-center">
             <FlagIcon language={language} />
-            <span className="text-xs font-medium">
+            <span className="text-sm font-medium">
               {language === "en" ? "ENG" : language === "fr" ? "FRA" : "ARB"}
             </span>
           </div>
