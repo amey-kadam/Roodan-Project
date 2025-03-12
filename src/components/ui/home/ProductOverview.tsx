@@ -40,7 +40,7 @@ const ProductCard = memo(({ product, language }: ProductCardProps) => {
         <h3 
           className="text-xl font-display font-semibold mb-2 bg-clip-text text-transparent" 
           style={{ 
-            backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+            backgroundImage: "linear-gradient(to right, #059669, #10b981)"
           }}
         >
           {product.title}
@@ -49,7 +49,7 @@ const ProductCard = memo(({ product, language }: ProductCardProps) => {
         <div 
           className="flex items-center font-medium transition-colors bg-clip-text text-transparent group-hover:text-emerald-600"
           style={{ 
-            backgroundImage: "linear-gradient(to right, #004d00, #00b300)" 
+            backgroundImage: "linear-gradient(to right, #059669, #10b981)"
           }}
         >
           <span>{language === "ar" ? "عرض التفاصيل" : "View Details"}</span>
@@ -112,7 +112,7 @@ function ProductOverviewComponent() {
   [language]);
 
   return (
-    <section className="section-padding bg-primary/5">
+    <section className="section-padding bg-emerald-50/30">
       <div className={cn("page-container", directionClass)}>
         <div className="text-center max-w-xl mx-auto mb-16">
           <h2 
@@ -123,7 +123,7 @@ function ProductOverviewComponent() {
           >
             {t("products.title")}
           </h2>
-          <div className="w-20 h-1 mx-auto" style={{ background: "linear-gradient(to right, #004d00, #00b300)" }}></div>
+          <div className="w-20 h-1 mx-auto" style={{ background:  "linear-gradient(to right, #059669, #10b981)" }}></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
