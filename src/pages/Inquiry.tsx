@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { useLocation } from "react-router-dom";
 import { 
   Send, 
   Mail, 
@@ -21,6 +22,7 @@ import {
 const Inquiry = () => {
   const { t, language } = useI18n();
   const { toast } = useToast();
+  const location = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Form state
@@ -34,6 +36,36 @@ const Inquiry = () => {
     delivery: "",
     message: ""
   });
+
+  // Product options - moved outside useEffect to be accessible throughout component
+  const productOptions = [
+    { value: "sugar_icumsa", label: "Sugar ICUMSA" },
+    { value: "soy_products", label: "Soy Products" },
+    { value: "coffee_beans", label: "Coffee Beans" },
+    { value: "beef_products", label: "Beef Products" },
+    { value: "chicken_meat", label: "Chicken Meat" },
+    { value: "beef_ghee", label: "Beef Ghee" },
+    { value: "vegetable_oils", label: "Vegetable Oils" },
+    { value: "rice_varieties", label: "Rice Varieties" },
+    { value: "olive_oil", label: "Olive Oil" },
+    { value: "urea_and_fertilizers", label: "Urea & Fertilizers" },
+    { value: "petroleum_products", label: "Petroleum Products" },
+  ];
+
+  // Set the selected product when the component mounts
+  useEffect(() => {
+    const state = location.state as { selectedProduct?: string };
+    if (state?.selectedProduct) {
+      // Find the matching product option
+      const matchingProduct = productOptions.find(
+        option => option.value === state.selectedProduct ||
+                 option.label.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and') === state.selectedProduct
+      );
+      if (matchingProduct) {
+        setFormData(prev => ({ ...prev, product: matchingProduct.value }));
+      }
+    }
+  }, [location.state]);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -100,22 +132,6 @@ const Inquiry = () => {
       setIsSubmitting(false);
     }
   };
-
-  // Product options
-  const productOptions = [
-    { value: "sugar", label: "Sugar ICUMSA" },
-    { value: "soy", label: "Soy Products" },
-    { value: "coffee", label: "Coffee Beans" },
-    { value: "beef", label: "Beef Products" },
-    { value: "chicken", label: "Chicken Meat" },
-    { value: "ghee", label: "Beef Ghee" },
-    { value: "vegetable_oil", label: "Vegetable Oils" },
-    { value: "rice", label: "Rice" },
-    { value: "olive_oil", label: "Olive Oil" },
-    { value: "urea", label: "Urea & Fertilizers" },
-    { value: "petroleum", label: "Petroleum Products" },
-    { value: "other", label: "Other" },
-  ];
 
   // Delivery terms options
   const deliveryOptions = [

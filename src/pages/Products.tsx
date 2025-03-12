@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Grid, Filter, ShoppingBag, Package, Leaf, Droplet, Fuel, Search, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 // Product category type
 type ProductCategory = "all" | "food" | "oils" | "agri" | "petro";
 
@@ -16,14 +17,17 @@ const MemoizedProductCardWrapper = memo(({
   image, 
   description, 
   details,
-  category 
+  category,
+  productId 
 }: { 
   title: string;
   image: string;
   description: string;
   details: string[];
   category: string;
+  productId: string;
 }) => {
+  const navigate = useNavigate();
   // Get category label and icon
   const getCategoryInfo = useCallback((cat: string) => {
     switch(cat) {
@@ -42,6 +46,10 @@ const MemoizedProductCardWrapper = memo(({
 
   const categoryInfo = useMemo(() => getCategoryInfo(category), [category, getCategoryInfo]);
   const CategoryIcon = categoryInfo.icon;
+
+  const handleRequestQuote = () => {
+    navigate('/inquiry', { state: { selectedProduct: productId } });
+  };
 
   return (
     <motion.div 
@@ -85,6 +93,7 @@ const MemoizedProductCardWrapper = memo(({
       <div className="px-6 pb-6">
         <Button 
           className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 rounded-xl transition-all duration-300 group relative overflow-hidden shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
+          onClick={handleRequestQuote}
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             Request Quote
@@ -546,6 +555,7 @@ const Products = () => {
                       description={product.description}
                       details={product.details}
                       category={product.category}
+                      productId={product.title.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and')}
                     />
                   ))
                 ) : (
