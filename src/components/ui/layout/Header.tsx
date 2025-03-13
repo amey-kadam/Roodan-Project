@@ -186,27 +186,6 @@ export function Header() {
               )}
             />
             
-            {/* Mobile Request Quote Button */}
-            <Button
-              asChild
-              size="sm"
-              className={cn(
-                "hover-scale hover:shadow-md font-medium text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300",
-                isScrolled ? "h-7 text-xs px-2 py-1" : "h-8 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
-              )}
-              style={{ 
-                transition: "all 0.3s ease",
-                boxShadow: "0 4px 14px rgba(5, 150, 105, 0.25)",
-                borderRadius: "12px"
-              }}
-            >
-              <NavLink to="/inquiry" onClick={() => window.scrollTo(0, 0)} className="flex items-center">
-                <span className="hidden xs:inline">{t("nav.inquiry")}</span>
-                <span className="xs:hidden">Quote</span>
-                <ArrowRight className="ml-1 w-3 h-3 xs:w-4 xs:h-4" />
-              </NavLink>
-            </Button>
-            
             <Button
               variant="ghost"
               size="icon"
@@ -233,50 +212,54 @@ export function Header() {
                   to={route.path}
                   className={({ isActive }) =>
                     cn(
-                      "py-3 sm:py-4 px-3 sm:px-4 font-medium text-base sm:text-lg transition-all duration-300 relative group",
+                      "py-3 sm:py-4 px-3 sm:px-4 font-medium text-base sm:text-lg transition-all duration-300 group",
                       isActive
                         ? "font-semibold"
                         : "hover:font-medium"
                     )
                   }
-                  style={({ isActive }) => ({
-                    backgroundImage: isActive ? textGradient : "none",
-                    WebkitBackgroundClip: isActive ? "text" : "none",
-                    WebkitTextFillColor: isActive ? "transparent" : "inherit"
-                  })}
-                  onMouseEnter={(e) => {
-                    if (!location.pathname.includes(route.path)) {
-                      e.currentTarget.style.backgroundImage = hoverTextGradient;
-                      e.currentTarget.style.webkitBackgroundClip = "text";
-                      e.currentTarget.style.webkitTextFillColor = "transparent";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!location.pathname.includes(route.path)) {
-                      e.currentTarget.style.backgroundImage = "none";
-                      e.currentTarget.style.webkitBackgroundClip = "none";
-                      e.currentTarget.style.webkitTextFillColor = "inherit";
-                    }
-                  }}
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     window.scrollTo(0, 0);
                   }}
                 >
-                  {route.label}
                   <span 
-                    className={cn(
-                      "absolute -bottom-1 left-0 w-full h-0.5 transition-all duration-500",
-                      location.pathname === route.path 
-                        ? "scale-x-100 opacity-100" 
-                        : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
-                    )}
-                    style={{ 
-                      background: underlineGradient,
-                      transformOrigin: "left",
-                      boxShadow: "0 0 8px rgba(5, 150, 105, 0.5)"
+                    className="relative inline-block"
+                    style={{
+                      backgroundImage: location.pathname === route.path ? textGradient : "none",
+                      WebkitBackgroundClip: location.pathname === route.path ? "text" : "none",
+                      WebkitTextFillColor: location.pathname === route.path ? "transparent" : "inherit",
                     }}
-                  />
+                    onMouseEnter={(e) => {
+                      if (!location.pathname.includes(route.path)) {
+                        e.currentTarget.style.backgroundImage = hoverTextGradient;
+                        e.currentTarget.style.webkitBackgroundClip = "text";
+                        e.currentTarget.style.webkitTextFillColor = "transparent";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!location.pathname.includes(route.path)) {
+                        e.currentTarget.style.backgroundImage = "none";
+                        e.currentTarget.style.webkitBackgroundClip = "none";
+                        e.currentTarget.style.webkitTextFillColor = "inherit";
+                      }
+                    }}
+                  >
+                    {route.label}
+                    <span 
+                      className={cn(
+                        "absolute -bottom-1 left-0 w-full h-0.5 transition-all duration-500",
+                        location.pathname === route.path 
+                          ? "scale-x-100 opacity-100" 
+                          : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      )}
+                      style={{ 
+                        background: underlineGradient,
+                        transformOrigin: "left",
+                        boxShadow: "0 0 8px rgba(5, 150, 105, 0.5)"
+                      }}
+                    />
+                  </span>
                 </NavLink>
               ))}
               <div className="pt-3 sm:pt-4 pb-2 px-2 sm:px-4">
