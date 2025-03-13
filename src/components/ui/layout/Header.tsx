@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { useI18n } from "@/utils/i18n";
 import { LanguageSelector } from "@/components/ui/home/LanguageSelector";
 import { Button } from "@/components/ui/button";
-import { Menu, X, CircleUserRound } from "lucide-react";
+import { Menu, X, CircleUserRound, ArrowRight } from "lucide-react";
 
 export function Header() {
   const { t } = useI18n();
@@ -69,22 +69,27 @@ export function Header() {
             onClick={() => window.scrollTo(0, 0)}
           >
             <div className="transition-all duration-300 group-hover:scale-105 flex items-center">
-              <img
-                src="/tree_logo.png"
-                alt="Roodan"
-                className={cn(
-                  "transition-all duration-300 transform -translate-y-3 translate-x-2",
-                  isScrolled 
-                    ? "w-16 h-14 sm:w-18 sm:h-16 md:w-20 md:h-18" 
-                    : "w-20 h-18 sm:w-22 sm:h-20 md:w-24 md:h-22"
-                )}
-              />
+              <div className="relative flex-shrink-0">
+                <img
+                  src="/tree_logo.png"
+                  alt="Roodan"
+                  className={cn(
+                    "transition-all duration-300 object-contain",
+                    isScrolled 
+                      ? "w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18" 
+                      : "w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20"
+                  )}
+                  style={{
+                    transform: "translateY(-10%) translateX(5%)"
+                  }}
+                />
+              </div>
               <span 
                 className={cn(
-                  "font-bold ml-2 tracking-wider transition-all duration-300 bg-clip-text text-transparent",
+                  "font-bold ml-1 xs:ml-2 tracking-wider transition-all duration-300 bg-clip-text text-transparent whitespace-nowrap",
                   isScrolled
-                    ? "text-lg sm:text-xl md:text-2xl"
-                    : "text-xl sm:text-2xl md:text-3xl"
+                    ? "text-base xs:text-lg sm:text-xl md:text-2xl"
+                    : "text-lg xs:text-xl sm:text-2xl md:text-3xl"
                 )}
                 style={{ 
                   backgroundImage: logoGradient,
@@ -150,7 +155,12 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
-            <LanguageSelector />
+            <LanguageSelector 
+              className={cn(
+                "transition-all duration-300",
+                isScrolled ? "scale-90" : "scale-100"
+              )}
+            />
             <Button
               asChild
               size="sm"
@@ -168,7 +178,35 @@ export function Header() {
 
           {/* Mobile Navigation Trigger */}
           <div className="flex md:hidden items-center space-x-2 sm:space-x-3">
-            <LanguageSelector />
+            <LanguageSelector 
+              compact={true}
+              className={cn(
+                "transition-all duration-300",
+                isScrolled ? "scale-90" : "scale-100"
+              )}
+            />
+            
+            {/* Mobile Request Quote Button */}
+            <Button
+              asChild
+              size="sm"
+              className={cn(
+                "hover-scale hover:shadow-md font-medium text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300",
+                isScrolled ? "h-7 text-xs px-2 py-1" : "h-8 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
+              )}
+              style={{ 
+                transition: "all 0.3s ease",
+                boxShadow: "0 4px 14px rgba(5, 150, 105, 0.25)",
+                borderRadius: "12px"
+              }}
+            >
+              <NavLink to="/inquiry" onClick={() => window.scrollTo(0, 0)} className="flex items-center">
+                <span className="hidden xs:inline">{t("nav.inquiry")}</span>
+                <span className="xs:hidden">Quote</span>
+                <ArrowRight className="ml-1 w-3 h-3 xs:w-4 xs:h-4" />
+              </NavLink>
+            </Button>
+            
             <Button
               variant="ghost"
               size="icon"

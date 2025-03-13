@@ -9,12 +9,15 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // Flag component for each language
-const FlagIcon = ({ language }: { language: string }) => {
+const FlagIcon = ({ language, compact = false }: { language: string; compact?: boolean }) => {
   // Return the appropriate flag based on language
   switch (language) {
     case "en":
       return (
-        <div className="w-6 h-4 rounded-sm overflow-hidden flex-shrink-0 mr-2">
+        <div className={cn(
+          "rounded-sm overflow-hidden flex-shrink-0",
+          compact ? "w-5 h-3 mr-1" : "w-6 h-4 mr-2"
+        )}>
           <div className="w-full h-full bg-blue-900 relative">
             {/* US flag stripes and stars */}
             <div className="absolute inset-0 flex flex-col">
@@ -44,7 +47,10 @@ const FlagIcon = ({ language }: { language: string }) => {
       );
     case "fr":
       return (
-        <div className="w-6 h-4 rounded-sm overflow-hidden flex-shrink-0 mr-2">
+        <div className={cn(
+          "rounded-sm overflow-hidden flex-shrink-0",
+          compact ? "w-5 h-3 mr-1" : "w-6 h-4 mr-2"
+        )}>
           <div className="w-full h-full flex">
             <div className="w-1/3 h-full bg-blue-900"></div>
             <div className="w-1/3 h-full bg-white"></div>
@@ -54,7 +60,10 @@ const FlagIcon = ({ language }: { language: string }) => {
       );
     case "ar":
       return (
-        <div className="w-6 h-4 rounded-sm overflow-hidden flex-shrink-0 mr-2">
+        <div className={cn(
+          "rounded-sm overflow-hidden flex-shrink-0",
+          compact ? "w-5 h-3 mr-1" : "w-6 h-4 mr-2"
+        )}>
           <div className="w-full h-full bg-green-600 flex items-center justify-center">
             <div className="text-white text-xs">☪</div>
           </div>
@@ -65,7 +74,7 @@ const FlagIcon = ({ language }: { language: string }) => {
   }
 };
 
-export function LanguageSelector({ className }: { className?: string }) {
+export function LanguageSelector({ className, compact = false }: { className?: string; compact?: boolean }) {
   const { language, setLanguage } = useI18n();
 
   return (
@@ -73,27 +82,34 @@ export function LanguageSelector({ className }: { className?: string }) {
       <DropdownMenuTrigger asChild>
         <Button 
           variant="ghost" 
-          size="sm"
+          size={compact ? "xs" : "sm"}
           className={cn(
-            "relative transition-all duration-300 hover:scale-105 h-9 px-3 py-2",
+            "relative transition-all duration-300 hover:scale-105",
+            compact ? "h-7 px-2 py-1" : "h-9 px-3 py-2",
             className
           )}
           style={{
             background: "white",
-            borderRadius: "16px",
+            borderRadius: compact ? "12px" : "16px",
             boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
             border: "none"
           }}
         >
           <div className="flex items-center">
-            <FlagIcon language={language} />
-            <span className="text-sm font-medium">
+            <FlagIcon language={language} compact={compact} />
+            <span className={cn(
+              "font-medium",
+              compact ? "text-xs" : "text-sm"
+            )}>
               {language === "en" ? "ENG" : language === "fr" ? "FRA" : "ARB"}
             </span>
           </div>
           {/* Speech bubble tail */}
           <div 
-            className="absolute top-1/2 -left-1.5 w-3 h-3 bg-white" 
+            className={cn(
+              "absolute top-1/2 -left-1.5 bg-white",
+              compact ? "w-2 h-2" : "w-3 h-3"
+            )}
             style={{ 
               clipPath: "polygon(100% 0, 100% 100%, 0 50%)",
               transform: "translateY(-50%)"

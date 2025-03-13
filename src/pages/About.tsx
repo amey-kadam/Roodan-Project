@@ -123,21 +123,23 @@ const About = () => {
                   
                   {/* Glass Nameplate */}
                   <div className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/80 border-t border-emerald-100 p-6 z-20">
-                    <h3 className="text-xl md:text-2xl font-bold bg-clip-text text-transparent mb-1 truncate" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
-                    <div className="flex items-center justify-between">
-                      <p className="text-emerald-600 font-medium truncate max-w-[70%]">{member.role}</p>
-                      <span className="text-emerald-500 text-sm flex items-center gap-1 group-hover:scale-110 transition-transform">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Flip
-                      </span>
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-bold bg-clip-text text-transparent break-words" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-base text-emerald-600 font-medium break-words flex-1">{member.role}</p>
+                        <span className="text-sm text-emerald-500 flex items-center gap-1 group-hover:scale-110 transition-transform whitespace-nowrap">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Flip
+                        </span>
+                      </div>
                     </div>
                   </div>
                   
                   {/* Decorative Elements */}
-                  <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-emerald-300 opacity-20 blur-3xl z-10" />
-                  <div className="absolute top-10 left-10 w-20 h-20 rounded-full bg-emerald-400 opacity-20 blur-3xl z-10" />
+                  <div className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 sm:w-12 h-8 sm:h-12 rounded-full bg-emerald-300 opacity-20 blur-3xl z-10" />
+                  <div className="absolute top-8 sm:top-10 left-8 sm:left-10 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-emerald-400 opacity-20 blur-3xl z-10" />
                 </div>
                 
                 {/* Back Card */}
@@ -154,8 +156,8 @@ const About = () => {
                   </div>
                   
                   <div className="mb-6 relative">
-                    <h3 className="text-xl md:text-3xl font-bold bg-clip-text text-transparent mb-1 truncate" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
-                    <p className="text-emerald-600 font-medium mb-4 truncate">{member.role}</p>
+                    <h3 className="text-2xl font-bold bg-clip-text text-transparent mb-1 break-words" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
+                    <p className="text-base text-emerald-600 font-medium mb-4 break-words">{member.role}</p>
                     <div className="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-300" />
                   </div>
                   

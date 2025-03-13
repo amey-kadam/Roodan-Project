@@ -40,18 +40,18 @@ function HeroComponent() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Improved world map background with better responsiveness */}
-      <div className="absolute inset-0 z-0 opacity-60">
+      <div className="absolute inset-0 z-0 opacity-80">
         <div className="w-full h-full relative">
           <LazyLoadImage
             src="/world-map.jpg"
-            effect="blur"
+            effect="opacity"
             className="object-cover object-center w-full h-full"
             wrapperClassName="absolute inset-0"
             alt="World Map Background"
             placeholderSrc="/world-map-placeholder.jpg" /* Optional lower resolution placeholder */
           />
           {/* Mobile-specific overlay to ensure visibility */}
-          <div className="absolute inset-0 bg-background/20 md:bg-transparent"></div>
+          <div className="absolute inset-0 bg-background/10 md:bg-transparent"></div>
         </div>
       </div>
 
@@ -63,7 +63,7 @@ function HeroComponent() {
         transition={{ duration: 1 }}
       >
         {/* Full Height Gradient Background - Using emerald colors from Products.tsx */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 opacity-100 md:opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 opacity-90 md:opacity-80" />
 
         {/* Layered Grid Pattern */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
