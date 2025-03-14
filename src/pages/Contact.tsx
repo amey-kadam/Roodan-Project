@@ -217,7 +217,7 @@ const Contact = () => {
         </section>
 
         {/* Contact Form + Map - Adjusted size for form elements */}
-        <section className="py-6">
+        <section className="py-6 sm:py-8">
           <div
             className={cn(
               "page-container max-w-6xl",
@@ -232,8 +232,28 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Form Section - Increased size of form elements */}
-                <div className="p-5 md:p-6">
+                {/* Map Section - Displayed first on mobile */}
+                <div className="relative h-[300px] sm:h-[350px] lg:h-auto min-h-[250px] order-first lg:order-last pb-4 sm:pb-6 lg:pb-0">
+                  <div className="absolute inset-0 rounded-lg overflow-hidden shadow-sm border border-gray-100">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.417834204089!2d54.33697647424187!3d24.470975504507794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e65e0afe75c95%3A0x3f42d2c696969cec!2sKhalidiyah%20Tower!5e0!3m2!1sen!2sae!4v1710835058468!5m2!1sen!2sae"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Roodan Office Location"
+                      className="w-full h-full"
+                    />
+                  </div>
+                </div>
+                
+                {/* Divider for mobile only */}
+                <div className="block lg:hidden w-full h-px bg-gradient-to-r from-transparent via-emerald-200 to-transparent my-4"></div>
+                
+                {/* Form Section */}
+                <div className="p-5 md:p-6 order-last lg:order-first mt-2 sm:mt-4 lg:mt-0">
                   <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
                     {t("SendUs.title")}
                   </h3>
@@ -311,21 +331,6 @@ const Contact = () => {
                       </span>
                     </Button>
                   </form>
-                </div>
-
-                {/* Map Section - Height adjusted */}
-                <div className="relative h-[300px] lg:h-auto">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.417834204089!2d54.33697647424187!3d24.470975504507794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e65e0afe75c95%3A0x3f42d2c696969cec!2sKhalidiyah%20Tower!5e0!3m2!1sen!2sae!4v1710835058468!5m2!1sen!2sae"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Roodan Office Location"
-                    className="absolute inset-0"
-                  />
                 </div>
               </div>
             </motion.div>

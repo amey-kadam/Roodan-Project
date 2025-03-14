@@ -229,28 +229,28 @@ const Inquiry = () => {
           <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
             <motion.div 
               variants={pageVariants}
-              className="max-w-4xl mx-auto mt-8 bg-white/90 backdrop-blur-sm border border-gray-100/80 rounded-3xl p-8 md:p-12 shadow-xl"
+              className="max-w-4xl mx-auto mt-8 bg-white/90 backdrop-blur-sm border border-gray-100/80 rounded-3xl p-5 sm:p-8 md:p-12 shadow-xl"
             >
               <motion.div variants={pageVariants} className="text-center mb-12">
-                <div className="flex items-center justify-center gap-4 mb-6">
-                  <Send className="w-12 h-12 text-emerald-500" />
-                  <h2 className="text-3xl font-display font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6">
+                  <Send className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-2 sm:mb-0" />
+                  <h2 className="text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent text-center">
                     {t("inquiry.form.title")}
                   </h2>
                 </div>
-                <p className="text-foreground max-w-2xl mx-auto">
+                <p className="text-foreground max-w-2xl mx-auto text-sm sm:text-base">
                   {t("inquiry.form.description")}
                 </p>
               </motion.div>
               
-              <form key={`inquiry-form-${language}-${forceUpdate}`} onSubmit={handleSubmit} className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <form key={`inquiry-form-${language}-${forceUpdate}`} onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
                   <motion.div 
                     variants={pageVariants} 
-                    className="space-y-3"
+                    className="space-y-2 sm:space-y-3"
                   >
-                    <label htmlFor="company" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      <Building className="w-5 h-5 text-emerald-500" />
+                    <label htmlFor="company" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                      <Building className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                       {t("inquiry.form.company")} <span className="text-destructive">*</span>
                     </label>
                     <Input 
@@ -264,10 +264,10 @@ const Inquiry = () => {
 
                   <motion.div 
                     variants={pageVariants} 
-                    className="space-y-3"
+                    className="space-y-2 sm:space-y-3"
                   >
-                    <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      <MessageCircle className="w-5 h-5 text-emerald-500" />
+                    <label htmlFor="name" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                       {t("inquiry.form.name")} <span className="text-destructive">*</span>
                     </label>
                     <Input 
@@ -280,13 +280,13 @@ const Inquiry = () => {
                   </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
                   <motion.div 
                     variants={pageVariants} 
-                    className="space-y-3"
+                    className="space-y-2 sm:space-y-3"
                   >
-                    <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      <Mail className="w-5 h-5 text-emerald-500" />
+                    <label htmlFor="email" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                       {t("inquiry.form.email")} <span className="text-destructive">*</span>
                     </label>
                     <Input 
@@ -301,10 +301,10 @@ const Inquiry = () => {
 
                   <motion.div 
                     variants={pageVariants} 
-                    className="space-y-3"
+                    className="space-y-2 sm:space-y-3"
                   >
-                    <label htmlFor="phone" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      <Phone className="w-5 h-5 text-emerald-500" />
+                    <label htmlFor="phone" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                       {t("inquiry.form.phone")} <span className="text-destructive">*</span>
                     </label>
                     <Input 
@@ -318,13 +318,13 @@ const Inquiry = () => {
                   </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
                   <motion.div 
                     variants={pageVariants} 
-                    className="space-y-3"
+                    className="space-y-2 sm:space-y-3"
                   >
-                    <label htmlFor="product" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      <ShoppingCart className="w-5 h-5 text-emerald-500" />
+                    <label htmlFor="product" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                      <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                       {t("inquiry.form.product")} <span className="text-destructive">*</span>
                     </label>
                     <Select 
@@ -352,10 +352,10 @@ const Inquiry = () => {
 
                   <motion.div 
                     variants={pageVariants} 
-                    className="space-y-3"
+                    className="space-y-2 sm:space-y-3"
                   >
-                    <label htmlFor="quantity" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                      <MessageCircle className="w-5 h-5 text-emerald-500" />
+                    <label htmlFor="quantity" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                       {t("inquiry.form.quantity")} <span className="text-destructive">*</span>
                     </label>
                     <Input 
@@ -370,10 +370,10 @@ const Inquiry = () => {
 
                 <motion.div 
                   variants={pageVariants} 
-                  className="space-y-3"
+                  className="space-y-2 sm:space-y-3"
                 >
-                  <label htmlFor="delivery" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                    <ShoppingCart className="w-5 h-5 text-emerald-500" />
+                  <label htmlFor="delivery" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                    <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                     {t("inquiry.form.delivery")} <span className="text-destructive">*</span>
                   </label>
                   <Select 
@@ -401,10 +401,10 @@ const Inquiry = () => {
 
                 <motion.div 
                   variants={pageVariants} 
-                  className="space-y-3"
+                  className="space-y-2 sm:space-y-3"
                 >
-                  <label htmlFor="message" className="flex items-center gap-2 text-sm font-medium text-foreground">
-                    <MessageCircle className="w-5 h-5 text-emerald-500" />
+                  <label htmlFor="message" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
+                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                     {t("inquiry.form.message")}
                   </label>
                   <Textarea 
@@ -419,10 +419,10 @@ const Inquiry = () => {
                 <motion.div variants={pageVariants}>
                   <Button 
                     type="submit" 
-                    className="w-full md:w-auto px-12 py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
+                    className="w-full px-6 sm:px-12 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
                     disabled={isSubmitting}
                   >
-                    <span className="flex items-center gap-3 text-lg font-semibold text-white">
+                    <span className="flex items-center gap-2 sm:gap-3 text-base sm:text-lg font-semibold text-white">
                       {isSubmitting ? "Submitting..." : t("inquiry.form.submit")}
                     </span>
                   </Button>
