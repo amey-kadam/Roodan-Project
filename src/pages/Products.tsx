@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, memo, useEffect } from "react";
+import { useState, useCallback, useMemo, memo, useEffect, useRef } from "react";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
 import { useI18n } from "@/utils/i18n";
@@ -107,10 +107,31 @@ const MemoizedProductCardWrapper = memo(({
   t
 }: ProductCardProps) => {
   const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   
   // Use memoized category info
   const categoryInfo = useMemo(() => getCategoryInfo(category, t), [category, t]);
   const CategoryIcon = categoryInfo.icon;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleRequestQuote = useCallback(() => {
     navigate('/inquiry', { state: { selectedProduct: productId } });
@@ -118,7 +139,14 @@ const MemoizedProductCardWrapper = memo(({
 
   return (
     <motion.div 
-      className="bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col group"
+      ref={cardRef}
+      className={cn(
+        "bg-white/90 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm hover:shadow-xl",
+        "transition-all duration-300 border border-gray-100 h-full flex flex-col group",
+        "transform-gpu w-full",
+        !isVisible && "opacity-0",
+        isVisible && "animate-fadeIn"
+      )}
       whileHover={{ y: -5 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -126,17 +154,25 @@ const MemoizedProductCardWrapper = memo(({
       transition={{ duration: 0.3 }}
     >
       <div className="relative">
-        <div className="aspect-[16/9] overflow-hidden">
-          <img 
-            src={image} 
-            alt={title} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-            decoding="async"
-            width="400"
-            height="225"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="aspect-[4/3] overflow-hidden bg-emerald-50/30">
+          {isVisible && (
+            <img 
+              src={image}
+              alt={title} 
+              className={cn(
+                "w-full h-full object-cover transform-gpu will-change-transform",
+                "group-hover:scale-105 transition-all duration-500 ease-out",
+                !imageLoaded && "blur-sm opacity-0",
+                imageLoaded && "blur-0 opacity-100"
+              )}
+              loading="lazy"
+              decoding="async"
+              width="320"
+              height="240"
+              onLoad={() => setImageLoaded(true)}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
         <div className="absolute top-4 left-4">
           <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md shadow-sm ${categoryInfo.color}`}>
@@ -145,28 +181,33 @@ const MemoizedProductCardWrapper = memo(({
           </div>
         </div>
       </div>
-      <div className="p-6 flex-grow flex flex-col">
-        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors">{title}</h3>
-        <p className="text-gray-600 mb-4 flex-grow text-sm">{description}</p>
+      <div className="p-4 flex-grow flex flex-col">
+        <h3 className="text-lg font-bold text-gray-800 mb-3 group-hover:text-emerald-700 transition-colors line-clamp-1">{title}</h3>
+        <p className="text-gray-600 mb-4 flex-grow text-sm line-clamp-2">{description}</p>
         <div className="space-y-2 mt-auto">
           {details.map((detail, index) => (
             <div key={index} className="flex items-start gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 flex-shrink-0" />
-              <p className="text-sm text-gray-700">{detail}</p>
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
+              <p className="text-xs text-gray-700 line-clamp-1">{detail}</p>
             </div>
           ))}
         </div>
       </div>
-      <div className="px-6 pb-6">
+      <div className="p-4 pt-0">
         <Button 
-          className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 rounded-xl transition-all duration-300 group relative overflow-hidden shadow-md hover:shadow-lg"
+          className={cn(
+            "w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white",
+            "hover:from-emerald-700 hover:to-emerald-600 rounded-lg",
+            "transition-all duration-300 group relative overflow-hidden",
+            "shadow-md hover:shadow-lg transform-gpu py-2.5"
+          )}
           onClick={handleRequestQuote}
         >
-          <span className="relative z-10 flex items-center justify-center gap-2">
+          <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
             {t('products.requestQuote')}
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 transform-gpu" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -177,14 +218,6 @@ const MemoizedProductCardWrapper = memo(({
         </Button>
       </div>
     </motion.div>
-  );
-}, (prevProps, nextProps) => {
-  // Custom comparison function to prevent unnecessary re-renders
-  return (
-    prevProps.title === nextProps.title &&
-    prevProps.image === nextProps.image &&
-    prevProps.category === nextProps.category &&
-    prevProps.productId === nextProps.productId
   );
 });
 
@@ -458,15 +491,15 @@ const Products = () => {
       <Header />
       <main className="flex-grow">
         {/* Filter and Search Section */}
-        <section className="py-8 pt-24">
+        <section className="py-8 pt-32">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl mx-auto px-4"
           >
             {/* Search Container */}
-            <div className="relative">
+            <div className="relative mt-8">
               {/* Background decorative elements */}
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
@@ -564,11 +597,11 @@ const Products = () => {
 
         {/* Products Grid */}
         <section className="py-8 pb-24">
-          <div className={cn("container mx-auto px-4", language === "ar" ? "rtl" : "ltr")}>
+          <div className={cn("max-w-[1400px] mx-auto px-8", language === "ar" ? "rtl" : "ltr")}>
             <AnimatePresence mode="wait">
               <motion.div 
-                key={activeCategory + searchQuery.length} // Only re-render when necessary
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                key={activeCategory + searchQuery.length}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
