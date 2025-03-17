@@ -346,7 +346,7 @@ const About = () => {
   <div className="absolute top-40 right-20 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
   <div className="absolute bottom-40 left-20 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
   
-  <motion.div variants={sectionVariants} className="max-w-5xl mx-auto px-4 relative z-10">
+  <motion.div variants={sectionVariants} className="max-w-5xl mx-auto px-10 relative z-10">
     <div className="flex flex-col items-center justify-center gap-3 mb-10">
       <motion.div 
         initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
