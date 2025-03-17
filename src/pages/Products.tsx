@@ -128,7 +128,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-2 sm:p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
@@ -141,7 +141,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
           damping: 30,
           duration: 0.4
         }}
-        className="relative w-full max-w-5xl bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden h-[95vh] sm:h-[90vh] md:h-[80vh] flex flex-col"
+        className="relative w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden h-[80vh] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Close button */}
@@ -150,10 +150,10 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
           onClick={onClose}
-          className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 md:top-4 md:right-4 z-10 p-1.5 sm:p-2 rounded-full bg-white/90 hover:bg-white shadow-md transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white shadow-md transition-colors"
           aria-label="Close modal"
         >
-          <XCircle className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-500 hover:text-gray-700" />
+          <XCircle className="w-6 h-6 text-gray-500 hover:text-gray-700" />
         </motion.button>
 
         <div className="grid md:grid-cols-2 h-full">
@@ -162,7 +162,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="relative h-[35vh] sm:h-[40vh] md:h-full bg-emerald-50/30"
+            className="relative h-full bg-emerald-50/30"
           >
             <img
               src={product.image}
@@ -181,9 +181,9 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="absolute top-3 left-3 sm:top-4 sm:left-4"
+              className="absolute top-4 left-4"
             >
-              <div className={`flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium backdrop-blur-md shadow-sm ${categoryInfo.color}`}>
+              <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md shadow-sm ${categoryInfo.color}`}>
                 <CategoryIcon className="w-3 h-3" />
                 <span>{categoryInfo.label}</span>
               </div>
@@ -195,13 +195,13 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-3 sm:p-4 md:p-8 flex flex-col overflow-y-auto"
+            className="p-8 flex flex-col overflow-y-auto"
           >
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-2 sm:mb-3 md:mb-4 line-clamp-2"
+              className="text-3xl font-bold text-gray-800 mb-6 line-clamp-2"
             >
               {product.title}
             </motion.h2>
@@ -210,7 +210,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-sm sm:text-base md:text-lg text-gray-600 mb-3 sm:mb-4 md:mb-6 line-clamp-4"
+              className="text-gray-600 mb-8 text-lg line-clamp-4"
             >
               {product.description}
             </motion.p>
@@ -219,7 +219,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="space-y-2 sm:space-y-3 md:space-y-4 mb-4 sm:mb-6 md:mb-8 flex-grow"
+              className="space-y-4 mb-8 flex-grow"
             >
               {product.details.map((detail, index) => (
                 <motion.div 
@@ -227,10 +227,10 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 + index * 0.1 }}
-                  className="flex items-start gap-1.5 sm:gap-2 md:gap-3"
+                  className="flex items-start gap-3"
                 >
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 mt-1.5 sm:mt-2 flex-shrink-0" />
-                  <p className="text-xs sm:text-sm md:text-base text-gray-700 line-clamp-2">{detail}</p>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0" />
+                  <p className="text-gray-700 text-base line-clamp-2">{detail}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -239,7 +239,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="mt-auto pt-3 sm:pt-4 md:pt-0"
+              className="mt-auto"
             >
               <Button
                 onClick={handleRequestQuote}
@@ -247,14 +247,14 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
                   "w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white",
                   "hover:from-emerald-700 hover:to-emerald-600 rounded-lg",
                   "transition-all duration-300 group relative overflow-hidden",
-                  "shadow-md hover:shadow-lg transform-gpu py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg"
+                  "shadow-md hover:shadow-lg transform-gpu py-4 text-lg"
                 )}
               >
-                <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
+                <span className="relative z-10 flex items-center justify-center gap-2">
                   {t('products.requestQuote')}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 transition-transform duration-300 group-hover:translate-x-1 transform-gpu"
+                    className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 transform-gpu"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -320,7 +320,7 @@ const MemoizedProductCardWrapper = memo(({
       ref={cardRef}
       className={cn(
         "bg-white/90 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm hover:shadow-xl",
-        "transition-all duration-300 border border-gray-100 h-full flex flex-col group",
+        "transition-all duration-300 border border-gray-100 h-[500px] flex flex-col group",
         "transform-gpu w-full cursor-pointer",
         !isVisible && "opacity-0",
         isVisible && "animate-fadeIn"
@@ -332,8 +332,8 @@ const MemoizedProductCardWrapper = memo(({
       transition={{ duration: 0.3 }}
       onClick={onClick}
     >
-      <div className="relative">
-        <div className="aspect-[4/3] overflow-hidden bg-emerald-50/30">
+      <div className="relative h-[200px]">
+        <div className="w-full h-full overflow-hidden bg-emerald-50/30">
           {isVisible && (
             <img 
               src={image}
@@ -360,10 +360,10 @@ const MemoizedProductCardWrapper = memo(({
           </div>
         </div>
       </div>
-      <div className="p-4 flex-grow flex flex-col">
+      <div className="p-4 flex-grow flex flex-col h-[300px]">
         <h3 className="text-lg font-bold text-gray-800 mb-3 group-hover:text-emerald-700 transition-colors line-clamp-1">{title}</h3>
-        <p className="text-gray-600 mb-4 flex-grow text-sm line-clamp-2">{description}</p>
-        <div className="space-y-2 mt-auto">
+        <p className="text-gray-600 mb-4 text-sm line-clamp-2">{description}</p>
+        <div className="space-y-2 flex-grow">
           {details.map((detail, index) => (
             <div key={index} className="flex items-start gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
@@ -372,7 +372,7 @@ const MemoizedProductCardWrapper = memo(({
           ))}
         </div>
       </div>
-      <div className="p-4 pt-0">
+      <div className="p-4 pt-0 mt-auto">
         <Button 
           className={cn(
             "w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white",
@@ -776,12 +776,12 @@ const Products = () => {
         </section>
 
         {/* Products Grid */}
-        <section className="py-8 pb-24">
-          <div className={cn("max-w-[1400px] mx-auto px-8", language === "ar" ? "rtl" : "ltr")}>
+        <section className="py-8 pb-24 w-full overflow-x-hidden">
+          <div className={cn("max-w-[1800px] mx-auto px-1 sm:px-4 md:px-6 w-full", language === "ar" ? "rtl" : "ltr")}>
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activeCategory + searchQuery.length}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -789,17 +789,20 @@ const Products = () => {
               >
                 {filteredProducts.length > 0 ? (
                   filteredProducts.map((product) => (
-                    <MemoizedProductCardWrapper
-                      key={product.id}
-                      title={product.title}
-                      image={product.image}
-                      description={product.description}
-                      details={product.details}
-                      category={product.category}
-                      productId={getProductIdByIndex(product.id)}
-                      t={t}
-                      onClick={() => setSelectedProduct(product)}
-                    />
+                    <div key={product.id} className="w-full min-w-0">
+                      <div className="w-full min-w-0">
+                        <MemoizedProductCardWrapper
+                          title={product.title}
+                          image={product.image}
+                          description={product.description}
+                          details={product.details}
+                          category={product.category}
+                          productId={getProductIdByIndex(product.id)}
+                          t={t}
+                          onClick={() => setSelectedProduct(product)}
+                        />
+                      </div>
+                    </div>
                   ))
                 ) : (
                   <div className="col-span-full text-center py-16">
