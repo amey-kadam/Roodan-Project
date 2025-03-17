@@ -29,7 +29,7 @@ export function Footer() {
   return (
     <footer className="bg-background/80 backdrop-blur-lg border-t border-emerald-500/20">
       <div className="px-4 md:px-6 py-8 md:py-16 max-w-7xl mx-auto">
-        {/* Logo and slogan for mobile - displayed at the top */}
+        {/* Mobile logo section */}
         <div className="md:hidden mb-8 text-center">
           <h3 className="text-xl font-display font-bold mb-4">
             <button
@@ -63,8 +63,8 @@ export function Footer() {
           </p>
         </div>
 
-        {/* Grid layout for footer sections - with improved mobile layout */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+        {/* Footer links grid with proper alignment */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 md:gap-x-8 lg:gap-12">
           {/* Logo and slogan (hidden on mobile, shown on desktop) */}
           <div className="hidden md:block">
             <h3 className="text-xl font-display font-bold mb-4">
@@ -99,11 +99,11 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider inline-block">
+          {/* Quick Links - with consistent heading and text alignment */}
+          <div className="px-2 sm:px-0">
+            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider">
               <span 
-                className="bg-clip-text text-transparent inline-block"
+                className="bg-clip-text text-transparent"
                 style={{ 
                   backgroundImage: titleGradient,
                   textShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
@@ -137,11 +137,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Products */}
-          <div>
-            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider inline-block">
+          {/* Products - with consistent heading and text alignment */}
+          <div className="px-2 sm:px-0">
+            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider">
               <span 
-                className="bg-clip-text text-transparent inline-block"
+                className="bg-clip-text text-transparent"
                 style={{ 
                   backgroundImage: titleGradient,
                   textShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
@@ -170,11 +170,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div className="col-span-2 sm:col-span-2 md:col-span-1">
-            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider inline-block">
+          {/* Contact Info - spans 2 columns on mobile, 1 on desktop with proper alignment */}
+          <div className="col-span-2 md:col-span-1 px-2 sm:px-0">
+            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider">
               <span 
-                className="bg-clip-text text-transparent inline-block"
+                className="bg-clip-text text-transparent"
                 style={{ 
                   backgroundImage: titleGradient,
                   textShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
@@ -184,7 +184,7 @@ export function Footer() {
               </span>
             </h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex flex-col sm:flex-row sm:items-start sm:space-x-2">
+              <li className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-2">
                 <span className="text-gray-600 font-medium">{t("contact.email")}:</span>
                 <a 
                   href="mailto:info@tradenexus.com" 
@@ -193,7 +193,7 @@ export function Footer() {
                   www.roodan.ae
                 </a>
               </li>
-              <li className="flex flex-col sm:flex-row sm:items-start sm:space-x-2">
+              <li className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-x-2">
                 <span className="text-gray-600 font-medium">{t("contact.phone")}:</span>
                 <a 
                   href="tel:+12345678900" 
@@ -202,7 +202,7 @@ export function Footer() {
                   +1 (234) 567-8900
                 </a>
               </li>
-              <li className="flex flex-col space-y-1">
+              <li className="grid grid-cols-1 gap-y-1">
                 <span className="text-gray-600 font-medium">{t("contact.address")}:</span>
                 <div className="text-gray-600">
                   {formatAddress(t("contact.address_main"))}
@@ -212,12 +212,12 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Copyright and links section */}
-        <div className="mt-12 pt-6 border-t border-emerald-500/20 flex flex-col md:flex-row justify-between items-center">
+        {/* Copyright and links section - improved alignment */}
+        <div className="mt-10 pt-6 border-t border-emerald-500/20 flex flex-col items-center md:flex-row md:justify-between">
           <p className="text-gray-600 text-sm text-center md:text-left">
             &copy; {currentYear} {t("logo.title")} {t("footer.rights")}.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex justify-center space-x-6 mt-4 md:mt-0">
             {["footer.privacy", "footer.terms"].map((item) => (
               <a 
                 key={item}
