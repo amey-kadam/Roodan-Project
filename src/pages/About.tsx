@@ -112,8 +112,8 @@ const About = () => {
             >
               <div className="relative h-full w-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                 {/* Front Card */}
-                <div className="absolute inset-0 [backface-visibility:hidden] rounded-2xl overflow-hidden shadow-md border border-emerald-200 bg-white/90 backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-emerald-600/10 mix-blend-multiply z-10" />
+                <div className="absolute inset-0 [backface-visibility:hidden] rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-white/90 backdrop-blur-sm">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-400/5 to-gray-600/10 mix-blend-multiply z-10" />
                   <div className="absolute inset-0 backdrop-blur-[1px] z-0" />
                   <img
                     src={member.image}
@@ -122,12 +122,12 @@ const About = () => {
                   />
                   
                   {/* Glass Nameplate */}
-                  <div className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/80 border-t border-emerald-100 p-6 z-20">
+                  <div className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/80 border-t border-gray-100 p-6 z-20">
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-bold bg-clip-text text-transparent break-words" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 break-words">{member.name}</h3>
                       <div className="flex items-center justify-between gap-2">
                         <p className="text-base text-emerald-600 font-medium break-words flex-1">{member.role}</p>
-                        <span className="text-sm text-emerald-500 flex items-center gap-1 group-hover:scale-110 transition-transform whitespace-nowrap">
+                        <span className="text-sm text-gray-500 flex items-center gap-1 group-hover:scale-110 transition-transform whitespace-nowrap">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
@@ -137,13 +137,12 @@ const About = () => {
                     </div>
                   </div>
                   
-                  {/* Decorative Elements */}
-                  <div className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 sm:w-12 h-8 sm:h-12 rounded-full bg-emerald-300 opacity-20 blur-3xl z-10" />
-                  <div className="absolute top-8 sm:top-10 left-8 sm:left-10 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-emerald-400 opacity-20 blur-3xl z-10" />
+                  {/* Decorative Elements - Reduced */}
+                  <div className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 sm:w-12 h-8 sm:h-12 rounded-full bg-blue-300 opacity-10 blur-3xl z-10" />
                 </div>
                 
                 {/* Back Card */}
-                <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-50 to-white p-8 flex flex-col justify-center shadow-md border border-emerald-200">
+                <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-white p-8 flex flex-col justify-center shadow-md border border-gray-200">
                   <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjAyIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTRoLTJ2NGgyek0zMCAzNGgtMnYtNGgydjR6bTAtNnYtNGgtMnY0aDJ6TTI0IDM0aC0ydi00aDJ2NHptMC02di00aC0ydjRoMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10 mix-blend-overlay" />
                   
                   {/* Logo in bottom right */}
@@ -156,12 +155,12 @@ const About = () => {
                   </div>
                   
                   <div className="mb-6 relative">
-                    <h3 className="text-2xl font-bold bg-clip-text text-transparent mb-1 break-words" style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}>{member.name}</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-1 break-words">{member.name}</h3>
                     <p className="text-base text-emerald-600 font-medium mb-4 break-words">{member.role}</p>
-                    <div className="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-300" />
+                    <div className="w-16 h-1 bg-emerald-500" />
                   </div>
                   
-                  {/* Social Links - FINAL VERSION WITH DIRECT HANDLING */}
+                  {/* Social Links */}
                   <div className="flex gap-4 mt-auto relative z-[100]">
                     {/* LinkedIn */}
                     <button 
@@ -169,7 +168,7 @@ const About = () => {
                         e.stopPropagation();
                         window.open(member.socialLinks.linkedin, '_blank', 'noopener,noreferrer');
                       }}
-                      className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md hover:shadow-emerald-200 cursor-pointer group"
+                      className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-gray-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md cursor-pointer group"
                       aria-label="LinkedIn"
                     >
                       <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -183,7 +182,7 @@ const About = () => {
                         e.stopPropagation();
                         window.open(member.socialLinks.twitter, '_blank', 'noopener,noreferrer');
                       }}
-                      className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md hover:shadow-emerald-200 cursor-pointer group"
+                      className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-gray-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md cursor-pointer group"
                       aria-label="Twitter"
                     >
                       <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -197,7 +196,7 @@ const About = () => {
                         e.stopPropagation();
                         window.location.href = member.socialLinks.email;
                       }}
-                      className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md hover:shadow-emerald-200 cursor-pointer group"
+                      className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-gray-700 transition-all duration-300 transform hover:scale-110 hover:shadow-md cursor-pointer group"
                       aria-label="Email"
                     >
                       <svg className="w-5 h-5 group-hover:animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -215,7 +214,7 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
+    <div className="min-h-screen flex flex-col bg-white font-sans">
       <Header />
       <main className="flex-grow">
         {/* Mission & Values Section */}
@@ -225,29 +224,18 @@ const About = () => {
           whileInView="animate"
           viewport={{ once: true }}
         >
-          {/* Background decorative elements */}
-          <div className="absolute top-20 right-10 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute bottom-20 left-10 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
+          {/* Reduced decorative elements with different colors */}
+          <div className="absolute top-20 right-10 w-40 h-40 bg-blue-200 rounded-full opacity-10 blur-3xl"></div>
           
           <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4 relative z-10">
             <div className="flex flex-col items-center justify-center gap-3 mb-10">
               <h2 
-                className="text-4xl md:text-5xl font-display mt-2 font-bold text-center bg-clip-text text-transparent" 
-                style={{ 
-                  backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
-                }}
+                className="text-4xl md:text-5xl font-display mt-2 font-bold text-center text-gray-800" 
               >
                 {t("about.mission.title")}
               </h2>
-              <div 
-                className="w-20 h-1 mx-auto" 
-                style={{ 
-                  background: "linear-gradient(to right, #047857, #10b981)" 
-                }}
-              ></div>
-              <p 
-                className="text-xl text-center max-w-3xl mx-auto mt-3 text-gray-600"
-              >
+              <div className="w-20 h-1 mx-auto bg-emerald-500"></div>
+              <p className="text-xl text-center max-w-3xl mx-auto mt-3 text-gray-600">
                 {t("about.mission.desc")}
               </p>
             </div>
@@ -257,18 +245,15 @@ const About = () => {
                 <motion.div 
                   key={`value-${index}`}
                   variants={itemVariants}
-                  className="bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-200/50 transition-all duration-300 h-full"
-                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.2)" }}
+                  className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 h-full"
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
                 >
                   <div className="flex flex-col h-full">
-                    <div className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600">
+                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-emerald-600">
                       <Award className="w-6 h-6" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 
-                        className="text-lg md:text-xl font-display font-semibold mb-2 bg-clip-text text-transparent truncate" 
-                        style={{ backgroundImage: "linear-gradient(to right, #047857, #10b981)" }}
-                      >
+                      <h3 className="text-lg md:text-xl font-display font-semibold mb-2 text-gray-800 truncate">
                         {t(`about.values.value${value}.title`)}
                       </h3>
                       <p className="text-gray-600 text-sm md:text-base">
@@ -284,14 +269,13 @@ const About = () => {
 
         {/* Team Section */}
         <motion.section 
-          className="page-container py-16 bg-gradient-to-br from-white via-gray-50 to-emerald-50/20 relative"
+          className="page-container py-16 bg-gray-50 relative"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          {/* Background decorative elements */}
-          <div className="absolute top-20 left-10 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
+          {/* Reduced background decorative elements */}
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-400 rounded-full opacity-10 blur-3xl"></div>
           
           <motion.div variants={sectionVariants} className="text-center mb-10 relative z-10">
             <div className="flex flex-col items-center justify-center gap-2 mb-4">
@@ -308,24 +292,14 @@ const About = () => {
                   }
                 }}
                 viewport={{ once: true }}
-                className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600"
+                className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-emerald-600"
               >
                 <Users className="w-6 h-6" />
               </motion.div>
-              <h2 
-                className="text-4xl md:text-5xl font-display font-bold bg-clip-text text-transparent mt-4"
-                style={{ 
-                  backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
-                }}
-              >
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mt-4">
                 {t("about.team.title")}
               </h2>
-              <div 
-                className="w-20 h-1 mx-auto mt-4" 
-                style={{ 
-                  background: "linear-gradient(to right, #047857, #10b981)" 
-                }}
-              ></div>
+              <div className="w-20 h-1 mx-auto mt-4 bg-emerald-500"></div>
             </div>
             <p className="max-w-2xl mx-auto text-lg text-gray-600 mt-4">
               {t("about.team.desc")}
@@ -337,100 +311,84 @@ const About = () => {
 
         {/* Why Choose Us Section */}
         <motion.section 
-  className="page-container py-16 relative"
-  initial="initial"
-  whileInView="animate"
-  viewport={{ once: true }}
->
-  {/* Background decorative elements */}
-  <div className="absolute top-40 right-20 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
-  <div className="absolute bottom-40 left-20 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
-  
-  <motion.div variants={sectionVariants} className="max-w-5xl mx-auto px-10 relative z-10">
-    <div className="flex flex-col items-center justify-center gap-3 mb-10">
-      <motion.div 
-        initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
-        whileInView={{ 
-          scale: 1, 
-          opacity: 1, 
-          rotateY: 0,
-          transition: { 
-            type: "spring", 
-            stiffness: 200,
-            delay: 0.1 
-          }
-        }}
-        viewport={{ once: true }}
-        className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600"
-      >
-        <Globe className="w-6 h-6" />
-      </motion.div>
-      <h2 
-        className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
-        style={{ 
-          backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
-        }}
-      >
-       {t("about.whyChooseUs.title")}
-      </h2>
-      <div 
-        className="w-20 h-1 mx-auto mt-2" 
-        style={{ 
-          background: "linear-gradient(to right, #047857, #10b981)" 
-        }}
-      ></div>
-    </div>
-    
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-      {[  
-        "about.whyChooseUs.reason1",
-        "about.whyChooseUs.reason2",
-        "about.whyChooseUs.reason3",
-        "about.whyChooseUs.reason4",
-        "about.whyChooseUs.reason5",
-      ].map((reason, index) => (
-        <motion.div 
-          key={index} 
-          initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-          whileInView={{ 
-            opacity: 1, 
-            x: 0,
-            transition: {
-              duration: 0.5,
-              delay: index * 0.1,
-              ease: "easeOut"
-            }
-          }}
-          viewport={{ once: true, amount: 0.3 }}
-          className={cn(
-            "bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-200/50 transition-all duration-300 h-full",
-            index === 4 && "md:col-span-2 md:max-w-lg md:mx-auto w-full"
-          )}
-          whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.2)" }}
+          className="page-container py-16 relative"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
         >
-          <div className="flex items-start gap-4 h-full">
-            <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-600">
-              <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-            </div>
-            <div className="flex-1 min-w-0 flex flex-col">
-              <h3 
-                className="text-lg md:text-xl font-display font-semibold mb-2 bg-clip-text text-transparent break-words" 
-                style={{ 
-                  backgroundImage: "linear-gradient(to right, #047857, #10b981)" 
+          {/* Reduced decorative elements */}
+          <div className="absolute top-40 right-20 w-40 h-40 bg-blue-200 rounded-full opacity-10 blur-3xl"></div>
+          
+          <motion.div variants={sectionVariants} className="max-w-5xl mx-auto px-10 relative z-10">
+            <div className="flex flex-col items-center justify-center gap-3 mb-10">
+              <motion.div 
+                initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
+                whileInView={{ 
+                  scale: 1, 
+                  opacity: 1, 
+                  rotateY: 0,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 200,
+                    delay: 0.1 
+                  }
                 }}
+                viewport={{ once: true }}
+                className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-emerald-600"
               >
-                {t(`about.whyChooseUs.title${index + 1}`)}
-              </h3>
-              <p className="text-gray-600 text-sm md:text-base">
-                {t(reason)}
-              </p>
+                <Globe className="w-6 h-6" />
+              </motion.div>
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-center text-gray-800 mt-4">
+               {t("about.whyChooseUs.title")}
+              </h2>
+              <div className="w-20 h-1 mx-auto mt-2 bg-emerald-500"></div>
             </div>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  </motion.div>
-</motion.section>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {[  
+                "about.whyChooseUs.reason1",
+                "about.whyChooseUs.reason2",
+                "about.whyChooseUs.reason3",
+                "about.whyChooseUs.reason4",
+                "about.whyChooseUs.reason5",
+              ].map((reason, index) => (
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    x: 0,
+                    transition: {
+                      duration: 0.5,
+                      delay: index * 0.1,
+                      ease: "easeOut"
+                    }
+                  }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  className={cn(
+                    "bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 h-full",
+                    index === 4 && "md:col-span-2 md:max-w-lg md:mx-auto w-full"
+                  )}
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                >
+                  <div className="flex items-start gap-4 h-full">
+                    <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 text-emerald-600">
+                      <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+                    </div>
+                    <div className="flex-1 min-w-0 flex flex-col">
+                      <h3 className="text-lg md:text-xl font-display font-semibold mb-2 text-gray-800 break-words">
+                        {t(`about.whyChooseUs.title${index + 1}`)}
+                      </h3>
+                      <p className="text-gray-600 text-sm md:text-base">
+                        {t(reason)}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.section>
       </main>
       <Footer />
     </div>
