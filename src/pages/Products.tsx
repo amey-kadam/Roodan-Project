@@ -5,7 +5,7 @@ import { useI18n } from "@/utils/i18n";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { Grid, ShoppingBag, Package, Leaf, Droplet, Fuel, Search, X } from "lucide-react";
+import { Grid, ShoppingBag, Package, Leaf, Droplet, Fuel, Search, X, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 // Define proper TypeScript interfaces
@@ -49,6 +49,14 @@ interface ProductCardProps {
   category: ProductCategory;
   productId: string;
   t: (key: string) => string;
+}
+
+// Add ProductModal interface
+interface ProductModalProps {
+  product: Product;
+  onClose: () => void;
+  t: (key: string) => string;
+  language: string;
 }
 
 // Move category info function outside component
@@ -96,7 +104,180 @@ const getProductIdByIndex = (id: number): string => {
   }
 };
 
-// Memoized product card with improved prop types
+// Add ProductModal component
+const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps) => {
+  const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const categoryInfo = useMemo(() => getCategoryInfo(product.category, t), [product.category, t]);
+  const CategoryIcon = categoryInfo.icon;
+
+  // Add useEffect to handle body scrolling
+  useEffect(() => {
+    // Prevent scrolling on the body when modal is open
+    document.body.style.overflow = 'hidden';
+    
+    // Cleanup function to restore scrolling when modal is closed
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  const handleRequestQuote = useCallback(() => {
+    navigate('/inquiry', { state: { selectedProduct: getProductIdByIndex(product.id) } });
+  }, [navigate, product.id]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 20 }}
+        transition={{ 
+          type: "spring",
+          stiffness: 300,
+          damping: 30,
+          duration: 0.4
+        }}
+        className="relative w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden max-h-[90vh] flex flex-col"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white shadow-md transition-colors"
+          aria-label="Close modal"
+        >
+          <XCircle className="w-6 h-6 text-gray-500 hover:text-gray-700" />
+        </motion.button>
+
+        <div className="grid md:grid-cols-2 h-full overflow-hidden">
+          {/* Image section */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+            className="relative h-full bg-emerald-50/30"
+          >
+            <img
+              src={product.image}
+              alt={product.title}
+              className={cn(
+                "w-full h-full object-cover",
+                !imageLoaded && "blur-sm opacity-0",
+                imageLoaded && "blur-0 opacity-100 transition-all duration-500"
+              )}
+              onLoad={() => setImageLoaded(true)}
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="absolute top-4 left-4"
+            >
+              <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md shadow-sm ${categoryInfo.color}`}>
+                <CategoryIcon className="w-3 h-3" />
+                <span>{categoryInfo.label}</span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Content section */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="p-8 flex flex-col overflow-y-auto"
+          >
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-3xl font-bold text-gray-800 mb-6"
+            >
+              {product.title}
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-gray-600 mb-8 text-lg"
+            >
+              {product.description}
+            </motion.p>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="space-y-4 mb-8"
+            >
+              {product.details.map((detail, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 + index * 0.1 }}
+                  className="flex items-start gap-3"
+                >
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0" />
+                  <p className="text-gray-700 text-base">{detail}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="mt-auto"
+            >
+              <Button
+                onClick={handleRequestQuote}
+                className={cn(
+                  "w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white",
+                  "hover:from-emerald-700 hover:to-emerald-600 rounded-lg",
+                  "transition-all duration-300 group relative overflow-hidden",
+                  "shadow-md hover:shadow-lg transform-gpu py-4 text-lg"
+                )}
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  {t('products.requestQuote')}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 transform-gpu"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+});
+
+ProductModal.displayName = 'ProductModal';
+
+// Update MemoizedProductCardWrapper to handle click
 const MemoizedProductCardWrapper = memo(({
   title, 
   image, 
@@ -104,8 +285,9 @@ const MemoizedProductCardWrapper = memo(({
   details,
   category,
   productId,
-  t
-}: ProductCardProps) => {
+  t,
+  onClick
+}: ProductCardProps & { onClick: () => void }) => {
   const navigate = useNavigate();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -143,7 +325,7 @@ const MemoizedProductCardWrapper = memo(({
       className={cn(
         "bg-white/90 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm hover:shadow-xl",
         "transition-all duration-300 border border-gray-100 h-full flex flex-col group",
-        "transform-gpu w-full",
+        "transform-gpu w-full cursor-pointer",
         !isVisible && "opacity-0",
         isVisible && "animate-fadeIn"
       )}
@@ -152,6 +334,7 @@ const MemoizedProductCardWrapper = memo(({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3 }}
+      onClick={onClick}
     >
       <div className="relative">
         <div className="aspect-[4/3] overflow-hidden bg-emerald-50/30">
@@ -294,6 +477,7 @@ const Products = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [productData, setProductData] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   // Initialize product data with translations
   useEffect(() => {
@@ -618,6 +802,7 @@ const Products = () => {
                       category={product.category}
                       productId={getProductIdByIndex(product.id)}
                       t={t}
+                      onClick={() => setSelectedProduct(product)}
                     />
                   ))
                 ) : (
@@ -650,6 +835,18 @@ const Products = () => {
         </section>
       </main>
       <Footer />
+
+      {/* Product Modal */}
+      <AnimatePresence>
+        {selectedProduct && (
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            t={t}
+            language={language}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
