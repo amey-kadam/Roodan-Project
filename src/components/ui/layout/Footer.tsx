@@ -28,12 +28,46 @@ export function Footer() {
 
   return (
     <footer className="bg-background/80 backdrop-blur-lg border-t border-emerald-500/20">
-      <div className="page-container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
-          <div className="md:col-span-1">
-            <h3 
-              className="text-xl font-display font-bold mb-4"
+      <div className="px-4 md:px-6 py-8 md:py-16 max-w-7xl mx-auto">
+        {/* Logo and slogan for mobile - displayed at the top */}
+        <div className="md:hidden mb-8 text-center">
+          <h3 className="text-xl font-display font-bold mb-4">
+            <button
+              onClick={handleLogoClick}
+              className="inline-flex items-center justify-center gap-2 hover:opacity-80 transition-all duration-300"
             >
+              <img
+                src="/tree_logo.png"
+                alt="Roodan Logo"
+                className="w-8 h-10 object-contain -translate-y-1 transform transition-transform duration-300"
+              />
+              <span 
+                className="bg-clip-text text-transparent transition-all duration-300 inline-block relative group"
+                style={{ 
+                  backgroundImage: titleGradient,
+                  textShadow: "0 2px 4px rgba(10, 93, 54, 0.2)"
+                }}
+              >
+                {t("logo.title")}
+                <span 
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-800 to-emerald-400 transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100"
+                  style={{
+                    boxShadow: "0 1px 2px rgba(10, 93, 54, 0.2)"
+                  }}
+                />
+              </span>
+            </button>
+          </h3>
+          <p className="text-gray-600 text-sm max-w-xs mx-auto leading-relaxed">
+            {t("slogan")}
+          </p>
+        </div>
+
+        {/* Grid layout for footer sections - with improved mobile layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+          {/* Logo and slogan (hidden on mobile, shown on desktop) */}
+          <div className="hidden md:block">
+            <h3 className="text-xl font-display font-bold mb-4">
               <button
                 onClick={handleLogoClick}
                 className="inline-flex items-center gap-2 hover:opacity-80 transition-all duration-300"
@@ -67,9 +101,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 
-              className="font-medium mb-4 text-sm uppercase tracking-wider inline-block"
-            >
+            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider inline-block">
               <span 
                 className="bg-clip-text text-transparent inline-block"
                 style={{ 
@@ -93,8 +125,8 @@ export function Footer() {
                     to={link.to} 
                     className={({ isActive }) =>
                       cn(
-                        "transition-all duration-300 text-gray-600 hover:text-black-900", // Same color for all links
-                        isActive ? "font-medium" : "" // Only apply font-weight difference for active link
+                        "transition-all duration-300 text-gray-600 hover:text-black-900",
+                        isActive ? "font-medium" : ""
                       )
                     }
                   >
@@ -107,9 +139,7 @@ export function Footer() {
 
           {/* Products */}
           <div>
-            <h3 
-              className="font-medium mb-4 text-sm uppercase tracking-wider inline-block"
-            >
+            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider inline-block">
               <span 
                 className="bg-clip-text text-transparent inline-block"
                 style={{ 
@@ -141,10 +171,8 @@ export function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 
-              className="font-medium mb-4 text-sm uppercase tracking-wider inline-block"
-            >
+          <div className="col-span-2 sm:col-span-2 md:col-span-1">
+            <h3 className="font-medium mb-4 text-sm uppercase tracking-wider inline-block">
               <span 
                 className="bg-clip-text text-transparent inline-block"
                 style={{ 
@@ -156,8 +184,8 @@ export function Footer() {
               </span>
             </h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-start space-x-2">
-                <span className="text-gray-600">{t("contact.email")}:</span>
+              <li className="flex flex-col sm:flex-row sm:items-start sm:space-x-2">
+                <span className="text-gray-600 font-medium">{t("contact.email")}:</span>
                 <a 
                   href="mailto:info@tradenexus.com" 
                   className="transition-all duration-300 text-gray-600 hover:text-gray-900"
@@ -165,8 +193,8 @@ export function Footer() {
                   www.roodan.ae
                 </a>
               </li>
-              <li className="flex items-start space-x-2">
-                <span className="text-gray-600">{t("contact.phone")}:</span>
+              <li className="flex flex-col sm:flex-row sm:items-start sm:space-x-2">
+                <span className="text-gray-600 font-medium">{t("contact.phone")}:</span>
                 <a 
                   href="tel:+12345678900" 
                   className="transition-all duration-300 text-gray-600 hover:text-gray-900"
@@ -175,8 +203,8 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex flex-col space-y-1">
-                <span className="text-gray-600">{t("contact.address")}:</span>
-                <div className="text-gray-600 ml-2">
+                <span className="text-gray-600 font-medium">{t("contact.address")}:</span>
+                <div className="text-gray-600">
                   {formatAddress(t("contact.address_main"))}
                 </div>
               </li>
@@ -184,8 +212,9 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Copyright and links section */}
         <div className="mt-12 pt-6 border-t border-emerald-500/20 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-sm text-center md:text-left">
             &copy; {currentYear} {t("logo.title")} {t("footer.rights")}.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
