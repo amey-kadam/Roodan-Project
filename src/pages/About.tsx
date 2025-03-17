@@ -337,100 +337,100 @@ const About = () => {
 
         {/* Why Choose Us Section */}
         <motion.section 
-          className="page-container py-16 relative"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
+  className="page-container py-16 relative"
+  initial="initial"
+  whileInView="animate"
+  viewport={{ once: true }}
+>
+  {/* Background decorative elements */}
+  <div className="absolute top-40 right-20 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
+  <div className="absolute bottom-40 left-20 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
+  
+  <motion.div variants={sectionVariants} className="max-w-5xl mx-auto px-4 relative z-10">
+    <div className="flex flex-col items-center justify-center gap-3 mb-10">
+      <motion.div 
+        initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
+        whileInView={{ 
+          scale: 1, 
+          opacity: 1, 
+          rotateY: 0,
+          transition: { 
+            type: "spring", 
+            stiffness: 200,
+            delay: 0.1 
+          }
+        }}
+        viewport={{ once: true }}
+        className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600"
+      >
+        <Globe className="w-6 h-6" />
+      </motion.div>
+      <h2 
+        className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
+        style={{ 
+          backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
+        }}
+      >
+       {t("about.whyChooseUs.title")}
+      </h2>
+      <div 
+        className="w-20 h-1 mx-auto mt-2" 
+        style={{ 
+          background: "linear-gradient(to right, #047857, #10b981)" 
+        }}
+      ></div>
+    </div>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      {[  
+        "about.whyChooseUs.reason1",
+        "about.whyChooseUs.reason2",
+        "about.whyChooseUs.reason3",
+        "about.whyChooseUs.reason4",
+        "about.whyChooseUs.reason5",
+      ].map((reason, index) => (
+        <motion.div 
+          key={index} 
+          initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+          whileInView={{ 
+            opacity: 1, 
+            x: 0,
+            transition: {
+              duration: 0.5,
+              delay: index * 0.1,
+              ease: "easeOut"
+            }
+          }}
+          viewport={{ once: true, amount: 0.3 }}
+          className={cn(
+            "bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-200/50 transition-all duration-300 h-full",
+            index === 4 && "md:col-span-2 md:max-w-lg md:mx-auto w-full"
+          )}
+          whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.2)" }}
         >
-          {/* Background decorative elements */}
-          <div className="absolute top-40 right-20 w-40 h-40 bg-emerald-300 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute bottom-40 left-20 w-40 h-40 bg-emerald-400 rounded-full opacity-20 blur-3xl"></div>
-          
-          <motion.div variants={sectionVariants} className="max-w-5xl mx-auto relative z-10">
-            <div className="flex flex-col items-center justify-center gap-3 mb-10">
-              <motion.div 
-                initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
-                whileInView={{ 
-                  scale: 1, 
-                  opacity: 1, 
-                  rotateY: 0,
-                  transition: { 
-                    type: "spring", 
-                    stiffness: 200,
-                    delay: 0.1 
-                  }
-                }}
-                viewport={{ once: true }}
-                className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-4 text-emerald-600"
-              >
-                <Globe className="w-6 h-6" />
-              </motion.div>
-              <h2 
-                className="text-4xl md:text-5xl font-display font-bold text-center bg-clip-text text-transparent mt-4"
+          <div className="flex items-start gap-4 h-full">
+            <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-600">
+              <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+            </div>
+            <div className="flex-1 min-w-0 flex flex-col">
+              <h3 
+                className="text-lg md:text-xl font-display font-semibold mb-2 bg-clip-text text-transparent break-words" 
                 style={{ 
-                  backgroundImage: "linear-gradient(to right, #047857, #10b981, #34d399)" 
+                  backgroundImage: "linear-gradient(to right, #047857, #10b981)" 
                 }}
               >
-               {t("about.whyChooseUs.title")}
-              </h2>
-              <div 
-                className="w-20 h-1 mx-auto mt-2" 
-                style={{ 
-                  background: "linear-gradient(to right, #047857, #10b981)" 
-                }}
-              ></div>
+                {t(`about.whyChooseUs.title${index + 1}`)}
+              </h3>
+              <p className="text-gray-600 text-sm md:text-base">
+                {t(reason)}
+              </p>
             </div>
-            
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {[  
-                "about.whyChooseUs.reason1",
-                "about.whyChooseUs.reason2",
-                "about.whyChooseUs.reason3",
-                "about.whyChooseUs.reason4",
-                "about.whyChooseUs.reason5",
-              ].map((reason, index) => (
-                <motion.div 
-                  key={index} 
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    x: 0,
-                    transition: {
-                      duration: 0.5,
-                      delay: index * 0.1,
-                      ease: "easeOut"
-                    }
-                  }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  className={cn(
-                    "bg-white/90 backdrop-blur-sm rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-200/50 transition-all duration-300 h-full",
-                    index === 4 && "md:col-span-2 md:max-w-lg md:mx-auto"
-                  )}
-                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.2)" }}
-                >
-                  <div className="flex items-start gap-4 h-full">
-                    <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-600">
-                      <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <div className="flex-1 min-w-0 flex flex-col">
-                      <h3 
-                        className="text-lg md:text-xl font-display font-semibold mb-2 bg-clip-text text-transparent truncate" 
-                        style={{ 
-                          backgroundImage: "linear-gradient(to right, #047857, #10b981)" 
-                        }}
-                      >
-                        {t(`about.whyChooseUs.title${index + 1}`)}
-                      </h3>
-                      <p className="text-gray-600 text-sm md:text-base">
-                        {t(reason)}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.section>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
+</motion.section>
       </main>
       <Footer />
     </div>
