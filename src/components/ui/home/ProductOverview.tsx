@@ -76,45 +76,26 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
       onClick={onClose}
     >
-      <motion.div
-        initial={{ scale: 0.95, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.95, opacity: 0, y: 20 }}
-        transition={{ 
-          type: "spring",
-          stiffness: 300,
-          damping: 30,
-          duration: 0.4
-        }}
+      <div
         className="relative w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden h-[90vh] md:h-[80vh] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Close button */}
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
+        <button
           onClick={onClose}
           className="absolute top-2 right-2 z-10 p-2 rounded-full bg-white/90 hover:bg-white shadow-md transition-colors"
           aria-label="Close modal"
         >
           <XCircle className="w-6 h-6 text-gray-500 hover:text-gray-700" />
-        </motion.button>
+        </button>
 
         <div className="grid md:grid-cols-2 h-full">
           {/* Image section */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
+          <div 
             className="relative h-[40vh] md:h-full bg-emerald-50/30"
           >
             <img
@@ -130,59 +111,39 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
               decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-          </motion.div>
+          </div>
 
           {/* Content section */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
+          <div 
             className="p-4 md:p-8 flex flex-col overflow-y-auto"
           >
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+            <h2 
               className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6 line-clamp-2"
             >
               {product.title}
-            </motion.h2>
+            </h2>
             
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+            <p 
               className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 line-clamp-4"
             >
               {product.description}
-            </motion.p>
+            </p>
             
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+            <div 
               className="space-y-3 md:space-y-4 mb-6 md:mb-8 flex-grow"
             >
               {product.details.map((detail, index) => (
-                <motion.div 
+                <div 
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6 + index * 0.1 }}
                   className="flex items-start gap-3"
                 >
                   <div className="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0" />
                   <p className="text-sm md:text-base text-gray-700 line-clamp-2">{detail}</p>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="mt-auto"
-            >
+            <div className="mt-auto">
               <Button
                 onClick={() => window.location.href = '/inquiry'}
                 className={cn(
@@ -205,11 +166,11 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
                   </svg>
                 </span>
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 });
 
