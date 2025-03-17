@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
-import { Mail, Phone, MapPin, ArrowRight, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -17,7 +17,7 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Format address to properly display multiline content
-  const formatAddress = (address: string) => {
+  const formatAddress = (address) => {
     // First replace the escaped newlines with actual newlines
     const processedAddress = address.replace(/\\n/g, '\n');
     // Then split by newline and map to spans
@@ -86,7 +86,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
       <Header />
       <main className="flex-grow relative">
         {/* Added proper spacing from navbar */}
@@ -96,19 +96,17 @@ const Contact = () => {
           className={cn(
             "page-container",
             language === "ar" ? "rtl" : "ltr",
-            "pt-14 pb-10"
+            "pt-14 pb-8"
           )}
         >
           <div className="flex items-center justify-center gap-4 mb-6">
             <h2
-              className="text-4xl md:text-5xl font-display font-bold text-center bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent mt-4"
+              className="text-4xl md:text-5xl font-display font-bold text-center text-slate-800 mt-4"
             >
               {t("contact.title")}
             </h2>
           </div>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-emerald-500 mx-auto rounded-full mb-8"></div>
-
-          {/*  */}
+          <div className="w-24 h-1 bg-emerald-500 mx-auto rounded-full mb-8"></div>
         </div>
 
         {/* Contact Information Cards - Compact with minimal spacing */}
@@ -146,7 +144,6 @@ const Contact = () => {
                     icon: Mail,
                     title: t("contact.email"),
                     links: [
-                      // { text: "www.roodan.ae", href: "https://www.roodan.ae" },
                       { text: "info@roodan.ae", href: "mailto:info@roodan.ae" },
                     ],
                   },
@@ -154,7 +151,6 @@ const Contact = () => {
                     icon: Phone,
                     title: t("contact.phone"),
                     links: [
-                      // { text: "+1 (234) 567-8900", href: "tel:+12345678900" },
                       { text: "+971507654228", href: "tel:+971507654228" },
                     ],
                   },
@@ -186,10 +182,10 @@ const Contact = () => {
                     }}
                     className="bg-white rounded-lg p-3 flex flex-col items-center text-center hover:shadow-md transition-all duration-200 border border-gray-100"
                   >
-                    <div className="w-8 h-8 bg-gradient-to-br from-emerald-500/10 to-emerald-600/20 rounded-full flex items-center justify-center mb-2">
-                      <item.icon className="w-4 h-4 text-emerald-500" />
+                    <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center mb-2">
+                      <item.icon className="w-4 h-4 text-blue-600" />
                     </div>
-                    <h3 className="text-sm font-medium mb-1 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
+                    <h3 className="text-sm font-medium mb-1 text-slate-700">
                       {item.title}
                     </h3>
                     {item.links ? (
@@ -198,7 +194,7 @@ const Contact = () => {
                           <a
                             key={idx}
                             href={link.href}
-                            className="block text-xs text-gray-600 hover:text-emerald-500 transition-colors"
+                            className="block text-xs text-gray-600 hover:text-blue-600 transition-colors"
                           >
                             {link.text}
                           </a>
@@ -250,11 +246,11 @@ const Contact = () => {
                 </div>
                 
                 {/* Divider for mobile only */}
-                <div className="block lg:hidden w-full h-px bg-gradient-to-r from-transparent via-emerald-200 to-transparent my-4"></div>
+                <div className="block lg:hidden w-full h-px bg-gray-200 my-4"></div>
                 
                 {/* Form Section */}
                 <div className="p-5 md:p-6 order-last lg:order-first mt-2 sm:mt-4 lg:mt-0">
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
+                  <h3 className="text-2xl font-bold mb-2 text-slate-800">
                     {t("SendUs.title")}
                   </h3>
                   <p className="text-gray-600 mb-6">
@@ -265,7 +261,7 @@ const Contact = () => {
                     <div>
                       <label
                         htmlFor="name"
-                        className="block text-sm font-medium mb-1"
+                        className="block text-sm font-medium mb-1 text-slate-700"
                       >
                         {t("contact.form.name")} <span className="text-red-500">*</span>
                       </label>
@@ -273,7 +269,7 @@ const Contact = () => {
                         id="name"
                         name="name"
                         required
-                        className="h-10 text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
+                        className="h-10 text-sm rounded-md border-gray-200 focus:border-blue-500 focus:ring-blue-500/30 transition-all"
                         placeholder="John Doe"
                       />
                     </div>
@@ -281,7 +277,7 @@ const Contact = () => {
                     <div>
                       <label
                         htmlFor="email"
-                        className="block text-sm font-medium mb-1"
+                        className="block text-sm font-medium mb-1 text-slate-700"
                       >
                         {t("contact.form.email")} <span className="text-red-500">*</span>
                       </label>
@@ -290,7 +286,7 @@ const Contact = () => {
                         id="email"
                         name="email"
                         required
-                        className="h-10 text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all"
+                        className="h-10 text-sm rounded-md border-gray-200 focus:border-blue-500 focus:ring-blue-500/30 transition-all"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -298,7 +294,7 @@ const Contact = () => {
                     <div>
                       <label
                         htmlFor="message"
-                        className="block text-sm font-medium mb-1"
+                        className="block text-sm font-medium mb-1 text-slate-700"
                       >
                         {t("contact.form.message")} <span className="text-red-500">*</span>
                       </label>
@@ -307,29 +303,31 @@ const Contact = () => {
                         name="message"
                         rows={4}
                         required
-                        className="w-full text-sm rounded-md border-gray-200 focus:border-emerald-500 focus:ring-emerald-500/30 transition-all resize-y min-h-[100px]"
+                        className="w-full text-sm rounded-md border-gray-200 focus:border-blue-500 focus:ring-blue-500/30 transition-all resize-y min-h-[100px]"
                         placeholder="Your message here..."
                       />
                     </div>
 
-                    <Button
-                      type="submit"
-                      className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300 group relative overflow-hidden shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
-                      disabled={isSubmitting}
-                    >
-                      <span className="relative z-10 flex items-center justify-center gap-2 font-medium text-white">
-                        {isSubmitting ? t("SendUs.sending") : t("SendUs.button")}
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </span>
-                    </Button>
+                    <div className="flex justify-end">
+                      <Button
+                        type="submit"
+                        className="px-6 py-2.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-all duration-300 shadow-sm"
+                        disabled={isSubmitting}
+                      >
+                        <span className="relative z-10 flex items-center justify-center gap-2 font-medium">
+                          {isSubmitting ? t("SendUs.sending") : t("SendUs.button")}
+                          <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </span>
+                      </Button>
+                    </div>
                   </form>
                 </div>
               </div>
