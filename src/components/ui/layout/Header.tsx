@@ -76,8 +76,8 @@ export function Header() {
                   className={cn(
                     "transition-all duration-300 object-contain",
                     isScrolled 
-                      ? "w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18" 
-                      : "w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20"
+                      ? "w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20" 
+                      : "w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-22 lg:h-22"
                   )}
                   style={{
                     transform: "translateY(-10%) translateX(5%)"
@@ -86,10 +86,10 @@ export function Header() {
               </div>
               <span 
                 className={cn(
-                  "font-bold ml-1 xs:ml-2 tracking-wider transition-all duration-300 bg-clip-text text-transparent whitespace-nowrap",
+                  "font-bold ml-2 xs:ml-3 tracking-wider transition-all duration-300 bg-clip-text text-transparent whitespace-nowrap",
                   isScrolled
-                    ? "text-base xs:text-lg sm:text-xl md:text-2xl"
-                    : "text-lg xs:text-xl sm:text-2xl md:text-3xl"
+                    ? "text-lg xs:text-xl sm:text-2xl md:text-3xl"
+                    : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
                 )}
                 style={{ 
                   backgroundImage: logoGradient,
@@ -177,7 +177,7 @@ export function Header() {
           </div>
 
           {/* Mobile Navigation Trigger */}
-          <div className="flex md:hidden items-center space-x-2 sm:space-x-3">
+          <div className="flex md:hidden items-center space-x-3 sm:space-x-4">
             <LanguageSelector 
               compact={true}
               className={cn(
@@ -191,12 +191,12 @@ export function Header() {
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
-              className="h-8 w-8 sm:h-10 sm:w-10"
+              className="h-16 w-16 sm:h-18 sm:w-18"
             >
               {isMobileMenuOpen ? (
-                <X className="h-5 w-5 sm:h-6 sm:w-6" />
+                <X className="h-9 w-9 sm:h-10 sm:w-10" />
               ) : (
-                <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+                <Menu className="h-9 w-9 sm:h-10 sm:w-10" />
               )}
             </Button>
           </div>
@@ -204,15 +204,15 @@ export function Header() {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed top-[60px] sm:top-[70px] inset-x-0 bg-background border-t border-border/30 shadow-md transition-all duration-300 overflow-y-auto max-h-[calc(100vh-60px)] sm:max-h-[calc(100vh-70px)]">
-            <nav className="flex flex-col py-4 sm:py-6 px-3 sm:px-4">
+          <div className="md:hidden fixed top-[70px] sm:top-[80px] inset-x-0 bg-background border-t border-border/30 shadow-md transition-all duration-300 overflow-y-auto max-h-[calc(100vh-70px)] sm:max-h-[calc(100vh-80px)]">
+            <nav className="flex flex-col py-6 sm:py-8 px-4 sm:px-6">
               {routes.map((route) => (
                 <NavLink
                   key={route.path}
                   to={route.path}
                   className={({ isActive }) =>
                     cn(
-                      "py-3 sm:py-4 px-3 sm:px-4 font-medium text-base sm:text-lg transition-all duration-300 group",
+                      "py-4 sm:py-5 px-4 sm:px-6 font-medium text-lg sm:text-xl transition-all duration-300 group",
                       isActive
                         ? "font-semibold"
                         : "hover:font-medium"
@@ -262,9 +262,9 @@ export function Header() {
                   </span>
                 </NavLink>
               ))}
-              <div className="pt-3 sm:pt-4 pb-2 px-2 sm:px-4">
+              <div className="pt-6 sm:pt-8 pb-4 px-4 sm:px-6">
                 <Button 
-                  className="w-full py-4 sm:py-6 text-sm sm:text-base text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 hover:shadow-lg" 
+                  className="w-full py-5 sm:py-6 text-base sm:text-lg text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 hover:shadow-lg" 
                   style={{ 
                     boxShadow: "0 4px 14px rgba(5, 150, 105, 0.25)",
                     transition: "all 0.3s ease"
