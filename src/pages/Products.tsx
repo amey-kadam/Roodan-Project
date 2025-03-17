@@ -128,7 +128,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
       onClick={onClose}
     >
       <motion.div
@@ -141,7 +141,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
           damping: 30,
           duration: 0.4
         }}
-        className="relative w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden h-[80vh] flex flex-col"
+        className="relative w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden h-[90vh] md:h-[80vh] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Close button */}
@@ -150,7 +150,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white shadow-md transition-colors"
+          className="absolute top-2 right-2 z-10 p-2 rounded-full bg-white/90 hover:bg-white shadow-md transition-colors"
           aria-label="Close modal"
         >
           <XCircle className="w-6 h-6 text-gray-500 hover:text-gray-700" />
@@ -162,7 +162,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="relative h-full bg-emerald-50/30"
+            className="relative h-[40vh] md:h-full bg-emerald-50/30"
           >
             <img
               src={product.image}
@@ -195,13 +195,13 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-8 flex flex-col overflow-y-auto"
+            className="p-4 md:p-8 flex flex-col overflow-y-auto"
           >
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-3xl font-bold text-gray-800 mb-6 line-clamp-2"
+              className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6 line-clamp-2"
             >
               {product.title}
             </motion.h2>
@@ -210,7 +210,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-gray-600 mb-8 text-lg line-clamp-4"
+              className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 line-clamp-4"
             >
               {product.description}
             </motion.p>
@@ -219,7 +219,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="space-y-4 mb-8 flex-grow"
+              className="space-y-3 md:space-y-4 mb-6 md:mb-8 flex-grow"
             >
               {product.details.map((detail, index) => (
                 <motion.div 
@@ -230,7 +230,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
                   className="flex items-start gap-3"
                 >
                   <div className="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0" />
-                  <p className="text-gray-700 text-base line-clamp-2">{detail}</p>
+                  <p className="text-sm md:text-base text-gray-700 line-clamp-2">{detail}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -247,7 +247,7 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
                   "w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white",
                   "hover:from-emerald-700 hover:to-emerald-600 rounded-lg",
                   "transition-all duration-300 group relative overflow-hidden",
-                  "shadow-md hover:shadow-lg transform-gpu py-4 text-lg"
+                  "shadow-md hover:shadow-lg transform-gpu py-3 md:py-4 text-base md:text-lg"
                 )}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
