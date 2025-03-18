@@ -212,21 +212,24 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Copyright and links section - improved alignment */}
-        <div className="mt-10 pt-6 border-t border-emerald-500/20 flex flex-col items-center md:flex-row md:justify-between">
-          <p className="text-gray-600 text-sm text-center md:text-left">
-            &copy; {currentYear} {t("logo.title")} {t("footer.rights")}.
-          </p>
-          <div className="flex justify-center space-x-6 mt-4 md:mt-0">
-            {["footer.privacy", "footer.terms"].map((item) => (
-              <a 
-                key={item}
-                href="#" 
-                className="text-sm text-gray-600 transition-all duration-300 hover:text-gray-900"
-              >
-                {t(item)}
-              </a>
-            ))}
+        {/* Single divider line with copyright and links in one row */}
+        <div className="mt-8 pt-4 border-t border-emerald-500/20">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+            <p className="text-gray-600 text-sm text-center md:text-left">
+              &copy; {currentYear} {t("logo.title")} {t("footer.rights")}.
+            </p>
+            
+            <div className="flex justify-center md:justify-end space-x-6 mt-4 md:mt-0">
+              {["footer.privacy", "footer.terms"].map((item) => (
+                <a 
+                  key={item}
+                  href="#" 
+                  className="text-sm text-gray-600 transition-all duration-300 hover:text-gray-900"
+                >
+                  {t(item)}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -57,11 +57,11 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 precise-transition",
         isScrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-1 sm:py-2"
-          : "bg-transparent py-2 sm:py-4"
+          ? "bg-background/80 backdrop-blur-lg border-b border-border/30 py-0.5 sm:py-1"
+          : "bg-transparent py-1 sm:py-2"
       )}
     >
-      <div className="w-full max-w-screen-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <div className="w-full max-w-screen-2xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
         <div className="flex items-center justify-between">
           <NavLink
             to="/"
@@ -76,8 +76,8 @@ export function Header() {
                   className={cn(
                     "transition-all duration-300 object-contain",
                     isScrolled 
-                      ? "w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20" 
-                      : "w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-22 lg:h-22"
+                      ? "w-8 h-8 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16" 
+                      : "w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18"
                   )}
                   style={{
                     transform: "translateY(-10%) translateX(5%)"
@@ -86,10 +86,10 @@ export function Header() {
               </div>
               <span 
                 className={cn(
-                  "font-bold ml-2 xs:ml-3 tracking-wider transition-all duration-300 bg-clip-text text-transparent whitespace-nowrap",
+                  "font-bold ml-1.5 xs:ml-2 tracking-wider transition-all duration-300 bg-clip-text text-transparent whitespace-nowrap",
                   isScrolled
-                    ? "text-lg xs:text-xl sm:text-2xl md:text-3xl"
-                    : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
+                    ? "text-base xs:text-lg sm:text-xl md:text-2xl"
+                    : "text-lg xs:text-xl sm:text-2xl md:text-3xl"
                 )}
                 style={{ 
                   backgroundImage: logoGradient,
@@ -102,14 +102,14 @@ export function Header() {
           </NavLink>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
+          <nav className="hidden md:flex items-center space-x-3 lg:space-x-6">
             {routes.map((route) => (
               <NavLink
                 key={route.path}
                 to={route.path}
                 className={({ isActive }) =>
                   cn(
-                    "relative font-medium text-sm lg:text-base transition-all duration-300 py-2 group",
+                    "relative font-medium text-xs lg:text-sm transition-all duration-300 py-1.5 group",
                     isActive 
                       ? "font-semibold" 
                       : "hover:font-medium"
@@ -139,7 +139,7 @@ export function Header() {
                 {route.label}
                 <span 
                   className={cn(
-                    "absolute -bottom-1 left-0 w-full h-0.5 transition-all duration-500",
+                    "absolute -bottom-0.5 left-0 w-full h-0.5 transition-all duration-500",
                     location.pathname === route.path 
                       ? "scale-x-100 opacity-100" 
                       : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
@@ -154,17 +154,17 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
+          <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
             <LanguageSelector 
               className={cn(
-                "transition-all duration-300",
-                isScrolled ? "scale-90" : "scale-100"
+                "transition-all duration-300 scale-90",
+                isScrolled ? "scale-85" : "scale-90"
               )}
             />
             <Button
               asChild
               size="sm"
-              className="hover-scale hover:shadow-md font-medium px-3 lg:px-6 lg:text-base lg:size-lg text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600"
+              className="hover-scale hover:shadow-md font-medium px-2 lg:px-4 text-sm lg:text-base text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 h-8"
               style={{ 
                 transition: "all 0.3s ease",
                 boxShadow: "0 4px 14px rgba(5, 150, 105, 0.25)"
@@ -176,13 +176,13 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile Navigation Trigger */}
-          <div className="flex md:hidden items-center space-x-3 sm:space-x-4">
+          {/* Mobile Navigation Trigger - make it smaller too */}
+          <div className="flex md:hidden items-center space-x-2 sm:space-x-3">
             <LanguageSelector 
               compact={true}
               className={cn(
-                "transition-all duration-300",
-                isScrolled ? "scale-90" : "scale-100"
+                "transition-all duration-300 scale-90",
+                isScrolled ? "scale-85" : "scale-90"
               )}
             />
             
@@ -191,20 +191,20 @@ export function Header() {
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
-              className="h-16 w-16 sm:h-18 sm:w-18"
+              className="h-12 w-12 sm:h-14 sm:w-14"
             >
               {isMobileMenuOpen ? (
-                <X className="h-9 w-9 sm:h-10 sm:w-10" />
+                <X className="h-6 w-6 sm:h-8 sm:w-8" />
               ) : (
-                <Menu className="h-9 w-9 sm:h-10 sm:w-10" />
+                <Menu className="h-6 w-6 sm:h-8 sm:w-8" />
               )}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* Mobile Navigation Menu - adjust top position */}
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed top-[70px] sm:top-[80px] inset-x-0 bg-background border-t border-border/30 shadow-md transition-all duration-300 overflow-y-auto max-h-[calc(100vh-70px)] sm:max-h-[calc(100vh-80px)]">
+          <div className="md:hidden fixed top-[60px] sm:top-[70px] inset-x-0 bg-background border-t border-border/30 shadow-md transition-all duration-300 overflow-y-auto max-h-[calc(100vh-60px)] sm:max-h-[calc(100vh-70px)]">
             <nav className="flex flex-col py-6 sm:py-8 px-4 sm:px-6">
               {routes.map((route) => (
                 <NavLink
