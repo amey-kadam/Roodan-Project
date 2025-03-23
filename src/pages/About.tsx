@@ -38,7 +38,7 @@ const About = () => {
         name: "Dipl.-Ing. MBA Adama Sow",
         role: "CEO, General Manager",
         description: "Visionary leader with strategic insights.",
-        image: "",
+        image: "/Adama.jpg",
         socialLinks: {
           linkedin: "https://www.linkedin.com/company/roodan",
           twitter: "https://twitter.com/roodan",
