@@ -49,7 +49,7 @@ const About = () => {
         name: "Jens Marson",
         role: "COO, Co-Manager",
         description: "Operational excellence expert.",
-        image: "",
+        image: "/Jens_marson.jpg",
         socialLinks: {
           linkedin: "https://www.linkedin.com/company/roodan",
           twitter: "https://twitter.com/roodan",
@@ -60,7 +60,7 @@ const About = () => {
         name: "Tilmann Schillinger",
         role: "CFO, Co-Manager",
         description: "Financial strategy mastermind.",
-        image: "",
+        image: "/Tilmann_Schillinger.jpg",
         socialLinks: {
           linkedin: "https://www.linkedin.com",
           twitter: "https://twitter.com",
@@ -82,7 +82,7 @@ const About = () => {
         name: "MBA, MSc.(UK) Kunal More",
         role: "Business Development Asia",
         description: "Technology transformation driver.",
-        image: "",
+        image: "/Kunal.jpg",
         socialLinks: {
           linkedin: "https://www.linkedin.com",
           twitter: "https://twitter.com",
