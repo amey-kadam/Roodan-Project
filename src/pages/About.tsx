@@ -71,7 +71,7 @@ const About = () => {
         name: "MBA, BSc. Pamela Aupindi ",
         role: "Business Development Africa",
         description: "International markets connector.",
-        image: "",
+        image: "/Pamela.jpg",
         socialLinks: {
           linkedin: "https://www.linkedin.com",
           twitter: "https://twitter.com",
