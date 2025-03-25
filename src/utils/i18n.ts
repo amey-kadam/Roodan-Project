@@ -85,9 +85,9 @@ const translations: Record<Language, Record<string, string>> = {
     'product.coffee.detail2': 'Origin: South America, Asia, Africa',
     'product.coffee.detail3': 'Packaging: 50 kg bags or big bags',
     
-    'product.beef.title': 'Beef Products',
-    'product.beef.description': 'Premium quality beef from India',
-    'product.beef.detail1': 'Frozen beef, various cuts',
+    'product.beef.title': 'Buffalo Meat (HALAL)',
+    'product.beef.description': 'Premium quality Buffalo Meat from India',
+    'product.beef.detail1': 'Frozen Buffalo Meat, various cuts',
     'product.beef.detail2': 'Packaging: Frozen goods',
     'product.beef.detail3': 'Delivery: Worldwide',
     
@@ -97,15 +97,15 @@ const translations: Record<Language, Record<string, string>> = {
     'product.chicken.detail2': 'Packaging: Frozen goods',
     'product.chicken.detail3': 'Delivery: Worldwide',
     
-    'product.ghee.title': 'Beef Ghee',
-    'product.ghee.description': 'Pure beef ghee from India',
-    'product.ghee.detail1': '100% pure beef ghee',
+    'product.ghee.title': 'Ghee',
+    'product.ghee.description': 'Pure ghee from India',
+    'product.ghee.detail1': '100% pure ghee',
     'product.ghee.detail2': 'Packaging: 1 kg cans, 15 kg buckets',
     'product.ghee.detail3': 'Delivery: Worldwide',
     
     'product.vegetable.title': 'Vegetable Oils',
     'product.vegetable.description': 'High-quality vegetable oils CP8 and CP10 from Asia',
-    'product.vegetable.detail1': 'Palm oil, various packaging sizes',
+    'product.vegetable.detail1': 'Palm oil, various packaging sizes, soyabean oil, sunflower oil, &avacado oil',
     'product.vegetable.detail2': 'Delivery: CIF, FOB or by arrangement',
     'product.vegetable.detail3': 'Premium quality for food and industrial applications',
     
@@ -236,13 +236,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Strengths
     'strengths.title': 'Nos Forces',
     'strengths.quality.title': 'Qualité',
-    'strengths.quality.desc': 'Produits premium répondant aux normes internationales',
+    'strengths.quality.desc': 'nos produits proviennent de fournisseurs expérimentés et fiables qui sont présélectionnés par notre équipe de terrain',
     'strengths.reliability.title': 'Fiabilité',
-    'strengths.reliability.desc': 'Partenaire de confiance avec une livraison constante',
+    'strengths.reliability.desc': "nous travaillons avec des partenaires de confiance qui font partie intégrante de notre chaîne d'approvisionnement et qui fournissent une solution de bout en bout avec une transparence à 100%",
     'strengths.partnership.title': 'Partenariat',
-    'strengths.partnership.desc': 'Relations à long terme basées sur la transparence',
-    'strengths.flexibility.title': 'Flexibilité',
-    'strengths.flexibility.desc': 'Solutions personnalisées pour vos besoins spécifiques',
+    'strengths.partnership.desc': 'Nos partenariats à long terme avec toutes nos parties prenantes reposent sur une confiance et une transparence de longue date',
+    'strengths.flexibility.title': 'Solution Personnalisée',
+    'strengths.flexibility.desc': "Nous fournissons des solutions d'exportation sur mesure selon les besoins des clients",
     
     // Products
     'products.title': 'Nos Produits',
