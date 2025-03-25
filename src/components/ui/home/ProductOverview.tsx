@@ -281,6 +281,17 @@ function ProductOverviewComponent() {
         t("product.sugar.detail3"),
       ],
       category: "food"
+    },{
+      title: t("products.soy"),
+      image: "/soya.jpg",    //   : 'Soy Products' 'products.soyDesc': 'Soybeans, Soy Flour, Soy Oil',,
+      description: t("products.soyDesc"),
+      link: "/products",
+      details: [
+        t("product.soy.detail1"),
+        t("product.soy.detail2"),
+        t("product.soy.detail3"),
+      ],
+      category: "food"
     },
     {
       title: t("products.coffee"),
