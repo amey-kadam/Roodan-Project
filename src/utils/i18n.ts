@@ -28,13 +28,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Strengths
     'strengths.title': 'Our Strengths',
     'strengths.quality.title': 'Quality',
-    'strengths.quality.desc': 'Premium products meeting international standards',
+    'strengths.quality.desc': 'our products are sourced from experienced and reliable suppliers who are shortlisted by our field team',
     'strengths.reliability.title': 'Reliability',
-    'strengths.reliability.desc': 'Trusted partner with consistent delivery',
+    'strengths.reliability.desc': 'we work with trusted partners who are an integrated part of our supply chain that provide an end to end solution with 100% transparency',
     'strengths.partnership.title': 'Partnership',
-    'strengths.partnership.desc': 'Long-term relationships built on transparency',
-    'strengths.flexibility.title': 'Flexibility',
-    'strengths.flexibility.desc': 'Customized solutions for your specific needs',
+    'strengths.partnership.desc': 'Our long term partnerships with all our stakeholders is built upon long standing trust and transparency',
+    'strengths.flexibility.title': 'Customised Solution',
+    'strengths.flexibility.desc': 'We provide tailor made export solutions as per customer needs',
     
     // Products
     'products.title': 'Our Products',
