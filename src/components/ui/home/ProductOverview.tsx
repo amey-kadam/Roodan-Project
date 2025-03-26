@@ -202,8 +202,8 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "group bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden cursor-pointer",
-        "transition-all duration-500 border border-white/20 h-full flex flex-col",
+        "group bg-white rounded-3xl overflow-hidden cursor-pointer",
+        "transition-all duration-500 border-gray-100 h-full flex flex-col",
         "transform-gpu hover:translate-y-[-8px]",
         "shadow-[0_8px_30px_rgb(0,0,0,0.12)]",
         !isVisible && "opacity-0",
@@ -407,14 +407,12 @@ function ProductOverviewComponent() {
         {/* Modern container with clean scrolling */}
         <div className="relative">
           <div 
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 scrollbar-hide"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 scrollbar-hide gradient-mask md:gradient-mask-none"
             style={{ 
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               WebkitOverflowScrolling: 'touch',
-              scrollBehavior: 'smooth',
-              maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
+              scrollBehavior: 'smooth'
             }}
           >
             {products.map((product) => (
@@ -430,6 +428,14 @@ function ProductOverviewComponent() {
                 />
               </div>
             ))}
+          </div>
+          
+          {/* Swipe indicator - only visible on mobile */}
+          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex items-center gap-1.5 md:hidden">
+            <div className="w-2 h-2 rounded-full bg-emerald-500/50"></div>
+            <div className="w-2 h-2 rounded-full bg-emerald-500/50"></div>
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+            <ArrowRight className="w-4 h-4 text-emerald-500 animate-swipe-right" />
           </div>
         </div>
 
