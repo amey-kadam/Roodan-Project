@@ -222,24 +222,25 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
       aria-label={`View details for ${product.title}`}
     >
       <div className="relative">
-        <div className="aspect-[16/9] overflow-hidden bg-emerald-50/30">
-          {isVisible && (
-            <img
-              src={product.image}
-              alt={product.title}
-              width="600"
-              height="338"
-              onLoad={() => setImageLoaded(true)}
-              className={cn(
-                "w-full h-full object-cover transform-gpu will-change-transform",
-                "group-hover:scale-105 transition-all duration-700 ease-out",
-                !imageLoaded && "blur-sm opacity-0",
-                imageLoaded && "blur-0 opacity-100"
-              )}
-              loading="lazy"
-              decoding="async"
-            />
-          )}
+        <div className="aspect-[16/9] overflow-hidden bg-emerald-50/30 relative">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
+          </div>
+          <img
+            src={product.image}
+            alt={product.title}
+            width="600"
+            height="338"
+            onLoad={() => setImageLoaded(true)}
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform",
+              "group-hover:scale-105 transition-all duration-700 ease-out",
+              !imageLoaded && "opacity-0",
+              imageLoaded && "opacity-100"
+            )}
+            loading="eager"
+            decoding="async"
+          />
           <div 
             className={cn(
               "absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent",
