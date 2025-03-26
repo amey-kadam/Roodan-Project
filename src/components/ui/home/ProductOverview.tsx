@@ -184,13 +184,13 @@ ProductModal.displayName = 'ProductModal';
 const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useIntersectionObserver(cardRef, () => {
     setIsVisible(true);
   });
 
-  // Force reset image loaded state when product changes
   useEffect(() => {
     setImageLoaded(false);
   }, [product.title, language]);
@@ -199,13 +199,26 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
     <div
       ref={cardRef}
       onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg cursor-pointer",
-        "transition-shadow duration-300 border border-gray-100 h-full flex flex-col",
-        "transform-gpu hover:translate-y-[-2px]",
+        "group bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden cursor-pointer",
+        "transition-all duration-500 border border-white/20 h-full flex flex-col",
+        "transform-gpu hover:translate-y-[-8px]",
+        "shadow-[0_8px_30px_rgb(0,0,0,0.12)]",
         !isVisible && "opacity-0",
         isVisible && "animate-fadeIn"
       )}
+      style={{
+        boxShadow: isHovered 
+          ? '0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2)'
+          : '0 8px 30px rgba(0, 0, 0, 0.12)',
+        transform: `perspective(1000px) 
+          rotateX(${isHovered ? '1deg' : '0deg'}) 
+          rotateY(${isHovered ? '1deg' : '0deg'}) 
+          translateZ(${isHovered ? '20px' : '0px'})`,
+        transformStyle: 'preserve-3d'
+      }}
       aria-label={`View details for ${product.title}`}
     >
       <div className="relative">
@@ -219,7 +232,7 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
               onLoad={() => setImageLoaded(true)}
               className={cn(
                 "w-full h-full object-cover transform-gpu will-change-transform",
-                "group-hover:scale-105 transition-all duration-500 ease-out",
+                "group-hover:scale-105 transition-all duration-700 ease-out",
                 !imageLoaded && "blur-sm opacity-0",
                 imageLoaded && "blur-0 opacity-100"
               )}
@@ -229,8 +242,8 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
           )}
           <div 
             className={cn(
-              "absolute inset-0 bg-gradient-to-t from-black/40 to-transparent",
-              "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              "absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent",
+              "opacity-0 group-hover:opacity-100 transition-opacity duration-500",
               "pointer-events-none"
             )}
           />
@@ -240,7 +253,8 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
         <h3 
           className={cn(
             "text-xl font-bold text-gray-800 mb-2",
-            "group-hover:text-emerald-700 transition-colors duration-300"
+            "group-hover:text-emerald-700 transition-colors duration-300",
+            "transform-gpu group-hover:translate-y-[-2px]"
           )}
         >
           {product.title}
@@ -256,7 +270,7 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
             className={cn(
               "w-4 h-4 ml-1 text-emerald-700 group-hover:text-emerald-800",
               "transform-gpu transition-transform duration-300",
-              "group-hover:translate-x-1",
+              "group-hover:translate-x-2",
               language === "ar" ? "rotate-180" : ""
             )} 
           />
@@ -390,23 +404,33 @@ function ProductOverviewComponent() {
           />
         </div>
 
-        <div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          style={{ 
-            containIntrinsicSize: '0 500px',
-            contain: 'content',
-            contentVisibility: 'auto'
-          }}
-        >
-          {products.map((product) => (
-            <ProductCard 
-              key={`${product.title}-${language}`} 
-              product={product} 
-              language={language} 
-              t={t}
-              onClick={() => setSelectedProduct(product)}
-            />
-          ))}
+        {/* Modern container with clean scrolling */}
+        <div className="relative">
+          <div 
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 scrollbar-hide"
+            style={{ 
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch',
+              scrollBehavior: 'smooth',
+              maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
+            }}
+          >
+            {products.map((product) => (
+              <div 
+                key={`${product.title}-${language}`}
+                className="flex-none w-[85vw] md:w-auto snap-center"
+              >
+                <ProductCard 
+                  product={product} 
+                  language={language} 
+                  t={t}
+                  onClick={() => setSelectedProduct(product)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 text-center">
