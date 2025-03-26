@@ -75,6 +75,11 @@ const ProductModal = memo(({ product, onClose, t, language }: ProductModalProps)
     };
   }, []);
 
+  // Reset image loaded state when product or language changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [product.title, language]);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
@@ -185,6 +190,11 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
     setIsVisible(true);
   });
 
+  // Force reset image loaded state when product changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [product.title, language]);
+
   return (
     <div
       ref={cardRef}
@@ -281,9 +291,10 @@ function ProductOverviewComponent() {
         t("product.sugar.detail3"),
       ],
       category: "food"
-    },{
+    },
+    {
       title: t("products.soy"),
-      image: "/soya.jpg",    //   : 'Soy Products' 'products.soyDesc': 'Soybeans, Soy Flour, Soy Oil',,
+      image: "/soya.jpg",
       description: t("products.soyDesc"),
       link: "/products",
       details: [
@@ -353,7 +364,7 @@ function ProductOverviewComponent() {
       ],
       category: "petro"
     },
-  ], [t]);
+  ], [t, language]);
 
   // Memoize direction class
   const directionClass = useMemo(() => 
@@ -389,7 +400,7 @@ function ProductOverviewComponent() {
         >
           {products.map((product) => (
             <ProductCard 
-              key={product.title} 
+              key={`${product.title}-${language}`} 
               product={product} 
               language={language} 
               t={t}
@@ -440,4 +451,7 @@ function ProductOverviewComponent() {
 }
 
 // Export memoized component
-export const ProductOverview = memo(ProductOverviewComponent);
+export const ProductOverview = memo(ProductOverviewComponent, (prevProps, nextProps) => {
+  // Always re-render the component when it receives new props
+  return false;
+});
