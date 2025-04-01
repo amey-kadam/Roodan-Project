@@ -91,13 +91,13 @@ const About = () => {
       },
       {
         name: "LLM. Makedonia Chante",
-        role: "Laws and International Relations",
+        role: "Laws and International Relations",
         description: "Technology transformation driver.",
         image: "/Makedonia.jpg",
         socialLinks: {
           linkedin: "https://www.linkedin.com",
           twitter: "https://twitter.com",
-          email: "mailto:chante@roodan.ae"
+          email: "mailto:makedonia@roodan.ae"
         }
       }
     ];
@@ -129,7 +129,12 @@ const About = () => {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="absolute inset-0 w-full h-full object-cover z-0"
+                    style={member.name === "LLM. Makedonia Chante" ? { objectPosition: 'center top' } : {}}
+                    className={`absolute inset-0 w-full h-full ${
+                      member.name === "LLM. Makedonia Chante" 
+                        ? "object-cover" 
+                        : "object-cover"
+                    } z-0`}
                   />
                   
                   {/* Glass Nameplate */}
