@@ -204,7 +204,9 @@ const translations: Record<Language, Record<string, string>> = {
     'SendUs.sending':'Sending...',
     'SendUS.success':'Message sent successfully!',
 
-      // LOI Form
+
+
+      // LOI Form starts here
       'loi.title': 'LETTER OF INTENT (LOI)',
       'loi.subtitle': 'FOR CIF ASWP - Complete the form below to submit your Letter of Intent',
       'loi.sections.loiDetails': 'LOI Details',
@@ -212,7 +214,7 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.vu':'Issued Date',
       'loi.sections.productDetails': 'Product Details',
 
-        // Product details fields
+      // Product details fields
       'loi.product.name': 'Product Name',
       'loi.product.quantity': 'Quantity (MT)',
       'loi.product.origin': 'Origin',
@@ -224,16 +226,16 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.product.deliveryPort': 'Delivery Port',
       'loi.product.targetPrice': 'Target Price (USD) per MT',
 
-        // Payment and Inspection section
-        'loi.sections.paymentInspection': 'Payment and Inspection',
-        'loi.payment.terms': 'Payment Terms',
-        'loi.payment.termsContent': 'THE BUYER RELEASES PAYMENT TO THE SELLER\'S BANK AFTER INSPECTION AT THE LOADING PORT WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS.',
-        'loi.payment.inspection': 'Inspection',
-        'loi.payment.selectInspection': 'Select Inspection Agency',
-        'loi.payment.inspectionNote': 'At the port of loading shall be for the account and at the expense of the SELLER / At the port of discharge shall be for the account and at the expense of the BUYER',
+      // Payment and Inspection section
+      'loi.sections.paymentInspection': 'Payment and Inspection',
+      'loi.payment.terms': 'Payment Terms',
+      'loi.payment.termsContent': 'THE BUYER RELEASES PAYMENT TO THE SELLER\'S BANK AFTER INSPECTION AT THE LOADING PORT WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS.',
+      'loi.payment.inspection': 'Inspection',
+      'loi.payment.selectInspection': 'Select Inspection Agency',
+      'loi.payment.inspectionNote': 'At the port of loading shall be for the account and at the expense of the SELLER / At the port of discharge shall be for the account and at the expense of the BUYER',
+
   
-  
-        // Additional Details section
+      // Additional Details section
       'loi.sections.additionalDetails': 'Additional Details',
       'loi.additional.observations': 'Observations',
       'loi.additional.observationsPlaceholder': 'Any additional observations',
@@ -251,7 +253,7 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.buyer.email': 'Email',
       'loi.buyer.website': 'Website',
 
-    // buyer bank information section
+      // buyer bank information section
       'loi.sections.bankInfo': "Buyer's Bank Information",
       'loi.bn':'Bank Name',
       'loi.bwc':'Bank SWIFT Code',
@@ -261,27 +263,27 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.bot':"Bank Officer's Title",
       'loi.bon':"Bank Officer's Name",
 
-
+      //legal warning
       'loi.sections.legalWarnings': 'Legal Warnings',
       'loi.wr1':"We declare we have operational experience, storage capacity,and financial resources to fulfill this LOI",
       'loi.wr2':'We fully understand and accept all terms and obligations outlined in this LOI',
       'loi.wr3':'We acknowledge that fraudulent documents may result in legal action by authorities including FBI, INTERPOL, ICC, and other international organizations',
 
 
-
+      //signature
       'loi.sections.signature': 'Signature & Attachments',
       'loi.lg1':'Legal Representative Signature',
       'loi.lg2':' Upload Documents (PDF/Image)',
       'loi.lg3':'Required: Company Stamp/Seal and Passport Copy',
       
-
+      //special condition
       'loi.sections.specialConditions': 'Special Conditions',
       'loi.sc1':'This LOI requires final written approval from both parties',
       'loi.sc2':'Electronic copies are considered valid equivalents to originals',
       'loi.sc3':'Submitting...',
       'loi.sc4':'Submit LOI',
 
-
+      //loi ends here
       
       
 
