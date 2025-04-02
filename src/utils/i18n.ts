@@ -492,29 +492,81 @@ const translations: Record<Language, Record<string, string>> = {
     'SendUs.sending':'Envoi...',
     'SendUS.success':'Message envoyé avec succès !',
     
-    // Inquiry
-    'inquiry.title': 'Demande de Devis',
-    'inquiry.subtitle': 'Remplissez le formulaire pour recevoir un devis personnalisé',
-    'inquiry.form.title': 'Demande de Devis',
-    'inquiry.form.description': 'Remplissez le formulaire pour recevoir un devis personnalisé',
-    'inquiry.form.company': 'Nom de l\'Entreprise',
-    'inquiry.form.name': 'Votre Nom',
-    'inquiry.form.email': 'Adresse Email',
-    'inquiry.form.phone': 'Numéro de Téléphone',
-    'inquiry.form.product': 'Produit',
-    'inquiry.form.selectProduct': 'Sélectionnez un produit',
-    'inquiry.form.quantity': 'Quantité',
-    'inquiry.form.delivery': 'Conditions de Livraison',
-    'inquiry.form.selectDelivery': 'Sélectionnez les conditions de livraison',
-    'inquiry.form.delivery.cif': 'CIF (Coût, Assurance & Fret)',
-    'inquiry.form.delivery.fob': 'FOB (Franco à Bord)',
-    'inquiry.form.delivery.exw': 'Ex Works (Départ Usine)',
-    'inquiry.form.delivery.ddp': 'DDP (Rendu Droits Acquittés)',
-    'inquiry.form.delivery.fas': 'FAS (Franco le Long du Navire)',
-    'inquiry.form.delivery.cfr': 'CFR (Coût et Fret)',
-    'inquiry.form.delivery.other': 'Autre',
-    'inquiry.form.message': 'Informations Supplémentaires',
-    'inquiry.form.submit': 'Envoyer la demande',
+    // LOI Form starts here
+    'loi.title': 'LETTRE D’INTENTION (LOI)',
+    'loi.subtitle': 'POUR CIF ASWP - Remplissez le formulaire ci-dessous pour soumettre votre Lettre d’Intention',
+    'loi.sections.loiDetails': 'Détails de la LOI',
+    'loi.id': 'Date d’émission',
+    'loi.vu': 'Date d’émission',
+    'loi.sections.productDetails': 'Détails du produit',
+
+    // Product details fields
+    'loi.product.name': 'Nom du produit',
+    'loi.product.quantity': 'Quantité (MT)',
+    'loi.product.origin': 'Origine',
+    'loi.product.shipments': 'Expéditions',
+    'loi.product.frequency': 'Fréquence de livraison',
+    'loi.product.contractLength': 'Durée du contrat',
+    'loi.product.totalAmount': 'Quantité totale du contrat (MT)',
+    'loi.product.incoterms': 'Incoterms 2020',
+    'loi.product.deliveryPort': 'Port de livraison',
+    'loi.product.targetPrice': 'Prix cible (USD) par MT',
+
+    // Payment and Inspection section
+    'loi.sections.paymentInspection': 'Paiement et Inspection',
+    'loi.payment.terms': 'Conditions de paiement',
+    'loi.payment.termsContent': 'L’ACHETEUR LIBÈRE LE PAIEMENT AU COMPTE DU VENDEUR APRÈS INSPECTION AU PORT DE CHARGEMENT DANS LES TROIS (3) JOURS BANCAIRES SUIVANT LA VALIDATION DE LA CARGAISON PAR SGS OU ÉQUIVALENT ET LA RÉCEPTION DE TOUS LES DOCUMENTS DE PAIEMENT REQUIS.',
+    'loi.payment.inspection': 'Inspection',
+    'loi.payment.selectInspection': 'Sélectionner l’agence d’inspection',
+    'loi.payment.inspectionNote': 'Au port de chargement, aux frais du VENDEUR / Au port de déchargement, aux frais de l’ACHETEUR',
+
+    // Additional Details section
+    'loi.sections.additionalDetails': 'Détails supplémentaires',
+    'loi.additional.observations': 'Observations',
+    'loi.additional.observationsPlaceholder': 'Toute observation supplémentaire',
+    'loi.additional.specifications': 'Spécifications',
+    'loi.additional.specificationsPlaceholder': 'Spécifications du produit',
+
+    // Buyer Information section
+    'loi.sections.buyerInfo': 'Informations sur l’acheteur',
+    'loi.buyer.companyName': 'Nom de l’entreprise',
+    'loi.buyer.regNumber': 'Numéro d’enregistrement de l’entreprise',
+    'loi.buyer.address': 'Adresse / Ville / État / Code postal / Pays',
+    'loi.buyer.repName': 'Nom du représentant légal',
+    'loi.buyer.title': 'Titre',
+    'loi.buyer.phone': 'Téléphone / Mobile',
+    'loi.buyer.email': 'E-mail',
+    'loi.buyer.website': 'Site web',
+
+    // buyer bank information section
+    'loi.sections.bankInfo': 'Informations bancaires de l’acheteur',
+    'loi.bn': 'Nom de la banque',
+    'loi.bwc': 'Code SWIFT de la banque',
+    'loi.bd': 'Adresse de la banque / Ville / État / Code postal / Pays',
+    'loi.an': 'Nom du compte',
+    'loi.anu': 'Numéro de compte',
+    'loi.bot': 'Titre du responsable bancaire',
+    'loi.bon': 'Nom du responsable bancaire',
+
+    // legal warning
+    'loi.sections.legalWarnings': 'Avertissements légaux',
+    'loi.wr1': 'Nous déclarons avoir l’expérience opérationnelle, la capacité de stockage et les ressources financières pour exécuter cette LOI',
+    'loi.wr2': 'Nous comprenons et acceptons pleinement toutes les conditions et obligations énoncées dans cette LOI',
+    'loi.wr3': 'Nous reconnaissons que la présentation de documents frauduleux peut entraîner des poursuites judiciaires par les autorités, y compris le FBI, INTERPOL, ICC et d’autres organisations internationales',
+
+    // signature
+    'loi.sections.signature': 'Signature et pièces jointes',
+    'loi.lg1': 'Signature du représentant légal',
+    'loi.lg2': 'Télécharger les documents (PDF/Image)',
+    'loi.lg3': 'Obligatoire : Cachet de l’entreprise et copie du passeport',
+
+    // special condition
+    'loi.sections.specialConditions': 'Conditions spéciales',
+    'loi.sc1': 'Cette LOI nécessite une approbation écrite finale des deux parties',
+    'loi.sc2': 'Les copies électroniques sont considérées comme équivalentes aux originaux',
+    'loi.sc3': 'Envoi en cours...',
+    'loi.sc4': 'Soumettre la LOI',
+
     
     // Footer
     'slogan':'Solutions commerciales mondiales haut de gamme offrant des produits de haute qualité avec un service fiable dans le monde entier.',
@@ -719,18 +771,81 @@ const translations: Record<Language, Record<string, string>> = {
     'SendUs.sending':'إرسال...',
     'SendUS.success':'تم إرسال الرسالة بنجاح!',
 
-    // LOI Form Arabic
+    // LOI Form starts here
     'loi.title': 'خطاب النوايا (LOI)',
-    'loi.subtitle': 'لـ CIF ASWP - أكمل النموذج أدناه لتقديم خطاب النوايا الخاص بك',
+    'loi.subtitle': 'CIF ASWP - أكمل النموذج أدناه لتقديم خطاب النوايا الخاص بك',
     'loi.sections.loiDetails': 'تفاصيل خطاب النوايا',
+    'loi.id': 'تاريخ الإصدار',
+    'loi.vu': 'تاريخ الإصدار',
     'loi.sections.productDetails': 'تفاصيل المنتج',
+
+    // Product details fields
+    'loi.product.name': 'اسم المنتج',
+    'loi.product.quantity': 'الكمية (طن متري)',
+    'loi.product.origin': 'المنشأ',
+    'loi.product.shipments': 'الشحنات',
+    'loi.product.frequency': 'تكرار التسليم',
+    'loi.product.contractLength': 'مدة العقد',
+    'loi.product.totalAmount': 'إجمالي كمية العقد (طن متري)',
+    'loi.product.incoterms': 'شروط الإنكوترمز 2020',
+    'loi.product.deliveryPort': 'ميناء التسليم',
+    'loi.product.targetPrice': 'السعر المستهدف (دولار أمريكي) لكل طن متري',
+
+    // Payment and Inspection section
     'loi.sections.paymentInspection': 'الدفع والتفتيش',
+    'loi.payment.terms': 'شروط الدفع',
+    'loi.payment.termsContent': 'يقوم المشتري بإصدار الدفع إلى بنك البائع بعد التفتيش في ميناء التحميل في غضون ثلاثة (3) أيام عمل بعد اجتياز الشحنة التفتيش من قبل SGS أو ما يعادلها، واستلام جميع مستندات الدفع ذات الصلة.',
+    'loi.payment.inspection': 'التفتيش',
+    'loi.payment.selectInspection': 'اختر وكالة التفتيش',
+    'loi.payment.inspectionNote': 'في ميناء التحميل يكون على حساب ونفقة البائع / في ميناء التفريغ يكون على حساب ونفقة المشتري',
+
+    // Additional Details section
     'loi.sections.additionalDetails': 'تفاصيل إضافية',
+    'loi.additional.observations': 'ملاحظات',
+    'loi.additional.observationsPlaceholder': 'أي ملاحظات إضافية',
+    'loi.additional.specifications': 'المواصفات',
+    'loi.additional.specificationsPlaceholder': 'مواصفات المنتج',
+
+    // Buyer Information section
     'loi.sections.buyerInfo': 'معلومات المشتري',
-    'loi.sections.bankInfo': 'معلومات البنك الخاص بالمشتري',
+    'loi.buyer.companyName': 'اسم الشركة',
+    'loi.buyer.regNumber': 'رقم تسجيل الشركة',
+    'loi.buyer.address': 'العنوان / المدينة / الولاية / الرمز البريدي / الدولة',
+    'loi.buyer.repName': 'اسم الممثل القانوني',
+    'loi.buyer.title': 'اللقب',
+    'loi.buyer.phone': 'الهاتف / الجوال',
+    'loi.buyer.email': 'البريد الإلكتروني',
+    'loi.buyer.website': 'الموقع الإلكتروني',
+
+    // buyer bank information section
+    'loi.sections.bankInfo': 'معلومات بنك المشتري',
+    'loi.bn': 'اسم البنك',
+    'loi.bwc': 'رمز SWIFT للبنك',
+    'loi.bd': 'عنوان البنك / المدينة / الولاية / الرمز البريدي / الدولة',
+    'loi.an': 'اسم الحساب',
+    'loi.anu': 'رقم الحساب',
+    'loi.bot': 'اللقب الوظيفي لمسؤول البنك',
+    'loi.bon': 'اسم مسؤول البنك',
+
+    // legal warning
     'loi.sections.legalWarnings': 'تحذيرات قانونية',
+    'loi.wr1': 'نقر بأن لدينا الخبرة التشغيلية، وسعة التخزين، والموارد المالية اللازمة لتنفيذ هذا الخطاب LOI',
+    'loi.wr2': 'نحن ندرك تمامًا ونقبل جميع الشروط والالتزامات الواردة في هذا الخطاب LOI',
+    'loi.wr3': 'نقر بأن تقديم مستندات مزورة قد يؤدي إلى اتخاذ إجراءات قانونية من قبل السلطات، بما في ذلك FBI، الإنتربول، ICC، وغيرها من المنظمات الدولية',
+
+    // signature
     'loi.sections.signature': 'التوقيع والمرفقات',
+    'loi.lg1': 'توقيع الممثل القانوني',
+    'loi.lg2': 'تحميل المستندات (PDF/صورة)',
+    'loi.lg3': 'مطلوب: ختم/ختم الشركة وصورة جواز السفر',
+
+    // special condition
     'loi.sections.specialConditions': 'شروط خاصة',
+    'loi.sc1': 'يتطلب هذا الخطاب LOI موافقة خطية نهائية من كلا الطرفين',
+    'loi.sc2': 'تعتبر النسخ الإلكترونية مكافئة قانونيًا للأصول',
+    'loi.sc3': 'جارٍ الإرسال...',
+    'loi.sc4': 'إرسال LOI',
+
     
     // Footer
     'slogan':'حلول تجارية عالمية متميزة توفر منتجات عالية الجودة مع خدمة موثوقة في جميع أنحاء العالم..',
