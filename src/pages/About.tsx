@@ -283,50 +283,145 @@ const About = () => {
           </motion.div>
         </motion.section>
 
-
-
         {/* Services section */}
         <motion.section 
-          className="page-container py-16 md:py-20 mt-12 relative"
+          className="page-container py-16 md:py-24 mt-12 relative overflow-hidden"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          {/* Reduced decorative elements with different colors */}
-          <div className="absolute top-20 right-10 w-40 h-40 bg-blue-200 rounded-full opacity-10 blur-3xl"></div>
+          {/* Enhanced decorative elements */}
+          <div className="absolute top-20 left-5 w-64 h-64 bg-emerald-200 rounded-full opacity-10 blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-200 rounded-full opacity-10 blur-3xl"></div>
+          <div className="absolute top-40 right-1/4 w-20 h-20 bg-purple-200 rounded-full opacity-15 blur-xl"></div>
           
           <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4 relative z-10">
-            <div className="flex flex-col items-center justify-center gap-3 mb-10">
-              <h2 
-                className="text-4xl md:text-5xl font-display mt-2 font-bold text-center text-gray-800" 
+            <div className="flex flex-col items-center justify-center gap-3 mb-14">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-display mt-2 font-bold text-center text-gray-800 relative" 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { duration: 0.7, ease: "easeOut" }
+                }}
+                viewport={{ once: true }}
               >
                 {t("about.services.title")}
-              </h2>
-              <div className="w-20 h-1 mx-auto bg-emerald-500"></div>
-              <p className="text-xl text-center max-w-3xl mx-auto mt-3 text-gray-600">
+              </motion.h2>
+              <motion.div 
+                className="w-20 h-1 mx-auto bg-emerald-500"
+                initial={{ width: 0, opacity: 0 }}
+                whileInView={{ 
+                  width: 80, 
+                  opacity: 1,
+                  transition: { duration: 0.5, delay: 0.3 }
+                }}
+                viewport={{ once: true }}
+              ></motion.div>
+              <motion.p 
+                className="text-xl text-center max-w-3xl mx-auto mt-3 text-gray-600"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { duration: 0.7, delay: 0.4, ease: "easeOut" }
+                }}
+                viewport={{ once: true }}
+              >
                 {t("about.services.desc")}
-              </p>
+              </motion.p>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mt-12">
               {[1, 2].map((value, index) => (
                 <motion.div 
                   key={`value-${index}`}
                   variants={itemVariants}
-                  className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 h-full"
-                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                  className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-500 h-full relative overflow-hidden group"
+                  whileHover={{ 
+                    y: -8, 
+                    boxShadow: "0 20px 35px -10px rgba(0, 0, 0, 0.1)",
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
                 >
-                  <div className="flex flex-col h-full">
-                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-emerald-600">
-                      <Award className="w-6 h-6" />
-                    </div>
+                  {/* Decorative gradient background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 opacity-60"></div>
+                  
+                  {/* Decorative corner effect */}
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-emerald-50 to-transparent opacity-60 rounded-bl-full transform -translate-y-10 translate-x-10 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-700"></div>
+                  
+                  <div className="flex flex-col h-full relative z-10">
+                    <motion.div 
+                      className="w-16 h-16 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mb-6 text-white shadow-lg group-hover:scale-110 transition-transform duration-300"
+                      whileHover={{ rotate: 5 }}
+                    >
+                      <Award className="w-8 h-8" />
+                    </motion.div>
+                    
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-lg md:text-xl font-display font-semibold mb-2 text-gray-800 truncate">
+                      <h3 className="text-xl md:text-2xl font-display font-semibold mb-5 text-gray-800 group-hover:text-emerald-600 transition-colors duration-300">
                         {t(`about.service.service${value}.title`)}
                       </h3>
-                      <p className="text-gray-600 text-sm md:text-base">
-                        {t(`about.service.service${value}.desc`)}
-                      </p>
+                      
+                      <ul className="space-y-3 text-gray-600 text-sm md:text-base">
+                        {value === 1 ? (
+                          <>
+                            <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-500 mr-3 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors duration-300">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </span>
+                              <span className="mt-0.5">Planning, execution, and optimization of projects</span>
+                            </li>
+                            <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-500 mr-3 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors duration-300">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </span>
+                              <span className="mt-0.5">Process analysis and efficiency improvement</span>
+                            </li>
+                            <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-500 mr-3 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors duration-300">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </span>
+                              <span className="mt-0.5">Strategic consulting and market entry strategies</span>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-500 mr-3 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors duration-300">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </span>
+                              <span className="mt-0.5">Import & export of various goods</span>
+                            </li>
+                            <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-500 mr-3 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors duration-300">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </span>
+                              <span className="mt-0.5">Procurement and logistics management</span>
+                            </li>
+                            <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-500 mr-3 group-hover/item:bg-emerald-500 group-hover/item:text-white transition-colors duration-300">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </span>
+                              <span className="mt-0.5">Development of trade strategies</span>
+                            </li>
+                          </>
+                        )}
+                      </ul>
+                      
                     </div>
                   </div>
                 </motion.div>
@@ -334,9 +429,6 @@ const About = () => {
             </div>
           </motion.div>
         </motion.section>
-
-
-
 
         {/* Team Section */}
         <motion.section 
