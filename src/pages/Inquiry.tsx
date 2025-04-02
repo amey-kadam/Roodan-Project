@@ -38,7 +38,6 @@ const LOIForm = () => {
   // Form state
   const [formData, setFormData] = useState({
     // LOI details
-    loiNumber: "",
     issuedDate: "",
     validUntil: "",
     
@@ -150,7 +149,6 @@ const LOIForm = () => {
         
         // Reset form
         setFormData({
-          loiNumber: "",
           issuedDate: "",
           validUntil: "",
           productName: "",
@@ -262,20 +260,7 @@ const LOIForm = () => {
                     LOI Details
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="loiNumber" className="text-sm font-medium flex items-center gap-1">
-                        <span>LOI Number</span>
-                        <span className="text-destructive">*</span>
-                      </label>
-                      <Input 
-                        id="loiNumber" 
-                        value={formData.loiNumber}
-                        onChange={handleChange}
-                        required 
-                        placeholder="LOI-2025-001"
-                        className="rounded-lg"
-                      />
-                    </div>
+                    
                     
                     <div className="space-y-2">
                       <label htmlFor="issuedDate" className="text-sm font-medium flex items-center gap-1">
@@ -496,12 +481,16 @@ const LOIForm = () => {
                       <label htmlFor="paymentTerms" className="text-sm font-medium">
                         Payment Terms
                       </label>
-                      <Textarea 
-                        id="paymentTerms" 
-                        value={formData.paymentTerms}
-                        onChange={handleChange}
-                        placeholder="Default: THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT OF WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS."
-                        className="rounded-lg h-24"
+                      <div className="p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-700">
+                        THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT 
+                        WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND 
+                        RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS.
+                      </div>
+                      {/* Hidden input to include in form data */}
+                      <input 
+                        type="hidden" 
+                        id="paymentTerms"
+                        value="THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS."
                       />
                     </div>
                     
