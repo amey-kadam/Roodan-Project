@@ -622,6 +622,15 @@ const Products = () => {
     setActiveCategory("all");
   }, []);
 
+  // Generate search placeholder text based on active category and language
+  const getSearchPlaceholder = useCallback(() => {
+    const categoryName = activeCategory === "all" 
+      ? t('products.categories.all').toLowerCase() 
+      : t(`products.categories.${activeCategory}`).toLowerCase();
+    
+    return t('products.searchPlaceholder').replace('{category}', categoryName);
+  }, [activeCategory, t]);
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
@@ -669,7 +678,7 @@ const Products = () => {
                       letterSpacing: "0.01em",
                       caretColor: "#10b981" 
                     }}
-                    placeholder={`Search ${activeCategory === "all" ? "all products" : activeCategory + " products"}...`}
+                    placeholder={getSearchPlaceholder()}
                     value={searchQuery}
                     onChange={handleSearchChange}
                     onFocus={() => setSearchFocused(true)}
@@ -703,7 +712,9 @@ const Products = () => {
                       {filteredProducts.length}
                     </span>
                     <span className="text-emerald-600">
-                      {filteredProducts.length === 1 ? 'result' : 'results'} found
+                      {filteredProducts.length === 1 
+                        ? t('products.singleResult') 
+                        : t('products.multipleResults')}
                     </span>
                   </div>
                 )}
