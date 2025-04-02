@@ -244,12 +244,12 @@ const LOIForm = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6">
                   <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-2 sm:mb-0" />
                   <h2 className="text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent text-center">
-                  {t("loi.title")}
+                    {t("loi.title")}
                   </h2>
                 </div>
                 <p className="text-foreground max-w-2xl mx-auto text-sm sm:text-base">
-                {t("loi.subtitle")}     
-               </p>
+                  {t("loi.subtitle")}     
+                </p>
               </motion.div>
               
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -261,11 +261,12 @@ const LOIForm = () => {
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     
-                    
                     <div className="space-y-2">
                       <label htmlFor="issuedDate" className="text-sm font-medium flex items-center gap-1">
                         <Calendar className="w-4 h-4 text-emerald-500" />
-                        <span>Issued Date</span>
+                        <span>
+                          {t("loi.id")}
+                        </span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input 
@@ -281,7 +282,9 @@ const LOIForm = () => {
                     <div className="space-y-2">
                       <label htmlFor="validUntil" className="text-sm font-medium flex items-center gap-1">
                         <Calendar className="w-4 h-4 text-emerald-500" />
-                        <span>Valid Until</span>
+                        <span>
+                          {t("loi.vu")}
+                        </span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input 
@@ -306,7 +309,7 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="space-y-2">
                       <label htmlFor="productName" className="text-sm font-medium flex items-center gap-1">
-                        <span>Product Name</span>
+                        <span>{t("loi.product.name")}</span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input 
@@ -322,7 +325,7 @@ const LOIForm = () => {
                     <div className="space-y-2">
                       <label htmlFor="quantity" className="text-sm font-medium flex items-center gap-1">
                         <BarChart className="w-4 h-4 text-blue-500" />
-                        <span>Quantity (MT)</span>
+                        <span>{t("loi.product.quantity")}</span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input 
@@ -339,7 +342,7 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="space-y-2">
                       <label htmlFor="origin" className="text-sm font-medium flex items-center gap-1">
-                        <span>Origin</span>
+                        <span>{t("loi.product.origin")}</span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input 
@@ -355,7 +358,7 @@ const LOIForm = () => {
                     <div className="space-y-2">
                       <label htmlFor="shipments" className="text-sm font-medium flex items-center gap-1">
                         <Truck className="w-4 h-4 text-blue-500" />
-                        <span>Shipments</span>
+                        <span>{t("loi.product.shipments")}</span>
                       </label>
                       <Input 
                         id="shipments" 
@@ -370,7 +373,7 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="space-y-2">
                       <label htmlFor="frequencyOfDelivery" className="text-sm font-medium">
-                        Frequency of Delivery
+                        {t("loi.product.frequency")}
                       </label>
                       <Input 
                         id="frequencyOfDelivery" 
@@ -383,7 +386,7 @@ const LOIForm = () => {
                     
                     <div className="space-y-2">
                       <label htmlFor="contractLength" className="text-sm font-medium">
-                        Contract Length
+                        {t("loi.product.contractLength")}
                       </label>
                       <Input 
                         id="contractLength" 
@@ -399,7 +402,7 @@ const LOIForm = () => {
                     <div className="space-y-2">
                       <label htmlFor="totalContractAmount" className="text-sm font-medium flex items-center gap-1">
                         <DollarSign className="w-4 h-4 text-blue-500" />
-                        <span>Total Contract Amount (MT)</span>
+                        <span>{t("loi.product.totalAmount")}</span>
                       </label>
                       <Input 
                         id="totalContractAmount" 
@@ -412,7 +415,7 @@ const LOIForm = () => {
                     
                     <div className="space-y-2">
                       <label htmlFor="incoterms" className="text-sm font-medium">
-                        Incoterms 2020
+                        {t("loi.product.incoterms")}
                       </label>
                       <Select 
                         value={formData.incoterms} 
@@ -438,7 +441,7 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="deliveryPort" className="text-sm font-medium flex items-center gap-1">
-                        <span>Delivery Port</span>
+                        <span>{t("loi.product.deliveryPort")}</span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input 
@@ -454,7 +457,7 @@ const LOIForm = () => {
                     <div className="space-y-2">
                       <label htmlFor="targetPrice" className="text-sm font-medium flex items-center gap-1">
                         <DollarSign className="w-4 h-4 text-blue-500" />
-                        <span>Target Price (USD) per MT</span>
+                        <span>{t("loi.product.targetPrice")}</span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input 
@@ -469,219 +472,217 @@ const LOIForm = () => {
                   </div>
                 </div>
                 
-                {/* Payment and Inspection Section */}
-                <div className="bg-purple-50 p-4 rounded-xl">
-                  <h3 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
-                    <CreditCard className="w-5 h-5 mr-2" />
-                    {t("loi.sections.paymentInspection")}
-                    </h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="paymentTerms" className="text-sm font-medium">
-                      {t("loi.sections.paymentInspection")}
-                      </label>
-                      <div className="p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-700">
-                        THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT 
-                        WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND 
-                        RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS.
-                      </div>
-                      {/* Hidden input to include in form data */}
-                      <input 
-                        type="hidden" 
-                        id="paymentTerms"
-                        value="THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS."
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="inspection" className="text-sm font-medium">
-                        Inspection
-                      </label>
-                      <Select 
-                        value={formData.inspection} 
-                        onValueChange={(value) => handleSelectChange('inspection', value)}
-                      >
-                        <SelectTrigger className="rounded-lg">
-                          <SelectValue placeholder="Select Inspection Agency" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {inspectionOptions.map((option) => (
-                            <SelectItem 
-                              key={option.value} 
-                              value={option.value}
-                            >
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <p className="text-xs text-gray-500 mt-1">
-                        At the port of loading shall be for the account and at the expense of the SELLER / At the port of discharge shall be for the account and at the expense of the BUYER
-                      </p>
-                    </div>
-                  </div>
-                </div>
+        {/* Payment and Inspection Section */}
+        <div className="bg-purple-50 p-4 rounded-xl">
+          <h3 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
+            <CreditCard className="w-5 h-5 mr-2" />
+            {t("loi.sections.paymentInspection")}
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="paymentTerms" className="text-sm font-medium">
+                {t("loi.payment.terms")}
+              </label>
+              <div className="p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-700">
+                {t("loi.payment.termsContent")}
+              </div>
+              {/* Hidden input to include in form data */}
+              <input 
+                type="hidden" 
+                id="paymentTerms"
+                value="THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS."
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="inspection" className="text-sm font-medium">
+                {t("loi.payment.inspection")}
+              </label>
+              <Select 
+                value={formData.inspection} 
+                onValueChange={(value) => handleSelectChange('inspection', value)}
+              >
+                <SelectTrigger className="rounded-lg">
+                  <SelectValue placeholder={t("loi.payment.selectInspection")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {inspectionOptions.map((option) => (
+                    <SelectItem 
+                      key={option.value} 
+                      value={option.value}
+                    >
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-gray-500 mt-1">
+                {t("loi.payment.inspectionNote")}
+              </p>
+            </div>
+          </div>
+        </div>
                 
-                {/* Additional Details Section */}
-                <div className="bg-gray-50 p-4 rounded-xl">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center">
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    {t("loi.sections.additionalDetails")}
-                    </h3>
-                  
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="observations" className="text-sm font-medium">
-                        Observations
-                      </label>
-                      <Textarea 
-                        id="observations" 
-                        value={formData.observations}
-                        onChange={handleChange}
-                        placeholder="Any additional observations"
-                        className="rounded-lg h-20"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="specifications" className="text-sm font-medium">
-                        Specifications
-                      </label>
-                      <Textarea 
-                        id="specifications" 
-                        value={formData.specifications}
-                        onChange={handleChange}
-                        placeholder="Product specifications"
-                        className="rounded-lg h-20"
-                      />
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Buyer Information Section */}
-                <div className="bg-amber-50 p-4 rounded-xl">
-                  <h3 className="text-lg font-semibold text-amber-700 mb-4 flex items-center">
-                    <Building className="w-5 h-5 mr-2" />
-                    {t("loi.sections.buyerInfo")}
-                  </h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="space-y-2">
-                      <label htmlFor="companyName" className="text-sm font-medium flex items-center gap-1">
-                        <span>Company Name</span>
-                        <span className="text-destructive">*</span>
-                      </label>
-                      <Input 
-                        id="companyName" 
-                        value={formData.companyName}
-                        onChange={handleChange}
-                        required 
-                        className="rounded-lg"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="companyRegistrationNumber" className="text-sm font-medium flex items-center gap-1">
-                        <ShieldCheck className="w-4 h-4 text-amber-500" />
-                        <span>Company Registration Number</span>
-                        <span className="text-destructive">*</span>
-                      </label>
-                      <Input 
-                        id="companyRegistrationNumber" 
-                        value={formData.companyRegistrationNumber}
-                        onChange={handleChange}
-                        required 
-                        className="rounded-lg"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2 mb-4">
-                    <label htmlFor="address" className="text-sm font-medium">
-                      Address/City/State/ZIP/Country
-                    </label>
-                    <Input 
-                      id="address" 
-                      value={formData.address}
-                      onChange={handleChange}
-                      className="rounded-lg"
-                    />
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="space-y-2">
-                      <label htmlFor="representativeName" className="text-sm font-medium flex items-center gap-1">
-                        <span>Legal Representative Name</span>
-                        <span className="text-destructive">*</span>
-                      </label>
-                      <Input 
-                        id="representativeName" 
-                        value={formData.representativeName}
-                        onChange={handleChange}
-                        required 
-                        className="rounded-lg"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="title" className="text-sm font-medium">
-                        Title
-                      </label>
-                      <Input 
-                        id="title" 
-                        value={formData.title}
-                        onChange={handleChange}
-                        className="rounded-lg"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-medium flex items-center gap-1">
-                        <Phone className="w-4 h-4 text-amber-500" />
-                        <span>Phone/Mobile</span>
-                        <span className="text-destructive">*</span>
-                      </label>
-                      <Input 
-                        id="phone" 
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required 
-                        className="rounded-lg"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium flex items-center gap-1">
-                        <Mail className="w-4 h-4 text-amber-500" />
-                        <span>Email</span>
-                        <span className="text-destructive">*</span>
-                      </label>
-                      <Input 
-                        id="email" 
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required 
-                        className="rounded-lg"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="website" className="text-sm font-medium">
-                      Website
-                    </label>
-                    <Input 
-                      id="website" 
-                      value={formData.website}
-                      onChange={handleChange}
-                      className="rounded-lg"
-                    />
-                  </div>
-                </div>
+    {/* Additional Details Section */}
+<div className="bg-gray-50 p-4 rounded-xl">
+  <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+    <MessageCircle className="w-5 h-5 mr-2" />
+    {t("loi.sections.additionalDetails")}
+  </h3>
+  
+  <div className="grid grid-cols-1 gap-4">
+    <div className="space-y-2">
+      <label htmlFor="observations" className="text-sm font-medium">
+        {t("loi.additional.observations")}
+      </label>
+      <Textarea 
+        id="observations" 
+        value={formData.observations}
+        onChange={handleChange}
+        placeholder={t("loi.additional.observationsPlaceholder")}
+        className="rounded-lg h-20"
+      />
+    </div>
+    
+    <div className="space-y-2">
+      <label htmlFor="specifications" className="text-sm font-medium">
+        {t("loi.additional.specifications")}
+      </label>
+      <Textarea 
+        id="specifications" 
+        value={formData.specifications}
+        onChange={handleChange}
+        placeholder={t("loi.additional.specificationsPlaceholder")}
+        className="rounded-lg h-20"
+      />
+    </div>
+  </div>
+</div>
+
+{/* Buyer Information Section */}
+<div className="bg-amber-50 p-4 rounded-xl">
+  <h3 className="text-lg font-semibold text-amber-700 mb-4 flex items-center">
+    <Building className="w-5 h-5 mr-2" />
+    {t("loi.sections.buyerInfo")}
+  </h3>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <div className="space-y-2">
+      <label htmlFor="companyName" className="text-sm font-medium flex items-center gap-1">
+        <span>{t("loi.buyer.companyName")}</span>
+        <span className="text-destructive">*</span>
+      </label>
+      <Input 
+        id="companyName" 
+        value={formData.companyName}
+        onChange={handleChange}
+        required 
+        className="rounded-lg"
+      />
+    </div>
+    
+    <div className="space-y-2">
+      <label htmlFor="companyRegistrationNumber" className="text-sm font-medium flex items-center gap-1">
+        <ShieldCheck className="w-4 h-4 text-amber-500" />
+        <span>{t("loi.buyer.regNumber")}</span>
+        <span className="text-destructive">*</span>
+      </label>
+      <Input 
+        id="companyRegistrationNumber" 
+        value={formData.companyRegistrationNumber}
+        onChange={handleChange}
+        required 
+        className="rounded-lg"
+      />
+    </div>
+  </div>
+  
+  <div className="space-y-2 mb-4">
+    <label htmlFor="address" className="text-sm font-medium">
+      {t("loi.buyer.address")}
+    </label>
+    <Input 
+      id="address" 
+      value={formData.address}
+      onChange={handleChange}
+      className="rounded-lg"
+    />
+  </div>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <div className="space-y-2">
+      <label htmlFor="representativeName" className="text-sm font-medium flex items-center gap-1">
+        <span>{t("loi.buyer.repName")}</span>
+        <span className="text-destructive">*</span>
+      </label>
+      <Input 
+        id="representativeName" 
+        value={formData.representativeName}
+        onChange={handleChange}
+        required 
+        className="rounded-lg"
+      />
+    </div>
+    
+    <div className="space-y-2">
+      <label htmlFor="title" className="text-sm font-medium">
+        {t("loi.buyer.title")}
+      </label>
+      <Input 
+        id="title" 
+        value={formData.title}
+        onChange={handleChange}
+        className="rounded-lg"
+      />
+    </div>
+  </div>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <div className="space-y-2">
+      <label htmlFor="phone" className="text-sm font-medium flex items-center gap-1">
+        <Phone className="w-4 h-4 text-amber-500" />
+        <span>{t("loi.buyer.phone")}</span>
+        <span className="text-destructive">*</span>
+      </label>
+      <Input 
+        id="phone" 
+        value={formData.phone}
+        onChange={handleChange}
+        required 
+        className="rounded-lg"
+      />
+    </div>
+    
+    <div className="space-y-2">
+      <label htmlFor="email" className="text-sm font-medium flex items-center gap-1">
+        <Mail className="w-4 h-4 text-amber-500" />
+        <span>{t("loi.buyer.email")}</span>
+        <span className="text-destructive">*</span>
+      </label>
+      <Input 
+        id="email" 
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+        required 
+        className="rounded-lg"
+      />
+    </div>
+  </div>
+  
+  <div className="space-y-2">
+    <label htmlFor="website" className="text-sm font-medium">
+      {t("loi.buyer.website")}
+    </label>
+    <Input 
+      id="website" 
+      value={formData.website}
+      onChange={handleChange}
+      className="rounded-lg"
+    />
+  </div>
+</div>
                 
                 {/* Bank Information Section */}
                 <div className="bg-indigo-50 p-4 rounded-xl">

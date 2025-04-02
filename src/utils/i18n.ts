@@ -208,11 +208,52 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.title': 'LETTER OF INTENT (LOI)',
       'loi.subtitle': 'FOR CIF ASWP - Complete the form below to submit your Letter of Intent',
       'loi.sections.loiDetails': 'LOI Details',
-      
+      'loi.id':'Issued Date',
+      'loi.vu':'Issued Date',
       'loi.sections.productDetails': 'Product Details',
-      'loi.sections.paymentInspection': 'Payment and Inspection',
+
+        // Product details fields
+      'loi.product.name': 'Product Name',
+      'loi.product.quantity': 'Quantity (MT)',
+      'loi.product.origin': 'Origin',
+      'loi.product.shipments': 'Shipments',
+      'loi.product.frequency': 'Frequency of Delivery',
+      'loi.product.contractLength': 'Contract Length',
+      'loi.product.totalAmount': 'Total Contract Amount (MT)',
+      'loi.product.incoterms': 'Incoterms 2020',
+      'loi.product.deliveryPort': 'Delivery Port',
+      'loi.product.targetPrice': 'Target Price (USD) per MT',
+
+        // Payment and Inspection section
+        'loi.sections.paymentInspection': 'Payment and Inspection',
+        'loi.payment.terms': 'Payment Terms',
+        'loi.payment.termsContent': 'THE BUYER RELEASES PAYMENT TO THE SELLER\'S BANK AFTER INSPECTION AT THE LOADING PORT WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS.',
+        'loi.payment.inspection': 'Inspection',
+        'loi.payment.selectInspection': 'Select Inspection Agency',
+        'loi.payment.inspectionNote': 'At the port of loading shall be for the account and at the expense of the SELLER / At the port of discharge shall be for the account and at the expense of the BUYER',
+  
+  
+        // Additional Details section
       'loi.sections.additionalDetails': 'Additional Details',
+      'loi.additional.observations': 'Observations',
+      'loi.additional.observationsPlaceholder': 'Any additional observations',
+      'loi.additional.specifications': 'Specifications',
+      'loi.additional.specificationsPlaceholder': 'Product specifications',
+      
+      // Buyer Information section
       'loi.sections.buyerInfo': 'Buyer Information',
+      'loi.buyer.companyName': 'Company Name',
+      'loi.buyer.regNumber': 'Company Registration Number',
+      'loi.buyer.address': 'Address/City/State/ZIP/Country',
+      'loi.buyer.repName': 'Legal Representative Name',
+      'loi.buyer.title': 'Title',
+      'loi.buyer.phone': 'Phone/Mobile',
+      'loi.buyer.email': 'Email',
+      'loi.buyer.website': 'Website',
+
+
+
+     
       'loi.sections.bankInfo': "Buyer's Bank Information",
       'loi.sections.legalWarnings': 'Legal Warnings',
       'loi.sections.signature': 'Signature & Attachments',
