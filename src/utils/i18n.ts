@@ -152,15 +152,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Our Services
     'about.service.service1.title':'Project Management & Consulting',
-    'about.service.service1.desc': 
-    '• Planning, execution, and optimization of projects \n' +
-    '• Process analysis and efficiency improvement \n' +
-    '• Strategic consulting and market entry strategies',
+    'about.service.service1.item1':'Planning, execution, and optimization of projects',
+    'about.service.service1.item2':'Process analysis and efficiency improvement',
+    'about.service.service1.item3':'Strategic consulting and market entry strategies',
     'about.service.service2.title':'General Trading & Distribution',
-    'about.service.service2.desc': 
-    '• Import & export of various goods \n' +
-    '• Procurement and logistics management \n' +
-    '• Development of trade strategies \n',
+    'about.service.service2.item1':'Import & export of various goods',
+    'about.service.service2.item2':'Procurement and logistics management',
+    'about.service.service2.item3':'Development of trade strategies', 
 
 
     // Our Mission
@@ -200,6 +198,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'WhatsApp',
     'SendUs.title' : 'Send us a Message',
     'SendUs.desc' :' Have a question or inquiry? Fill out the form below and we will get back to you as soon as possible.',
+    'contact.form.message_placeholder': 'Your message here...',
     'SendUs.button':'Send',
     'SendUs.sending':'Sending...',
     'SendUS.success':'Message sent successfully!',
@@ -493,15 +492,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Our Services
     'about.service.service1.title':'Gestion de projet et conseil',
-    'about.service.service1.desc': 
-    '• Planification, exécution et optimisation de projets \n' +
-    '• Analyse des processus et amélioration de lefficacité \n' +
-    '• Conseil stratégique et stratégies dentrée sur le marché',
+    'about.service.service1.item1':'Planification, exécution et optimisation de projets',
+    'about.service.service1.item2':'Analyse des processus et amélioration de lefficacité',
+    'about.service.service1.item3':'Conseil stratégique et stratégies dentrée sur le marché',
     'about.service.service2.title':'Négoce général et distribution',
-    'about.service.service2.desc': 
-    '• Importation et exportation de marchandises diverses \n' +
-    '• Gestion des achats et de la logistique \n' +
-    '• Développement de stratégies commerciales \n',
+    'about.service.service2.item1':'Importation et exportation de marchandises diverses',
+    'about.service.service2.item2':'Gestion des achats et de la logistique',
+    'about.service.service2.item3':'Développement de stratégies commerciales', 
       
     // About.Why Choose Us
     'about.whyChooseUs.title': 'Pourquoi nous choisir ?',
@@ -530,6 +527,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'WhatsApp',     
     'SendUs.title' : 'Envoyez-nous un message',
     'SendUs.desc' :'Vous avez une question ou une demande ? Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.',
+    'contact.form.message_placeholder': 'Votre message ici...',
     'SendUs.button':'Envoyer',
     'SendUs.sending':'Envoi...',
     'SendUS.success':'Message envoyé avec succès !',
@@ -693,9 +691,9 @@ const translations: Record<Language, Record<string, string>> = {
     'products.viewAll': 'عرض جميع المنتجات',
     'products.viewDetails': 'عرض التفاصيل',
     'products.sugar': 'السكر والصويا',
-    'products.sugarDesc': 'ICUMSA 45، ICUMSA 100، ICUMSA 150',
+    'products.sugarDesc': 'إيكومسا 45، إيكومسا 100، إيكومسا 150',
     'products.soy': 'منتجات الصويا',
-    'products.soyDesc': 'Soybeans, Soy Flour, Soy Oil',
+    'products.soyDesc': 'فول الصويا، دقيق الصويا، زيت الصويا',
     'products.coffee': 'حبوب القهوة',
     'products.coffeeDesc': 'روبوستا وأرابيكا',
     'products.meat': 'منتجات اللحوم',
@@ -813,15 +811,14 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Our Services
     'about.service.service1.title':'إدارة المشاريع والاستشارات',
-    'about.service.service1.desc': 
-    'التخطيط والتنفيذ وتحسين المشاريع •\n' +
-    'تحليل العمليات وتحسين الكفاءة •\n' +
-    'الاستشارات الاستراتيجية واستراتيجيات دخول السوق •',
+    'about.service.service1.item1':'التخطيط والتنفيذ وتحسين المشاريع',
+    'about.service.service1.item2':'تحليل العمليات وتحسين الكفاءة',
+    'about.service.service1.item3':'الاستشارات الاستراتيجية واستراتيجيات دخول السوق',
     'about.service.service2.title':'التجارة العامة والتوزيع',
-    'about.service.service2.desc': 
-    'استيراد وتصدير مختلف السلع •\n' +
-    'إدارة المشتريات والخدمات اللوجستية •\n' +
-    'تطوير استراتيجيات التجارة •\n',
+    'about.service.service2.item1':'استيراد وتصدير مختلف السلع',
+    'about.service.service2.item2':'إدارة المشتريات والخدمات اللوجستية ',
+    'about.service.service2.item3':'تطوير استراتيجيات التجارة', 
+
       
     // About.Why Choose Us
     'about.whyChooseUs.title': 'لماذا تختارنا؟',
@@ -851,6 +848,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'واتساب',     
     'SendUs.title' : 'أرسل لنا رسالة',
     'SendUs.desc' :'هل لديك سؤال أو استفسار؟ املأ النموذج أدناه وسنقوم بالرد عليك في أقرب وقت ممكن.',
+    'contact.form.message_placeholder': 'رسالتك هنا...',
     'SendUs.button':'يرسل',
     'SendUs.sending':'إرسال...',
     'SendUS.success':'تم إرسال الرسالة بنجاح!',

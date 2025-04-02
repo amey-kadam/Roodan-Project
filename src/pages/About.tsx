@@ -465,8 +465,7 @@ const About = () => {
                                 </svg>
                               </span>
                               <span className="mt-0.5">
-                                Planning, execution, and optimization of
-                                projects
+                                {t("about.service.service1.item1")}
                               </span>
                             </li>
                             <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
@@ -488,7 +487,7 @@ const About = () => {
                                 </svg>
                               </span>
                               <span className="mt-0.5">
-                                Process analysis and efficiency improvement
+                                {t("about.service.service1.item2")}
                               </span>
                             </li>
                             <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
@@ -510,7 +509,7 @@ const About = () => {
                                 </svg>
                               </span>
                               <span className="mt-0.5">
-                                Strategic consulting and market entry strategies
+                                {t("about.service.service1.item3")}
                               </span>
                             </li>
                           </>
@@ -535,7 +534,7 @@ const About = () => {
                                 </svg>
                               </span>
                               <span className="mt-0.5">
-                                Import & export of various goods
+                                {t("about.service.service2.item1")}
                               </span>
                             </li>
                             <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
@@ -557,7 +556,7 @@ const About = () => {
                                 </svg>
                               </span>
                               <span className="mt-0.5">
-                                Procurement and logistics management
+                                {t("about.service.service2.item2")}
                               </span>
                             </li>
                             <li className="flex items-start group/item transition-all duration-300 hover:translate-x-1">
@@ -579,7 +578,7 @@ const About = () => {
                                 </svg>
                               </span>
                               <span className="mt-0.5">
-                                Development of trade strategies
+                                {t("about.service.service2.item3")}
                               </span>
                             </li>
                           </>
