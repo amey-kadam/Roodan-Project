@@ -244,12 +244,12 @@ const LOIForm = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6">
                   <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-2 sm:mb-0" />
                   <h2 className="text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent text-center">
-                    LETTER OF INTENT (LOI)
+                  {t("loi.title")}
                   </h2>
                 </div>
                 <p className="text-foreground max-w-2xl mx-auto text-sm sm:text-base">
-                  FOR CIF ASWP - Complete the form below to submit your Letter of Intent
-                </p>
+                {t("loi.subtitle")}     
+               </p>
               </motion.div>
               
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -257,7 +257,7 @@ const LOIForm = () => {
                 <div className="bg-emerald-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-emerald-700 mb-4 flex items-center">
                     <FileSignature className="w-5 h-5 mr-2" />
-                    LOI Details
+                    {t("loi.sections.loiDetails")}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     
@@ -300,7 +300,7 @@ const LOIForm = () => {
                 <div className="bg-blue-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-blue-700 mb-4 flex items-center">
                     <ShoppingCart className="w-5 h-5 mr-2" />
-                    Product Details
+                    {t("loi.sections.productDetails")}
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -473,13 +473,13 @@ const LOIForm = () => {
                 <div className="bg-purple-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
                     <CreditCard className="w-5 h-5 mr-2" />
-                    Payment and Inspection
-                  </h3>
+                    {t("loi.sections.paymentInspection")}
+                    </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="paymentTerms" className="text-sm font-medium">
-                        Payment Terms
+                      {t("loi.sections.paymentInspection")}
                       </label>
                       <div className="p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-700">
                         THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT 
@@ -527,8 +527,8 @@ const LOIForm = () => {
                 <div className="bg-gray-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center">
                     <MessageCircle className="w-5 h-5 mr-2" />
-                    Additional Details
-                  </h3>
+                    {t("loi.sections.additionalDetails")}
+                    </h3>
                   
                   <div className="grid grid-cols-1 gap-4">
                     <div className="space-y-2">
@@ -563,7 +563,7 @@ const LOIForm = () => {
                 <div className="bg-amber-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-amber-700 mb-4 flex items-center">
                     <Building className="w-5 h-5 mr-2" />
-                    Buyer Information
+                    {t("loi.sections.buyerInfo")}
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -687,7 +687,7 @@ const LOIForm = () => {
                 <div className="bg-indigo-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-indigo-700 mb-4 flex items-center">
                     <CreditCard className="w-5 h-5 mr-2" />
-                    Buyer's Bank Information
+                    {t("loi.sections.bankInfo")}
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -785,7 +785,7 @@ const LOIForm = () => {
                 <div className="bg-red-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-red-700 mb-4 flex items-center">
                     <ShieldCheck className="w-5 h-5 mr-2" />
-                    Legal Warnings
+                    {t("loi.sections.legalWarnings")}
                   </h3>
                   
                   <div className="space-y-4 text-sm text-red-700/90">
@@ -838,7 +838,7 @@ const LOIForm = () => {
                 <div className="bg-slate-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-slate-700 mb-4 flex items-center">
                     <FileSignature className="w-5 h-5 mr-2" />
-                    Signature & Attachments
+                    {t("loi.sections.signature")}
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -878,7 +878,7 @@ const LOIForm = () => {
                 <div className="bg-violet-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-violet-700 mb-4 flex items-center">
                     <ShieldCheck className="w-5 h-5 mr-2" />
-                    Special Conditions
+                    {t("loi.sections.specialConditions")}
                   </h3>
                   
                   <div className="space-y-3 text-sm text-gray-700">
