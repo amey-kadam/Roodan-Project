@@ -304,7 +304,7 @@ const Contact = () => {
                         rows={4}
                         required
                         className="w-full text-sm rounded-md border-gray-200 focus:border-blue-500 focus:ring-blue-500/30 transition-all resize-y min-h-[100px]"
-                        placeholder="Your message here..."
+                        placeholder={t("contact.form.message_placeholder")}
                       />
                     </div>
 
