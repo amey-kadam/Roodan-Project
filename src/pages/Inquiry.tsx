@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -32,16 +32,6 @@ const LOIForm = () => {
   const { toast } = useToast();
   const location = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [forceUpdate, setForceUpdate] = useState(0);
-  const prevLanguageRef = useRef(language);
-  
-  // Force re-render when language changes
-  useEffect(() => {
-    if (prevLanguageRef.current !== language) {
-      prevLanguageRef.current = language;
-      setForceUpdate(prev => prev + 1);
-    }
-  }, [language]);
   
   // Form state
   const [formData, setFormData] = useState({
@@ -90,21 +80,21 @@ const LOIForm = () => {
     bankPhone: ""
   });
 
-  // Incoterms options
+  // Incoterms options - These will re-render with the entire component when language changes
   const incotermsOptions = [
-    { value: "CIF", label: "CIF (Cost, Insurance, Freight)" },
-    { value: "FOB", label: "FOB (Free on Board)" },
-    { value: "EXW", label: "EXW (Ex Works)" },
-    { value: "DDP", label: "DDP (Delivered Duty Paid)" },
-    { value: "FAS", label: "FAS (Free Alongside Ship)" },
-    { value: "CFR", label: "CFR (Cost and Freight)" }
+    { value: "CIF", label: t('loi.incoterms.cif') },
+    { value: "FOB", label: t('loi.incoterms.fob') },
+    { value: "EXW", label: t('loi.incoterms.exw') },
+    { value: "DDP", label: t('loi.incoterms.ddp') },
+    { value: "FAS", label: t('loi.incoterms.fas') },
+    { value: "CFR", label: t('loi.incoterms.cfr') }
   ];
   
   // Inspection options
   const inspectionOptions = [
-    { value: "SGS", label: "SGS" },
-    { value: "INTERTEK", label: "INTERTEK" },
-    { value: "CIQ", label: "CIQ" }
+    { value: "SGS", label: t('loi.inspection.sgs') },
+    { value: "INTERTEK", label: t('loi.inspection.intertek') },
+    { value: "CIQ", label: t('loi.inspection.ciq') }
   ];
 
   const handleChange = (e) => {
@@ -268,7 +258,7 @@ const LOIForm = () => {
                 </p>
               </motion.div>
               
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8" key={language}>
                 {/* LOI Details Section */}
                 <div className="bg-emerald-50 p-4 rounded-xl">
                   <h3 className="text-lg font-semibold text-emerald-700 mb-4 flex items-center">
@@ -889,7 +879,7 @@ const LOIForm = () => {
                     
                     <div className="space-y-2">
                       <label className="text-sm font-medium">
-                      {t("loi.lg2")}
+                      {t("loi.upload.document")}
                       </label>
                       <div className="flex flex-col gap-2">
                         <Input 

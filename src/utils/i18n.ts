@@ -236,6 +236,22 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.product.deliveryPortPlaceholder': 'e.g. Port of Dubai',
       'loi.product.targetPricePlaceholder': 'e.g. 450',
 
+      // Incoterm options
+      'loi.incoterms.cif': 'CIF (Cost, Insurance, Freight)',
+      'loi.incoterms.fob': 'FOB (Free on Board)',
+      'loi.incoterms.exw': 'EXW (Ex Works)',
+      'loi.incoterms.ddp': 'DDP (Delivered Duty Paid)',
+      'loi.incoterms.fas': 'FAS (Free Alongside Ship)',
+      'loi.incoterms.cfr': 'CFR (Cost and Freight)',
+      
+      // Inspection options
+      'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
+      'loi.inspection.intertek': 'INTERTEK',
+      'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
+
+      // Upload document
+      'loi.upload.document': 'Upload documents (PDF/Image)',
+      
       // Payment and Inspection section
       'loi.sections.paymentInspection': 'Payment and Inspection',
       'loi.payment.terms': 'Payment Terms',
@@ -548,6 +564,22 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.product.deliveryPortPlaceholder': 'ex: Port de Dubaï',
     'loi.product.targetPricePlaceholder': 'ex: 450',
 
+    // Incoterm options
+    'loi.incoterms.cif': 'CIF (Coût, Assurance et Fret)',
+    'loi.incoterms.fob': 'FOB (Franco à Bord)',
+    'loi.incoterms.exw': 'EXW (À l\'Usine)',
+    'loi.incoterms.ddp': 'DDP (Rendu Droits Acquittés)',
+    'loi.incoterms.fas': 'FAS (Franco le Long du Navire)',
+    'loi.incoterms.cfr': 'CFR (Coût et Fret)',
+
+    // Inspection options
+    'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
+    'loi.inspection.intertek': 'INTERTEK',
+    'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
+
+    // Upload document
+    'loi.upload.document': 'Télécharger les documents (PDF/Image)',
+
     // Payment and Inspection section
     'loi.sections.paymentInspection': 'Paiement et Inspection',
     'loi.payment.terms': 'Conditions de paiement',
@@ -853,6 +885,22 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.product.deliveryPortPlaceholder': 'مثال: ميناء دبي',
     'loi.product.targetPricePlaceholder': 'مثال: 450',
 
+    // Incoterm options
+    'loi.incoterms.cif': 'سيف (التكلفة والتأمين والشحن)',
+    'loi.incoterms.fob': 'فوب (تسليم ظهر السفينة)',
+    'loi.incoterms.exw': 'إكسدبليو (تسليم المصنع)',
+    'loi.incoterms.ddp': 'دي دي بي (التسليم خالص الرسوم)',
+    'loi.incoterms.fas': 'فاس (تسليم جانب السفينة)',
+    'loi.incoterms.cfr': 'سي إف آر (التكلفة والشحن)',
+
+    // Inspection options
+    'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
+    'loi.inspection.intertek': 'INTERTEK',
+    'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
+
+    // Upload document
+    'loi.upload.document': 'تحميل المستندات (PDF/صورة)',
+
     // Payment and Inspection section
     'loi.sections.paymentInspection': 'الدفع والتفتيش',
     'loi.payment.terms': 'شروط الدفع',
@@ -936,7 +984,15 @@ const translations: Record<Language, Record<string, string>> = {
 // Create the store
 export const useI18n = create<I18nState>((set, get) => ({
   language: 'en',
-  setLanguage: (language) => set({ language }),
+  setLanguage: (language) => {
+    // Force a more complete update by providing a fresh function
+    set({ 
+      language,
+      t: (key: string) => {
+        return translations[language][key] || key;
+      }
+    });
+  },
   t: (key) => {
     const { language } = get();
     return translations[language][key] || key;
