@@ -251,13 +251,42 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.buyer.email': 'Email',
       'loi.buyer.website': 'Website',
 
-
-
-     
+    // buyer bank information section
       'loi.sections.bankInfo': "Buyer's Bank Information",
+      'loi.bn':'Bank Name',
+      'loi.bwc':'Bank SWIFT Code',
+      'loi.bd':'Bank Address/City/State/ZIP/Country',
+      'loi.an':'Account Name',
+      'loi.anu':'Account Number',
+      'loi.bot':"Bank Officer's Title",
+      'loi.bon':"Bank Officer's Name",
+
+
       'loi.sections.legalWarnings': 'Legal Warnings',
+      'loi.wr1':"We declare we have operational experience, storage capacity,and financial resources to fulfill this LOI",
+      'loi.wr2':'We fully understand and accept all terms and obligations outlined in this LOI',
+      'loi.wr3':'We acknowledge that fraudulent documents may result in legal action by authorities including FBI, INTERPOL, ICC, and other international organizations',
+
+
+
       'loi.sections.signature': 'Signature & Attachments',
+      'loi.lg1':'Legal Representative Signature',
+      'loi.lg2':' Upload Documents (PDF/Image)',
+      'loi.lg3':'Required: Company Stamp/Seal and Passport Copy',
+      
+
       'loi.sections.specialConditions': 'Special Conditions',
+      'loi.sc1':'This LOI requires final written approval from both parties',
+      'loi.sc2':'Electronic copies are considered valid equivalents to originals',
+      'loi.sc3':'Submitting...',
+      'loi.sc4':'Submit LOI',
+
+
+      
+      
+
+
+
     
     // Footer
     'slogan':'Premium global trading solutions providing high-quality products with reliable service worldwide.',

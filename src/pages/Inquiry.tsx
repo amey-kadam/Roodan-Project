@@ -694,7 +694,7 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="space-y-2">
                       <label htmlFor="bankName" className="text-sm font-medium">
-                        Bank Name
+                      {t('loi.bn')}
                       </label>
                       <Input 
                         id="bankName" 
@@ -706,7 +706,7 @@ const LOIForm = () => {
                     
                     <div className="space-y-2">
                       <label htmlFor="bankSwiftCode" className="text-sm font-medium">
-                        Bank SWIFT Code
+                      {t('loi.bwc')}
                       </label>
                       <Input 
                         id="bankSwiftCode" 
@@ -719,7 +719,7 @@ const LOIForm = () => {
                   
                   <div className="space-y-2 mb-4">
                     <label htmlFor="bankAddress" className="text-sm font-medium">
-                      Bank Address/City/State/ZIP/Country
+                    {t('loi.bd')}
                     </label>
                     <Input 
                       id="bankAddress" 
@@ -732,7 +732,7 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="space-y-2">
                       <label htmlFor="accountName" className="text-sm font-medium">
-                        Account Name
+                      {t('loi.an')}
                       </label>
                       <Input 
                         id="accountName" 
@@ -744,7 +744,7 @@ const LOIForm = () => {
                     
                     <div className="space-y-2">
                       <label htmlFor="accountNumber" className="text-sm font-medium">
-                        Account Number
+                      {t('loi.anu')}
                       </label>
                       <Input 
                         id="accountNumber" 
@@ -758,7 +758,7 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="bankOfficerName" className="text-sm font-medium">
-                        Bank Officer's Name
+                       {t('loi.bon')}
                       </label>
                       <Input 
                         id="bankOfficerName" 
@@ -770,7 +770,7 @@ const LOIForm = () => {
                     
                     <div className="space-y-2">
                       <label htmlFor="bankOfficerTitle" className="text-sm font-medium">
-                        Bank Officer's Title
+                       {t('loi.bot')}
                       </label>
                       <Input 
                         id="bankOfficerTitle" 
@@ -799,8 +799,7 @@ const LOIForm = () => {
                         />
                       </div>
                       <p>
-                        We declare we have operational experience, storage capacity, 
-                        and financial resources to fulfill this LOI
+                      {t("loi.wr1")}
                       </p>
                     </div>
                     
@@ -813,8 +812,8 @@ const LOIForm = () => {
                         />
                       </div>
                       <p>
-                        We fully understand and accept all terms and obligations 
-                        outlined in this LOI
+                      {t("loi.wr2")}
+
                       </p>
                     </div>
                     
@@ -827,9 +826,8 @@ const LOIForm = () => {
                         />
                       </div>
                       <p>
-                        We acknowledge that fraudulent documents may result in 
-                        legal action by authorities including FBI, INTERPOL, 
-                        ICC, and other international organizations
+                      {t("loi.wr3")}
+
                       </p>
                     </div>
                   </div>
@@ -845,7 +843,9 @@ const LOIForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="signature" className="text-sm font-medium flex items-center gap-1">
-                        <span>Legal Representative Signature</span>
+                        <span>
+                        {t("loi.lg1")}
+                        </span>
                         <span className="text-destructive">*</span>
                       </label>
                       <Input
@@ -858,7 +858,7 @@ const LOIForm = () => {
                     
                     <div className="space-y-2">
                       <label className="text-sm font-medium">
-                        Upload Documents (PDF/Image)
+                      {t("loi.lg2")}
                       </label>
                       <div className="flex flex-col gap-2">
                         <Input 
@@ -868,7 +868,7 @@ const LOIForm = () => {
                           onChange={(e) => {/* Handle file upload */}}
                         />
                         <p className="text-xs text-gray-500">
-                          Required: Company Stamp/Seal and Passport Copy
+                        {t("loi.lg3")}
                         </p>
                       </div>
                     </div>
@@ -885,11 +885,11 @@ const LOIForm = () => {
                   <div className="space-y-3 text-sm text-gray-700">
                     <p className="flex gap-2">
                       <span className="text-violet-600 font-semibold">§</span>
-                      This LOI requires final written approval from both parties
+                      {t("loi.sc1")}
                     </p>
                     <p className="flex gap-2">
                       <span className="text-violet-600 font-semibold">§</span>
-                      Electronic copies are considered valid equivalents to originals
+                      {t("loi.sc2")}
                     </p>
                   </div>
                 </div>
@@ -903,12 +903,12 @@ const LOIForm = () => {
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
-                      <span>Submitting...</span>
+                      <span>{t("loi.sc3")}</span>
                     ) : (
                       <>
                         <Send className="w-5 h-5 mr-2" />
-                        Submit LOI
-                      </>
+                        {t("loi.sc4")}
+                   </>
                     )}
                   </Button>
                 </div>
