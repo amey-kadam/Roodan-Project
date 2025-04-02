@@ -369,6 +369,7 @@ const CategoryButton = memo(({
   
   return (
     <motion.div
+      key={`${category.id}-${category.label}`}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ 
@@ -417,7 +418,8 @@ const CategoryButton = memo(({
 }, (prevProps, nextProps) => {
   return (
     prevProps.activeCategory === nextProps.activeCategory &&
-    prevProps.category.id === nextProps.category.id
+    prevProps.category.id === nextProps.category.id &&
+    prevProps.category.label === nextProps.category.label
   );
 });
 
@@ -577,7 +579,7 @@ const Products = () => {
     { id: "oils" as ProductCategory, label: t("products.categories.oils"), icon: Droplet },
     { id: "agri" as ProductCategory, label: t("products.categories.agri"), icon: Leaf },
     { id: "petro" as ProductCategory, label: t("products.categories.petro"), icon: Fuel },
-  ], [t]);
+  ], [t, language]);
 
   // Filter products based on active category and search query
   const filteredProducts = useMemo(() => {
@@ -725,7 +727,7 @@ const Products = () => {
                 <div className="flex flex-wrap gap-3 md:gap-4 justify-center items-center">
                   {categories.map((category, index) => (
                     <CategoryButton
-                      key={category.id}
+                      key={`${category.id}-${language}`}
                       category={category}
                       activeCategory={activeCategory}
                       onClick={() => handleCategoryChange(category.id)}
@@ -747,7 +749,7 @@ const Products = () => {
           <div className={cn("max-w-[1800px] mx-auto px-1 sm:px-4 md:px-6 w-full", language === "ar" ? "rtl" : "ltr")}>
             <AnimatePresence mode="wait">
               <motion.div 
-                key={activeCategory + searchQuery.length}
+                key={activeCategory + searchQuery.length + language}
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full"
                 variants={containerVariants}
                 initial="hidden"
