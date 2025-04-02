@@ -59,6 +59,21 @@ def init_db():
     )
     ''')
     
+    # Create LOI submissions table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS loi_submissions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company_name TEXT,
+        rep_name TEXT,
+        email TEXT,
+        phone TEXT,
+        product TEXT,
+        quantity TEXT,
+        submission_date DATETIME,
+        loi_data TEXT
+    )
+    ''')
+    
     # Create admin users table
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS admin_users (
@@ -77,6 +92,28 @@ def init_db():
     
     conn.commit()
     conn.close()
+
+# Function to record LOI submissions
+def record_loi_submission(company_name, rep_name, email, phone, product, quantity, loi_data):
+    """Record an LOI submission"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            INSERT INTO loi_submissions 
+            (company_name, rep_name, email, phone, product, quantity, submission_date, loi_data)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (company_name, rep_name, email, phone, product, quantity, 
+             datetime.datetime.now(), str(loi_data)))
+        
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Error recording LOI submission: {str(e)}")
+        return False
+    
 
 # Function to track page visits
 def track_visit(path):
@@ -198,6 +235,10 @@ def get_stats():
     cursor.execute("SELECT COUNT(*) FROM quotations")
     total_quotations = cursor.fetchone()[0]
     
+    # Get total LOI submissions
+    cursor.execute("SELECT COUNT(*) FROM loi_submissions")
+    total_lois = cursor.fetchone()[0]
+    
     # Get recent visits (last 30 days)
     thirty_days_ago = (datetime.datetime.now() - datetime.timedelta(days=30)).strftime('%Y-%m-%d')
     cursor.execute(f"SELECT COUNT(*) FROM visits WHERE date(timestamp) >= '{thirty_days_ago}'")
@@ -222,8 +263,24 @@ def get_stats():
         'recent_visits': recent_visits,
         'total_enquiries': total_enquiries,
         'total_quotations': total_quotations,
+        'total_lois': total_lois,
         'visits_by_day': visits_by_day
     })
+
+# Add new route for LOI submissions
+@admin_bp.route('/api/loi-submissions')
+@login_required
+def get_loi_submissions():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT * FROM loi_submissions ORDER BY submission_date DESC LIMIT 50")
+    submissions = [dict(row) for row in cursor.fetchall()]
+    
+    conn.close()
+    
+    return jsonify(submissions)
+
 
 # Routes to view detailed data
 @admin_bp.route('/api/enquiries')

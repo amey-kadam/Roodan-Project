@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
+from admin import record_loi_submission
 
 # Import admin module
 from admin import admin_bp, init_db, track_visit, record_enquiry, record_quotation
@@ -91,48 +92,89 @@ def contact():
         print(f"Error in contact endpoint: {str(e)}")
         return jsonify({"success": False, "message": "An error occurred."}), 500
 
-@app.route('/api/inquiry', methods=['POST'])
-def inquiry():
+@app.route('/api/loi-submission', methods=['POST'])
+def loi_submission():
     try:
         data = request.json
-        company = data.get('company', '')
-        name = data.get('name', '')
-        email = data.get('email', '')
-        phone = data.get('phone', '')
-        product = data.get('product', '')
-        quantity = data.get('quantity', '')
-        delivery = data.get('delivery', '')
-        message = data.get('message', '')
+        
+        # Validate required fields
+        required_fields = [
+            'issuedDate', 'validUntil', 'productName', 'quantity',
+            'origin', 'deliveryPort', 'targetPrice', 'companyName',
+            'companyRegistrationNumber', 'representativeName', 'email', 'phone'
+        ]
+        
+        missing_fields = [field for field in required_fields if not data.get(field)]
+        if missing_fields:
+            return jsonify({
+                "success": False,
+                "message": f"Missing required fields: {', '.join(missing_fields)}"
+            }), 400
 
-        if not all([company, name, email, phone, product, quantity, delivery]):
-            return jsonify({"success": False, "message": "Please fill all required fields"}), 400
-
-        subject = f"New Product Inquiry from {company}"
+        # Build email content
+        subject = f"New LOI Submission from {data['companyName']}"
         body = f"""
-        You have received a new product inquiry:
+        LETTER OF INTENT DETAILS:
+        Issued Date: {data['issuedDate']}
+        Valid Until: {data['validUntil']}
 
-        Company: {company}
-        Contact Person: {name}
-        Email: {email}
-        Phone: {phone}
+        PRODUCT DETAILS:
+        Product Name: {data['productName']}
+        Quantity: {data['quantity']}
+        Origin: {data['origin']}
+        Delivery Port: {data['deliveryPort']}
+        Target Price: {data['targetPrice']}
+        Incoterms: {data['incoterms']}
+        Total Contract Amount: {data['totalContractAmount']}
 
-        Product: {product}
-        Quantity: {quantity}
-        Delivery Terms: {delivery}
+        BUYER INFORMATION:
+        Company: {data['companyName']}
+        Registration Number: {data['companyRegistrationNumber']}
+        Address: {data['address']}
+        Representative: {data['representativeName']} ({data['title']})
+        Phone: {data['phone']}
+        Email: {data['email']}
+        Website: {data['website']}
 
-        Additional Message:
-        {message}
+        BANK DETAILS:
+        Bank Name: {data['bankName']}
+        SWIFT Code: {data['bankSwiftCode']}
+        Account Name: {data['accountName']}
+        Account Number: {data['accountNumber']}
+
+        ADDITIONAL DETAILS:
+        Observations: {data['observations']}
+        Specifications: {data['specifications']}
         """
 
-        if send_email(email, subject, body):
-            record_quotation(company, name, email, phone, product, quantity, delivery, message)
-            return jsonify({"success": True, "message": "Your inquiry has been submitted successfully!"}), 200
+        # Send email
+        if send_email(data['email'], subject, body):
+            # Record full submission in database
+            record_loi_submission(
+                company_name=data['companyName'],
+                rep_name=data['representativeName'],
+                email=data['email'],
+                phone=data['phone'],
+                product=data['productName'],
+                quantity=data['quantity'],
+                loi_data=data  # Pass entire data object
+            )
+            return jsonify({
+                "success": True,
+                "message": "LOI submitted successfully!"
+            }), 200
         else:
-            return jsonify({"success": False, "message": "Failed to submit inquiry. Please try again later."}), 500
+            return jsonify({
+                "success": False,
+                "message": "Failed to submit LOI. Please try again later."
+            }), 500
 
     except Exception as e:
-        print(f"Error sending inquiry email: {str(e)}")
-        return jsonify({"success": False, "message": "Failed to submit inquiry. Please try again later."}), 500
+        print(f"LOI submission error: {str(e)}")
+        return jsonify({
+            "success": False,
+            "message": "An error occurred while processing your LOI."
+        }), 500
 
 # Admin redirect
 @app.route('/admin', methods=['GET'])
