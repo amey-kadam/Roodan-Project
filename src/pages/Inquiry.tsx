@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -16,10 +16,18 @@ import {
   Phone, 
   Building, 
   ShoppingCart, 
-  MessageCircle 
+  MessageCircle,
+  FileText,
+  Calendar,
+  ShieldCheck,
+  DollarSign,
+  Truck,
+  FileSignature,
+  CreditCard,
+  BarChart
 } from "lucide-react";
 
-const Inquiry = () => {
+const LOIForm = () => {
   const { t, language } = useI18n();
   const { toast } = useToast();
   const location = useLocation();
@@ -29,111 +37,99 @@ const Inquiry = () => {
   
   // Form state
   const [formData, setFormData] = useState({
-    company: "",
-    name: "",
-    email: "",
-    phone: "",
-    product: "",
+    // LOI details
+    loiNumber: "",
+    issuedDate: "",
+    validUntil: "",
+    
+    // Product details
+    productName: "",
     quantity: "",
-    delivery: "",
-    message: ""
+    origin: "",
+    shipments: "",
+    frequencyOfDelivery: "",
+    contractLength: "",
+    totalContractAmount: "",
+    incoterms: "CIF",
+    deliveryPort: "",
+    targetPrice: "",
+    
+    // Payment and inspection
+    paymentTerms: "",
+    inspection: "SGS",
+    
+    // Additional details
+    observations: "",
+    specifications: "",
+    
+    // Buyer information
+    companyName: "",
+    companyRegistrationNumber: "",
+    address: "",
+    representativeName: "",
+    title: "",
+    phone: "",
+    email: "",
+    website: "",
+    
+    // Bank information
+    bankName: "",
+    bankSwiftCode: "",
+    bankAddress: "",
+    accountName: "",
+    accountNumber: "",
+    bankOfficerName: "",
+    bankOfficerTitle: "",
+    bankPhone: ""
   });
 
-  // Product options with translation keys
-  const productOptions = useMemo(() => [
-    { value: "sugar_icumsa", label: t('product.sugar.title') },
-    { value: "soy_products", label: t('product.soy.title') },
-    { value: "coffee_beans", label: t('product.coffee.title') },
-    { value: "beef_products", label: t('product.beef.title') },
-    { value: "chicken_meat", label: t('product.chicken.title') },
-    { value: "beef_ghee", label: t('product.ghee.title') },
-    { value: "vegetable_oils", label: t('product.vegetable.title') },
-    { value: "rice_varieties", label: t('product.rice.title') },
-    { value: "olive_oil", label: t('product.olive.title') },
-    { value: "urea_and_fertilizers", label: t('product.urea.title') },
-    { value: "petroleum_products", label: t('product.petroleum.title') },
-  ], [t, language, forceUpdate]);
+  // Incoterms options
+  const incotermsOptions = [
+    { value: "CIF", label: "CIF (Cost, Insurance, Freight)" },
+    { value: "FOB", label: "FOB (Free on Board)" },
+    { value: "EXW", label: "EXW (Ex Works)" },
+    { value: "DDP", label: "DDP (Delivered Duty Paid)" },
+    { value: "FAS", label: "FAS (Free Alongside Ship)" },
+    { value: "CFR", label: "CFR (Cost and Freight)" }
+  ];
+  
+  // Inspection options
+  const inspectionOptions = [
+    { value: "SGS", label: "SGS" },
+    { value: "INTERTEK", label: "INTERTEK" },
+    { value: "CIQ", label: "CIQ" }
+  ];
 
-  // Set the selected product when the component mounts or language changes
-  useEffect(() => {
-    const state = location.state as { selectedProduct?: string };
-    if (state?.selectedProduct) {
-      // Try to find a direct match with the value first
-      let matchingProduct = productOptions.find(option => option.value === state.selectedProduct);
-      
-      // If no direct match, try to match by comparing the transformed product ID
-      if (!matchingProduct) {
-        // Get all product labels in lowercase with spaces replaced by underscores
-        const normalizedLabels = productOptions.map(option => ({
-          value: option.value,
-          normalizedLabel: option.label.toLowerCase().replace(/\s+/g, '_').replace(/&/g, 'and')
-        }));
-        
-        // Find a match with the normalized label
-        const matchByLabel = normalizedLabels.find(item => item.normalizedLabel === state.selectedProduct);
-        
-        if (matchByLabel) {
-          matchingProduct = productOptions.find(option => option.value === matchByLabel.value);
-        }
-      }
-      
-      if (matchingProduct) {
-        setFormData(prev => ({ ...prev, product: matchingProduct.value }));
-      }
-    }
-  }, [location.state, productOptions, language]);
-  
-  // Force UI update when language changes
-  useEffect(() => {
-    // Only run this effect when language actually changes
-    if (prevLanguageRef.current !== language) {
-      // Store current values
-      const currentValues = { ...formData };
-      
-      // Reset form data to force re-render of select components
-      setFormData(prev => ({
-        ...prev,
-        product: "",
-        delivery: ""
-      }));
-      
-      // After a short delay, restore the values and force update
-      const timer = setTimeout(() => {
-        setFormData(currentValues);
-        setForceUpdate(prev => prev + 1); // Increment to force re-render
-      }, 50);
-      
-      // Update the ref to current language
-      prevLanguageRef.current = language;
-      
-      return () => clearTimeout(timer);
-    }
-  }, [language, formData]);
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
   };
   
-  const handleSelectChange = (name: string, value: string) => {
+  const handleSelectChange = (name, value) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
       // Validate required fields
-      const requiredFields = ['company', 'name', 'email', 'phone', 'product', 'quantity', 'delivery'];
-      const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
+      const requiredFields = [
+        'loiNumber', 'issuedDate', 'validUntil', 'productName', 
+        'quantity', 'origin', 'deliveryPort', 'targetPrice',
+        'companyName', 'companyRegistrationNumber', 'representativeName', 
+        'email', 'phone'
+      ];
+      
+      const missingFields = requiredFields.filter(field => !formData[field]);
       
       if (missingFields.length > 0) {
         throw new Error("Please fill all required fields");
       }
       
       // Send data to backend API
-      const response = await fetch('http://localhost:5000/api/inquiry', {
+      const response = await fetch('/api/loi-submission', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -145,29 +141,56 @@ const Inquiry = () => {
       
       if (response.ok) {
         toast({
-          title: "Inquiry Submitted",
-          description: data.message || "We've received your inquiry and will contact you soon.",
+          title: "LOI Submitted Successfully",
+          description: "Your Letter of Intent has been received. We will contact you shortly.",
           duration: 5000,
         });
         
+        // Generate PDF download or preview option here
+        
         // Reset form
         setFormData({
-          company: "",
-          name: "",
-          email: "",
-          phone: "",
-          product: "",
+          loiNumber: "",
+          issuedDate: "",
+          validUntil: "",
+          productName: "",
           quantity: "",
-          delivery: "",
-          message: ""
+          origin: "",
+          shipments: "",
+          frequencyOfDelivery: "",
+          contractLength: "",
+          totalContractAmount: "",
+          incoterms: "CIF",
+          deliveryPort: "",
+          targetPrice: "",
+          paymentTerms: "",
+          inspection: "SGS",
+          observations: "",
+          specifications: "",
+          companyName: "",
+          companyRegistrationNumber: "",
+          address: "",
+          representativeName: "",
+          title: "",
+          phone: "",
+          email: "",
+          website: "",
+          bankName: "",
+          bankSwiftCode: "",
+          bankAddress: "",
+          accountName: "",
+          accountNumber: "",
+          bankOfficerName: "",
+          bankOfficerTitle: "",
+          bankPhone: ""
         });
       } else {
-        throw new Error(data.message || "Failed to submit inquiry");
+        throw new Error(data.message || "Failed to submit LOI");
       }
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to submit inquiry. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to submit LOI. Please try again.",
         variant: "destructive",
         duration: 5000,
       });
@@ -175,17 +198,6 @@ const Inquiry = () => {
       setIsSubmitting(false);
     }
   };
-
-  // Delivery terms options with translations
-  const deliveryOptions = useMemo(() => [
-    { value: "cif", label: t('inquiry.form.delivery.cif') },
-    { value: "fob", label: t('inquiry.form.delivery.fob') },
-    { value: "ex_works", label: t('inquiry.form.delivery.exw') },
-    { value: "ddp", label: t('inquiry.form.delivery.ddp') },
-    { value: "fas", label: t('inquiry.form.delivery.fas') },
-    { value: "cfr", label: t('inquiry.form.delivery.cfr') },
-    { value: "other", label: t('inquiry.form.delivery.other') },
-  ], [t, language, forceUpdate]);
 
   const pageVariants = {
     initial: { opacity: 0, y: 50 },
@@ -203,7 +215,6 @@ const Inquiry = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
       <main className="flex-grow">
-        {/* Inquiry Form - Moved to top */}
         <motion.section 
           className="py-12 pt-28 relative"
           initial="initial"
@@ -233,200 +244,684 @@ const Inquiry = () => {
             >
               <motion.div variants={pageVariants} className="text-center mb-12">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6">
-                  <Send className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-2 sm:mb-0" />
+                  <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-2 sm:mb-0" />
                   <h2 className="text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent text-center">
-                    {t("inquiry.form.title")}
+                    LETTER OF INTENT (LOI)
                   </h2>
                 </div>
                 <p className="text-foreground max-w-2xl mx-auto text-sm sm:text-base">
-                  {t("inquiry.form.description")}
+                  FOR CIF ASWP - Complete the form below to submit your Letter of Intent
                 </p>
               </motion.div>
               
-              <form key={`inquiry-form-${language}-${forceUpdate}`} onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-                  <motion.div 
-                    variants={pageVariants} 
-                    className="space-y-2 sm:space-y-3"
-                  >
-                    <label htmlFor="company" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                      <Building className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                      {t("inquiry.form.company")} <span className="text-destructive">*</span>
+              <form onSubmit={handleSubmit} className="space-y-8">
+                {/* LOI Details Section */}
+                <div className="bg-emerald-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-emerald-700 mb-4 flex items-center">
+                    <FileSignature className="w-5 h-5 mr-2" />
+                    LOI Details
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="loiNumber" className="text-sm font-medium flex items-center gap-1">
+                        <span>LOI Number</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="loiNumber" 
+                        value={formData.loiNumber}
+                        onChange={handleChange}
+                        required 
+                        placeholder="LOI-2025-001"
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="issuedDate" className="text-sm font-medium flex items-center gap-1">
+                        <Calendar className="w-4 h-4 text-emerald-500" />
+                        <span>Issued Date</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="issuedDate" 
+                        type="date"
+                        value={formData.issuedDate}
+                        onChange={handleChange}
+                        required 
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="validUntil" className="text-sm font-medium flex items-center gap-1">
+                        <Calendar className="w-4 h-4 text-emerald-500" />
+                        <span>Valid Until</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="validUntil" 
+                        type="date"
+                        value={formData.validUntil}
+                        onChange={handleChange}
+                        required 
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Product Details Section */}
+                <div className="bg-blue-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-blue-700 mb-4 flex items-center">
+                    <ShoppingCart className="w-5 h-5 mr-2" />
+                    Product Details
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="productName" className="text-sm font-medium flex items-center gap-1">
+                        <span>Product Name</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="productName" 
+                        value={formData.productName}
+                        onChange={handleChange}
+                        required 
+                        placeholder="e.g. Sugar ICUMSA 45"
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="quantity" className="text-sm font-medium flex items-center gap-1">
+                        <BarChart className="w-4 h-4 text-blue-500" />
+                        <span>Quantity (MT)</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="quantity" 
+                        value={formData.quantity}
+                        onChange={handleChange}
+                        required 
+                        placeholder="e.g. 25,000"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="origin" className="text-sm font-medium flex items-center gap-1">
+                        <span>Origin</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="origin" 
+                        value={formData.origin}
+                        onChange={handleChange}
+                        required 
+                        placeholder="e.g. Brazil"
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="shipments" className="text-sm font-medium flex items-center gap-1">
+                        <Truck className="w-4 h-4 text-blue-500" />
+                        <span>Shipments</span>
+                      </label>
+                      <Input 
+                        id="shipments" 
+                        value={formData.shipments}
+                        onChange={handleChange}
+                        placeholder="e.g. 5,000 MT x 5"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="frequencyOfDelivery" className="text-sm font-medium">
+                        Frequency of Delivery
+                      </label>
+                      <Input 
+                        id="frequencyOfDelivery" 
+                        value={formData.frequencyOfDelivery}
+                        onChange={handleChange}
+                        placeholder="e.g. Monthly"
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="contractLength" className="text-sm font-medium">
+                        Contract Length
+                      </label>
+                      <Input 
+                        id="contractLength" 
+                        value={formData.contractLength}
+                        onChange={handleChange}
+                        placeholder="e.g. 12 months"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="totalContractAmount" className="text-sm font-medium flex items-center gap-1">
+                        <DollarSign className="w-4 h-4 text-blue-500" />
+                        <span>Total Contract Amount (MT)</span>
+                      </label>
+                      <Input 
+                        id="totalContractAmount" 
+                        value={formData.totalContractAmount}
+                        onChange={handleChange}
+                        placeholder="e.g. 25,000"
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="incoterms" className="text-sm font-medium">
+                        Incoterms 2020
+                      </label>
+                      <Select 
+                        value={formData.incoterms} 
+                        onValueChange={(value) => handleSelectChange('incoterms', value)}
+                      >
+                        <SelectTrigger className="rounded-lg">
+                          <SelectValue placeholder="Select Incoterms" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {incotermsOptions.map((option) => (
+                            <SelectItem 
+                              key={option.value} 
+                              value={option.value}
+                            >
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="deliveryPort" className="text-sm font-medium flex items-center gap-1">
+                        <span>Delivery Port</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="deliveryPort" 
+                        value={formData.deliveryPort}
+                        onChange={handleChange}
+                        required 
+                        placeholder="e.g. Port of Dubai"
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="targetPrice" className="text-sm font-medium flex items-center gap-1">
+                        <DollarSign className="w-4 h-4 text-blue-500" />
+                        <span>Target Price (USD) per MT</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="targetPrice" 
+                        value={formData.targetPrice}
+                        onChange={handleChange}
+                        required 
+                        placeholder="e.g. 450"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Payment and Inspection Section */}
+                <div className="bg-purple-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
+                    <CreditCard className="w-5 h-5 mr-2" />
+                    Payment and Inspection
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="paymentTerms" className="text-sm font-medium">
+                        Payment Terms
+                      </label>
+                      <Textarea 
+                        id="paymentTerms" 
+                        value={formData.paymentTerms}
+                        onChange={handleChange}
+                        placeholder="Default: THE BUYER RELEASES PAYMENT TO THE SELLER'S BANK AFTER INSPECTION AT THE LOADING PORT OF WITHIN THREE (3) BANKING DAYS AFTER THE CARGO HAS PASSED THE SGS OR SIMILAR, AND RECEIPT OF ALL RELEVANT PAYMENT DOCUMENTS."
+                        className="rounded-lg h-24"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="inspection" className="text-sm font-medium">
+                        Inspection
+                      </label>
+                      <Select 
+                        value={formData.inspection} 
+                        onValueChange={(value) => handleSelectChange('inspection', value)}
+                      >
+                        <SelectTrigger className="rounded-lg">
+                          <SelectValue placeholder="Select Inspection Agency" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {inspectionOptions.map((option) => (
+                            <SelectItem 
+                              key={option.value} 
+                              value={option.value}
+                            >
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-gray-500 mt-1">
+                        At the port of loading shall be for the account and at the expense of the SELLER / At the port of discharge shall be for the account and at the expense of the BUYER
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Additional Details Section */}
+                <div className="bg-gray-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    Additional Details
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="observations" className="text-sm font-medium">
+                        Observations
+                      </label>
+                      <Textarea 
+                        id="observations" 
+                        value={formData.observations}
+                        onChange={handleChange}
+                        placeholder="Any additional observations"
+                        className="rounded-lg h-20"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="specifications" className="text-sm font-medium">
+                        Specifications
+                      </label>
+                      <Textarea 
+                        id="specifications" 
+                        value={formData.specifications}
+                        onChange={handleChange}
+                        placeholder="Product specifications"
+                        className="rounded-lg h-20"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Buyer Information Section */}
+                <div className="bg-amber-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-amber-700 mb-4 flex items-center">
+                    <Building className="w-5 h-5 mr-2" />
+                    Buyer Information
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="companyName" className="text-sm font-medium flex items-center gap-1">
+                        <span>Company Name</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="companyName" 
+                        value={formData.companyName}
+                        onChange={handleChange}
+                        required 
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="companyRegistrationNumber" className="text-sm font-medium flex items-center gap-1">
+                        <ShieldCheck className="w-4 h-4 text-amber-500" />
+                        <span>Company Registration Number</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="companyRegistrationNumber" 
+                        value={formData.companyRegistrationNumber}
+                        onChange={handleChange}
+                        required 
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2 mb-4">
+                    <label htmlFor="address" className="text-sm font-medium">
+                      Address/City/State/ZIP/Country
                     </label>
                     <Input 
-                      id="company" 
-                      value={formData.company}
+                      id="address" 
+                      value={formData.address}
                       onChange={handleChange}
-                      required 
-                      className="rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      className="rounded-lg"
                     />
-                  </motion.div>
-
-                  <motion.div 
-                    variants={pageVariants} 
-                    className="space-y-2 sm:space-y-3"
-                  >
-                    <label htmlFor="name" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                      {t("inquiry.form.name")} <span className="text-destructive">*</span>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="representativeName" className="text-sm font-medium flex items-center gap-1">
+                        <span>Legal Representative Name</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="representativeName" 
+                        value={formData.representativeName}
+                        onChange={handleChange}
+                        required 
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="title" className="text-sm font-medium">
+                        Title
+                      </label>
+                      <Input 
+                        id="title" 
+                        value={formData.title}
+                        onChange={handleChange}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="text-sm font-medium flex items-center gap-1">
+                        <Phone className="w-4 h-4 text-amber-500" />
+                        <span>Phone/Mobile</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="phone" 
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required 
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-sm font-medium flex items-center gap-1">
+                        <Mail className="w-4 h-4 text-amber-500" />
+                        <span>Email</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input 
+                        id="email" 
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required 
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label htmlFor="website" className="text-sm font-medium">
+                      Website
                     </label>
                     <Input 
-                      id="name" 
-                      value={formData.name}
+                      id="website" 
+                      value={formData.website}
                       onChange={handleChange}
-                      required 
-                      className="rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
+                      className="rounded-lg"
                     />
-                  </motion.div>
+                  </div>
+                </div>
+                
+                {/* Bank Information Section */}
+                <div className="bg-indigo-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-indigo-700 mb-4 flex items-center">
+                    <CreditCard className="w-5 h-5 mr-2" />
+                    Buyer's Bank Information
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="bankName" className="text-sm font-medium">
+                        Bank Name
+                      </label>
+                      <Input 
+                        id="bankName" 
+                        value={formData.bankName}
+                        onChange={handleChange}
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="bankSwiftCode" className="text-sm font-medium">
+                        Bank SWIFT Code
+                      </label>
+                      <Input 
+                        id="bankSwiftCode" 
+                        value={formData.bankSwiftCode}
+                        onChange={handleChange}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2 mb-4">
+                    <label htmlFor="bankAddress" className="text-sm font-medium">
+                      Bank Address/City/State/ZIP/Country
+                    </label>
+                    <Input 
+                      id="bankAddress" 
+                      value={formData.bankAddress}
+                      onChange={handleChange}
+                      className="rounded-lg"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label htmlFor="accountName" className="text-sm font-medium">
+                        Account Name
+                      </label>
+                      <Input 
+                        id="accountName" 
+                        value={formData.accountName}
+                        onChange={handleChange}
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="accountNumber" className="text-sm font-medium">
+                        Account Number
+                      </label>
+                      <Input 
+                        id="accountNumber" 
+                        value={formData.accountNumber}
+                        onChange={handleChange}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="bankOfficerName" className="text-sm font-medium">
+                        Bank Officer's Name
+                      </label>
+                      <Input 
+                        id="bankOfficerName" 
+                        value={formData.bankOfficerName}
+                        onChange={handleChange}
+                        className="rounded-lg"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label htmlFor="bankOfficerTitle" className="text-sm font-medium">
+                        Bank Officer's Title
+                      </label>
+                      <Input 
+                        id="bankOfficerTitle" 
+                        value={formData.bankOfficerTitle}
+                        onChange={handleChange}
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Legal Warnings Section */}
+                <div className="bg-red-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-red-700 mb-4 flex items-center">
+                    <ShieldCheck className="w-5 h-5 mr-2" />
+                    Legal Warnings
+                  </h3>
+                  
+                  <div className="space-y-4 text-sm text-red-700/90">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 mt-1">
+                        <input 
+                          type="checkbox" 
+                          required 
+                          className="h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-500"
+                        />
+                      </div>
+                      <p>
+                        We declare we have operational experience, storage capacity, 
+                        and financial resources to fulfill this LOI
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 mt-1">
+                        <input 
+                          type="checkbox" 
+                          required 
+                          className="h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-500"
+                        />
+                      </div>
+                      <p>
+                        We fully understand and accept all terms and obligations 
+                        outlined in this LOI
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 mt-1">
+                        <input 
+                          type="checkbox" 
+                          required 
+                          className="h-4 w-4 text-red-600 border-red-300 rounded focus:ring-red-500"
+                        />
+                      </div>
+                      <p>
+                        We acknowledge that fraudulent documents may result in 
+                        legal action by authorities including FBI, INTERPOL, 
+                        ICC, and other international organizations
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-                  <motion.div 
-                    variants={pageVariants} 
-                    className="space-y-2 sm:space-y-3"
-                  >
-                    <label htmlFor="email" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                      {t("inquiry.form.email")} <span className="text-destructive">*</span>
-                    </label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      value={formData.email}
-                      onChange={handleChange}
-                      required 
-                      className="rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
-                    />
-                  </motion.div>
-
-                  <motion.div 
-                    variants={pageVariants} 
-                    className="space-y-2 sm:space-y-3"
-                  >
-                    <label htmlFor="phone" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                      {t("inquiry.form.phone")} <span className="text-destructive">*</span>
-                    </label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                      className="rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
-                    />
-                  </motion.div>
+                {/* Signature Section */}
+                <div className="bg-slate-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-slate-700 mb-4 flex items-center">
+                    <FileSignature className="w-5 h-5 mr-2" />
+                    Signature & Attachments
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="signature" className="text-sm font-medium flex items-center gap-1">
+                        <span>Legal Representative Signature</span>
+                        <span className="text-destructive">*</span>
+                      </label>
+                      <Input
+                        id="signature"
+                        placeholder="Full legal name as signature"
+                        className="rounded-lg font-semibold"
+                        required
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">
+                        Upload Documents (PDF/Image)
+                      </label>
+                      <div className="flex flex-col gap-2">
+                        <Input 
+                          type="file" 
+                          accept=".pdf,.jpg,.png"
+                          className="rounded-lg py-1.5"
+                          onChange={(e) => {/* Handle file upload */}}
+                        />
+                        <p className="text-xs text-gray-500">
+                          Required: Company Stamp/Seal and Passport Copy
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-                  <motion.div 
-                    variants={pageVariants} 
-                    className="space-y-2 sm:space-y-3"
-                  >
-                    <label htmlFor="product" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                      <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                      {t("inquiry.form.product")} <span className="text-destructive">*</span>
-                    </label>
-                    <Select 
-                      key={`product-select-${language}-${forceUpdate}`}
-                      value={formData.product} 
-                      onValueChange={(value) => handleSelectChange('product', value)}
-                      required
-                    >
-                      <SelectTrigger className="rounded-xl">
-                        <SelectValue placeholder={t("inquiry.form.selectProduct")} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {productOptions.map((option) => (
-                          <SelectItem 
-                            key={option.value} 
-                            value={option.value}
-                            className="hover:bg-secondary/20"
-                          >
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </motion.div>
-
-                  <motion.div 
-                    variants={pageVariants} 
-                    className="space-y-2 sm:space-y-3"
-                  >
-                    <label htmlFor="quantity" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                      {t("inquiry.form.quantity")} <span className="text-destructive">*</span>
-                    </label>
-                    <Input 
-                      id="quantity" 
-                      value={formData.quantity}
-                      onChange={handleChange}
-                      required 
-                      className="rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
-                    />
-                  </motion.div>
+                {/* Special Conditions Section */}
+                <div className="bg-violet-50 p-4 rounded-xl">
+                  <h3 className="text-lg font-semibold text-violet-700 mb-4 flex items-center">
+                    <ShieldCheck className="w-5 h-5 mr-2" />
+                    Special Conditions
+                  </h3>
+                  
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <p className="flex gap-2">
+                      <span className="text-violet-600 font-semibold">§</span>
+                      This LOI requires final written approval from both parties
+                    </p>
+                    <p className="flex gap-2">
+                      <span className="text-violet-600 font-semibold">§</span>
+                      Electronic copies are considered valid equivalents to originals
+                    </p>
+                  </div>
                 </div>
 
-                <motion.div 
-                  variants={pageVariants} 
-                  className="space-y-2 sm:space-y-3"
-                >
-                  <label htmlFor="delivery" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                    <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                    {t("inquiry.form.delivery")} <span className="text-destructive">*</span>
-                  </label>
-                  <Select 
-                    key={`delivery-select-${language}-${forceUpdate}`}
-                    value={formData.delivery} 
-                    onValueChange={(value) => handleSelectChange('delivery', value)}
-                    required
-                  >
-                    <SelectTrigger className="rounded-xl">
-                      <SelectValue placeholder={t("inquiry.form.selectDelivery")} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {deliveryOptions.map((option) => (
-                        <SelectItem 
-                          key={option.value} 
-                          value={option.value}
-                          className="hover:bg-secondary/20"
-                        >
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </motion.div>
-
-                <motion.div 
-                  variants={pageVariants} 
-                  className="space-y-2 sm:space-y-3"
-                >
-                  <label htmlFor="message" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-foreground">
-                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
-                    {t("inquiry.form.message")}
-                  </label>
-                  <Textarea 
-                    id="message" 
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={5} 
-                    className="rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
-                  />
-                </motion.div>
-
-                <motion.div variants={pageVariants}>
+                {/* Submit Button */}
+                <div className="flex justify-center mt-10">
                   <Button 
                     type="submit" 
-                    className="w-full px-6 sm:px-12 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-700 hover:to-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/20"
+                    size="lg"
+                    className="px-16 py-6 text-lg bg-emerald-600 hover:bg-emerald-700"
                     disabled={isSubmitting}
                   >
-                    <span className="flex items-center gap-2 sm:gap-3 text-base sm:text-lg font-semibold text-white">
-                      {isSubmitting ? "Submitting..." : t("inquiry.form.submit")}
-                    </span>
+                    {isSubmitting ? (
+                      <span>Submitting...</span>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Submit LOI
+                      </>
+                    )}
                   </Button>
-                </motion.div>
+                </div>
               </form>
             </motion.div>
           </div>
@@ -437,4 +932,4 @@ const Inquiry = () => {
   );
 };
 
-export default Inquiry;
+export default LOIForm;
