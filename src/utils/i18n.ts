@@ -140,12 +140,27 @@ const translations: Record<Language, Record<string, string>> = {
     'about.subtitle': 'Our mission and values',
     'about.mission.title': 'Our Mission',
     'about.mission.desc': 'To provide premium quality products through transparent and reliable partnerships worldwide.',
+    'about.services.title': 'Our Services',
+    'about.services.desc': 'Providing Quality Products with Trust & Transparency Worldwide',
     'about.values.title': 'Our Values',
     'about.values.desc': 'Quality, reliability, partnership, and flexibility form the cornerstone of our business philosophy.',
     'about.experience.title': 'Our Experience',
     'about.experience.desc': 'With years of experience in international trade, we have established strong partnerships and a reputation for excellence.',
     'about.team.title': 'Our Leadership Team',
     'about.team.desc': "Discover the exceptional individuals driving our company's vision and success.",
+
+    // Our Services
+    'about.service.service1.title':'Project Management & Consulting',
+    'about.service.service1.desc': 
+    '• Planning, execution, and optimization of projects \n' +
+    '• Process analysis and efficiency improvement \n' +
+    '• Strategic consulting and market entry strategies',
+    'about.service.service2.title':'General Trading & Distribution',
+    'about.service.service2.desc': 
+    '• Import & export of various goods \n' +
+    '• Procurement and logistics management \n' +
+    '• Development of trade strategies \n',
+
 
     // Our Mission
     'about.values.value1.title':'Quality Assurance',
@@ -247,32 +262,33 @@ const translations: Record<Language, Record<string, string>> = {
     'strengths.flexibility.desc': "Nous fournissons des solutions d'exportation sur mesure selon les besoins des clients",
     
     // Products
-    'products.title': 'Nos Produits, nos',
-    'products.description': 'Découvrez notre gamme complète de produits de qualité supérieure, provenant de fournisseurs mondiaux de confiance., et',
-    'products.viewAll': 'Voir tous les produits, Voir tous les produits',
+    'products.title': 'Nos Produits',
+    'products.description': 'Découvrez notre gamme complète de produits de qualité supérieure, provenant de fournisseurs mondiaux de confiance.',
+    'products.viewAll': 'Voir tous les produits',
     'products.viewDetails': 'Voir les détails',
-    'products.sugar': 'Sugar & Soy, etc',
+    'products.sugar': 'Sucre',
     'products.sugarDesc': 'ICUMSA 45, ICUMSA 100, ICUMSA 150',
-    'products.soy': 'Soy Products',
-    'products.soyDesc': 'Soybeans, Soy Flour, Soy Oil',
+    'products.soy': 'Produits à base de soja',
+    'products.soyDesc': 'Soja, farine de soja, huile de soja',
     'produits.café': 'Café Beans',
     'produits.coffeeDesc': 'Robusta & Arabica, etc',
     'produits.viande': 'Produits de viande, Produits de viande',
+    'products.meat': 'Produits à base de viande',
     'products.meatDesc': 'Buffalo Meat, Chicken & Cow Ghee, Duc',
     'products.oil': 'Huiles végétales',
-    'products.oilDesc': 'CP8, CP10 & Olive Oil, soyabean oil, sunflower oil & avacado oil, etc',
-    'produits.rice': 'Rice, etc',
+    'products.oilDesc': 'CP8, CP10 & Huile d\'olive, huile de soja, huile de tournesol & huile d\'avocat',
+    'products.rice': 'Riz',
     'products.riceDesc': 'Basmati, Jasmin & Riz Blanc',
-    'produits.olive': "Olive Oil, huile d'olive",
-    'products.urea': 'Urée & Engrais, etc',
-    'produits.pétrole': 'Produits du pétrole, Produits du pétrole',
+    'products.olive': 'Huile d\'olive',
+    'products.urea': 'Urée & Engrais',
+    'products.petroleum': 'Produits pétroliers',
     'products.petroleumDesc': 'EN 590, D2, AGO, Jet A1',
-    'products.categories.all': 'Tous les produits, Tous les produits',
-    'products.categories.food': 'Produits alimentaires, Produits alimentaires',
-    'produits.catégories.huiles': 'Huiles',
-    'produits.catégories.agri': 'Agriculture etc',
-    'produits.catégories.pétro': 'Petroleum etc',
-    'products.requestQuote': 'Request Quote etc',
+    'products.categories.all': 'Tous les produits',
+    'products.categories.food': 'Produits alimentaires',
+    'products.categories.oils': 'Huiles',
+    'products.categories.agri': 'Produits agricoles',
+    'products.categories.petro': 'Produits pétroliers',
+    'products.requestQuote': 'Demander un devis',
     'products.noProductsFound': 'Aucun produit trouvé',
     'products.noProductsMatching': 'Aucun produit correspondant à "{query}" dans {category}.',
     'products.noProductsInCategory': "Aucun produit n'est disponible dans la catégorie {}.",
@@ -350,6 +366,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about.subtitle': 'Notre mission et nos valeurs',
     'about.mission.title': 'Notre Mission',
     'about.mission.desc': 'Fournir des produits de qualité premium grâce à des partenariats transparents et fiables dans le monde entier.',
+    'about.services.title': 'Nos prestations',
+    'about.services.desc': 'Fournir des produits de qualité avec confiance et transparence dans le monde entier',
     'about.values.title': 'Nos Valeurs',
     'about.values.desc': 'La qualité, la fiabilité, le partenariat et la flexibilité constituent la pierre angulaire de notre philosophie d\'entreprise.',
     'about.experience.title': 'Notre Expérience',
@@ -367,18 +385,30 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.value4.title':'Engagement client',
     'about.values.value4.desc': 'Assurer la satisfaction du client grâce à des prix compétitifs, une logistique supérieure et un service exceptionnel.',
 
+    // Our Services
+    'about.service.service1.title':'Gestion de projet et conseil',
+    'about.service.service1.desc': 
+    '• Planification, exécution et optimisation de projets \n' +
+    '• Analyse des processus et amélioration de lefficacité \n' +
+    '• Conseil stratégique et stratégies dentrée sur le marché',
+    'about.service.service2.title':'Négoce général et distribution',
+    'about.service.service2.desc': 
+    '• Importation et exportation de marchandises diverses \n' +
+    '• Gestion des achats et de la logistique \n' +
+    '• Développement de stratégies commerciales \n',
+
     // About.Why Choose Us
-    'about.whyChooseUs.title': 'Why Choose Us?',
+    'about.whyChooseUs.title': 'Pourquoi nous choisir ?',
     'about.whyChooseUs.title1': 'Assurance qualité supérieure',
-    'about.whyChooseUs.reason1': 'Premium quality products sourced from trusted suppliers worldwide',
+    'about.whyChooseUs.reason1': 'Produits de qualité supérieure provenant de fournisseurs de confiance dans le monde entier',
     'about.whyChooseUs.title2': 'Des solutions logistiques sur mesure',
-    'about.whyChooseUs.reason2': 'Flexible delivery terms to meet your specific requirements',
+    'about.whyChooseUs.reason2': 'Conditions de livraison flexibles pour répondre à vos besoins spécifiques',
     'about.whyChooseUs.title3': 'Des prix compétitifs et transparents',
-    'about.whyChooseUs.reason3': 'Competitive pricing and transparent business practices',
+    'about.whyChooseUs.reason3': 'Des prix compétitifs et des pratiques commerciales transparentes',
     'about.whyChooseUs.title4': 'Assistance client dédiée',
-    'about.whyChooseUs.reason4': 'Responsive customer service and dedicated support',
+    'about.whyChooseUs.reason4': 'Service client réactif et support dédié',
     'about.whyChooseUs.title5': 'Expertise mondiale et réseau de confiance',
-    'about.whyChooseUs.reason5': 'Years of experience in international trade with a global network',
+    'about.whyChooseUs.reason5': 'Des années dexpérience dans le commerce international avec un réseau mondial',
     
     // Contact
     'contact.title': 'Contactez-nous',
@@ -463,7 +493,7 @@ const translations: Record<Language, Record<string, string>> = {
     'products.viewAll': 'عرض جميع المنتجات',
     'products.viewDetails': 'عرض التفاصيل',
     'products.sugar': 'السكر والصويا',
-    'products.sugarDesc': 'إيكومسا 45، إيكومسا 100، إيكومسا 150',
+    'products.sugarDesc': 'ICUMSA 45، ICUMSA 100، ICUMSA 150',
     'products.soy': 'منتجات الصويا',
     'products.soyDesc': 'Soybeans, Soy Flour, Soy Oil',
     'products.coffee': 'حبوب القهوة',
@@ -561,6 +591,8 @@ const translations: Record<Language, Record<string, string>> = {
     'about.subtitle': 'مهمتنا وقيمنا',
     'about.mission.title': 'مهمتنا',
     'about.mission.desc': 'توفير منتجات عالية الجودة من خلال شراكات شفافة وموثوقة في جميع أنحاء العالم.',
+    'about.services.title': 'خدماتنا',
+    'about.services.desc': 'توفير منتجات عالية الجودة مع الثقة والشفافية في جميع أنحاء العالم',
     'about.values.title': 'قيمنا',
     'about.values.desc': 'الجودة والموثوقية والشراكة والمرونة تشكل حجر الزاوية في فلسفة أعمالنا.',
     'about.experience.title': 'خبرتنا',
@@ -577,6 +609,18 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.value3.desc': 'تعزيز ممارسات التجارة المستدامة والأخلاقية في جميع عملياتنا.',
     'about.values.value4.title':'التزام العملاء',
     'about.values.value4.desc': 'لضمان رضا العملاء من خلال الأسعار التنافسية والخدمات اللوجستية المتفوقة والخدمة الاستثنائية.',
+
+    // Our Services
+    'about.service.service1.title':'إدارة المشاريع والاستشارات',
+    'about.service.service1.desc': 
+    'التخطيط والتنفيذ وتحسين المشاريع •\n' +
+    'تحليل العمليات وتحسين الكفاءة •\n' +
+    'الاستشارات الاستراتيجية واستراتيجيات دخول السوق •',
+    'about.service.service2.title':'التجارة العامة والتوزيع',
+    'about.service.service2.desc': 
+    'استيراد وتصدير مختلف السلع •\n' +
+    'إدارة المشتريات والخدمات اللوجستية •\n' +
+    'تطوير استراتيجيات التجارة •\n',
       
     // About.Why Choose Us
     'about.whyChooseUs.title': 'لماذا تختارنا؟',

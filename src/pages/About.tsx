@@ -42,7 +42,7 @@ const About = () => {
         socialLinks: {
           linkedin: "https://www.linkedin.com/company/roodan",
           twitter: "https://twitter.com/roodan",
-          email: "mailto:info@roodan.com"
+          email: "mailto:adama@roodan.ae"
         }
       },
       {
@@ -53,7 +53,7 @@ const About = () => {
         socialLinks: {
           linkedin: "https://www.linkedin.com/company/roodan",
           twitter: "https://twitter.com/roodan",
-          email: "mailto:info@roodan.com"
+          email: "mailto:jens@roodan.ae"
         }
       },
       {
@@ -64,7 +64,7 @@ const About = () => {
         socialLinks: {
           linkedin: "https://www.linkedin.com",
           twitter: "https://twitter.com",
-          email: "mailto:michael.chen@example.com"
+          email: "mailto:tilmann@roodan.ae"
         }
       },
       {
@@ -75,7 +75,7 @@ const About = () => {
         socialLinks: {
           linkedin: "https://www.linkedin.com",
           twitter: "https://twitter.com",
-          email: "mailto:emma.rodriguez@example.com"
+          email: "mailto:pamela@roodan.ae"
         }
       },
       {
@@ -86,7 +86,18 @@ const About = () => {
         socialLinks: {
           linkedin: "https://www.linkedin.com",
           twitter: "https://twitter.com",
-          email: "mailto:david.kim@example.com"
+          email: "mailto:kunal@roodan.ae"
+        }
+      },
+      {
+        name: "LLM. Makedonia Chante",
+        role: "Laws and International Relations",
+        description: "Technology transformation driver.",
+        image: "/Makedonia.jpg",
+        socialLinks: {
+          linkedin: "https://www.linkedin.com",
+          twitter: "https://twitter.com",
+          email: "mailto:makedonia@roodan.ae"
         }
       }
     ];
@@ -118,7 +129,12 @@ const About = () => {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="absolute inset-0 w-full h-full object-cover z-0"
+                    style={member.name === "LLM. Makedonia Chante" ? { objectPosition: 'center top' } : {}}
+                    className={`absolute inset-0 w-full h-full ${
+                      member.name === "LLM. Makedonia Chante" 
+                        ? "object-cover" 
+                        : "object-cover"
+                    } z-0`}
                   />
                   
                   {/* Glass Nameplate */}
@@ -266,6 +282,61 @@ const About = () => {
             </div>
           </motion.div>
         </motion.section>
+
+
+
+        {/* Services section */}
+        <motion.section 
+          className="page-container py-16 md:py-20 mt-12 relative"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          {/* Reduced decorative elements with different colors */}
+          <div className="absolute top-20 right-10 w-40 h-40 bg-blue-200 rounded-full opacity-10 blur-3xl"></div>
+          
+          <motion.div variants={sectionVariants} className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="flex flex-col items-center justify-center gap-3 mb-10">
+              <h2 
+                className="text-4xl md:text-5xl font-display mt-2 font-bold text-center text-gray-800" 
+              >
+                {t("about.services.title")}
+              </h2>
+              <div className="w-20 h-1 mx-auto bg-emerald-500"></div>
+              <p className="text-xl text-center max-w-3xl mx-auto mt-3 text-gray-600">
+                {t("about.services.desc")}
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-12">
+              {[1, 2].map((value, index) => (
+                <motion.div 
+                  key={`value-${index}`}
+                  variants={itemVariants}
+                  className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 h-full"
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                >
+                  <div className="flex flex-col h-full">
+                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-emerald-600">
+                      <Award className="w-6 h-6" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-lg md:text-xl font-display font-semibold mb-2 text-gray-800 truncate">
+                        {t(`about.service.service${value}.title`)}
+                      </h3>
+                      <p className="text-gray-600 text-sm md:text-base">
+                        {t(`about.service.service${value}.desc`)}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.section>
+
+
+
 
         {/* Team Section */}
         <motion.section 
