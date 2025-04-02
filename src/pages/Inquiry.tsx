@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
@@ -34,6 +34,14 @@ const LOIForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
   const prevLanguageRef = useRef(language);
+  
+  // Force re-render when language changes
+  useEffect(() => {
+    if (prevLanguageRef.current !== language) {
+      prevLanguageRef.current = language;
+      setForceUpdate(prev => prev + 1);
+    }
+  }, [language]);
   
   // Form state
   const [formData, setFormData] = useState({
@@ -317,7 +325,7 @@ const LOIForm = () => {
                         value={formData.productName}
                         onChange={handleChange}
                         required 
-                        placeholder="e.g. Sugar ICUMSA 45"
+                        placeholder={t('loi.product.e.g')}
                         className="rounded-lg"
                       />
                     </div>
@@ -333,7 +341,7 @@ const LOIForm = () => {
                         value={formData.quantity}
                         onChange={handleChange}
                         required 
-                        placeholder="e.g. 25,000"
+                        placeholder={t("loi.product.quantityPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -350,7 +358,7 @@ const LOIForm = () => {
                         value={formData.origin}
                         onChange={handleChange}
                         required 
-                        placeholder="e.g. Brazil"
+                        placeholder={t("loi.product.originPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -364,7 +372,7 @@ const LOIForm = () => {
                         id="shipments" 
                         value={formData.shipments}
                         onChange={handleChange}
-                        placeholder="e.g. 5,000 MT x 5"
+                        placeholder={t("loi.product.shipmentsPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -379,7 +387,7 @@ const LOIForm = () => {
                         id="frequencyOfDelivery" 
                         value={formData.frequencyOfDelivery}
                         onChange={handleChange}
-                        placeholder="e.g. Monthly"
+                        placeholder={t("loi.product.frequencyPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -392,7 +400,7 @@ const LOIForm = () => {
                         id="contractLength" 
                         value={formData.contractLength}
                         onChange={handleChange}
-                        placeholder="e.g. 12 months"
+                        placeholder={t("loi.product.contractLengthPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -408,7 +416,7 @@ const LOIForm = () => {
                         id="totalContractAmount" 
                         value={formData.totalContractAmount}
                         onChange={handleChange}
-                        placeholder="e.g. 25,000"
+                        placeholder={t("loi.product.totalAmountPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -422,7 +430,7 @@ const LOIForm = () => {
                         onValueChange={(value) => handleSelectChange('incoterms', value)}
                       >
                         <SelectTrigger className="rounded-lg">
-                          <SelectValue placeholder="Select Incoterms" />
+                          <SelectValue placeholder={t("loi.product.selectIncoterms")} />
                         </SelectTrigger>
                         <SelectContent>
                           {incotermsOptions.map((option) => (
@@ -449,7 +457,7 @@ const LOIForm = () => {
                         value={formData.deliveryPort}
                         onChange={handleChange}
                         required 
-                        placeholder="e.g. Port of Dubai"
+                        placeholder={t("loi.product.deliveryPortPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -465,7 +473,7 @@ const LOIForm = () => {
                         value={formData.targetPrice}
                         onChange={handleChange}
                         required 
-                        placeholder="e.g. 450"
+                        placeholder={t("loi.product.targetPricePlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -578,6 +586,7 @@ const LOIForm = () => {
         value={formData.companyName}
         onChange={handleChange}
         required 
+        placeholder={t("loi.buyer.companyNamePlaceholder")}
         className="rounded-lg"
       />
     </div>
@@ -593,6 +602,7 @@ const LOIForm = () => {
         value={formData.companyRegistrationNumber}
         onChange={handleChange}
         required 
+        placeholder={t("loi.buyer.regNumberPlaceholder")}
         className="rounded-lg"
       />
     </div>
@@ -606,6 +616,7 @@ const LOIForm = () => {
       id="address" 
       value={formData.address}
       onChange={handleChange}
+      placeholder={t("loi.buyer.addressPlaceholder")}
       className="rounded-lg"
     />
   </div>
@@ -621,6 +632,7 @@ const LOIForm = () => {
         value={formData.representativeName}
         onChange={handleChange}
         required 
+        placeholder={t("loi.buyer.repNamePlaceholder")}
         className="rounded-lg"
       />
     </div>
@@ -633,6 +645,7 @@ const LOIForm = () => {
         id="title" 
         value={formData.title}
         onChange={handleChange}
+        placeholder={t("loi.buyer.titlePlaceholder")}
         className="rounded-lg"
       />
     </div>
@@ -650,6 +663,7 @@ const LOIForm = () => {
         value={formData.phone}
         onChange={handleChange}
         required 
+        placeholder={t("loi.buyer.phonePlaceholder")}
         className="rounded-lg"
       />
     </div>
@@ -666,6 +680,7 @@ const LOIForm = () => {
         value={formData.email}
         onChange={handleChange}
         required 
+        placeholder={t("loi.buyer.emailPlaceholder")}
         className="rounded-lg"
       />
     </div>
@@ -679,6 +694,7 @@ const LOIForm = () => {
       id="website" 
       value={formData.website}
       onChange={handleChange}
+      placeholder={t("loi.buyer.websitePlaceholder")}
       className="rounded-lg"
     />
   </div>
@@ -700,6 +716,7 @@ const LOIForm = () => {
                         id="bankName" 
                         value={formData.bankName}
                         onChange={handleChange}
+                        placeholder={t("loi.bankNamePlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -712,6 +729,7 @@ const LOIForm = () => {
                         id="bankSwiftCode" 
                         value={formData.bankSwiftCode}
                         onChange={handleChange}
+                        placeholder={t("loi.bankSwiftCodePlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -725,6 +743,7 @@ const LOIForm = () => {
                       id="bankAddress" 
                       value={formData.bankAddress}
                       onChange={handleChange}
+                      placeholder={t("loi.bankAddressPlaceholder")}
                       className="rounded-lg"
                     />
                   </div>
@@ -738,6 +757,7 @@ const LOIForm = () => {
                         id="accountName" 
                         value={formData.accountName}
                         onChange={handleChange}
+                        placeholder={t("loi.accountNamePlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -750,6 +770,7 @@ const LOIForm = () => {
                         id="accountNumber" 
                         value={formData.accountNumber}
                         onChange={handleChange}
+                        placeholder={t("loi.accountNumberPlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -764,6 +785,7 @@ const LOIForm = () => {
                         id="bankOfficerName" 
                         value={formData.bankOfficerName}
                         onChange={handleChange}
+                        placeholder={t("loi.bankOfficerNamePlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -776,6 +798,7 @@ const LOIForm = () => {
                         id="bankOfficerTitle" 
                         value={formData.bankOfficerTitle}
                         onChange={handleChange}
+                        placeholder={t("loi.bankOfficerTitlePlaceholder")}
                         className="rounded-lg"
                       />
                     </div>
@@ -850,7 +873,7 @@ const LOIForm = () => {
                       </label>
                       <Input
                         id="signature"
-                        placeholder="Full legal name as signature"
+                        placeholder={t("loi.signaturePlaceholder")}
                         className="rounded-lg font-semibold"
                         required
                       />

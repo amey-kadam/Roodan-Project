@@ -200,7 +200,6 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'WhatsApp',
     'SendUs.title' : 'Send us a Message',
     'SendUs.desc' :' Have a question or inquiry? Fill out the form below and we will get back to you as soon as possible.',
-    'contact.form.message_placeholder': 'Your message here...',
     'SendUs.button':'Send',
     'SendUs.sending':'Sending...',
     'SendUS.success':'Message sent successfully!',
@@ -226,6 +225,16 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.product.incoterms': 'Incoterms 2020',
       'loi.product.deliveryPort': 'Delivery Port',
       'loi.product.targetPrice': 'Target Price (USD) per MT',
+      'loi.product.e.g': 'e.g. Sugar ICUMSA 45',
+      'loi.product.quantityPlaceholder': 'e.g. 25,000',
+      'loi.product.originPlaceholder': 'e.g. Brazil',
+      'loi.product.shipmentsPlaceholder': 'e.g. 5,000 MT x 5',
+      'loi.product.frequencyPlaceholder': 'e.g. Monthly',
+      'loi.product.contractLengthPlaceholder': 'e.g. 12 months',
+      'loi.product.totalAmountPlaceholder': 'e.g. 25,000',
+      'loi.product.selectIncoterms': 'Select Incoterms',
+      'loi.product.deliveryPortPlaceholder': 'e.g. Port of Dubai',
+      'loi.product.targetPricePlaceholder': 'e.g. 450',
 
       // Payment and Inspection section
       'loi.sections.paymentInspection': 'Payment and Inspection',
@@ -253,6 +262,14 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.buyer.phone': 'Phone/Mobile',
       'loi.buyer.email': 'Email',
       'loi.buyer.website': 'Website',
+      'loi.buyer.companyNamePlaceholder': 'Your company name',
+      'loi.buyer.regNumberPlaceholder': 'Registration number',
+      'loi.buyer.addressPlaceholder': 'Company address',
+      'loi.buyer.repNamePlaceholder': 'Representative name',
+      'loi.buyer.titlePlaceholder': 'Job title',
+      'loi.buyer.phonePlaceholder': 'Phone number',
+      'loi.buyer.emailPlaceholder': 'Email address',
+      'loi.buyer.websitePlaceholder': 'Company website',
 
       // buyer bank information section
       'loi.sections.bankInfo': "Buyer's Bank Information",
@@ -263,6 +280,14 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.anu':'Account Number',
       'loi.bot':"Bank Officer's Title",
       'loi.bon':"Bank Officer's Name",
+      'loi.signaturePlaceholder': 'Full legal name as signature',
+      'loi.bankNamePlaceholder': 'Bank name',
+      'loi.bankSwiftCodePlaceholder': 'SWIFT/BIC code',
+      'loi.bankAddressPlaceholder': 'Bank address',
+      'loi.accountNamePlaceholder': 'Account holder name',
+      'loi.accountNumberPlaceholder': 'Account number',
+      'loi.bankOfficerNamePlaceholder': 'Bank officer name',
+      'loi.bankOfficerTitlePlaceholder': 'Bank officer title',
 
       //legal warning
       'loi.sections.legalWarnings': 'Legal Warnings',
@@ -334,11 +359,11 @@ const translations: Record<Language, Record<string, string>> = {
     'products.sugarDesc': 'ICUMSA 45, ICUMSA 100, ICUMSA 150',
     'products.soy': 'Produits à base de soja',
     'products.soyDesc': 'Soja, farine de soja, huile de soja',
-    'products.coffee': 'Café Beans',
-    'products.coffeeDesc': 'Robusta & Arabica, etc',
-    'products.viande': 'Produits de viande, Produits de viande',
+    'produits.café': 'Café Beans',
+    'produits.coffeeDesc': 'Robusta & Arabica, etc',
+    'produits.viande': 'Produits de viande, Produits de viande',
     'products.meat': 'Produits à base de viande',
-    'products.meatDesc': 'Viande de buffle, poulet et ghee de vache, Duc',
+    'products.meatDesc': 'Buffalo Meat, Chicken & Cow Ghee, Duc',
     'products.oil': 'Huiles végétales',
     'products.oilDesc': 'CP8, CP10 & Huile d\'olive, huile de soja, huile de tournesol & huile d\'avocat',
     'products.rice': 'Riz',
@@ -394,31 +419,31 @@ const translations: Record<Language, Record<string, string>> = {
     'product.ghee.description': 'Ghee de bœuf pur d\'Inde',
     'product.ghee.detail1': 'Ghee de bœuf 100% pur',
     'product.ghee.detail2': 'Emballage: Boîtes de 1 kg, seaux de 15 kg',
-    'product.ghee.detail3': 'Livraison: Mondiale',
+    'product.ghee.detail3': 'Delivery: Worldwide',
     
     'product.vegetable.title': 'Huiles Végétales',
     'product.vegetable.description': 'Huiles végétales de haute qualité CP8 et CP10 d\'Asie',
-    'product.vegetable.detail1': 'Huile de palme, différentes tailles d\'emballage',
-    'product.vegetable.detail2': 'Livraison: CIF, FOB ou sur arrangement',
-    'product.vegetable.detail3': 'Qualité premium pour applications alimentaires et industrielles',
+    'product.vegetable.detail1': 'Palm oil, various packaging sizes, soyabean oil, sunflower oil, &avacado oil',
+    'product.vegetable.detail2': 'Delivery: CIF, FOB or by arrangement',
+    'product.vegetable.detail3': 'Premium quality for food and industrial applications',
     
     'product.rice.title': 'Variétés de Riz',
     'product.rice.description': 'Variétés de riz premium du monde entier',
-    'product.rice.detail1': 'Basmati, jasmin, étuvé, riz blanc',
-    'product.rice.detail2': 'Emballage: Sacs de 5 kg, 25 kg ou grands sacs',
-    'product.rice.detail3': 'Livraison: CIF, FOB',
+    'product.rice.detail1': 'Basmati, jasmin, parboiled, white rice',
+    'product.rice.detail2': 'Packaging: 5 kg, 25 kg bags or big bags',
+    'product.rice.detail3': 'Delivery: CIF, FOB',
     
     'product.olive.title': 'Huile d\'Olive',
     'product.olive.description': 'Huile d\'olive premium de Grèce',
     'product.olive.detail1': 'Huile d\'olive extra vierge, huile d\'olive vierge, huile d\'olive raffinée',
     'product.olive.detail2': 'Emballage: Bouteilles de 1 l, bidons de 5 l, fûts de 200 l',
-    'product.olive.detail3': 'Livraison: CIF, FOB',
+    'product.olive.detail3': 'Delivery: CIF, FOB',
     
     'product.urea.title': 'Urée & Engrais',
     'product.urea.description': 'Urée et engrais de haute qualité pour usage agricole',
     'product.urea.detail1': 'Urée 46% Granulaire et Prilled',
     'product.urea.detail2': 'Emballage: Sacs de 50 kg ou grands sacs',
-    'product.urea.detail3': 'Livraison: Mondiale',
+    'product.urea.detail3': 'Delivery: Worldwide',
     
     'product.petroleum.title': 'Produits Pétroliers',
     'product.petroleum.description': 'Produits pétroliers premium pour diverses applications',
@@ -441,7 +466,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.team.desc': 'Découvrez les individus exceptionnels qui sont à l\'origine de la vision et du succès de notre entreprise.',
 
     // Our Mission
-    'about.values.value1.title':'Assurance qualité',
+    'about.values.value1.title':'Quality Assurance',
     'about.values.value1.desc': 'Fournir des produits agricoles et industriels de haute qualité répondant aux normes mondiales.',
     'about.values.value2.title':'Des partenariats fiables',
     'about.values.value2.desc': 'Construire des relations à long terme avec les clients en assurant une livraison rapide et efficace.',
@@ -461,7 +486,7 @@ const translations: Record<Language, Record<string, string>> = {
     '• Importation et exportation de marchandises diverses \n' +
     '• Gestion des achats et de la logistique \n' +
     '• Développement de stratégies commerciales \n',
-
+      
     // About.Why Choose Us
     'about.whyChooseUs.title': 'Pourquoi nous choisir ?',
     'about.whyChooseUs.title1': 'Assurance qualité supérieure',
@@ -486,20 +511,19 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.email': 'Votre Email',
     'contact.form.message': 'Votre Message',
     'contact.form.submit': 'Envoyer le Message',
-    'contact.whatsapp' : 'WhatsApp',
+    'contact.whatsapp' : 'WhatsApp',     
     'SendUs.title' : 'Envoyez-nous un message',
     'SendUs.desc' :'Vous avez une question ou une demande ? Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.',
-    'contact.form.message_placeholder': 'Votre message ici...',
     'SendUs.button':'Envoyer',
     'SendUs.sending':'Envoi...',
     'SendUS.success':'Message envoyé avec succès !',
-    
+
     // LOI Form starts here
-    'loi.title': 'LETTRE D’INTENTION (LOI)',
-    'loi.subtitle': 'POUR CIF ASWP - Remplissez le formulaire ci-dessous pour soumettre votre Lettre d’Intention',
+    'loi.title': 'LETTRE D\'INTENTION (LOI)',
+    'loi.subtitle': 'POUR CIF ASWP - Remplissez le formulaire ci-dessous pour soumettre votre Lettre d\'Intention',
     'loi.sections.loiDetails': 'Détails de la LOI',
-    'loi.id': 'Date d’émission',
-    'loi.vu': 'Date d’émission',
+    'loi.id': 'Date d\'émission',
+    'loi.vu': 'Validité jusqu\'au',
     'loi.sections.productDetails': 'Détails du produit',
 
     // Product details fields
@@ -513,35 +537,53 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.product.incoterms': 'Incoterms 2020',
     'loi.product.deliveryPort': 'Port de livraison',
     'loi.product.targetPrice': 'Prix cible (USD) par MT',
+    'loi.product.e.g': 'par exemple Sucre ICUMSA 45',
+    'loi.product.quantityPlaceholder': 'ex: 25,000',
+    'loi.product.originPlaceholder': 'ex: Brésil',
+    'loi.product.shipmentsPlaceholder': 'ex: 5,000 TM x 5',
+    'loi.product.frequencyPlaceholder': 'ex: Mensuel',
+    'loi.product.contractLengthPlaceholder': 'ex: 12 mois',
+    'loi.product.totalAmountPlaceholder': 'ex: 25,000',
+    'loi.product.selectIncoterms': 'Sélectionner les Incoterms',
+    'loi.product.deliveryPortPlaceholder': 'ex: Port de Dubaï',
+    'loi.product.targetPricePlaceholder': 'ex: 450',
 
     // Payment and Inspection section
     'loi.sections.paymentInspection': 'Paiement et Inspection',
     'loi.payment.terms': 'Conditions de paiement',
-    'loi.payment.termsContent': 'L’ACHETEUR LIBÈRE LE PAIEMENT AU COMPTE DU VENDEUR APRÈS INSPECTION AU PORT DE CHARGEMENT DANS LES TROIS (3) JOURS BANCAIRES SUIVANT LA VALIDATION DE LA CARGAISON PAR SGS OU ÉQUIVALENT ET LA RÉCEPTION DE TOUS LES DOCUMENTS DE PAIEMENT REQUIS.',
+    'loi.payment.termsContent': 'L\'ACHETEUR LIBÈRE LE PAIEMENT AU COMPTE DU VENDEUR APRÈS INSPECTION AU PORT DE CHARGEMENT DANS LES TROIS (3) JOURS BANCAIRES SUIVANT LA VALIDATION DE LA CARGAISON PAR SGS OU ÉQUIVALENT ET LA RÉCEPTION DE TOUS LES DOCUMENTS DE PAIEMENT REQUIS.',
     'loi.payment.inspection': 'Inspection',
-    'loi.payment.selectInspection': 'Sélectionner l’agence d’inspection',
-    'loi.payment.inspectionNote': 'Au port de chargement, aux frais du VENDEUR / Au port de déchargement, aux frais de l’ACHETEUR',
+    'loi.payment.selectInspection': 'Sélectionner l\'agence d\'inspection',
+    'loi.payment.inspectionNote': 'Au port de chargement, aux frais du VENDEUR / Au port de déchargement, aux frais de l\'ACHETEUR',
 
     // Additional Details section
     'loi.sections.additionalDetails': 'Détails supplémentaires',
     'loi.additional.observations': 'Observations',
-    'loi.additional.observationsPlaceholder': 'Toute observation supplémentaire',
+    'loi.additional.observationsPlaceholder': 'Observations supplémentaires',
     'loi.additional.specifications': 'Spécifications',
     'loi.additional.specificationsPlaceholder': 'Spécifications du produit',
-
+    
     // Buyer Information section
-    'loi.sections.buyerInfo': 'Informations sur l’acheteur',
-    'loi.buyer.companyName': 'Nom de l’entreprise',
-    'loi.buyer.regNumber': 'Numéro d’enregistrement de l’entreprise',
+    'loi.sections.buyerInfo': 'Informations sur l\'acheteur',
+    'loi.buyer.companyName': 'Nom de l\'entreprise',
+    'loi.buyer.regNumber': 'Numéro d\'enregistrement de l\'entreprise',
     'loi.buyer.address': 'Adresse / Ville / État / Code postal / Pays',
     'loi.buyer.repName': 'Nom du représentant légal',
     'loi.buyer.title': 'Titre',
     'loi.buyer.phone': 'Téléphone / Mobile',
     'loi.buyer.email': 'E-mail',
     'loi.buyer.website': 'Site web',
+    'loi.buyer.companyNamePlaceholder': 'Nom de votre entreprise',
+    'loi.buyer.regNumberPlaceholder': 'Numéro d\'enregistrement',
+    'loi.buyer.addressPlaceholder': 'Adresse de l\'entreprise',
+    'loi.buyer.repNamePlaceholder': 'Nom du représentant',
+    'loi.buyer.titlePlaceholder': 'Titre du poste',
+    'loi.buyer.phonePlaceholder': 'Numéro de téléphone',
+    'loi.buyer.emailPlaceholder': 'Adresse e-mail',
+    'loi.buyer.websitePlaceholder': 'Site web de l\'entreprise',
 
     // buyer bank information section
-    'loi.sections.bankInfo': 'Informations bancaires de l’acheteur',
+    'loi.sections.bankInfo': 'Informations bancaires de l\'acheteur',
     'loi.bn': 'Nom de la banque',
     'loi.bwc': 'Code SWIFT de la banque',
     'loi.bd': 'Adresse de la banque / Ville / État / Code postal / Pays',
@@ -549,18 +591,26 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.anu': 'Numéro de compte',
     'loi.bot': 'Titre du responsable bancaire',
     'loi.bon': 'Nom du responsable bancaire',
+    'loi.signaturePlaceholder': 'Nom légal complet comme signature',
+    'loi.bankNamePlaceholder': 'Nom de la banque',
+    'loi.bankSwiftCodePlaceholder': 'Code SWIFT/BIC',
+    'loi.bankAddressPlaceholder': 'Adresse de la banque',
+    'loi.accountNamePlaceholder': 'Nom du titulaire du compte',
+    'loi.accountNumberPlaceholder': 'Numéro de compte',
+    'loi.bankOfficerNamePlaceholder': 'Nom du responsable bancaire',
+    'loi.bankOfficerTitlePlaceholder': 'Titre du responsable bancaire',
 
     // legal warning
     'loi.sections.legalWarnings': 'Avertissements légaux',
-    'loi.wr1': 'Nous déclarons avoir l’expérience opérationnelle, la capacité de stockage et les ressources financières pour exécuter cette LOI',
+    'loi.wr1': 'Nous déclarons avoir l\'expérience opérationnelle, la capacité de stockage et les ressources financières pour exécuter cette LOI',
     'loi.wr2': 'Nous comprenons et acceptons pleinement toutes les conditions et obligations énoncées dans cette LOI',
-    'loi.wr3': 'Nous reconnaissons que la présentation de documents frauduleux peut entraîner des poursuites judiciaires par les autorités, y compris le FBI, INTERPOL, ICC et d’autres organisations internationales',
+    'loi.wr3': 'Nous reconnaissons que la présentation de documents frauduleux peut entraîner des poursuites judiciaires par les autorités, y compris le FBI, INTERPOL, ICC et d\'autres organisations internationales',
 
     // signature
     'loi.sections.signature': 'Signature et pièces jointes',
     'loi.lg1': 'Signature du représentant légal',
     'loi.lg2': 'Télécharger les documents (PDF/Image)',
-    'loi.lg3': 'Obligatoire : Cachet de l’entreprise et copie du passeport',
+    'loi.lg3': 'Obligatoire : Cachet de l\'entreprise et copie du passeport',
 
     // special condition
     'loi.sections.specialConditions': 'Conditions spéciales',
@@ -611,9 +661,9 @@ const translations: Record<Language, Record<string, string>> = {
     'products.viewAll': 'عرض جميع المنتجات',
     'products.viewDetails': 'عرض التفاصيل',
     'products.sugar': 'السكر والصويا',
-    'products.sugarDesc': 'إيكومسا 45، إيكومسا 100، إيكومسا 150',
+    'products.sugarDesc': 'ICUMSA 45، ICUMSA 100، ICUMSA 150',
     'products.soy': 'منتجات الصويا',
-    'products.soyDesc': 'فول الصويا، دقيق الصويا، زيت الصويا',
+    'products.soyDesc': 'Soybeans, Soy Flour, Soy Oil',
     'products.coffee': 'حبوب القهوة',
     'products.coffeeDesc': 'روبوستا وأرابيكا',
     'products.meat': 'منتجات اللحوم',
@@ -701,7 +751,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     'product.petroleum.title': 'المنتجات البترولية',
     'product.petroleum.description': 'منتجات بترولية ممتازة لمختلف التطبيقات',
-    'product.petroleum.detail1': 'EN 590، D2، AGO، Jet A1',
+    'product.petroleum.detail1': 'EN 590, D2, AGO, Jet A1',
     'product.petroleum.detail2': 'ديزل، وقود طيران، وقود سيارات',
     'product.petroleum.detail3': 'التسليم: CIF، FOB',
     
@@ -769,7 +819,6 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.whatsapp' : 'واتساب',     
     'SendUs.title' : 'أرسل لنا رسالة',
     'SendUs.desc' :'هل لديك سؤال أو استفسار؟ املأ النموذج أدناه وسنقوم بالرد عليك في أقرب وقت ممكن.',
-    'contact.form.message_placeholder': 'رسالتك هنا...',
     'SendUs.button':'يرسل',
     'SendUs.sending':'إرسال...',
     'SendUS.success':'تم إرسال الرسالة بنجاح!',
@@ -793,6 +842,16 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.product.incoterms': 'شروط الإنكوترمز 2020',
     'loi.product.deliveryPort': 'ميناء التسليم',
     'loi.product.targetPrice': 'السعر المستهدف (دولار أمريكي) لكل طن متري',
+    'loi.product.e.g': 'على سبيل المثال سكر ICUMSA 45',
+    'loi.product.quantityPlaceholder': 'مثال: 25,000',
+    'loi.product.originPlaceholder': 'مثال: البرازيل',
+    'loi.product.shipmentsPlaceholder': 'مثال: 5,000 طن متري × 5',
+    'loi.product.frequencyPlaceholder': 'مثال: شهريًا',
+    'loi.product.contractLengthPlaceholder': 'مثال: 12 شهرًا',
+    'loi.product.totalAmountPlaceholder': 'مثال: 25,000',
+    'loi.product.selectIncoterms': 'اختر شروط الإنكوترمز',
+    'loi.product.deliveryPortPlaceholder': 'مثال: ميناء دبي',
+    'loi.product.targetPricePlaceholder': 'مثال: 450',
 
     // Payment and Inspection section
     'loi.sections.paymentInspection': 'الدفع والتفتيش',
@@ -819,6 +878,14 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.buyer.phone': 'الهاتف / الجوال',
     'loi.buyer.email': 'البريد الإلكتروني',
     'loi.buyer.website': 'الموقع الإلكتروني',
+    'loi.buyer.companyNamePlaceholder': 'اسم شركتك',
+    'loi.buyer.regNumberPlaceholder': 'رقم التسجيل',
+    'loi.buyer.addressPlaceholder': 'عنوان الشركة',
+    'loi.buyer.repNamePlaceholder': 'اسم الممثل',
+    'loi.buyer.titlePlaceholder': 'المسمى الوظيفي',
+    'loi.buyer.phonePlaceholder': 'رقم الهاتف',
+    'loi.buyer.emailPlaceholder': 'عنوان البريد الإلكتروني',
+    'loi.buyer.websitePlaceholder': 'موقع الشركة الإلكتروني',
 
     // buyer bank information section
     'loi.sections.bankInfo': 'معلومات بنك المشتري',
@@ -829,6 +896,14 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.anu': 'رقم الحساب',
     'loi.bot': 'اللقب الوظيفي لمسؤول البنك',
     'loi.bon': 'اسم مسؤول البنك',
+    'loi.signaturePlaceholder': 'الاسم القانوني الكامل كتوقيع',
+    'loi.bankNamePlaceholder': 'اسم البنك',
+    'loi.bankSwiftCodePlaceholder': 'رمز SWIFT/BIC',
+    'loi.bankAddressPlaceholder': 'عنوان البنك',
+    'loi.accountNamePlaceholder': 'اسم صاحب الحساب',
+    'loi.accountNumberPlaceholder': 'رقم الحساب',
+    'loi.bankOfficerNamePlaceholder': 'اسم مسؤول البنك',
+    'loi.bankOfficerTitlePlaceholder': 'منصب مسؤول البنك',
 
     // legal warning
     'loi.sections.legalWarnings': 'تحذيرات قانونية',
@@ -849,7 +924,6 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.sc3': 'جارٍ الإرسال...',
     'loi.sc4': 'إرسال LOI',
 
-    
     // Footer
     'slogan':'حلول تجارية عالمية متميزة توفر منتجات عالية الجودة مع خدمة موثوقة في جميع أنحاء العالم..',
     'footer.rights': 'جميع الحقوق محفوظة',
