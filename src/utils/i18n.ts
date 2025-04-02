@@ -211,7 +211,7 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.subtitle': 'FOR CIF ASWP - Complete the form below to submit your Letter of Intent',
       'loi.sections.loiDetails': 'LOI Details',
       'loi.id':'Issued Date',
-      'loi.vu':'Issued Date',
+      'loi.vu':'Valid Until',
       'loi.sections.productDetails': 'Product Details',
 
       // Product details fields

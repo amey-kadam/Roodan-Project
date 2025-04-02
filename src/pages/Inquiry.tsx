@@ -115,10 +115,18 @@ const LOIForm = () => {
     try {
       // Validate required fields
       const requiredFields = [
-        'loiNumber', 'issuedDate', 'validUntil', 'productName', 
-        'quantity', 'origin', 'deliveryPort', 'targetPrice',
-        'companyName', 'companyRegistrationNumber', 'representativeName', 
-        'email', 'phone'
+        'issuedDate', 
+        'validUntil', 
+        'productName',
+        'quantity', 
+        'origin', 
+        'deliveryPort', 
+        'targetPrice',
+        'companyName', 
+        'companyRegistrationNumber', 
+        'representativeName',
+        'email', 
+        'phone'  // Changed from 'phone' to match state
       ];
       
       const missingFields = requiredFields.filter(field => !formData[field]);
