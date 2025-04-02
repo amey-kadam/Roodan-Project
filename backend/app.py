@@ -14,7 +14,15 @@ from admin import admin_bp, init_db, track_visit, record_enquiry, record_quotati
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+# Configure CORS to allow requests from the frontend
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:8080", "http://127.0.0.1:8080", "http://localhost:5173", "http://127.0.0.1:5173"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Accept", "Authorization"],
+        "supports_credentials": True
+    }
+})
 
 # Configure Flask app
 app.secret_key = os.getenv("SECRET_KEY", "your-secret-key-for-sessions")
