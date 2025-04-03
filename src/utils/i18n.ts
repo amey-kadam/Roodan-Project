@@ -244,7 +244,7 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.incoterms.cfr': 'CFR (Cost and Freight)',
       
       // Inspection options
-      'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
+      'loi.inspection.sgs': 'SGS (General Surveillance Society)',
       'loi.inspection.intertek': 'INTERTEK',
       'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
 
@@ -573,7 +573,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Inspection options
     'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
     'loi.inspection.intertek': 'INTERTEK',
-    'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
+    'loi.inspection.ciq': 'CIQ (Inspection et Quarantaine en Chine)',
 
     // Upload document
     'loi.upload.document': 'Télécharger les documents (PDF/Image)',
@@ -892,9 +892,9 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.incoterms.cfr': 'سي إف آر (التكلفة والشحن)',
 
     // Inspection options
-    'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
-    'loi.inspection.intertek': 'INTERTEK',
-    'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
+    'loi.inspection.sgs': 'SGS (جمعية المراقبة العامة)',
+    'loi.inspection.intertek': 'انترتيك',
+    'loi.inspection.ciq': 'CIQ (التفتيش والحجر الصحي في الصين)',
 
     // Upload document
     'loi.upload.document': 'تحميل المستندات (PDF/صورة)',
