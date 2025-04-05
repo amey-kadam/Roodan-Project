@@ -160,7 +160,6 @@ const translations: Record<Language, Record<string, string>> = {
     'about.service.service2.item2':'Procurement and logistics management',
     'about.service.service2.item3':'Development of trade strategies', 
 
-
     // Our Mission
     'about.values.value1.title':'Quality Assurance',
     'about.values.value1.desc': 'Delivering premium agricultural and industrial products to global standards.',
@@ -203,8 +202,6 @@ const translations: Record<Language, Record<string, string>> = {
     'SendUs.sending':'Sending...',
     'SendUS.success':'Message sent successfully!',
 
-
-
       // LOI Form starts here
       'loi.title': 'LETTER OF INTENT (LOI)',
       'loi.subtitle': 'FOR CIF ASWP - Complete the form below to submit your Letter of Intent',
@@ -244,7 +241,7 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.incoterms.cfr': 'CFR (Cost and Freight)',
       
       // Inspection options
-      'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
+      'loi.inspection.sgs': 'SGS (General Surveillance Society)',
       'loi.inspection.intertek': 'INTERTEK',
       'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
 
@@ -258,7 +255,6 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.payment.inspection': 'Inspection',
       'loi.payment.selectInspection': 'Select Inspection Agency',
       'loi.payment.inspectionNote': 'At the port of loading shall be for the account and at the expense of the SELLER / At the port of discharge shall be for the account and at the expense of the BUYER',
-
   
       // Additional Details section
       'loi.sections.additionalDetails': 'Additional Details',
@@ -310,7 +306,6 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.wr2':'We fully understand and accept all terms and obligations outlined in this LOI',
       'loi.wr3':'We acknowledge that fraudulent documents may result in legal action by authorities including FBI, INTERPOL, ICC, and other international organizations',
 
-
       //signature
       'loi.sections.signature': 'Signature & Attachments',
       'loi.lg1':'Legal Representative Signature',
@@ -325,10 +320,6 @@ const translations: Record<Language, Record<string, string>> = {
       'loi.sc4':'Submit LOI',
 
       //loi ends here
-      
-      
-
-
 
     
     // Footer
@@ -573,7 +564,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Inspection options
     'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
     'loi.inspection.intertek': 'INTERTEK',
-    'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
+    'loi.inspection.ciq': 'CIQ (Inspection et Quarantaine en Chine)',
 
     // Upload document
     'loi.upload.document': 'Télécharger les documents (PDF/Image)',
@@ -648,7 +639,6 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.sc2': 'Les copies électroniques sont considérées comme équivalentes aux originaux',
     'loi.sc3': 'Envoi en cours...',
     'loi.sc4': 'Soumettre la LOI',
-
     
     // Footer
     'slogan':'Solutions commerciales mondiales haut de gamme offrant des produits de haute qualité avec un service fiable dans le monde entier.',
@@ -818,7 +808,6 @@ const translations: Record<Language, Record<string, string>> = {
     'about.service.service2.item1':'استيراد وتصدير مختلف السلع',
     'about.service.service2.item2':'إدارة المشتريات والخدمات اللوجستية ',
     'about.service.service2.item3':'تطوير استراتيجيات التجارة', 
-
       
     // About.Why Choose Us
     'about.whyChooseUs.title': 'لماذا تختارنا؟',
@@ -832,7 +821,6 @@ const translations: Record<Language, Record<string, string>> = {
     'about.whyChooseUs.reason4': 'خدمة عملاء سريعة الاستجابة ودعم مخصص',
     'about.whyChooseUs.title5': 'خبرة عالمية وشبكة موثوقة',
     'about.whyChooseUs.reason5': 'سنوات من الخبرة في التجارة الدولية مع شبكة عالمية',
-    
     
     // Contact
     'contact.title': 'اتصل بنا',
@@ -892,9 +880,9 @@ const translations: Record<Language, Record<string, string>> = {
     'loi.incoterms.cfr': 'سي إف آر (التكلفة والشحن)',
 
     // Inspection options
-    'loi.inspection.sgs': 'SGS (Société Générale de Surveillance)',
-    'loi.inspection.intertek': 'INTERTEK',
-    'loi.inspection.ciq': 'CIQ (China Inspection and Quarantine)',
+    'loi.inspection.sgs': 'SGS (جمعية المراقبة العامة)',
+    'loi.inspection.intertek': 'انترتيك',
+    'loi.inspection.ciq': 'CIQ (التفتيش والحجر الصحي في الصين)',
 
     // Upload document
     'loi.upload.document': 'تحميل المستندات (PDF/صورة)',
@@ -996,3 +984,4 @@ export const useI18n = create<I18nState>((set, get) => ({
     return translations[language][key] || key;
   }
 }));
+ 
