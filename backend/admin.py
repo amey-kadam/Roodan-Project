@@ -2,7 +2,15 @@ from flask import Blueprint, jsonify, render_template, request, session, redirec
 import sqlite3
 import os
 import datetime
+import uuid
 from functools import wraps
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Create a Blueprint for the admin routes
 admin_bp = Blueprint('admin', __name__)
@@ -21,17 +29,6 @@ def init_db():
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # Create visits table
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS visits (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        ip_address TEXT,
-        user_agent TEXT,
-        path TEXT,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-    ''')
-    
     # Create enquiries table
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS enquiries (
@@ -43,10 +40,11 @@ def init_db():
     )
     ''')
     
-    # Create quotations table
+    # Create quotations table with ticket number and expiration
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS quotations (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ticket_no TEXT UNIQUE,
         company TEXT,
         name TEXT,
         email TEXT,
@@ -55,7 +53,8 @@ def init_db():
         quantity TEXT,
         delivery TEXT,
         message TEXT,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        expires_at DATETIME
     )
     ''')
     
@@ -86,7 +85,6 @@ def init_db():
     # Insert a default admin user if none exists
     cursor.execute("SELECT COUNT(*) FROM admin_users")
     if cursor.fetchone()[0] == 0:
-        # Default credentials: admin/password123 (you should change this in production)
         cursor.execute("INSERT INTO admin_users (username, password) VALUES (?, ?)", 
                       ("admin", "password123"))
     
@@ -113,27 +111,6 @@ def record_loi_submission(company_name, rep_name, email, phone, product, quantit
     except Exception as e:
         print(f"Error recording LOI submission: {str(e)}")
         return False
-    
-
-# Function to track page visits
-def track_visit(path):
-    """Track a page visit"""
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        
-        ip_address = request.remote_addr
-        user_agent = request.headers.get('User-Agent', '')
-        
-        cursor.execute(
-            "INSERT INTO visits (ip_address, user_agent, path) VALUES (?, ?, ?)",
-            (ip_address, user_agent, path)
-        )
-        
-        conn.commit()
-        conn.close()
-    except Exception as e:
-        print(f"Error tracking visit: {str(e)}")
 
 # Function to record enquiries
 def record_enquiry(name, email, message):
@@ -154,24 +131,50 @@ def record_enquiry(name, email, message):
         print(f"Error recording enquiry: {str(e)}")
         return False
 
-# Function to record quotation requests
+# Function to record quotation requests with ticket number and expiration
 def record_quotation(company, name, email, phone, product, quantity, delivery, message):
-    """Record a quotation request"""
+    """Record a quotation request with a ticket number and expiration date"""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         
+        # Generate a unique ticket number (format: QT-YYYYMMDD-XXXXX)
+        date_prefix = datetime.datetime.now().strftime('%Y%m%d')
+        ticket_no = f"QT-{date_prefix}-{str(uuid.uuid4())[:5].upper()}"
+        
+        # Set expiration date to 4 days from now
+        expires_at = datetime.datetime.now() + datetime.timedelta(days=4)
+        
         cursor.execute(
-            "INSERT INTO quotations (company, name, email, phone, product, quantity, delivery, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            (company, name, email, phone, product, quantity, delivery, message)
+            "INSERT INTO quotations (ticket_no, company, name, email, phone, product, quantity, delivery, message, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (ticket_no, company, name, email, phone, product, quantity, delivery, message, expires_at)
         )
         
         conn.commit()
         conn.close()
-        return True
+        return ticket_no
     except Exception as e:
         print(f"Error recording quotation: {str(e)}")
-        return False
+        return None
+
+# Function to clean up expired quotations
+def cleanup_expired_quotations():
+    """Remove quotations that have expired"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        now = datetime.datetime.now()
+        cursor.execute("DELETE FROM quotations WHERE expires_at < ?", (now,))
+        
+        deleted_count = cursor.rowcount
+        conn.commit()
+        conn.close()
+        
+        return deleted_count
+    except Exception as e:
+        print(f"Error cleaning up expired quotations: {str(e)}")
+        return 0
 
 # Login required decorator
 def login_required(f):
@@ -223,10 +226,6 @@ def get_stats():
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # Get total visits
-    cursor.execute("SELECT COUNT(*) FROM visits")
-    total_visits = cursor.fetchone()[0]
-    
     # Get total enquiries
     cursor.execute("SELECT COUNT(*) FROM enquiries")
     total_enquiries = cursor.fetchone()[0]
@@ -239,32 +238,12 @@ def get_stats():
     cursor.execute("SELECT COUNT(*) FROM loi_submissions")
     total_lois = cursor.fetchone()[0]
     
-    # Get recent visits (last 30 days)
-    thirty_days_ago = (datetime.datetime.now() - datetime.timedelta(days=30)).strftime('%Y-%m-%d')
-    cursor.execute(f"SELECT COUNT(*) FROM visits WHERE date(timestamp) >= '{thirty_days_ago}'")
-    recent_visits = cursor.fetchone()[0]
-    
-    # Get daily visits for the past 7 days
-    visits_by_day = []
-    for i in range(6, -1, -1):
-        date = (datetime.datetime.now() - datetime.timedelta(days=i)).strftime('%Y-%m-%d')
-        next_date = (datetime.datetime.now() - datetime.timedelta(days=i-1)).strftime('%Y-%m-%d')
-        cursor.execute(f"SELECT COUNT(*) FROM visits WHERE date(timestamp) >= '{date}' AND date(timestamp) < '{next_date}'")
-        count = cursor.fetchone()[0]
-        visits_by_day.append({
-            'date': date,
-            'count': count
-        })
-    
     conn.close()
     
     return jsonify({
-        'total_visits': total_visits,
-        'recent_visits': recent_visits,
         'total_enquiries': total_enquiries,
         'total_quotations': total_quotations,
-        'total_lois': total_lois,
-        'visits_by_day': visits_by_day
+        'total_lois': total_lois
     })
 
 # Add new route for LOI submissions
@@ -280,7 +259,6 @@ def get_loi_submissions():
     conn.close()
     
     return jsonify(submissions)
-
 
 # Routes to view detailed data
 @admin_bp.route('/api/enquiries')
@@ -302,9 +280,60 @@ def get_quotations():
     conn = get_db_connection()
     cursor = conn.cursor()
     
+    # Clean up expired quotations first
+    cleanup_expired_quotations()
+    
+    # Get active quotations
     cursor.execute("SELECT * FROM quotations ORDER BY timestamp DESC LIMIT 50")
     quotations = [dict(row) for row in cursor.fetchall()]
     
     conn.close()
     
     return jsonify(quotations)
+
+@admin_bp.route('/api/quotations/search/<ticket_no>')
+@login_required
+def search_quotation(ticket_no):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT * FROM quotations WHERE ticket_no = ?", (ticket_no,))
+    quotation = cursor.fetchone()
+    
+    conn.close()
+    
+    if quotation:
+        return jsonify(dict(quotation))
+    else:
+        return jsonify({"error": "Quotation not found"}), 404
+
+# Email configuration
+def send_email(to_email, subject, body):
+    """Send an email using SMTP"""
+    try:
+        # Get email configuration from environment variables
+        smtp_server = os.getenv('SMTP_SERVER')
+        smtp_port = int(os.getenv('SMTP_PORT', 587))
+        smtp_username = os.getenv('SMTP_USERNAME')
+        smtp_password = os.getenv('SMTP_PASSWORD')
+        from_email = os.getenv('FROM_EMAIL')
+        
+        # Create message
+        msg = MIMEMultipart()
+        msg['From'] = from_email
+        msg['To'] = to_email
+        msg['Subject'] = subject
+        
+        # Add body
+        msg.attach(MIMEText(body, 'plain'))
+        
+        # Send email
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            server.send_message(msg)
+        
+        return True
+    except Exception as e:
+        print(f"Error sending email: {str(e)}")
+        return False

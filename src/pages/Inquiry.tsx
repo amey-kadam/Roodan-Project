@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
+import { pageVariants } from "@/lib/animations";
 import { Header } from "@/components/ui/layout/Header";
 import { Footer } from "@/components/ui/layout/Footer";
 import { useI18n } from "@/utils/i18n";
@@ -26,6 +27,7 @@ import {
   CreditCard,
   BarChart
 } from "lucide-react";
+import { QuoteRequestForm } from "@/components/ui/forms/QuoteRequestForm";
 
 const LOIForm = () => {
   const { t, language } = useI18n();
@@ -124,7 +126,7 @@ const LOIForm = () => {
         'companyRegistrationNumber', 
         'representativeName',
         'email', 
-        'phone'  // Changed from 'phone' to match state
+        'phone'
       ];
       
       const missingFields = requiredFields.filter(field => !formData[field]);
@@ -133,87 +135,111 @@ const LOIForm = () => {
         throw new Error("Please fill all required fields");
       }
       
-      // Send data to backend API
-      const response = await fetch('http://localhost:5000/api/loi-submission', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(formData),
-      });
+      // Use XMLHttpRequest instead of fetch to bypass potential blocking
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:5000/api/loi-submission', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
       
-      const data = await response.json();
+      // Handle response
+      xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try {
+            const data = JSON.parse(xhr.responseText);
+            toast({
+              title: "LOI Submitted Successfully",
+              description: "Your Letter of Intent has been received. We will contact you shortly.",
+              duration: 5000,
+            });
+            
+            // Reset form
+            setFormData({
+              issuedDate: "",
+              validUntil: "",
+              productName: "",
+              quantity: "",
+              origin: "",
+              shipments: "",
+              frequencyOfDelivery: "",
+              contractLength: "",
+              totalContractAmount: "",
+              incoterms: "CIF",
+              deliveryPort: "",
+              targetPrice: "",
+              paymentTerms: "",
+              inspection: "SGS",
+              observations: "",
+              specifications: "",
+              companyName: "",
+              companyRegistrationNumber: "",
+              address: "",
+              representativeName: "",
+              title: "",
+              phone: "",
+              email: "",
+              website: "",
+              bankName: "",
+              bankSwiftCode: "",
+              bankAddress: "",
+              accountName: "",
+              accountNumber: "",
+              bankOfficerName: "",
+              bankOfficerTitle: "",
+              bankPhone: ""
+            });
+          } catch (error) {
+            console.error('Error parsing JSON response:', error);
+            toast({
+              title: "Error",
+              description: "Server returned an invalid response",
+              variant: "destructive",
+              duration: 5000,
+            });
+          }
+        } else {
+          let errorMessage = "Failed to submit LOI";
+          try {
+            const data = JSON.parse(xhr.responseText);
+            errorMessage = data.message || errorMessage;
+          } catch (e) {
+            // If parsing fails, use the default error message
+          }
+          
+          toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "destructive",
+            duration: 5000,
+          });
+        }
+        setIsSubmitting(false);
+      };
       
-      if (response.ok) {
+      // Handle network errors
+      xhr.onerror = function() {
+        console.error('Network error occurred');
         toast({
-          title: "LOI Submitted Successfully",
-          description: "Your Letter of Intent has been received. We will contact you shortly.",
+          title: "Network Error",
+          description: "Failed to connect to the server. Please check your internet connection or try again later.",
+          variant: "destructive",
           duration: 5000,
         });
-        
-        // Generate PDF download or preview option here
-        
-        // Reset form
-        setFormData({
-          issuedDate: "",
-          validUntil: "",
-          productName: "",
-          quantity: "",
-          origin: "",
-          shipments: "",
-          frequencyOfDelivery: "",
-          contractLength: "",
-          totalContractAmount: "",
-          incoterms: "CIF",
-          deliveryPort: "",
-          targetPrice: "",
-          paymentTerms: "",
-          inspection: "SGS",
-          observations: "",
-          specifications: "",
-          companyName: "",
-          companyRegistrationNumber: "",
-          address: "",
-          representativeName: "",
-          title: "",
-          phone: "",
-          email: "",
-          website: "",
-          bankName: "",
-          bankSwiftCode: "",
-          bankAddress: "",
-          accountName: "",
-          accountNumber: "",
-          bankOfficerName: "",
-          bankOfficerTitle: "",
-          bankPhone: ""
-        });
-      } else {
-        throw new Error(data.message || "Failed to submit LOI");
-      }
+        setIsSubmitting(false);
+      };
+      
+      // Send the request
+      xhr.send(JSON.stringify(formData));
+      
     } catch (error) {
+      console.error('Submission error:', error);
       toast({
         title: "Error",
         description: error instanceof Error ? error.message : "Failed to submit LOI. Please try again.",
         variant: "destructive",
         duration: 5000,
       });
-    } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const pageVariants = {
-    initial: { opacity: 0, y: 50 },
-    animate: { 
-      opacity: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.8,
-        ease: "easeOut"
-      }
     }
   };
 
@@ -945,4 +971,50 @@ const LOIForm = () => {
   );
 };
 
-export default LOIForm;
+// Main component
+const InquiryPage = () => {
+  const { t, language } = useI18n();
+  const location = useLocation();
+  const selectedProduct = location.state?.selectedProduct;
+
+  return (
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
+      <Header />
+      <main className="flex-grow">
+        <motion.section 
+          className="py-12 pt-28 relative"
+          initial="initial"
+          animate="animate"
+          variants={pageVariants}
+        >
+          {/* Subtle background effect */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
+            <motion.div
+              className="absolute w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -top-64 -right-64"
+              animate={{
+                y: [0, -20, 0],
+                transition: {
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }
+              }}
+            />
+          </div>
+          
+          <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
+            {selectedProduct ? (
+              <QuoteRequestForm selectedProduct={selectedProduct} />
+            ) : (
+              <LOIForm />
+            )}
+          </div>
+        </motion.section>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default InquiryPage;
