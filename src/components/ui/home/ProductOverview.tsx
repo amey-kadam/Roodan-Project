@@ -223,23 +223,24 @@ const ProductCard = memo(({ product, language, t, onClick }: ProductCardProps) =
     >
       <div className="relative">
         <div className="aspect-[16/9] overflow-hidden bg-emerald-50/30 relative">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
+          {/* Loading placeholder */}
+          <div className="absolute inset-0 flex items-center justify-center bg-emerald-50/50">
+            <div className="w-8 h-8 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
           </div>
           <img
             src={product.image}
             alt={product.title}
-            width="600"
-            height="338"
-            onLoad={() => setImageLoaded(true)}
+            width="400"
+            height="300"
             className={cn(
               "absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform",
               "group-hover:scale-105 transition-all duration-700 ease-out",
               !imageLoaded && "opacity-0",
               imageLoaded && "opacity-100"
             )}
-            loading="eager"
+            loading="lazy"
             decoding="async"
+            onLoad={() => setImageLoaded(true)}
           />
           <div 
             className={cn(
@@ -345,7 +346,7 @@ function ProductOverviewComponent() {
     },
     {
       title: t("products.oil"),
-      image: "/oil.jpeg",
+      image: "/vegetable-oil.jpg",
       description: t("products.oilDesc"),
       link: "/products",
       details: [
@@ -388,7 +389,7 @@ function ProductOverviewComponent() {
 
   return (
     <section 
-      className="section-padding bg-emerald-50/30"
+      className="section-padding bg-emerald-50/30 pt-8"
       style={styles}
     >
       <div className={cn("page-container", directionClass)}>

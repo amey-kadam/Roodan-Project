@@ -118,7 +118,7 @@ export function Strengths() {
   [language]);
 
   return (
-    <section className="section-padding bg-emerald-50/30">
+    <section className="section-padding bg-emerald-50/30 pb-8">
       <div className={cn("page-container", directionClass)}>
         <motion.div 
           variants={titleVariants}
@@ -148,7 +148,7 @@ export function Strengths() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
         >
           {strengths.map((strength, index) => (
             <motion.div 
@@ -156,18 +156,18 @@ export function Strengths() {
               variants={itemVariants}
               className="bg-background rounded-xl p-6 border border-emerald-200 shadow-sm hover:shadow-emerald-500/20 transition-all duration-300 hover:translate-y-[-5px]"
             >
-              <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", strength.color)}>
-                <strength.icon className="w-6 h-6" />
+              <div className={cn("w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mb-3 sm:mb-4", strength.color)}>
+                <strength.icon className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <h3 
-                className="text-xl font-display font-semibold mb-2 bg-clip-text text-transparent" 
+                className="text-lg sm:text-xl font-display font-semibold mb-1 sm:mb-2 bg-clip-text text-transparent" 
                 style={{ 
                   backgroundImage: titleGradient
                 }}
               >
                 {strength.title}
               </h3>
-              <p className="text-muted-foreground">{strength.description}</p>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{strength.description}</p>
             </motion.div>
           ))}
         </motion.div>

@@ -512,7 +512,7 @@ const Products = () => {
       {
         id: 7,
         title: t('product.vegetable.title'),
-        image: "/oil.jpeg",
+        image: "/oil.png",
         description: t('product.vegetable.description'),
         details: [
           t('product.vegetable.detail1'),
