@@ -4,6 +4,7 @@ import { useI18n } from "@/utils/i18n";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Globe, Award, Users } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 
 const About = () => {
   const { t, language } = useI18n();
@@ -266,6 +267,231 @@ const About = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+      </div>
+    );
+  };
+
+  const PartnersSection = () => {
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const scrollAmount = 320; // Width of one card
+    const scrollSpeed = 1; // pixels per frame
+    const animationFrameRef = useRef<number>();
+
+    useEffect(() => {
+      const animate = () => {
+        if (!isHovered && carouselRef.current) {
+          const newPosition = scrollPosition + scrollSpeed;
+          const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+          
+          if (newPosition >= maxScroll) {
+            setScrollPosition(0);
+          } else {
+            setScrollPosition(newPosition);
+          }
+          
+          animationFrameRef.current = requestAnimationFrame(animate);
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+
+      return () => {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
+    }, [scrollPosition, isHovered]);
+
+    const handleScroll = (direction: 'left' | 'right') => {
+      if (carouselRef.current) {
+        const newPosition = direction === 'left'
+          ? Math.max(0, scrollPosition - scrollAmount)
+          : Math.min(carouselRef.current.scrollWidth - carouselRef.current.clientWidth, scrollPosition + scrollAmount);
+        
+        setScrollPosition(newPosition);
+      }
+    };
+
+    return (
+      <div className="w-full bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-12"
+            variants={sectionVariants}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+              {t('about.partners.title')}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
+              {t('about.partners.desc')}
+            </p>
+            <h3 className="text-2xl font-semibold text-gray-800 mb-8">
+              {t('about.partners.subtitle')}
+            </h3>
+          </motion.div>
+
+          <div className="relative">
+            {/* Left Arrow Button */}
+            <button
+              onClick={() => handleScroll('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
+              aria-label="Previous partners"
+            >
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <div className="overflow-hidden">
+              <motion.div 
+                ref={carouselRef}
+                className="flex space-x-6 py-4" 
+                style={{ 
+                  transform: `translateX(-${scrollPosition}px)`,
+                  transition: 'transform 0.1s linear',
+                  willChange: 'transform'
+                }}
+                variants={sectionVariants}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {/* European Representation */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.europe')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">International Foodstuff Supplier SL</p>
+                  <p className="text-gray-600 mb-1">Mr. Moreno & Nunoz</p>
+                  <p className="text-gray-600">Madrid, Spain</p>
+                </motion.div>
+
+                {/* West Africa Distribution */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.westAfrica')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">Soufa Global Business Import Export</p>
+                  <p className="text-gray-600 mb-1">Mr. Abdourahmane Diallo</p>
+                  <p className="text-gray-600">Dakar, Senegal</p>
+                </motion.div>
+
+                {/* Mali Distribution */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.mali')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">Fatoumata Haidara Negoce-Services</p>
+                  <p className="text-gray-600 mb-1">Mrs. Fatoumata Haidara</p>
+                  <p className="text-gray-600">Bamako, Mali</p>
+                </motion.div>
+
+                {/* East Africa Distribution */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.eastAfrica')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">Al-wabil Al-saieb Trading</p>
+                  <p className="text-gray-600 mb-1">Mr. Abdelsalam Mekki A. Yahya</p>
+                  <p className="text-gray-600">Khartoum, Soudan</p>
+                </motion.div>
+
+                {/* Asia Representation */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.asia')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">Saatvik Foods Ltd</p>
+                  <p className="text-gray-600 mb-1">Mrs. Aditi More</p>
+                  <p className="text-gray-600">Mumbai, India</p>
+                </motion.div>
+
+                {/* India Foodstuff and Fruits */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.india')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">Schi Traders Ltd</p>
+                  <p className="text-gray-600 mb-1">Mr. Kakasaheb Chavan</p>
+                  <p className="text-gray-600">Mumbai, India</p>
+                  <p className="text-gray-600">Osmanabad, India</p>
+                </motion.div>
+
+                {/* Latin America Representation */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.latinAmerica')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">Roodan do Brasil</p>
+                  <p className="text-gray-600 mb-1">Mr. Vicenzo Lauria</p>
+                  <p className="text-gray-600">Vitória da Conquista – Bahia, Brazil</p>
+                </motion.div>
+
+                {/* Logistics Partner */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.logistics')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">United Global Logistic</p>
+                  <p className="text-gray-600 mb-1">Mr. Mo Khan</p>
+                  <p className="text-gray-600 mb-1">New York, USA</p>
+                  <a href="https://www.unitedgloball.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-800">
+                    www.unitedgloball.com
+                  </a>
+                </motion.div>
+
+                {/* UAE Partners */}
+                <motion.div 
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.uae')}</h4>
+                  <p className="text-gray-800 font-medium mb-2">Buttner Coffee Trading LLC</p>
+                  <p className="text-gray-600 mb-1">Mr. Sebastian Buttner</p>
+                  <p className="text-gray-600 mb-4">Dubai, UAE</p>
+                  <p className="text-gray-800 font-medium mb-2">Wealth Capital Global Trading LLC</p>
+                  <p className="text-gray-600 mb-1">Mr. Salim Khaleleyal</p>
+                  <p className="text-gray-600">Deria, UAE</p>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Right Arrow Button */}
+            <button
+              onClick={() => handleScroll('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
+              aria-label="Next partners"
+            >
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -644,6 +870,7 @@ const About = () => {
           </motion.div>
 
           <TeamSection />
+          <PartnersSection />
         </motion.section>
 
         {/* Why Choose Us Section */}
