@@ -3,9 +3,8 @@ import { Footer } from "@/components/ui/layout/Footer";
 import { useI18n } from "@/utils/i18n";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Globe, Award, Users } from "lucide-react";
+import { Globe, Award, Users, Handshake, Building2, Plane, Ship, Truck, Store, Factory, User, MapPin, Briefcase } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { Handshake } from "lucide-react";
 
 const About = () => {
   const { t, language } = useI18n();
@@ -411,15 +410,24 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.europe")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.europe.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.europe.name")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.europe.location")}Madrid, Spain
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.europe.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.europe.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.europe.location")}Madrid, Spain
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* West Africa Distribution */}
@@ -431,15 +439,24 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.westAfrica")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.westAfrica.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.westAfrica.name")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.westAfrica.location")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.westAfrica.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.westAfrica.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.westAfrica.location")}
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* Mali Distribution */}
@@ -451,15 +468,24 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.mali")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.mali.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.mali.name")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.mali.location")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.mali.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.mali.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.mali.location")}
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* East Africa Distribution */}
@@ -471,15 +497,24 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.eastAfrica")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.eastAfrica.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.eastAfrica.name")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.eastAfrica.location")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.eastAfrica.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.eastAfrica.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.eastAfrica.location")}
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* Asia Representation */}
@@ -491,15 +526,24 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.asia")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.asia.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.asia.name")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.asia.location")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.asia.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.asia.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.asia.location")}
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* India Foodstuff and Fruits */}
@@ -511,18 +555,30 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.india")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.india.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.india.name")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.india.location1")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.india.location2")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.india.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.india.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.india.location1")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.india.location2")}
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* Latin America Representation */}
@@ -534,15 +590,24 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.latinAmerica")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.latinAmerica.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.latinAmerica.name")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.latinAmerica.location")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.latinAmerica.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.latinAmerica.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.latinAmerica.location")}
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* Logistics Partner */}
@@ -554,15 +619,24 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.logistics")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.logistics.compName")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.logistics.name")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.logistics.location")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.logistics.compName")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.logistics.name")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.logistics.location")}
+                    </p>
+                  </div>
                   <a
                     href="https://www.unitedgloball.com"
                     target="_blank"
@@ -582,24 +656,42 @@ const About = () => {
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                     {t("about.partners.uae")}
                   </h4>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.uae.compName1")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.uae.name1")}
-                  </p>
-                  <p className="text-gray-600 mb-4">
-                    {t("about.partners.uae.location1")}
-                  </p>
-                  <p className="text-gray-800 font-medium mb-2">
-                    {t("about.partners.uae.compName2")}
-                  </p>
-                  <p className="text-gray-600 mb-1">
-                    {t("about.partners.uae.name2")}
-                  </p>
-                  <p className="text-gray-600">
-                    {t("about.partners.uae.location2")}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.uae.compName1")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.uae.name1")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.uae.location1")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Briefcase className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-800 font-medium">
+                      {t("about.partners.uae.compName2")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <User className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.uae.name2")}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <p className="text-gray-600">
+                      {t("about.partners.uae.location2")}
+                    </p>
+                  </div>
                 </motion.div>
               </motion.div>
             </div>
