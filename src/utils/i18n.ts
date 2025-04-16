@@ -180,7 +180,7 @@ const translations: Record<Language, Record<string, string>> = {
         'about.partners.asia.location': 'Mumbai, India',
 
         'about.partners.india': 'India Foodstuff and Fruits',
-        'about.partners.india.compName': 'Schi Traders Ltd',
+        'about.partners.india.compName': 'Sachi Traders Ltd',
         'about.partners.india.name': 'Mr. Kakasaheb Chavan',
         'about.partners.india.location1': 'Mumbai, India',
         'about.partners.india.location2': 'Osmanabad, India',
@@ -555,7 +555,7 @@ const translations: Record<Language, Record<string, string>> = {
       'about.partners.asia.location': 'Mumbai, Inde',
 
       'about.partners.india': 'Produits Alimentaires et Fruits Indiens',
-      'about.partners.india.compName': 'Schi Traders Ltd',
+      'about.partners.india.compName': 'Sachi Traders Ltd',
       'about.partners.india.name': 'M. Kakasaheb Chavan',
       'about.partners.india.location1': 'Mumbai, Inde',
       'about.partners.india.location2': 'Osmanabad, Inde',
