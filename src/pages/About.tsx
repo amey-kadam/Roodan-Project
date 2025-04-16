@@ -458,7 +458,7 @@ const About = () => {
                         >
                           <Briefcase className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                           <p className="text-gray-800 font-medium">
-                            {t(`about.partners.${partner.id}.compName`)}
+                            {t(`about.partners.${partner.id}.compName${partner.id === 'uae' ? '1' : ''}`)}
                           </p>
                         </motion.div>
 
@@ -470,7 +470,7 @@ const About = () => {
                         >
                           <User className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                           <p className="text-gray-600">
-                            {t(`about.partners.${partner.id}.name`)}
+                            {t(`about.partners.${partner.id}.name${partner.id === 'uae' ? '1' : ''}`)}
                           </p>
                         </motion.div>
 
@@ -482,7 +482,7 @@ const About = () => {
                         >
                           <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                           <p className="text-gray-600">
-                            {t(`about.partners.${partner.id}.location`)}
+                            {t(`about.partners.${partner.id}.location${partner.id === 'uae' ? '1' : partner.id === 'india' ? '1' : ''}`)}
                           </p>
                         </motion.div>
 
@@ -495,7 +495,7 @@ const About = () => {
                           >
                             <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                             <p className="text-gray-600">
-                              {t(`about.partners.${partner.id}.location2`)}
+                              {t(`about.partners.${partner.id}.location${partner.id === 'uae' ? '2' : partner.id === 'india' ? '2' : ''}`)}
                             </p>
                           </motion.div>
                         )}
