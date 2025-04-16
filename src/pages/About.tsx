@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Globe, Award, Users } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { Handshake } from "lucide-react";
 
 const About = () => {
   const { t, language } = useI18n();
@@ -284,14 +285,15 @@ const About = () => {
       const animate = () => {
         if (!isHovered && carouselRef.current) {
           const newPosition = scrollPosition + scrollSpeed;
-          const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
-          
+          const maxScroll =
+            carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+
           if (newPosition >= maxScroll) {
             setScrollPosition(0);
           } else {
             setScrollPosition(newPosition);
           }
-          
+
           animationFrameRef.current = requestAnimationFrame(animate);
         }
       };
@@ -305,12 +307,17 @@ const About = () => {
       };
     }, [scrollPosition, isHovered]);
 
-    const handleScroll = (direction: 'left' | 'right') => {
+    const handleScroll = (direction: "left" | "right") => {
       if (carouselRef.current) {
-        const newPosition = direction === 'left'
-          ? Math.max(0, scrollPosition - scrollAmount)
-          : Math.min(carouselRef.current.scrollWidth - carouselRef.current.clientWidth, scrollPosition + scrollAmount);
-        
+        const newPosition =
+          direction === "left"
+            ? Math.max(0, scrollPosition - scrollAmount)
+            : Math.min(
+                carouselRef.current.scrollWidth -
+                  carouselRef.current.clientWidth,
+                scrollPosition + scrollAmount
+              );
+
         setScrollPosition(newPosition);
       }
     };
@@ -318,44 +325,75 @@ const About = () => {
     return (
       <div className="w-full bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             variants={sectionVariants}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-              {t('about.partners.title')}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
-              {t('about.partners.desc')}
+            <div className="flex flex-col items-center justify-center gap-2 mb-4">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
+                whileInView={{
+                  scale: 1,
+                  opacity: 1,
+                  rotate: 0,
+                  transition: {
+                    type: "spring",
+                    stiffness: 200,
+                    delay: 0.1,
+                  },
+                }}
+                viewport={{ once: true }}
+                className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-emerald-600"
+              >
+                <Handshake className="w-6 h-6" />
+              </motion.div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                {t("about.partners.title")}
+              </h2>
+              <div className="w-20 h-1 mx-auto mt-4 bg-emerald-500"></div>
+            </div>
+
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4 mt-4">
+              {t("about.partners.desc")}
             </p>
             <h3 className="text-2xl font-semibold text-gray-800 mb-8">
-              {t('about.partners.subtitle')}
+              {t("about.partners.subtitle")}
             </h3>
           </motion.div>
 
           <div className="relative">
             {/* Left Arrow Button */}
             <button
-              onClick={() => handleScroll('left')}
+              onClick={() => handleScroll("left")}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
               aria-label="Previous partners"
             >
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-6 h-6 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
 
             <div className="overflow-hidden">
-              <motion.div 
+              <motion.div
                 ref={carouselRef}
-                className="flex space-x-6 py-4" 
-                style={{ 
+                className="flex space-x-6 py-4"
+                style={{
                   transform: `translateX(-${scrollPosition}px)`,
-                  transition: 'transform 0.1s linear',
-                  willChange: 'transform'
+                  transition: "transform 0.1s linear",
+                  willChange: "transform",
                 }}
                 variants={sectionVariants}
                 initial="initial"
@@ -365,130 +403,225 @@ const About = () => {
                 onMouseLeave={() => setIsHovered(false)}
               >
                 {/* European Representation */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.europe')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.europe.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.europe.name')}</p>
-                  <p className="text-gray-600">{t('about.partners.europe.location')}Madrid, Spain</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.europe")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.europe.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.europe.name")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.europe.location")}Madrid, Spain
+                  </p>
                 </motion.div>
 
                 {/* West Africa Distribution */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.westAfrica')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.westAfrica.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.westAfrica.name')}</p>
-                  <p className="text-gray-600">{t('about.partners.westAfrica.location')}</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.westAfrica")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.westAfrica.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.westAfrica.name")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.westAfrica.location")}
+                  </p>
                 </motion.div>
 
                 {/* Mali Distribution */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.mali')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.mali.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.mali.name')}</p>
-                  <p className="text-gray-600">{t('about.partners.mali.location')}</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.mali")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.mali.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.mali.name")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.mali.location")}
+                  </p>
                 </motion.div>
 
                 {/* East Africa Distribution */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.eastAfrica')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.eastAfrica.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.eastAfrica.name')}</p>
-                  <p className="text-gray-600">{t('about.partners.eastAfrica.location')}</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.eastAfrica")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.eastAfrica.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.eastAfrica.name")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.eastAfrica.location")}
+                  </p>
                 </motion.div>
 
                 {/* Asia Representation */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.asia')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.asia.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.asia.name')}</p>
-                  <p className="text-gray-600">{t('about.partners.asia.location')}</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.asia")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.asia.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.asia.name")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.asia.location")}
+                  </p>
                 </motion.div>
 
                 {/* India Foodstuff and Fruits */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.india')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.india.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.india.name')}</p>
-                  <p className="text-gray-600">{t('about.partners.india.location1')}</p>
-                  <p className="text-gray-600">{t('about.partners.india.location2')}</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.india")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.india.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.india.name")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.india.location1")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.india.location2")}
+                  </p>
                 </motion.div>
 
                 {/* Latin America Representation */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.latinAmerica')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.latinAmerica.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.latinAmerica.name')}</p>
-                  <p className="text-gray-600">{t('about.partners.latinAmerica.location')}</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.latinAmerica")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.latinAmerica.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.latinAmerica.name")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.latinAmerica.location")}
+                  </p>
                 </motion.div>
 
                 {/* Logistics Partner */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.logistics')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.logistics.compName')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.logistics.name')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.logistics.location')}</p>
-                  <a href="https://www.unitedgloball.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-800">
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.logistics")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.logistics.compName")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.logistics.name")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.logistics.location")}
+                  </p>
+                  <a
+                    href="https://www.unitedgloball.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-600 hover:text-emerald-800"
+                  >
                     www.unitedgloball.com
                   </a>
                 </motion.div>
 
                 {/* UAE Partners */}
-                <motion.div 
+                <motion.div
                   className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.uae')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.uae.compName1')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.uae.name1')}</p>
-                  <p className="text-gray-600 mb-4">{t('about.partners.uae.location1')}</p>
-                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.uae.compName2')}</p>
-                  <p className="text-gray-600 mb-1">{t('about.partners.uae.name2')}</p>
-                  <p className="text-gray-600">{t('about.partners.uae.location2')}</p>
+                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                    {t("about.partners.uae")}
+                  </h4>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.uae.compName1")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.uae.name1")}
+                  </p>
+                  <p className="text-gray-600 mb-4">
+                    {t("about.partners.uae.location1")}
+                  </p>
+                  <p className="text-gray-800 font-medium mb-2">
+                    {t("about.partners.uae.compName2")}
+                  </p>
+                  <p className="text-gray-600 mb-1">
+                    {t("about.partners.uae.name2")}
+                  </p>
+                  <p className="text-gray-600">
+                    {t("about.partners.uae.location2")}
+                  </p>
                 </motion.div>
               </motion.div>
             </div>
 
             {/* Right Arrow Button */}
             <button
-              onClick={() => handleScroll('right')}
+              onClick={() => handleScroll("right")}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
               aria-label="Next partners"
             >
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="w-6 h-6 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
@@ -516,16 +649,15 @@ const About = () => {
             className="max-w-7xl mx-auto px-4 relative z-10"
           >
             <div className="flex flex-col items-center justify-center gap-3 mb-10">
-              <h2 className="text-4xl md:text-5xl font-display mt-2 font-bold text-center bg-clip-text text-transparent" 
-                style={{ 
-                  backgroundImage: "linear-gradient(to right, #059669, #10b981)"
-                }}>
+              <h2 className="text-4xl md:text-5xl font-display mt-2 font-bold text-center text-black">
                 {t("about.mission.title")}
               </h2>
-              <div className="w-20 h-1 mx-auto" 
-                style={{ 
-                  background: "linear-gradient(to right, #059669, #10b981)"
-                }}></div>
+              <div
+                className="w-20 h-1 mx-auto"
+                style={{
+                  background: "linear-gradient(to right, #059669, #10b981)",
+                }}
+              ></div>
               <p className="text-xl text-center max-w-3xl mx-auto mt-3 text-gray-600">
                 {t("about.mission.desc")}
               </p>
@@ -547,10 +679,13 @@ const About = () => {
                       <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-display font-semibold mb-2 break-words bg-clip-text text-transparent" 
-                        style={{ 
-                          backgroundImage: "linear-gradient(to right, #059669, #10b981)"
-                        }}>
+                      <h3
+                        className="text-sm sm:text-base md:text-lg lg:text-xl font-display font-semibold mb-2 break-words bg-clip-text text-transparent"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(to right, #059669, #10b981)",
+                        }}
+                      >
                         {t(`about.values.value${value}.title`)}
                       </h3>
                       <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed break-words">
@@ -946,10 +1081,13 @@ const About = () => {
                       <div className="hidden sm:block w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-emerald-500"></div>
                       </div>
-                      <h3 className="text-base sm:text-lg md:text-xl font-display font-semibold text-gray-800 break-words bg-clip-text text-transparent flex-1" 
-                        style={{ 
-                          backgroundImage: "linear-gradient(to right, #059669, #10b981)"
-                        }}>
+                      <h3
+                        className="text-base sm:text-lg md:text-xl font-display font-semibold text-gray-800 break-words bg-clip-text text-transparent flex-1"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(to right, #059669, #10b981)",
+                        }}
+                      >
                         {t(`about.whyChooseUs.title${index + 1}`)}
                       </h3>
                     </div>
