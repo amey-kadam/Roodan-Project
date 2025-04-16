@@ -371,9 +371,9 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.europe')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">International Foodstuff Supplier SL</p>
-                  <p className="text-gray-600 mb-1">Mr. Moreno & Nunoz</p>
-                  <p className="text-gray-600">Madrid, Spain</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.europe.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.europe.name')}</p>
+                  <p className="text-gray-600">{t('about.partners.europe.location')}Madrid, Spain</p>
                 </motion.div>
 
                 {/* West Africa Distribution */}
@@ -383,9 +383,9 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.westAfrica')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">Soufa Global Business Import Export</p>
-                  <p className="text-gray-600 mb-1">Mr. Abdourahmane Diallo</p>
-                  <p className="text-gray-600">Dakar, Senegal</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.westAfrica.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.westAfrica.name')}</p>
+                  <p className="text-gray-600">{t('about.partners.westAfrica.location')}</p>
                 </motion.div>
 
                 {/* Mali Distribution */}
@@ -395,9 +395,9 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.mali')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">Fatoumata Haidara Negoce-Services</p>
-                  <p className="text-gray-600 mb-1">Mrs. Fatoumata Haidara</p>
-                  <p className="text-gray-600">Bamako, Mali</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.mali.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.mali.name')}</p>
+                  <p className="text-gray-600">{t('about.partners.mali.location')}</p>
                 </motion.div>
 
                 {/* East Africa Distribution */}
@@ -407,9 +407,9 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.eastAfrica')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">Al-wabil Al-saieb Trading</p>
-                  <p className="text-gray-600 mb-1">Mr. Abdelsalam Mekki A. Yahya</p>
-                  <p className="text-gray-600">Khartoum, Soudan</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.eastAfrica.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.eastAfrica.name')}</p>
+                  <p className="text-gray-600">{t('about.partners.eastAfrica.location')}</p>
                 </motion.div>
 
                 {/* Asia Representation */}
@@ -419,9 +419,9 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.asia')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">Saatvik Foods Ltd</p>
-                  <p className="text-gray-600 mb-1">Mrs. Aditi More</p>
-                  <p className="text-gray-600">Mumbai, India</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.asia.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.asia.name')}</p>
+                  <p className="text-gray-600">{t('about.partners.asia.location')}</p>
                 </motion.div>
 
                 {/* India Foodstuff and Fruits */}
@@ -431,10 +431,10 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.india')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">Schi Traders Ltd</p>
-                  <p className="text-gray-600 mb-1">Mr. Kakasaheb Chavan</p>
-                  <p className="text-gray-600">Mumbai, India</p>
-                  <p className="text-gray-600">Osmanabad, India</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.india.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.india.name')}</p>
+                  <p className="text-gray-600">{t('about.partners.india.location1')}</p>
+                  <p className="text-gray-600">{t('about.partners.india.location2')}</p>
                 </motion.div>
 
                 {/* Latin America Representation */}
@@ -444,9 +444,9 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.latinAmerica')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">Roodan do Brasil</p>
-                  <p className="text-gray-600 mb-1">Mr. Vicenzo Lauria</p>
-                  <p className="text-gray-600">Vitória da Conquista – Bahia, Brazil</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.latinAmerica.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.latinAmerica.name')}</p>
+                  <p className="text-gray-600">{t('about.partners.latinAmerica.location')}</p>
                 </motion.div>
 
                 {/* Logistics Partner */}
@@ -456,9 +456,9 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.logistics')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">United Global Logistic</p>
-                  <p className="text-gray-600 mb-1">Mr. Mo Khan</p>
-                  <p className="text-gray-600 mb-1">New York, USA</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.logistics.compName')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.logistics.name')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.logistics.location')}</p>
                   <a href="https://www.unitedgloball.com" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-800">
                     www.unitedgloball.com
                   </a>
@@ -471,12 +471,12 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">{t('about.partners.uae')}</h4>
-                  <p className="text-gray-800 font-medium mb-2">Buttner Coffee Trading LLC</p>
-                  <p className="text-gray-600 mb-1">Mr. Sebastian Buttner</p>
-                  <p className="text-gray-600 mb-4">Dubai, UAE</p>
-                  <p className="text-gray-800 font-medium mb-2">Wealth Capital Global Trading LLC</p>
-                  <p className="text-gray-600 mb-1">Mr. Salim Khaleleyal</p>
-                  <p className="text-gray-600">Deria, UAE</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.uae.compName1')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.uae.name1')}</p>
+                  <p className="text-gray-600 mb-4">{t('about.partners.uae.location1')}</p>
+                  <p className="text-gray-800 font-medium mb-2">{t('about.partners.uae.compName2')}</p>
+                  <p className="text-gray-600 mb-1">{t('about.partners.uae.name2')}</p>
+                  <p className="text-gray-600">{t('about.partners.uae.location2')}</p>
                 </motion.div>
               </motion.div>
             </div>

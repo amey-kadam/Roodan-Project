@@ -152,15 +152,57 @@ const translations: Record<Language, Record<string, string>> = {
     'about.partners.title': 'Our Partners',
     'about.partners.subtitle': 'Global Partners & Representations',
     'about.partners.desc': 'As an international trading company based in Abu Dhabi, we work closely with trusted partners around the world. These partnerships enable us to ensure efficient sourcing, reliable distribution, and professional handling across all markets.',
-    'about.partners.europe': 'European Representation',
-    'about.partners.westAfrica': 'West Africa Distribution',
-    'about.partners.mali': 'Mali Distribution',
-    'about.partners.eastAfrica': 'East Africa Distribution',
-    'about.partners.asia': 'Asia Representation',
-    'about.partners.india': 'India Foodstuff and Fruits',
-    'about.partners.latinAmerica': 'Latin America Representation',
-    'about.partners.logistics': 'Logistics Partner',
-    'about.partners.uae': 'Our Partners in UAE',
+
+      // Our Partners
+        'about.partners.europe': 'European Representation',
+        'about.partners.europe.compName': 'International Foodstuff Supplier SL',
+        'about.partners.europe.name': 'Mr. Moreno & Nunoz',
+        'about.partners.europe.location': 'Madrid, Spain',
+
+        'about.partners.westAfrica': 'West Africa Distribution',
+        'about.partners.westAfrica.compName': 'Soufa Global Business Import Export',
+        'about.partners.westAfrica.name': 'Mr. Abdourahmane Diallo',
+        'about.partners.westAfrica.location': 'Dakar, Senegal',
+
+        'about.partners.mali': 'Mali Distribution',
+        'about.partners.mali.compName': 'Fatoumata Haidara Negoce-Services',
+        'about.partners.mali.name': 'Mrs. Fatoumata Haidara',
+        'about.partners.mali.location': 'Bamako, Mali',
+
+        'about.partners.eastAfrica': 'East Africa Distribution',
+        'about.partners.eastAfrica.compName': 'Al-wabil Al-saieb Trading',
+        'about.partners.eastAfrica.name': 'Mr. Abdelsalam Mekki A. Yahya',
+        'about.partners.eastAfrica.location': 'Khartoum, Soudan',
+
+        'about.partners.asia': 'Asia Representation',
+        'about.partners.asia.compName': 'Saatvik Foods Ltd',
+        'about.partners.asia.name': 'Mrs. Aditi More',
+        'about.partners.asia.location': 'Mumbai, India',
+
+        'about.partners.india': 'India Foodstuff and Fruits',
+        'about.partners.india.compName': 'Schi Traders Ltd',
+        'about.partners.india.name': 'Mr. Kakasaheb Chavan',
+        'about.partners.india.location1': 'Mumbai, India',
+        'about.partners.india.location2': 'Osmanabad, India',
+
+        'about.partners.latinAmerica': 'Latin America Representation',
+        'about.partners.latinAmerica.compName': 'Roodan do Brasil',
+        'about.partners.latinAmerica.name': 'Mr. Vicenzo Lauria',
+        'about.partners.latinAmerica.location': 'Vitória da Conquista – Bahia, Brazil',
+
+        'about.partners.logistics': 'Logistics Partner',
+        'about.partners.logistics.compName': 'United Global Logistic',
+        'about.partners.logistics.name': 'Mr. Mo Khan',
+        'about.partners.logistics.location': 'New York, USA',
+
+        'about.partners.uae': 'Our Partners in UAE',
+        'about.partners.uae.compName1': 'Buttner Coffee Trading LLC',
+        'about.partners.uae.name1': 'Mr. Sebastian Buttner',
+        'about.partners.uae.location1': 'Dubai, UAE',
+        'about.partners.uae.compName2': 'Wealth Capital Global Trading LLC',
+        'about.partners.uae.name2': 'Mr. Salim Khaleleyal',
+        'about.partners.uae.location2': 'Deria, UAE',
+
 
     // Our Services
     'about.service.service1.title':'Project Management & Consulting',
@@ -485,15 +527,57 @@ const translations: Record<Language, Record<string, string>> = {
     'about.partners.title': 'Nos Partenaires',
     'about.partners.subtitle': 'Partenaires et Représentations Mondiales',
     'about.partners.desc': 'En tant que société de négoce international basée à Abou Dhabi, nous travaillons en étroite collaboration avec des partenaires de confiance dans le monde entier. Ces partenariats nous permettent d\'assurer un approvisionnement efficace, une distribution fiable et une gestion professionnelle sur tous les marchés.',
-    'about.partners.europe': 'Représentation Européenne',
-    'about.partners.westAfrica': 'Distribution Afrique de l\'Ouest',
-    'about.partners.mali': 'Distribution Mali',
-    'about.partners.eastAfrica': 'Distribution Afrique de l\'Est',
-    'about.partners.asia': 'Représentation Asie',
-    'about.partners.india': 'Produits Alimentaires et Fruits Indiens',
-    'about.partners.latinAmerica': 'Représentation Amérique Latine',
-    'about.partners.logistics': 'Partenaire Logistique',
-    'about.partners.uae': 'Nos Partenaires aux EAU',
+
+        // Our Partners
+        'about.partners.europe': 'Représentation Européenne',
+        'about.partners.europe.compName': 'International Foodstuff Supplier SL',
+        'about.partners.europe.name': 'Mr. Moreno & Nunoz',
+        'about.partners.europe.location': 'Madrid, Spain',
+
+        'about.partners.westAfrica': 'Distribution Afrique de l\'Ouest',
+        'about.partners.westAfrica.compName': 'Soufa Global Business Import Export',
+        'about.partners.westAfrica.name': 'Mr. Abdourahmane Diallo',
+        'about.partners.westAfrica.location': 'Dakar, Senegal',
+
+        'about.partners.mali': 'Distribution Mali',
+        'about.partners.mali.compName': 'Fatoumata Haidara Negoce-Services',
+        'about.partners.mali.name': 'Mrs. Fatoumata Haidara',
+        'about.partners.mali.location': 'Bamako, Mali',
+
+        'about.partners.eastAfrica': 'Distribution Afrique de l\'Est',
+        'about.partners.eastAfrica.compName': 'Al-wabil Al-saieb Trading',
+        'about.partners.eastAfrica.name': 'Mr. Abdelsalam Mekki A. Yahya',
+        'about.partners.eastAfrica.location': 'Khartoum, Soudan',
+
+        'about.partners.asia': 'Représentation Asie',
+        'about.partners.asia.compName': 'Saatvik Foods Ltd',
+        'about.partners.asia.name': 'Mrs. Aditi More',
+        'about.partners.asia.location': 'Mumbai, India',
+
+        'about.partners.india': 'Produits Alimentaires et Fruits Indiens',
+        'about.partners.india.compName': 'Schi Traders Ltd',
+        'about.partners.india.name': 'Mr. Kakasaheb Chavan',
+        'about.partners.india.location1': 'Mumbai, India',
+        'about.partners.india.location2': 'Osmanabad, India',
+
+        'about.partners.latinAmerica': 'Représentation Amérique Latine',
+        'about.partners.latinAmerica.compName': 'Roodan do Brasil',
+        'about.partners.latinAmerica.name': 'Mr. Vicenzo Lauria',
+        'about.partners.latinAmerica.location': 'Vitória da Conquista – Bahia, Brazil',
+
+        'about.partners.logistics': 'Partenaire Logistique',
+        'about.partners.logistics.compName': 'United Global Logistic',
+        'about.partners.logistics.name': 'Mr. Mo Khan',
+        'about.partners.logistics.location': 'New York, USA',
+
+        'about.partners.uae': 'Nos Partenaires aux EAU',
+        'about.partners.uae.compName1': 'Buttner Coffee Trading LLC',
+        'about.partners.uae.name1': 'Mr. Sebastian Buttner',
+        'about.partners.uae.location1': 'Dubai, UAE',
+        'about.partners.uae.compName2': 'Wealth Capital Global Trading LLC',
+        'about.partners.uae.name2': 'Mr. Salim Khaleleyal',
+        'about.partners.uae.location2': 'Deria, UAE',
+
 
     // Our Mission
     'about.values.value1.title':'Quality Assurance',
@@ -815,15 +899,56 @@ const translations: Record<Language, Record<string, string>> = {
     'about.partners.title': 'شركاؤنا',
     'about.partners.subtitle': 'الشركاء والتمثيل العالمي',
     'about.partners.desc': 'بصفتنا شركة تجارية دولية مقرها أبو ظبي، نعمل عن كثب مع شركاء موثوقين في جميع أنحاء العالم. تمكننا هذه الشراكات من ضمان التوريد الفعال والتوزيع الموثوق والمعالجة المهنية في جميع الأسواق.',
-    'about.partners.europe': 'التمثيل الأوروبي',
-    'about.partners.westAfrica': 'توزيع غرب إفريقيا',
-    'about.partners.mali': 'توزيع مالي',
-    'about.partners.eastAfrica': 'توزيع شرق إفريقيا',
-    'about.partners.asia': 'التمثيل الآسيوي',
-    'about.partners.india': 'المواد الغذائية والفواكه الهندية',
-    'about.partners.latinAmerica': 'التمثيل الأمريكي اللاتيني',
-    'about.partners.logistics': 'الشريك اللوجستي',
-    'about.partners.uae': 'شركاؤنا في الإمارات',
+
+        // Our Partners
+        'about.partners.europe': 'التمثيل الأوروبي',
+        'about.partners.europe.compName': 'International Foodstuff Supplier SL',
+        'about.partners.europe.name': 'Mr. Moreno & Nunoz',
+        'about.partners.europe.location': 'Madrid, Spain',
+
+        'about.partners.westAfrica': 'توزيع غرب إفريقيا',
+        'about.partners.westAfrica.compName': 'Soufa Global Business Import Export',
+        'about.partners.westAfrica.name': 'Mr. Abdourahmane Diallo',
+        'about.partners.westAfrica.location': 'Dakar, Senegal',
+
+        'about.partners.mali': 'توزيع مالي',
+        'about.partners.mali.compName': 'Fatoumata Haidara Negoce-Services',
+        'about.partners.mali.name': 'Mrs. Fatoumata Haidara',
+        'about.partners.mali.location': 'Bamako, Mali',
+
+        'about.partners.eastAfrica': 'توزيع شرق إفريقيا',
+        'about.partners.eastAfrica.compName': 'Al-wabil Al-saieb Trading',
+        'about.partners.eastAfrica.name': 'Mr. Abdelsalam Mekki A. Yahya',
+        'about.partners.eastAfrica.location': 'Khartoum, Soudan',
+
+        'about.partners.asia': 'التمثيل الآسيوي',
+        'about.partners.asia.compName': 'Saatvik Foods Ltd',
+        'about.partners.asia.name': 'Mrs. Aditi More',
+        'about.partners.asia.location': 'Mumbai, India',
+
+        'about.partners.india': 'المواد الغذائية والفواكه الهندية',
+        'about.partners.india.compName': 'Schi Traders Ltd',
+        'about.partners.india.name': 'Mr. Kakasaheb Chavan',
+        'about.partners.india.location1': 'Mumbai, India',
+        'about.partners.india.location2': 'Osmanabad, India',
+
+        'about.partners.latinAmerica': 'التمثيل الأمريكي اللاتيني',
+        'about.partners.latinAmerica.compName': 'Roodan do Brasil',
+        'about.partners.latinAmerica.name': 'Mr. Vicenzo Lauria',
+        'about.partners.latinAmerica.location': 'Vitória da Conquista – Bahia, Brazil',
+
+        'about.partners.logistics': 'الشريك اللوجستي',
+        'about.partners.logistics.compName': 'United Global Logistic',
+        'about.partners.logistics.name': 'Mr. Mo Khan',
+        'about.partners.logistics.location': 'New York, USA',
+
+        'about.partners.uae': 'شركاؤنا في الإمارات',
+        'about.partners.uae.compName1': 'Buttner Coffee Trading LLC',
+        'about.partners.uae.name1': 'Mr. Sebastian Buttner',
+        'about.partners.uae.location1': 'Dubai, UAE',
+        'about.partners.uae.compName2': 'Wealth Capital Global Trading LLC',
+        'about.partners.uae.name2': 'Mr. Salim Khaleleyal',
+        'about.partners.uae.location2': 'Deria, UAE',
 
     // Our Mission
     'about.values.value1.title':'ضمان الجودة',
