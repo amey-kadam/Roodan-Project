@@ -285,7 +285,7 @@ const About = () => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const scrollAmount = 320; // Width of one card
-    const scrollSpeed = 1; // pixels per frame
+    const scrollSpeed = 0.5; // Reduced speed for smoother animation
     const animationFrameRef = useRef<number>();
 
     const partnersData: Partner[] = [
@@ -300,13 +300,35 @@ const About = () => {
       { id: "uae", icon: Building2, additionalLocation: true }
     ];
 
+    // Create a duplicated array for seamless looping
+    const duplicatedPartners = [...partnersData, ...partnersData];
+
     useEffect(() => {
       const animate = () => {
         if (!isHovered && carouselRef.current) {
-          const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+          const containerWidth = carouselRef.current.scrollWidth;
+          const halfWidth = containerWidth / 2;
+          
           setScrollPosition((prevPosition) => {
-            const newPosition = prevPosition + scrollSpeed;
-            return newPosition >= maxScroll ? 0 : newPosition;
+            // Increment position for continuous scrolling
+            let newPosition = prevPosition + scrollSpeed;
+            
+            // When we reach halfway through the duplicated content, 
+            // reset position to create an invisible loop
+            if (newPosition >= halfWidth) {
+              // Instead of using animation transition for this reset,
+              // directly set the position without animation
+              carouselRef.current.style.transition = 'none';
+              newPosition = 0;
+              
+              // Force a reflow to ensure the transition removal takes effect
+              // before we re-enable it after a very short delay
+              setTimeout(() => {
+                carouselRef.current.style.transition = 'transform 0.5s ease-out';
+              }, 10);
+            }
+            
+            return newPosition;
           });
         }
         animationFrameRef.current = requestAnimationFrame(animate);
@@ -319,15 +341,43 @@ const About = () => {
           cancelAnimationFrame(animationFrameRef.current);
         }
       };
-    }, [isHovered]); // Only depend on isHovered state
+    }, [isHovered, scrollSpeed]);
 
     const handleScroll = (direction: "left" | "right") => {
       if (carouselRef.current) {
-        const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
-        const newPosition = direction === "left"
-          ? Math.max(0, scrollPosition - scrollAmount)
-          : Math.min(maxScroll, scrollPosition + scrollAmount);
-
+        const containerWidth = carouselRef.current.scrollWidth;
+        const halfWidth = containerWidth / 2;
+        
+        let newPosition;
+        
+        if (direction === "left") {
+          newPosition = scrollPosition - scrollAmount;
+          // If we would scroll before the start, loop around to the end
+          if (newPosition < 0) {
+            // Use the same no-transition approach for seamless wrapping
+            carouselRef.current.style.transition = 'none';
+            newPosition = halfWidth - scrollAmount;
+            
+            // Force a reflow before re-enabling transitions
+            setTimeout(() => {
+              carouselRef.current.style.transition = 'transform 0.5s ease-out';
+            }, 10);
+          }
+        } else {
+          newPosition = scrollPosition + scrollAmount;
+          // If we would scroll past the halfway point, loop back to beginning
+          if (newPosition >= halfWidth) {
+            // Use the same no-transition approach for seamless wrapping
+            carouselRef.current.style.transition = 'none';
+            newPosition = 0;
+            
+            // Force a reflow before re-enabling transitions
+            setTimeout(() => {
+              carouselRef.current.style.transition = 'transform 0.5s ease-out';
+            }, 10);
+          }
+        }
+        
         setScrollPosition(newPosition);
       }
     };
@@ -402,15 +452,15 @@ const About = () => {
                 className="flex space-x-6 py-4"
                 style={{
                   transform: `translateX(-${scrollPosition}px)`,
-                  transition: "transform 0.1s linear",
+                  transition: "transform 0.5s ease-out",
                   willChange: "transform",
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                {partnersData.map((partner, index) => (
+                {duplicatedPartners.map((partner, index) => (
                   <motion.div
-                    key={partner.id}
+                    key={`${partner.id}-${index}`}
                     className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col h-[260px]"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ 
