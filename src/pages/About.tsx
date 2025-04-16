@@ -5,6 +5,14 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Globe, Award, Users, Handshake, Building2, Plane, Ship, Truck, Store, Factory, User, MapPin, Briefcase } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { LucideIcon } from "lucide-react";
+
+interface Partner {
+  id: string;
+  icon: LucideIcon;
+  additionalLocation?: boolean;
+  website?: string;
+}
 
 const About = () => {
   const { t, language } = useI18n();
@@ -280,21 +288,28 @@ const About = () => {
     const scrollSpeed = 1; // pixels per frame
     const animationFrameRef = useRef<number>();
 
+    const partnersData: Partner[] = [
+      { id: "europe", icon: Globe },
+      { id: "westAfrica", icon: Building2 },
+      { id: "mali", icon: Store },
+      { id: "eastAfrica", icon: Factory },
+      { id: "asia", icon: Plane },
+      { id: "india", icon: Ship, additionalLocation: true },
+      { id: "latinAmerica", icon: Globe },
+      { id: "logistics", icon: Truck, website: "https://www.unitedgloball.com" },
+      { id: "uae", icon: Building2, additionalLocation: true }
+    ];
+
     useEffect(() => {
       const animate = () => {
         if (!isHovered && carouselRef.current) {
-          const newPosition = scrollPosition + scrollSpeed;
-          const maxScroll =
-            carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
-
-          if (newPosition >= maxScroll) {
-            setScrollPosition(0);
-          } else {
-            setScrollPosition(newPosition);
-          }
-
-          animationFrameRef.current = requestAnimationFrame(animate);
+          const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+          setScrollPosition((prevPosition) => {
+            const newPosition = prevPosition + scrollSpeed;
+            return newPosition >= maxScroll ? 0 : newPosition;
+          });
         }
+        animationFrameRef.current = requestAnimationFrame(animate);
       };
 
       animationFrameRef.current = requestAnimationFrame(animate);
@@ -304,18 +319,14 @@ const About = () => {
           cancelAnimationFrame(animationFrameRef.current);
         }
       };
-    }, [scrollPosition, isHovered]);
+    }, [isHovered]); // Only depend on isHovered state
 
     const handleScroll = (direction: "left" | "right") => {
       if (carouselRef.current) {
-        const newPosition =
-          direction === "left"
-            ? Math.max(0, scrollPosition - scrollAmount)
-            : Math.min(
-                carouselRef.current.scrollWidth -
-                  carouselRef.current.clientWidth,
-                scrollPosition + scrollAmount
-              );
+        const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+        const newPosition = direction === "left"
+          ? Math.max(0, scrollPosition - scrollAmount)
+          : Math.min(maxScroll, scrollPosition + scrollAmount);
 
         setScrollPosition(newPosition);
       }
@@ -364,11 +375,11 @@ const About = () => {
           </motion.div>
 
           <div className="relative">
-            {/* Left Arrow Button */}
-            <button
+            <motion.button
               onClick={() => handleScroll("left")}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
-              aria-label="Previous partners"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: -5 }}
+              whileTap={{ scale: 0.95 }}
             >
               <svg
                 className="w-6 h-6 text-gray-600"
@@ -383,7 +394,7 @@ const About = () => {
                   d="M15 19l-7-7 7-7"
                 />
               </svg>
-            </button>
+            </motion.button>
 
             <div className="overflow-hidden">
               <motion.div
@@ -394,313 +405,127 @@ const About = () => {
                   transition: "transform 0.1s linear",
                   willChange: "transform",
                 }}
-                variants={sectionVariants}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                {/* European Representation */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.europe")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.europe.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.europe.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.europe.location")}Madrid, Spain
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* West Africa Distribution */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.westAfrica")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.westAfrica.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.westAfrica.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.westAfrica.location")}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Mali Distribution */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.mali")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.mali.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.mali.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.mali.location")}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* East Africa Distribution */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.eastAfrica")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.eastAfrica.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.eastAfrica.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.eastAfrica.location")}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Asia Representation */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.asia")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.asia.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.asia.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.asia.location")}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* India Foodstuff and Fruits */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.india")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.india.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.india.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.india.location1")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.india.location2")}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Latin America Representation */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.latinAmerica")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.latinAmerica.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.latinAmerica.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.latinAmerica.location")}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Logistics Partner */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.logistics")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.logistics.compName")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.logistics.name")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.logistics.location")}
-                    </p>
-                  </div>
-                  <a
-                    href="https://www.unitedgloball.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-emerald-600 hover:text-emerald-800"
+                {partnersData.map((partner, index) => (
+                  <motion.div
+                    key={partner.id}
+                    className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col h-[260px]"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ 
+                      opacity: 1, 
+                      y: 0,
+                      transition: {
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 20,
+                        delay: index * 0.1
+                      }
+                    }}
+                    whileHover={{ 
+                      scale: 1.02,
+                      y: -5,
+                      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                    }}
+                    viewport={{ once: true }}
                   >
-                    www.unitedgloball.com
-                  </a>
-                </motion.div>
+                    <motion.div 
+                      className="flex items-center gap-3 mb-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                      <motion.div 
+                        className="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        {partner.icon && <partner.icon className="w-5 h-5 text-emerald-600" />}
+                      </motion.div>
+                      <h4 className="text-lg font-semibold bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                        {t(`about.partners.${partner.id}`)}
+                      </h4>
+                    </motion.div>
 
-                {/* UAE Partners */}
-                <motion.div
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-                    {t("about.partners.uae")}
-                  </h4>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.uae.compName1")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.uae.name1")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.uae.location1")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Briefcase className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-800 font-medium">
-                      {t("about.partners.uae.compName2")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <User className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.uae.name2")}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-emerald-600" />
-                    <p className="text-gray-600">
-                      {t("about.partners.uae.location2")}
-                    </p>
-                  </div>
-                </motion.div>
+                    <div className="flex-grow flex flex-col justify-between space-y-2">
+                      <div className="space-y-2">
+                        <motion.div 
+                          className="flex items-center gap-2"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.3 }}
+                        >
+                          <Briefcase className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                          <p className="text-gray-800 font-medium">
+                            {t(`about.partners.${partner.id}.compName`)}
+                          </p>
+                        </motion.div>
+
+                        <motion.div 
+                          className="flex items-center gap-2"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.4 }}
+                        >
+                          <User className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                          <p className="text-gray-600">
+                            {t(`about.partners.${partner.id}.name`)}
+                          </p>
+                        </motion.div>
+
+                        <motion.div 
+                          className="flex items-center gap-2"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.5 }}
+                        >
+                          <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                          <p className="text-gray-600">
+                            {t(`about.partners.${partner.id}.location`)}
+                          </p>
+                        </motion.div>
+
+                        {partner.additionalLocation && (
+                          <motion.div 
+                            className="flex items-center gap-2"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.6 }}
+                          >
+                            <MapPin className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                            <p className="text-gray-600">
+                              {t(`about.partners.${partner.id}.location2`)}
+                            </p>
+                          </motion.div>
+                        )}
+                      </div>
+
+                      {partner.website && (
+                        <motion.a
+                          href={partner.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-emerald-600 hover:text-emerald-800 block"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {partner.website}
+                        </motion.a>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             </div>
 
-            {/* Right Arrow Button */}
-            <button
+            <motion.button
               onClick={() => handleScroll("right")}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110"
-              aria-label="Next partners"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg border border-gray-200 transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
               <svg
                 className="w-6 h-6 text-gray-600"
@@ -715,7 +540,7 @@ const About = () => {
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
