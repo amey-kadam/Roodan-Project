@@ -1084,7 +1084,7 @@ const translations: Record<Language, Record<string, string>> = {
     // buyer bank information section
     'loi.sections.bankInfo': 'معلومات بنك المشتري',
     'loi.bn': 'اسم البنك',
-    'loi.bwc': 'رمز SWIFT للبنك',
+    'loi.bwc': 'رمز سويفت البنكي',
     'loi.bd': 'عنوان البنك / المدينة / الولاية / الرمز البريدي / الدولة',
     'loi.an': 'اسم الحساب',
     'loi.anu': 'رقم الحساب',
