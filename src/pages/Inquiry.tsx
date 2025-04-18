@@ -966,7 +966,6 @@ const LOIForm = () => {
           </div>
         </motion.section>
       </main>
-      <Footer />
     </div>
   );
 };

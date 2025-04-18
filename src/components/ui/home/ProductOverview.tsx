@@ -346,7 +346,7 @@ function ProductOverviewComponent() {
     },
     {
       title: t("products.oil"),
-      image: "/vegetable-oil.jpg",
+      image: "/oil.png",
       description: t("products.oilDesc"),
       link: "/products",
       details: [
@@ -358,7 +358,7 @@ function ProductOverviewComponent() {
     },
     {
       title: t("products.rice"),
-      image: "/Rice.jpg",
+      image: "/rice.jpg",
       description: t("products.riceDesc"),
       link: "/products",
       details: [
