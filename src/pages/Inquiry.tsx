@@ -247,35 +247,11 @@ const LOIForm = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
       <main className="flex-grow">
-        <motion.section 
-          className="py-12 pt-28 relative"
-          initial="initial"
-          animate="animate"
-          variants={pageVariants}
-        >
-          {/* Subtle background effect */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
-            <motion.div
-              className="absolute w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -top-64 -right-64"
-              animate={{
-                y: [0, -20, 0],
-                transition: {
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }
-              }}
-            />
-          </div>
-          
+        <div className="py-6 pt-16 relative">
           <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
-            <motion.div 
-              variants={pageVariants}
-              className="max-w-4xl mx-auto mt-8 bg-white/90 backdrop-blur-sm border border-gray-100/80 rounded-3xl p-5 sm:p-8 md:p-12 shadow-xl"
-            >
-              <motion.div variants={pageVariants} className="text-center mb-12">
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6">
+            <div className="max-w-4xl mx-auto bg-white/90 backdrop-blur-sm border border-gray-100/80 rounded-3xl p-5 sm:p-8 md:p-12 shadow-xl">
+              <div className="text-center mb-8">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-4">
                   <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mb-2 sm:mb-0" />
                   <h2 className="text-2xl sm:text-3xl font-display font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent text-center">
                     {t("loi.title")}
@@ -284,7 +260,7 @@ const LOIForm = () => {
                 <p className="text-foreground max-w-2xl mx-auto text-sm sm:text-base">
                   {t("loi.subtitle")}     
                 </p>
-              </motion.div>
+              </div>
               
               <form onSubmit={handleSubmit} className="space-y-8" key={language}>
                 {/* LOI Details Section */}
@@ -962,9 +938,9 @@ const LOIForm = () => {
                   </Button>
                 </div>
               </form>
-            </motion.div>
+            </div>
           </div>
-        </motion.section>
+        </div>
       </main>
     </div>
   );
@@ -980,28 +956,7 @@ const InquiryPage = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 font-sans">
       <Header />
       <main className="flex-grow">
-        <motion.section 
-          className="py-12 pt-28 relative"
-          initial="initial"
-          animate="animate"
-          variants={pageVariants}
-        >
-          {/* Subtle background effect */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-10" />
-            <motion.div
-              className="absolute w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -top-64 -right-64"
-              animate={{
-                y: [0, -20, 0],
-                transition: {
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }
-              }}
-            />
-          </div>
-          
+        <div className="py-6 pt-16 relative">
           <div className={cn("page-container relative z-10", language === "ar" ? "rtl" : "ltr")}>
             {selectedProduct ? (
               <QuoteRequestForm selectedProduct={selectedProduct} />
@@ -1009,7 +964,7 @@ const InquiryPage = () => {
               <LOIForm />
             )}
           </div>
-        </motion.section>
+        </div>
       </main>
       <Footer />
     </div>
