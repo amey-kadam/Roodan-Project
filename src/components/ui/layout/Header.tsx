@@ -96,7 +96,7 @@ export function Header() {
                   textShadow: "0 1px 2px rgba(0,0,0,0.1)"
                 }}
               >
-               {t("logo.title")}
+              ROODAN
               </span>
             </div>
           </NavLink>
