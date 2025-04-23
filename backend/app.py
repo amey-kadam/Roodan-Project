@@ -65,7 +65,7 @@ def send_email(sender_email, subject, body):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('admin_login.html')
 
 @app.route('/api/contact', methods=['POST'])
 def contact():
