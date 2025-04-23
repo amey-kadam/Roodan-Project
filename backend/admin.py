@@ -18,9 +18,15 @@ admin_bp = Blueprint('admin', __name__)
 # Database setup
 def get_db_connection():
     """Create a connection to the SQLite database"""
-    if not os.path.exists('instance'):
-        os.makedirs('instance')
-    conn = sqlite3.connect('instance/tracker.db')
+    # Use absolute path for cPanel environment
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_path = os.path.join(base_dir, 'instance', 'tracker.db')
+    
+    # Ensure directory exists
+    if not os.path.exists(os.path.dirname(db_path)):
+        os.makedirs(os.path.dirname(db_path))
+    
+    conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
 
