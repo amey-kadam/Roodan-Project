@@ -197,6 +197,7 @@ def quote_request():
         quantity = data.get('quantity', '')
         delivery = data.get('deliveryPort', '')
         observations = data.get('observations', '')
+        payment_terms = data.get('paymentTerms', '')
         bank_name = data.get('bankName', '')
         bank_swift_code = data.get('bankSwiftCode', '')
         bank_address = data.get('bankAddress', '')
@@ -214,7 +215,7 @@ def quote_request():
         # Create email content
         subject = f"New Quote Request - Ticket #{ticket_no}"
 
-        # HTML content
+        # HTML content with separate tables for each section
         html_content = f"""
         <html>
         <head>
@@ -229,20 +230,31 @@ def quote_request():
         <body>
             <h1>New Quote Request Received</h1>
             
-            <h2>Company Information</h2>
+            <h2>Buyer Information</h2>
             <table>
                 <tr><th>Field</th><th>Value</th></tr>
                 <tr><td>Company Name</td><td>{company or 'N/A'}</td></tr>
                 <tr><td>Representative Name</td><td>{name or 'N/A'}</td></tr>
                 <tr><td>Email</td><td>{email or 'N/A'}</td></tr>
                 <tr><td>Phone</td><td>{phone or 'N/A'}</td></tr>
+            </table>
+            
+            <h2>Product Details</h2>
+            <table>
+                <tr><th>Field</th><th>Value</th></tr>
                 <tr><td>Product</td><td>{product or 'N/A'}</td></tr>
                 <tr><td>Quantity</td><td>{quantity or 'N/A'}</td></tr>
                 <tr><td>Delivery Port</td><td>{delivery or 'N/A'}</td></tr>
                 <tr><td>Observations</td><td>{observations or 'N/A'}</td></tr>
             </table>
             
-            <h2>Bank Information</h2>
+            <h2>Payment Details</h2>
+            <table>
+                <tr><th>Field</th><th>Value</th></tr>
+                <tr><td>Payment Terms</td><td>{payment_terms or 'N/A'}</td></tr>
+            </table>
+            
+            <h2>Buyer Bank Information</h2>
             <table>
                 <tr><th>Field</th><th>Value</th></tr>
                 <tr><td>Bank Name</td><td>{bank_name or 'N/A'}</td></tr>
@@ -262,17 +274,22 @@ def quote_request():
         plain_text = f"""
         New Quote Request Received:
 
-        Company Information:
+        Buyer Information:
         - Company Name: {company or 'N/A'}
         - Representative Name: {name or 'N/A'}
         - Email: {email or 'N/A'}
         - Phone: {phone or 'N/A'}
+
+        Product Details:
         - Product: {product or 'N/A'}
         - Quantity: {quantity or 'N/A'}
         - Delivery Port: {delivery or 'N/A'}
         - Observations: {observations or 'N/A'}
 
-        Bank Information:
+        Payment Details:
+        - Payment Terms: {payment_terms or 'N/A'}
+
+        Buyer Bank Information:
         - Bank Name: {bank_name or 'N/A'}
         - Bank SWIFT Code: {bank_swift_code or 'N/A'}
         - Bank Address: {bank_address or 'N/A'}
