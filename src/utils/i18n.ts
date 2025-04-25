@@ -21,7 +21,7 @@ const translations: Record<Language, Record<string, string>> = {
     'logo.title':'ROODAN',
     
     // Hero
-    'hero.title': 'Roodan General Trading ',
+    'hero.title': 'Roodan General Trading',
     'hero.subtitle': 'Global quality products with reliable service',
     'hero.cta': 'Explore Products',
     
@@ -203,6 +203,11 @@ const translations: Record<Language, Record<string, string>> = {
         'about.partners.uae.name2': 'Mr. Salim Khaleleyal',
         'about.partners.uae.location2': 'Deria, UAE',
 
+        'about.partners.ivoryCoast': 'Ivory Coast Representative',
+        'about.partners.ivoryCoast.compName': 'RECORD\'S HOLDING SA',
+        'about.partners.ivoryCoast.name': 'Mr. Malick Ouattara',
+        'about.partners.ivoryCoast.location': 'Abidjan - IVORY COAST',
+        'about.partners.ivoryCoast.address': '03 BP 2603 ABIDJAN 03',
 
     // Our Services
     'about.service.service1.title':'Project Management & Consulting',
@@ -395,7 +400,7 @@ const translations: Record<Language, Record<string, string>> = {
     'logo.title':'ROODAN',
     
     // Hero
-    'hero.title': 'Commerce général de Roodan',
+    'hero.title': 'Roodan General Trading',
     'hero.subtitle': 'Produits de qualité mondiale avec un service fiable',
     'hero.cta': 'Explorer les Produits',
     
@@ -577,6 +582,12 @@ const translations: Record<Language, Record<string, string>> = {
       'about.partners.uae.compName2': 'Wealth Capital Global Trading LLC',
       'about.partners.uae.name2': 'M. Salim Khaleleyal',
       'about.partners.uae.location2': 'Deria, EAU',
+
+      'about.partners.ivoryCoast': 'Représentant Côte d\'Ivoire',
+      'about.partners.ivoryCoast.compName': 'RECORD\'S HOLDING SA',
+      'about.partners.ivoryCoast.name': 'M. Malick Ouattara',
+      'about.partners.ivoryCoast.location': 'Abidjan - CÔTE D\'IVOIRE',
+      'about.partners.ivoryCoast.address': '03 BP 2603 ABIDJAN 03',
 
     // Our Mission
     'about.values.value1.title':'Quality Assurance',
@@ -764,10 +775,10 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'اتصل بنا',
 
     //Header
-    'logo.title':'رودان',
+    'logo.title':'ROODAN',
     
     // Hero
-    'hero.title': 'رودان للتجارة العامة',
+    'hero.title': 'Roodan General Trading',
     'hero.subtitle': 'منتجات عالمية الجودة مع خدمة موثوقة',
     'hero.cta': 'استكشاف المنتجات',
     
@@ -948,6 +959,12 @@ const translations: Record<Language, Record<string, string>> = {
       'about.partners.uae.compName2': 'ويلث كابيتال جلوبال تريدينج ش.ذ.م.م',
       'about.partners.uae.name2': 'السيد سليم خليليال',
       'about.partners.uae.location2': 'ديرة، الإمارات',
+
+      'about.partners.ivoryCoast': 'ممثل ساحل العاج',
+      'about.partners.ivoryCoast.compName': 'RECORD\'S HOLDING SA',
+      'about.partners.ivoryCoast.name': 'السيد مالك واتارا',
+      'about.partners.ivoryCoast.location': 'أبيدجان - ساحل العاج',
+      'about.partners.ivoryCoast.address': '03 BP 2603 ABIDJAN 03',
 
     // Our Mission
     'about.values.value1.title':'ضمان الجودة',
@@ -1144,4 +1161,3 @@ export const useI18n = create<I18nState>((set, get) => ({
     return translations[language][key] || key;
   }
 }));
- 

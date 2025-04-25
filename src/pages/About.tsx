@@ -297,7 +297,8 @@ const About = () => {
       { id: "india", icon: Ship, additionalLocation: true },
       { id: "latinAmerica", icon: Globe },
       { id: "logistics", icon: Truck, website: "https://www.unitedgloball.com" },
-      { id: "uae", icon: Building2, additionalLocation: true }
+      { id: "uae", icon: Building2, additionalLocation: true },
+      { id: "ivoryCoast", icon: Store }
     ];
 
     // Create a duplicated array for seamless looping
