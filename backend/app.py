@@ -69,6 +69,7 @@ def send_email(sender_email, subject, body):
         print(f"❌ Error sending email: {str(e)}")
         return False
 
+
 @app.before_request
 def handle_options_request():
     if request.method == 'OPTIONS':
@@ -188,63 +189,119 @@ def quote_request():
         print("Received payload:", data)  # Debugging: Log the received payload
 
         # Map incoming keys to expected keys
-        company = data.get('companyName')
-        name = data.get('representativeName')
-        email = data.get('email')
-        phone = data.get('phone')
-        product = data.get('productName')
-        quantity = data.get('quantity')
-        delivery = data.get('deliveryPort')
-        message = data.get('observations')
-
-        # Check for missing fields
-        missing_fields = []
-        if not company:
-            missing_fields.append('company')
-        if not name:
-            missing_fields.append('name')
-        if not email:
-            missing_fields.append('email')
-        if not phone:
-            missing_fields.append('phone')
-        if not product:
-            missing_fields.append('product')
-        if not quantity:
-            missing_fields.append('quantity')
-        if not delivery:
-            missing_fields.append('delivery')
-
-        if missing_fields:
-            error_msg = f"Missing required fields: {', '.join(missing_fields)}"
-            print(error_msg)
-            return jsonify({"error": error_msg}), 400
+        company = data.get('companyName', '')
+        name = data.get('representativeName', '')
+        email = data.get('email', '')
+        phone = data.get('phone', '')
+        product = data.get('productName', '')
+        quantity = data.get('quantity', '')
+        delivery = data.get('deliveryPort', '')
+        observations = data.get('observations', '')
+        bank_name = data.get('bankName', '')
+        bank_swift_code = data.get('bankSwiftCode', '')
+        bank_address = data.get('bankAddress', '')
+        account_name = data.get('accountName', '')
+        account_number = data.get('accountNumber', '')
+        bank_officer_name = data.get('bankOfficerName', '')
+        bank_officer_title = data.get('bankOfficerTitle', '')
+        bank_phone = data.get('bankPhone', '')
 
         # Record the quotation request and get ticket number
-        ticket_no = record_quotation(company, name, email, phone, product, quantity, delivery, message)
+        ticket_no = record_quotation(company, name, email, phone, product, quantity, delivery, observations)
         if not ticket_no:
             return jsonify({"error": "Failed to record quotation request"}), 500
 
         # Create email content
         subject = f"New Quote Request - Ticket #{ticket_no}"
-        body = f"""
-        You have received a new quote request:
 
-        Ticket Number: {ticket_no}
-        Company: {company}
-        Representative Name: {name}
-        Email: {email}
-        Phone: {phone}
-        Product: {product}
-        Quantity: {quantity}
-        Delivery Port: {delivery}
-        Observations: {message or 'N/A'}
-
-        Please respond to the user as soon as possible.
+        # HTML content
+        html_content = f"""
+        <html>
+        <head>
+            <style>
+                body {{ font-family: Arial, sans-serif; }}
+                table {{ border-collapse: collapse; width: 100%; margin-bottom: 20px; }}
+                th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+                th {{ background-color: #f2f2f2; }}
+                h2 {{ color: #333; }}
+            </style>
+        </head>
+        <body>
+            <h1>New Quote Request Received</h1>
+            
+            <h2>Company Information</h2>
+            <table>
+                <tr><th>Field</th><th>Value</th></tr>
+                <tr><td>Company Name</td><td>{company or 'N/A'}</td></tr>
+                <tr><td>Representative Name</td><td>{name or 'N/A'}</td></tr>
+                <tr><td>Email</td><td>{email or 'N/A'}</td></tr>
+                <tr><td>Phone</td><td>{phone or 'N/A'}</td></tr>
+                <tr><td>Product</td><td>{product or 'N/A'}</td></tr>
+                <tr><td>Quantity</td><td>{quantity or 'N/A'}</td></tr>
+                <tr><td>Delivery Port</td><td>{delivery or 'N/A'}</td></tr>
+                <tr><td>Observations</td><td>{observations or 'N/A'}</td></tr>
+            </table>
+            
+            <h2>Bank Information</h2>
+            <table>
+                <tr><th>Field</th><th>Value</th></tr>
+                <tr><td>Bank Name</td><td>{bank_name or 'N/A'}</td></tr>
+                <tr><td>Bank SWIFT Code</td><td>{bank_swift_code or 'N/A'}</td></tr>
+                <tr><td>Bank Address</td><td>{bank_address or 'N/A'}</td></tr>
+                <tr><td>Account Name</td><td>{account_name or 'N/A'}</td></tr>
+                <tr><td>Account Number</td><td>{account_number or 'N/A'}</td></tr>
+                <tr><td>Bank Officer Name</td><td>{bank_officer_name or 'N/A'}</td></tr>
+                <tr><td>Bank Officer Title</td><td>{bank_officer_title or 'N/A'}</td></tr>
+                <tr><td>Bank Phone</td><td>{bank_phone or 'N/A'}</td></tr>
+            </table>
+        </body>
+        </html>
         """
 
+        # Plain text content
+        plain_text = f"""
+        New Quote Request Received:
+
+        Company Information:
+        - Company Name: {company or 'N/A'}
+        - Representative Name: {name or 'N/A'}
+        - Email: {email or 'N/A'}
+        - Phone: {phone or 'N/A'}
+        - Product: {product or 'N/A'}
+        - Quantity: {quantity or 'N/A'}
+        - Delivery Port: {delivery or 'N/A'}
+        - Observations: {observations or 'N/A'}
+
+        Bank Information:
+        - Bank Name: {bank_name or 'N/A'}
+        - Bank SWIFT Code: {bank_swift_code or 'N/A'}
+        - Bank Address: {bank_address or 'N/A'}
+        - Account Name: {account_name or 'N/A'}
+        - Account Number: {account_number or 'N/A'}
+        - Bank Officer Name: {bank_officer_name or 'N/A'}
+        - Bank Officer Title: {bank_officer_title or 'N/A'}
+        - Bank Phone: {bank_phone or 'N/A'}
+        """
+
+        # Send HTML email
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = subject
+        msg['From'] = EMAIL_USER
+        msg['To'] = RECIPIENT_EMAIL
+        msg['Reply-To'] = email
+
+        # Attach both plain text and HTML versions
+        msg.attach(MIMEText(plain_text, 'plain'))
+        msg.attach(MIMEText(html_content, 'html'))
+
         # Send the email
-        email_sent = send_email(email, subject, body)
-        if not email_sent:
+        try:
+            with smtplib.SMTP_SSL(EMAIL_HOST, EMAIL_PORT) as server:
+                server.login(EMAIL_USER, EMAIL_PASSWORD)
+                server.send_message(msg)
+            print("Email sent successfully")
+        except Exception as e:
+            print(f"Failed to send email: {str(e)}")
             return jsonify({"error": "Failed to send email"}), 500
 
         return jsonify({
