@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
-from admin import record_loi_submission, record_enquiry, record_quotation, admin_bp, send_email, init_db
+from admin import record_loi_submission, record_enquiry, record_quotation, admin_bp, send_email, init_db, update_enquiries_table
 
 # Load environment variables from .env file
 load_dotenv()
@@ -15,12 +15,16 @@ app = Flask(__name__)
 # Configure CORS to allow requests from the frontend
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:8080", "http://127.0.0.1:8080", "http://localhost:5173", "http://127.0.0.1:5173", "https://roodan.ae", "https://www.roodan.ae"],
+        "origins": [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://localhost:8080"  # Add this line
+        ],
         "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Accept", "Authorization", "X-Requested-With", "Cache-Control", "Pragma", "Origin"],
-        "expose_headers": ["Content-Type", "Accept", "Authorization"],
-        "supports_credentials": True,
-        "max_age": 3600
+        "allow_headers": ["Content-Type", "Accept", "Authorization", "X-Requested-With"],
+        "supports_credentials": True
     }
 })
 
@@ -34,6 +38,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 # Initialize the database
 with app.app_context():
     init_db()
+    update_enquiries_table()  # Add this line
 
 # Email configuration
 EMAIL_HOST = os.getenv("EMAIL_HOST", "mail.roodan.ae")
@@ -62,6 +67,16 @@ def send_email(sender_email, subject, body):
     except Exception as e:
         print(f"❌ Error sending email: {str(e)}")
         return False
+
+@app.before_request
+def handle_options_request():
+    if request.method == 'OPTIONS':
+        response = app.make_response('')
+        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin', '*')
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
 
 @app.route('/')
 def index():

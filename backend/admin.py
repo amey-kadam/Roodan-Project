@@ -31,17 +31,19 @@ def get_db_connection():
     return conn
 
 def init_db():
-    """Initialize the database with required tables"""
+    """Initialize the database with required tables."""
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    # Create enquiries table
+    # Create enquiries table with ticket number and expiration
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS enquiries (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         email TEXT,
         message TEXT,
+        ticket_no TEXT UNIQUE,
+        expires_at DATETIME,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     )
     ''')
@@ -97,6 +99,44 @@ def init_db():
     conn.commit()
     conn.close()
 
+def update_enquiries_table():
+    """Update the enquiries table to include ticket_no and expires_at columns."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Check if the table already has the required columns
+    cursor.execute("PRAGMA table_info(enquiries)")
+    columns = [column[1] for column in cursor.fetchall()]
+    
+    if 'ticket_no' not in columns or 'expires_at' not in columns:
+        # Rename the old table
+        cursor.execute("ALTER TABLE enquiries RENAME TO old_enquiries")
+        
+        # Create the new table with the updated schema
+        cursor.execute('''
+        CREATE TABLE enquiries (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            email TEXT,
+            message TEXT,
+            ticket_no TEXT UNIQUE,
+            expires_at DATETIME,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+        ''')
+        
+        # Copy data from the old table to the new table
+        cursor.execute('''
+        INSERT INTO enquiries (id, name, email, message, timestamp)
+        SELECT id, name, email, message, timestamp FROM old_enquiries
+        ''')
+        
+        # Drop the old table
+        cursor.execute("DROP TABLE old_enquiries")
+    
+    conn.commit()
+    conn.close()
+
 # Function to record LOI submissions
 def record_loi_submission(company_name, rep_name, email, phone, product, quantity, loi_data):
     """Record an LOI submission"""
@@ -118,24 +158,31 @@ def record_loi_submission(company_name, rep_name, email, phone, product, quantit
         print(f"Error recording LOI submission: {str(e)}")
         return False
 
-# Function to record enquiries
+# Function to record enquiries with ticket number and expiration
 def record_enquiry(name, email, message):
-    """Record a contact form submission"""
+    """Record a contact form submission with a ticket number and expiration date."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         
+        # Generate a unique ticket number (format: ENQ-YYYYMMDD-XXXXX)
+        date_prefix = datetime.datetime.now().strftime('%Y%m%d')
+        ticket_no = f"ENQ-{date_prefix}-{str(uuid.uuid4())[:5].upper()}"
+        
+        # Set expiration date to 7 days from now
+        expires_at = datetime.datetime.now() + datetime.timedelta(days=7)
+        
         cursor.execute(
-            "INSERT INTO enquiries (name, email, message) VALUES (?, ?, ?)",
-            (name, email, message)
+            "INSERT INTO enquiries (name, email, message, ticket_no, expires_at) VALUES (?, ?, ?, ?, ?)",
+            (name, email, message, ticket_no, expires_at)
         )
         
         conn.commit()
         conn.close()
-        return True
+        return ticket_no
     except Exception as e:
         print(f"Error recording enquiry: {str(e)}")
-        return False
+        return None
 
 # Function to record quotation requests with ticket number and expiration
 def record_quotation(company, name, email, phone, product, quantity, delivery, message):
@@ -273,7 +320,13 @@ def get_enquiries():
     conn = get_db_connection()
     cursor = conn.cursor()
     
-    cursor.execute("SELECT * FROM enquiries ORDER BY timestamp DESC LIMIT 50")
+    # Clean up expired enquiries
+    now = datetime.datetime.now()
+    cursor.execute("DELETE FROM enquiries WHERE expires_at < ?", (now,))
+    conn.commit()
+    
+    # Get active enquiries
+    cursor.execute("SELECT * FROM enquiries WHERE expires_at >= ? ORDER BY timestamp DESC LIMIT 50", (now,))
     enquiries = [dict(row) for row in cursor.fetchall()]
     
     conn.close()
