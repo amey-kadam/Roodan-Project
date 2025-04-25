@@ -961,7 +961,7 @@ const translations: Record<Language, Record<string, string>> = {
       'about.partners.uae.location2': 'ديرة، الإمارات',
 
       'about.partners.ivoryCoast': 'ممثل ساحل العاج',
-      'about.partners.ivoryCoast.compName': 'RECORD\'S HOLDING SA',
+      'about.partners.ivoryCoast.compName': 'شركة ريكوردز هولدينغ ش.م.',
       'about.partners.ivoryCoast.name': 'السيد مالك واتارا',
       'about.partners.ivoryCoast.location': 'أبيدجان - ساحل العاج',
       'about.partners.ivoryCoast.address': '03 BP 2603 ABIDJAN 03',
