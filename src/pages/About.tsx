@@ -153,7 +153,7 @@ const About = () => {
                   {/* Glass Nameplate */}
                   <div className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/80 border-t border-gray-100 p-6 z-20">
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-bold text-gray-900 break-words">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 break-words">
                         {member.name}
                       </h3>
                       <div className="flex items-center justify-between gap-2">
