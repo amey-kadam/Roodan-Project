@@ -137,6 +137,49 @@ def update_enquiries_table():
     conn.commit()
     conn.close()
 
+def update_quotations_table():
+    """Update the quotations table to include ticket_no and expires_at columns."""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Check if the table already has the required columns
+    cursor.execute("PRAGMA table_info(quotations)")
+    columns = [column[1] for column in cursor.fetchall()]
+    
+    if 'ticket_no' not in columns or 'expires_at' not in columns:
+        # Rename the old table
+        cursor.execute("ALTER TABLE quotations RENAME TO old_quotations")
+        
+        # Create the new table with the updated schema
+        cursor.execute('''
+        CREATE TABLE quotations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticket_no TEXT UNIQUE,
+            company TEXT,
+            name TEXT,
+            email TEXT,
+            phone TEXT,
+            product TEXT,
+            quantity TEXT,
+            delivery TEXT,
+            message TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            expires_at DATETIME
+        )
+        ''')
+        
+        # Copy data from the old table to the new table
+        cursor.execute('''
+        INSERT INTO quotations (id, company, name, email, phone, product, quantity, delivery, message, timestamp)
+        SELECT id, company, name, email, phone, product, quantity, delivery, message, timestamp FROM old_quotations
+        ''')
+        
+        # Drop the old table
+        cursor.execute("DROP TABLE old_quotations")
+    
+    conn.commit()
+    conn.close()
+
 # Function to record LOI submissions
 def record_loi_submission(company_name, rep_name, email, phone, product, quantity, loi_data):
     """Record an LOI submission"""
@@ -184,24 +227,24 @@ def record_enquiry(name, email, message):
         print(f"Error recording enquiry: {str(e)}")
         return None
 
-# Function to record quotation requests with ticket number and expiration
+# Function to record quotation requests
 def record_quotation(company, name, email, phone, product, quantity, delivery, message):
-    """Record a quotation request with a ticket number and expiration date"""
+    """Record a quotation request and return the ticket number (id)."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Generate a unique ticket number (format: QT-YYYYMMDD-XXXXX)
-        date_prefix = datetime.datetime.now().strftime('%Y%m%d')
-        ticket_no = f"QT-{date_prefix}-{str(uuid.uuid4())[:5].upper()}"
+        # Set expiration date to 7 days from now
+        expires_at = datetime.datetime.now() + datetime.timedelta(days=7)
         
-        # Set expiration date to 4 days from now
-        expires_at = datetime.datetime.now() + datetime.timedelta(days=4)
-        
+        # Insert the quotation into the database
         cursor.execute(
-            "INSERT INTO quotations (ticket_no, company, name, email, phone, product, quantity, delivery, message, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (ticket_no, company, name, email, phone, product, quantity, delivery, message, expires_at)
+            "INSERT INTO quotations (company, name, email, phone, product, quantity, delivery, message, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (company, name, email, phone, product, quantity, delivery, message, expires_at)
         )
+        
+        # Get the id of the newly inserted record
+        ticket_no = cursor.lastrowid
         
         conn.commit()
         conn.close()
@@ -314,28 +357,39 @@ def get_loi_submissions():
     return jsonify(submissions)
 
 # Routes to view detailed data
-@admin_bp.route('/api/enquiries')
-@login_required
+@admin_bp.route('/api/enquiries', methods=['GET'])
 def get_enquiries():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    # Clean up expired enquiries
-    now = datetime.datetime.now()
-    cursor.execute("DELETE FROM enquiries WHERE expires_at < ?", (now,))
-    conn.commit()
-    
-    # Get active enquiries
-    cursor.execute("SELECT * FROM enquiries WHERE expires_at >= ? ORDER BY timestamp DESC LIMIT 50", (now,))
-    enquiries = [dict(row) for row in cursor.fetchall()]
-    
-    conn.close()
-    
-    return jsonify(enquiries)
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Fetch all enquiries
+        cursor.execute("SELECT * FROM enquiries ORDER BY timestamp DESC")
+        enquiries = [dict(row) for row in cursor.fetchall()]
+        
+        conn.close()
+        return jsonify(enquiries), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@admin_bp.route('/api/quotations', methods=['GET'])
+def get_quotations():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Fetch all quotations
+        cursor.execute("SELECT id AS ticket_no, company, name, email, phone, product, quantity, delivery, message, timestamp, expires_at FROM quotations ORDER BY timestamp DESC")
+        quotations = [dict(row) for row in cursor.fetchall()]
+        
+        conn.close()
+        return jsonify(quotations), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @admin_bp.route('/api/quotations')
 @login_required
-def get_quotations():
+def get_quotations_admin():
     conn = get_db_connection()
     cursor = conn.cursor()
     
@@ -350,27 +404,30 @@ def get_quotations():
     
     return jsonify(quotations)
 
-@admin_bp.route('/api/quotations/search/<ticket_no>')
+@admin_bp.route('/api/quotations/search/<int:ticket_no>', methods=['GET'])
 @login_required
 def search_quotation(ticket_no):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    cursor.execute("SELECT * FROM quotations WHERE ticket_no = ?", (ticket_no,))
-    quotation = cursor.fetchone()
-    
-    conn.close()
-    
-    if quotation:
-        return jsonify(dict(quotation))
-    else:
-        return jsonify({"error": "Quotation not found"}), 404
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Fetch the quotation by ticket_no
+        cursor.execute("SELECT id AS ticket_no, company, name, email, phone, product, quantity, delivery, message, timestamp, expires_at FROM quotations WHERE id = ?", (ticket_no,))
+        quotation = cursor.fetchone()
+        
+        conn.close()
+        
+        if quotation:
+            return jsonify(dict(quotation)), 200
+        else:
+            return jsonify({"error": "Quotation not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Email configuration
-def send_email(to_email, subject, body):
-    """Send an email using SMTP"""
+def send_email(to_email, subject, html_content):
+    """Send an email using SMTP with HTML content"""
     try:
-        # Get email configuration from environment variables
         smtp_server = os.getenv('SMTP_SERVER')
         smtp_port = int(os.getenv('SMTP_PORT', 587))
         smtp_username = os.getenv('SMTP_USERNAME')
@@ -378,13 +435,13 @@ def send_email(to_email, subject, body):
         from_email = os.getenv('FROM_EMAIL')
         
         # Create message
-        msg = MIMEMultipart()
+        msg = MIMEMultipart('alternative')
         msg['From'] = from_email
         msg['To'] = to_email
         msg['Subject'] = subject
         
-        # Add body
-        msg.attach(MIMEText(body, 'plain'))
+        # Attach HTML content
+        msg.attach(MIMEText(html_content, 'html'))
         
         # Send email
         with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -392,7 +449,8 @@ def send_email(to_email, subject, body):
             server.login(smtp_username, smtp_password)
             server.send_message(msg)
         
+        print("✅ Email sent successfully!")
         return True
     except Exception as e:
-        print(f"Error sending email: {str(e)}")
+        print(f"❌ Error sending email: {str(e)}")
         return False
