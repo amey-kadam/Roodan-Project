@@ -488,7 +488,7 @@ const Products = () => {
       {
         id: 5,
         title: t('product.chicken.title'),
-        image: "/Chicken.jpg",
+        image: "/chicken.jpg",
         description: t('product.chicken.description'),
         details: [
           t('product.chicken.detail1'),
@@ -524,7 +524,7 @@ const Products = () => {
       {
         id: 8,
         title: t('product.rice.title'),
-        image: "/rice.jpg",
+        image: "/Rice.jpg",
         description: t('product.rice.description'),
         details: [
           t('product.rice.detail1'),
