@@ -15,13 +15,7 @@ app = Flask(__name__)
 # Configure CORS to allow requests from the frontend
 CORS(app, resources={
     r"/api/*": {
-        "origins": [
-            "http://localhost:3000",
-            "http://127.0.0.1:3000",
-            "http://localhost:5173",
-            "http://127.0.0.1:5173",
-            "http://localhost:8080"  
-        ],
+        "origins": ["https://www.roodan.ae"],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Accept", "Authorization", "X-Requested-With"],
         "supports_credentials": True
@@ -414,5 +408,5 @@ def loi_submission():
 def admin_redirect():
     return redirect(url_for('admin.login'))
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+# if __name__ == '__main__':
+#     app.run(debug=False, port=5000)

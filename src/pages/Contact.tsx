@@ -47,7 +47,7 @@ const Contact = () => {
         message: form.elements.namedItem("message").value,
       };
 
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch("https://roodan.ae/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
