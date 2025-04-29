@@ -70,7 +70,7 @@ const Contact = () => {
       toast({
         title: t("SendUS.success"),
         description: "We will get back to you soon.",
-        variant: "success"
+        variant: "default"  // Changed from "success" to "default"
       });
     } catch (error) {
       console.error("Error:", error);
@@ -354,4 +354,4 @@ const Contact = () => {
   );
 };
 
-export default
+export default Contact;
