@@ -10,4 +10,15 @@ if sys.executable != INTERP and os.path.exists(INTERP):
 sys.path.insert(0, os.path.dirname(__file__))
 
 # Import the Flask application instance
-from app import app as application
+from app import app
+
+# For cPanel passenger_wsgi.py
+application = app
+
+# Set up logging
+import logging
+logging.basicConfig(
+    filename='app.log',
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s: %(message)s'
+)

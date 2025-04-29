@@ -6,25 +6,55 @@ from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
 from admin import record_loi_submission, record_enquiry, record_quotation, admin_bp, send_email, init_db, update_enquiries_table, update_quotations_table
+import logging
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 
-# Configure CORS to allow requests from the frontend
+# Configure CORS to allow requests from all environments
+CORS_ORIGINS = [
+    "https://www.roodan.ae",  # Production
+    "https://roodan.ae",      # Production without www
+    "http://localhost:5173",  # Development
+    "http://localhost:8080"   # Alternative development port
+]
+
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["https://www.roodan.ae"],
+        "origins": CORS_ORIGINS,
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Accept", "Authorization", "X-Requested-With"],
         "supports_credentials": True
     }
 })
 
-# Configure Flask app
+# Configure Flask app with proper file permissions
 app.secret_key = os.getenv("SECRET_KEY", "your-secret-key-for-sessions")
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config['DATABASE'] = os.path.join(app.root_path, 'instance', 'tracker.db')
+
+# Ensure instance directory exists with proper permissions
+instance_path = os.path.join(app.root_path, 'instance')
+if not os.path.exists(instance_path):
+    os.makedirs(instance_path, mode=0o755)
+
+# Set up error logging
+file_handler = logging.FileHandler('error.log')
+file_handler.setLevel(logging.ERROR)
+app.logger.addHandler(file_handler)
+
+# Error handlers
+@app.errorhandler(404)
+def not_found_error(error):
+    app.logger.error(f'Page not found: {request.url}')
+    return jsonify({"error": "Resource not found"}), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    app.logger.error(f'Server Error: {error}')
+    return jsonify({"error": "Internal server error"}), 500
 
 # Register the admin blueprint with the correct URL prefix
 app.register_blueprint(admin_bp, url_prefix='/admin')
