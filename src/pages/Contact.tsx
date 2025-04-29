@@ -44,7 +44,7 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("https://roodan.ae/api/contact", {
+      const response = await fetch("https://roodan.ae/backend/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -441,5 +441,9 @@ def loi_submission():
 def admin_redirect():
     return redirect(url_for('admin.login'))
 
+@app.route("/test")
+def test():
+    return "Flask is running and reachable!", 200
+
 # if __name__ == '__main__':
 #     app.run(debug=False, port=5000)
