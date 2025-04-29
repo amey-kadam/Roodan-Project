@@ -37,10 +37,11 @@ CORS(app, resources={
 def after_request(response):
     origin = request.headers.get('Origin')
     if origin in CORS_ORIGINS:
-        response.headers.add('Access-Control-Allow-Origin', origin)
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-Requested-With')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
-        response.headers.add('Access-Control-Allow-Credentials', 'true')
+        response.headers['Access-Control-Allow-Origin'] = origin
+        response.headers['Vary'] = 'Origin'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
     return response
 
 # Configure Flask app with proper file permissions
@@ -76,7 +77,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 with app.app_context():
     init_db()
     update_enquiries_table()
-    update_quotations_table()  # Add this line
+    update_quotations_table()
 
 # Email configuration
 EMAIL_HOST = os.getenv("EMAIL_HOST", "mail.roodan.ae")
@@ -105,17 +106,6 @@ def send_email(sender_email, subject, body):
     except Exception as e:
         print(f"❌ Error sending email: {str(e)}")
         return False
-
-
-@app.before_request
-def handle_options_request():
-    if request.method == 'OPTIONS':
-        response = app.make_response('')
-        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin', '*')
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
-        return response
 
 @app.route('/')
 def index():
