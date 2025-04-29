@@ -15,6 +15,11 @@ const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   // Format address to properly display multiline content
   const formatAddress = (address) => {
@@ -35,50 +40,44 @@ const Contact = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      const form = e.target;
-      const formData = {
-        name: form.elements.namedItem("name").value,
-        email: form.elements.namedItem("email").value,
-        message: form.elements.namedItem("message").value,
-      };
-
       const response = await fetch("https://roodan.ae/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Origin": "https://www.roodan.ae"
         },
-        body: JSON.stringify(formData),
+        mode: "cors",
+        credentials: "include",
+        body: JSON.stringify(formData)
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        toast({
-          title: "Message Sent",
-          description:
-            data.message ||
-            "We've received your message and will get back to you soon.",
-          duration: 5000,
-        });
-
-        form.reset();
-      } else {
-        throw new Error(data.message || "Failed to send message");
+      if (!response.ok) {
+        throw new Error("Failed to send message");
       }
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        message: ""
+      });
+      
+      toast({
+        title: t("SendUS.success"),
+        description: "We will get back to you soon.",
+        variant: "success"
+      });
     } catch (error) {
+      console.error("Error:", error);
       toast({
         title: "Error",
-        description:
-          error instanceof Error
-            ? error.message
-            : "Failed to send message. Please try again.",
-        variant: "destructive",
-        duration: 5000,
+        description: "Failed to send message. Please try again.",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
@@ -271,6 +270,10 @@ const Contact = () => {
                         required
                         className="h-10 text-sm rounded-md border-gray-200 focus:border-blue-500 focus:ring-blue-500/30 transition-all"
                         placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                       />
                     </div>
 
@@ -288,6 +291,10 @@ const Contact = () => {
                         required
                         className="h-10 text-sm rounded-md border-gray-200 focus:border-blue-500 focus:ring-blue-500/30 transition-all"
                         placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                       />
                     </div>
 
@@ -305,6 +312,10 @@ const Contact = () => {
                         required
                         className="w-full text-sm rounded-md border-gray-200 focus:border-blue-500 focus:ring-blue-500/30 transition-all resize-y min-h-[100px]"
                         placeholder={t("contact.form.message_placeholder")}
+                        value={formData.message}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
                       />
                     </div>
 
@@ -343,4 +354,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default
