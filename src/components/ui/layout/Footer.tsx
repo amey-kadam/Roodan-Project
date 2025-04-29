@@ -58,9 +58,19 @@ export function Footer() {
               </span>
             </button>
           </h3>
-          <p className="text-gray-600 text-sm max-w-xs mx-auto leading-relaxed">
+          <p className="text-gray-600 text-sm max-w-xs mx-auto leading-relaxed mb-4">
             {t("slogan")}
           </p>
+          <div className="space-y-1">
+            <p className="text-gray-600 text-xs flex items-center justify-center">
+              <span className="font-medium">{t("footer.registry")}</span>
+              <span className="ml-2 text-emerald-700">5832687</span>
+            </p>
+            <p className="text-gray-600 text-xs flex items-center justify-center">
+              <span className="font-medium">{t("footer.license")}</span>
+              <span className="ml-2 text-emerald-700">CN-5832687</span>
+            </p>
+          </div>
         </div>
 
         {/* Footer links grid with proper alignment */}
@@ -94,9 +104,19 @@ export function Footer() {
                 </span>
               </button>
             </h3>
-            <p className="text-gray-600 text-sm max-w-xs leading-relaxed">
+            <p className="text-gray-600 text-sm max-w-xs leading-relaxed mb-4">
               {t("slogan")}
             </p>
+            <div className="space-y-1">
+              <p className="text-gray-600 text-xs flex items-center">
+                <span className="font-medium">{t("footer.registry")}</span>
+                <span className="ml-2 text-emerald-700">5832687</span>
+              </p>
+              <p className="text-gray-600 text-xs flex items-center">
+                <span className="font-medium">{t("footer.license")}</span>
+                <span className="ml-2 text-emerald-700">CN-5832687</span>
+              </p>
+            </div>
           </div>
 
           {/* Quick Links - with consistent heading and text alignment */}

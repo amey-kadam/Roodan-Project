@@ -387,6 +387,8 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
     'nav.quick_link':'Quick Links',
+    'footer.registry': 'Registry No.:',
+    'footer.license': 'Economic Licence No.:',
   },
   
   fr: {
@@ -764,6 +766,8 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.privacy': 'Politique de Confidentialité',
     'footer.terms': 'Conditions d\'Utilisation',
     'nav.quick_link':'Liens rapides',
+    'footer.registry': 'N° de Registre:',
+    'footer.license': 'N° de Licence Économique:',
   },
   
   ar: {
@@ -1141,6 +1145,8 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.privacy': 'سياسة الخصوصية',
     'footer.terms': 'شروط الخدمة',
     'nav.quick_link':'روابط سريعة',
+    'footer.registry': 'رقم السجل:',
+    'footer.license': 'رقم الرخصة الاقتصادية:',
   }
 };
 
