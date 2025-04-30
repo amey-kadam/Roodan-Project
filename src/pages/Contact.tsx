@@ -44,17 +44,17 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("https://roodan.ae/backend/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Origin": "https://www.roodan.ae"
-        },
-        mode: "cors",
-        credentials: "include",
-        body: JSON.stringify(formData)
-      });
+// Update the API endpoint URL and remove Origin header
+const response = await fetch("http://localhost:5000/api/contact", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+  },
+  mode: "cors",
+  credentials: "include",
+  body: JSON.stringify(formData)
+});
 
       if (!response.ok) {
         throw new Error("Failed to send message");

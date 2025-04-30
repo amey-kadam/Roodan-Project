@@ -6,69 +6,33 @@ from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
 from admin import record_loi_submission, record_enquiry, record_quotation, admin_bp, send_email, init_db, update_enquiries_table, update_quotations_table
-import logging
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 
-# Configure CORS to allow requests from all environments
-CORS_ORIGINS = [
-    "https://www.roodan.ae",  # Production
-    "https://roodan.ae",      # Production without www
-    "http://localhost:5173",  # Development
-    "http://localhost:8080"   # Alternative development port
-]
-
+# Configure CORS to allow requests from the frontend
+# Update CORS origins to include port 8080
 CORS(app, resources={
     r"/api/*": {
-        "origins": CORS_ORIGINS,
+        "origins": [
+            "http://localhost:8080",  # Added port 8080
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "https://www.roodan.ae"
+        ],
         "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization", "X-Requested-With"],
-        "expose_headers": ["Content-Type", "Authorization"],
-        "supports_credentials": True,
-        "max_age": 120  # Cache preflight requests for 2 minutes
+        "allow_headers": ["Content-Type", "Accept", "Authorization", "X-Requested-With"],
+        "supports_credentials": True
     }
 })
 
-# Add CORS headers to all responses
-@app.after_request
-def after_request(response):
-    origin = request.headers.get('Origin')
-    if origin in CORS_ORIGINS:
-        response.headers['Access-Control-Allow-Origin'] = origin
-        response.headers['Vary'] = 'Origin'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    return response
-
-# Configure Flask app with proper file permissions
+# Configure Flask app
 app.secret_key = os.getenv("SECRET_KEY", "your-secret-key-for-sessions")
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['DATABASE'] = os.path.join(app.root_path, 'instance', 'tracker.db')
-
-# Ensure instance directory exists with proper permissions
-instance_path = os.path.join(app.root_path, 'instance')
-if not os.path.exists(instance_path):
-    os.makedirs(instance_path, mode=0o755)
-
-# Set up error logging
-file_handler = logging.FileHandler('error.log')
-file_handler.setLevel(logging.ERROR)
-app.logger.addHandler(file_handler)
-
-# Error handlers
-@app.errorhandler(404)
-def not_found_error(error):
-    app.logger.error(f'Page not found: {request.url}')
-    return jsonify({"error": "Resource not found"}), 404
-
-@app.errorhandler(500)
-def internal_error(error):
-    app.logger.error(f'Server Error: {error}')
-    return jsonify({"error": "Internal server error"}), 500
 
 # Register the admin blueprint with the correct URL prefix
 app.register_blueprint(admin_bp, url_prefix='/admin')
@@ -77,14 +41,14 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 with app.app_context():
     init_db()
     update_enquiries_table()
-    update_quotations_table()
+    update_quotations_table()  # Add this line
 
 # Email configuration
 EMAIL_HOST = os.getenv("EMAIL_HOST", "mail.roodan.ae")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", "465"))
-EMAIL_USER = os.getenv("EMAIL_USER", "info@roodan.ae")
+EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD", "your-email-password")
-RECIPIENT_EMAIL = "info@roodan.ae"
+RECIPIENT_EMAIL = "test@roodan.ae"
 
 # Function to Send Emails
 def send_email(sender_email, subject, body):
@@ -106,6 +70,17 @@ def send_email(sender_email, subject, body):
     except Exception as e:
         print(f"❌ Error sending email: {str(e)}")
         return False
+
+
+@app.before_request
+def handle_options_request():
+    if request.method == 'OPTIONS':
+        response = app.make_response('')
+        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin', '*')
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
 
 @app.route('/')
 def index():
@@ -441,9 +416,5 @@ def loi_submission():
 def admin_redirect():
     return redirect(url_for('admin.login'))
 
-@app.route("/test")
-def test():
-    return "Flask is running and reachable!", 200
-
-# if __name__ == '__main__':
-#     app.run(debug=False, port=5000)
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
