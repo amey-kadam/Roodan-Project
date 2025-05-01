@@ -376,12 +376,12 @@ def send_email(to_email, subject, html_content):
         msg['To'] = to_email
         msg['Subject'] = subject
         
-        # Attach HTML content
+        # Attach HTML contentm   
         msg.attach(MIMEText(html_content, 'html'))
         
         # Send email
         with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()
+            server.starttls() 
             server.login(smtp_username, smtp_password)
             server.send_message(msg)
         

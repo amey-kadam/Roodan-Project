@@ -1,13 +1,19 @@
-import sys
-import os
+import sys, os
 
-# Get the current directory
-INTERP = os.path.join(os.environ['HOME'], 'python')
-if sys.executable != INTERP and os.path.exists(INTERP):
+# Set the path to your Python virtual environment
+VENV_PATH = os.path.join(os.getcwd(), 'venv')
+INTERP = os.path.join(VENV_PATH, 'bin', 'python')
+if sys.executable != INTERP:
     os.execl(INTERP, INTERP, *sys.argv)
 
-# Add the application directory to the Python path
-sys.path.insert(0, os.path.dirname(__file__))
+# Add the current directory to the path
+sys.path.append(os.getcwd())
 
-# Import the Flask application instance
+# Import your application as application
 from app import app as application
+
+# If using a different name for your Flask app, adjust accordingly
+# For example, if your app is created as:
+# flask_app = Flask(__name__)
+# Then use:
+# from your_file import flask_app as application
