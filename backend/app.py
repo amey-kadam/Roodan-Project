@@ -5,19 +5,18 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
-from admin import record_loi_submission, record_enquiry, record_quotation, admin_bp, send_email, init_db, update_enquiries_table, update_quotations_table
+from admin import record_loi_submission, record_enquiry, record_quotation, admin_bp, send_email, init_db
 
-# Load environment variables from .env file
+# Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
 
-# Configure CORS to allow requests from the frontend
-# Update CORS origins to include port 8080
+# Configure CORS
 CORS(app, resources={
     r"/api/*": {
         "origins": [
-            "http://localhost:8080",  # Added port 8080
+            "http://localhost:8080",
             "http://localhost:3000",
             "http://127.0.0.1:3000",
             "http://localhost:5173",
@@ -34,24 +33,22 @@ CORS(app, resources={
 app.secret_key = os.getenv("SECRET_KEY", "your-secret-key-for-sessions")
 app.config['SESSION_TYPE'] = 'filesystem'
 
-# Register the admin blueprint with the correct URL prefix
+# Register admin blueprint
 app.register_blueprint(admin_bp, url_prefix='/admin')
 
-# Initialize the database
+# Initialize database
 with app.app_context():
     init_db()
-    update_enquiries_table()
-    update_quotations_table()  # Add this line
 
 # Email configuration
 EMAIL_HOST = os.getenv("EMAIL_HOST", "mail.roodan.ae")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", "465"))
 EMAIL_USER = os.getenv("EMAIL_USER")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD", "your-email-password")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 RECIPIENT_EMAIL = "test@roodan.ae"
 
-# Function to Send Emails
-def send_email(sender_email, subject, body):
+# Function to Send Emails (renamed to send_email_notification to avoid conflict)
+def send_email_notification(sender_email, subject, body):
     try:
         msg = MIMEMultipart()
         msg['From'] = EMAIL_USER  # Must use your verified sender email for SMTP
@@ -97,7 +94,6 @@ def contact():
         if not all([name, email, message]):
             return jsonify({"error": "Missing required fields"}), 400
 
-        # Record the enquiry
         if not record_enquiry(name, email, message):
             return jsonify({"error": "Failed to record enquiry"}), 500
 
