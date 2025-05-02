@@ -40,49 +40,63 @@ const Contact = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-// Update the API endpoint URL and remove Origin header
-const response = await fetch("/api/contact", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-  },
-  mode: "cors",
-  credentials: "include",
-  body: JSON.stringify(formData)
-});
+// Update your handleSubmit function in Contact.tsx
 
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  try {
+    // 1. Fix API URL to match domain being used
+    // Get the current domain
+    const currentDomain = window.location.origin;
+    
+    // Create the API URL by replacing the domain but keeping the path
+    // This ensures www.roodan.ae calls www.roodan.ae/api/contact instead of roodan.ae/api/contact
+    const apiUrl = `${currentDomain}/api/contact`;
+    
+    console.log("Submitting form to:", apiUrl);
+    
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      // 2. Update CORS settings
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify(formData)
+    });
 
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        message: ""
-      });
-      
-      toast({
-        title: t("SendUS.success"),
-        description: "We will get back to you soon.",
-        variant: "default"  // Changed from "success" to "default"
-      });
-    } catch (error) {
-      console.error("Error:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      console.error("Server response error:", response.status, errorData);
+      throw new Error(`Failed to send message: ${response.status}`);
     }
-  };
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      message: ""
+    });
+    
+    toast({
+      title: t("SendUS.success"),
+      description: "We will get back to you soon.",
+      variant: "default"
+    });
+  } catch (error) {
+    console.error("Form submission error:", error);
+    toast({
+      title: "Error",
+      description: "Failed to send message. Please try again.",
+      variant: "destructive"
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans">

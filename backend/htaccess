@@ -1,0 +1,14 @@
+# Add this .htaccess file to your Flask application root directory
+# This will properly route API requests to your Flask application
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Handle API requests - direct them to the Flask application
+    RewriteRule ^api/(.*)$ app.py/$1 [QSA,L]
+    
+    # Handle React SPA requests - direct all other requests to the React app
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.html [QSA,L]
+</IfModule>
